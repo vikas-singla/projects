@@ -1,0 +1,263 @@
+﻿var rejectProfileEmptyText = "Enter your comments here";
+var notInterestedEmptyText = "Enter your comments here";
+var regionLocId = -1;
+
+$(function () {
+    $("#rejectProfileCommentsInput").emptyText(rejectProfileEmptyText, "emptytextstyle");
+    $("#notInterestedCommentsInput").emptyText(notInterestedEmptyText, "emptytextstyle");
+});
+
+$(document).ready(function () {
+    $("#frmAddVendor").validationEngine({ promptPosition: "topRight", scroll: false });
+
+    $("#addVendorServiceNameInput").autocomplete({
+        minLength: 1,
+        source: function (request, response) {
+            $.ajax({
+                url: "/home/SearchServicesAutoComplete", type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item, value: item, id: item }
+                    }))
+                }
+            })
+        },
+        open: function (e, ui) {
+            var acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        }
+    });
+
+    $("#addVendorLocationInput").autocomplete({
+        minLength: 3,
+        source: function (request, response) {
+            $.ajax({
+                url: "/vendor/SearchCityLocationsAutoComplete", type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 15 },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.FullCityLocation, value: item.FullCityLocation, id: item.Id }
+                    }))
+                }
+            })
+        },
+        select: function (event, ui) {
+            regionLocId = ui.item.id;
+        },
+        open: function (e, ui) {
+            var 
+            acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        },
+        change: function (event, ui) {
+            if (!ui.item) {
+                if ($(".ui-autocomplete li:textEquals('" + $(this).val() + "')").size() == 0 && $(this).val() != $(this).attr("emptytext")) {
+                    // remove invalid value, as it didn't match anything
+                    relQuestId = -1;
+                    $(this).val("");
+                    $(this).data("autocomplete").term = "";
+                    $(this).blur();
+                    return false;
+                }
+            }
+        }
+    });
+
+    $('#vendorNameInput').keypress(function (e) {
+        code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) {
+            e.preventDefault();
+            $('#addVendorProfileSubmit').click();
+        }
+    });
+
+    $('#addVendorProfileSubmit').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        alert("Coming Soon!");
+        return false;
+
+        if ($('#frmAddVendor').validationEngine('validate')) {
+            $('#frmAddVendor').validationEngine('hideAll');
+
+            var vendorName = $('#vendorNameInput').val();
+            createVendor(vendorName);
+        }
+
+        return false;
+    });
+
+    $('#submitvprofilereview').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        var vid = $(this).attr("data-vid") + "";
+        submitVendorProfileForReview(vid);
+
+        return false;
+    });
+
+    $('#addvendorbtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+    });
+
+    $('.btnbluestyle').live('click', function () {
+        var sid = $(this).attr("data-sid") + "";
+        if (sid == "rejectProfileVendorMessage") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+
+            clearDefaultIfEmpty('rejectProfileCommentsInput', rejectProfileEmptyText);
+            if ($('#rejectvendorprofilefrm').validationEngine('validate')) {
+                $('#rejectvendorprofilefrm').validationEngine('hideAll');
+                var rejectionComments = $("#rejectProfileCommentsInput").val() + "";
+                var vendorId = $(this).attr("data-vid") + "";
+
+                rejectVendorProfile(vendorId, rejectionComments);
+            }
+            return false;
+        }
+        else if (sid == "notInterestedVendorMessage") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+
+            clearDefaultIfEmpty('notInterestedCommentsInput', notInterestedEmptyText);
+            if ($('#notinterestedvendorfrm').validationEngine('validate')) {
+                $('#notinterestedvendorfrm').validationEngine('hideAll');
+                var notInterestedComments = $("#notInterestedCommentsInput").val() + "";
+                var vendorId = $(this).attr("data-vid") + "";
+
+                deleteProfile(vendorId, notInterestedComments);
+            }
+            return false;
+        }
+    });
+
+    $("#addvendorbtn").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#notinterestedvendorbtn").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+});
+
+function deleteProfile(vendorId, comments) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/DeleteProfile",
+        data: {
+            vendorId: vendorId,
+            comments: comments
+        },
+        async: false,
+        success: function (result) {
+            window.location.href = "/vendor/" + result.vendorId;
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your profile could not submitted for review. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function submitVendorProfileForReview(vendorId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/SubmitForReview",
+        data: {
+            vendorId: vendorId
+        },
+        async: false,
+        success: function (result) {
+            window.location.href = "/vendor/" + result.vendorId;
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your profile could not submitted for review. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function createVendor(vendorName) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/CreateVendor",
+        data: {
+            name: vendorName
+        },
+        async: false,
+        success: function (result) {
+            window.location.href = "/vendor/" + result.vendorId;
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your profile could not be created. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function rejectVendorProfile(vendorId, comments) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/RejectVendorProfile",
+        data: {
+            vendorId: vendorId,
+            comments: comments
+        },
+        async: false,
+        success: function (result) {
+            window.location.href = "/vendor/" + vendorId;
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Profile could not be rejected. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}

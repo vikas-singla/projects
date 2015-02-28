@@ -1,0 +1,114 @@
+﻿@using Oceanus.ViewModels.Shared
+@using SquishIt.Framework
+@model Oceanus.ViewModels.ListingViewModel
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/Listings/sixloonies.listings.css")
+            .Add("~/Content/Overlay/sixloonies.general.overlay.css")
+            .Add("~/Content/Overlay/sixloonies.expandnetwork.overlay.css")
+            .ForceRelease()
+            .Render("~/cache/listing.index.#.css")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+        Bundle.JavaScript()
+            .Add("~/Scripts/sixloonies.listing.index.js")
+            .Render("~/cache/sixloonies.listing.index.scripts_#.js")
+        );
+}
+<div class="listingfilterpanel">
+    <div class="filterbtns">
+        <ul>
+            <li id="categorydropdownbtn" class="btndarkborderright">Show Everything@(ViewBag.FilterCategoryName != null ? (": " + ViewBag.FilterCategoryName) : "")<img class="arrowdwnimg"
+                src="/images/scrollarrow_down.gif" alt /><div id="categoryddmenu">
+                    @foreach (var category in Model.AvailableCategories)
+                    {
+                        <div class="menulink">
+                            <a href="#" style="@(category.Selected ? "bold" : "")" data-cat-val="@category.Value">@category.Text</a>
+                        </div>
+                    }
+                </div>
+            </li>
+            <li id="sortbybuzzbtn" class="btndarkborderright btndarkborderleft">Sort By Most Buzz</li><li id="filterbyfriendsbtn" class="btndarkborderleft" style="@((ViewBag.FilterByFriends != null && ViewBag.FilterByFriends == "on") ? "font-weight:bold;" : "")">Filter By Opinion Of My Friends</li>
+        </ul>
+    </div>
+</div>
+@using (Html.BeginForm("Index", "Home", null, FormMethod.Get, new { id = "listingForm" }))
+{ 
+    <div class="listing">
+        <div class="search_sect">
+            <div class="headline">
+                Find the best source of services.
+            </div>
+            <div class="search_inputs">
+                <input id="servicenameinput" name="SelectedServices" class="inputstyle" value="@(ViewBag.ServiceNameSearchText)"  />
+                @Html.TextBoxFor(m => m.VendorName, new { @class = "inputstyle", id = "vendornamefilterinput", value = ViewBag.VendorNameSearchText })
+                @*<div class="city">@Html.TextBoxFor(m => m.CityName, new { @class = "inputstyle", id = "citynamefilterinput" }) &nbsp;</div>*@
+                @Html.DropDownListFor(m => m.CityId, Model.AvailableCities) &nbsp;
+                <input type="hidden" name="SelectedCategories" value="@(ViewBag.FilterCategoryId)" />
+                <input type="hidden" name="showListingsByFriends" value="@(ViewBag.FilterByFriends)" />
+                <div class="btn">
+                    <a href="#" class="btnbluestyle" onclick="javascript:SubmitListingForm();">Search</a>
+                </div>
+            </div>
+        </div>
+        @if (ViewBag.ShowSearchResultsCount == null || !ViewBag.ShowSearchResultsCount)
+        {
+            <div class="border">
+            </div>
+        }
+        <div class="results">
+            @if (ViewBag.ShowSearchResultsCount != null && ViewBag.ShowSearchResultsCount)
+            {
+                <div class="resultsheader">
+                    <div class="resultscount">
+                        <span style="color: #CB2027;">@Model.TotalResults professionals and businesses</span>
+                        — <span class="normaltext">search results for </span>
+                        @if (ViewBag.ServiceNameSearchText != null)
+                        {
+                            <text>@((ViewBag.ServiceNameSearchText + string.Empty).Trim())</text>
+                            
+                            if ("Service: " + ViewBag.VendorNameSearchText != null || ViewBag.FilterCategoryName != null)
+                            {
+                                <text>,&nbsp;</text>
+                            }
+                        }
+                        @if (ViewBag.VendorNameSearchText != null)
+                        {
+                            <text>@(("Name: " + ViewBag.VendorNameSearchText + string.Empty).Trim())</text>
+                            
+                              if (ViewBag.FilterCategoryName != null)
+                            {
+                                <text>,&nbsp;</text>
+                            }
+                        }
+                        @if (ViewBag.FilterCategoryName != null)
+                        {
+                            <text>@(("Category: " + ViewBag.FilterCategoryName + string.Empty).Trim())</text>
+                        }
+                    </div>
+                </div>
+            }
+            <div class="resultsPanel">
+                <div>
+                    @{Html.RenderPartial("_PhotoBasedVendorResults");}
+                </div>
+                <div id="vendorlistingsbyfriends" style="display: none;">
+                </div>
+                <div class="resultspagerpanel">
+                    @Html.Partial("_FilterableViewModelPager", Model, new ViewDataDictionary() { { "FormId", "listingForm" }, { "SubmitCallbackJSFunction", "SubmitListingForm" } })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="display: none;">
+        <div class="expandnetworkoverlay" id="tellfriendform">
+            <div class="content">
+                <div id="tellfriendformpanel">
+                </div>
+            </div>
+        </div>
+    </div>
+}

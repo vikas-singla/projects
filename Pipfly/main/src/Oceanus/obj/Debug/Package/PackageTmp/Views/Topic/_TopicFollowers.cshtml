@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Oceanus.ViewModels.UserToTagFollowerMappingViewModel>
+<div class="topicfollowers">
+    <div class="section" style="margin-top: 0;">
+        <div class="sectiontitle">
+            <div class="titletext">
+                Followers</div>
+        </div>
+        <div class="topicfollowersect">
+            @if (Model == null || Model.Count() == 0)
+            {
+                <text>There are currently <b>0</b> followers on this topic.</text>
+            }
+            else
+            {
+                int count = Model.Count();
+                <text>Followed by <b>@(count)</b> @(count > 1 ? "people" : "person")</text>
+                <div class="followerimagecollage">
+                    @foreach (var follower in Model)
+                    {
+                        <div class="followeruserimg">
+                            <a href="/u/@(follower.BaseUserProfile.Id)" title="@(follower.BaseUserProfile.FullName)">
+                                <img src="/images/user.jpg" alt width="40px" height="40px" /></a>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

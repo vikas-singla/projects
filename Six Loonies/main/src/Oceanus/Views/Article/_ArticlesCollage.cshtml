@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Oceanus.ViewModels.ArticleViewModel>
+@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/articles/pipfly.articles.css")
+            .Add("~/Content/clips/pipfly.clips.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.collage.#.css")
+        );
+}
+<div class="articlemaincontainer" style="@((Model == null || Model.Count() == 0)? "border:none;" : "")">
+    @if (@Model != null && @Model.Count() > 0)
+    {
+        int numArticles = Model.Count();
+
+        for (int i = 0; i < numArticles; ++i)
+        {
+        <div class="articlecontainer @((((i % 2) == 1) || numArticles == 1) ? "articlewidthrect" : "articlewidthsmallsquare")">
+            <div class="websource">
+                @{
+                                 Uri pageURI = new Uri(Model.ElementAt(i).WebPage.WebDomainUrl);
+                }
+                <a href="@(Model.ElementAt(i).WebPage.PageUrl)">
+                    <img src="@(Model.ElementAt(i).WebPage.WebDomainUrl)/favicon.ico" height="12px" style="margin-right:5px" />@(pageURI.DnsSafeHost)</a>
+            </div>
+            <div class="articlecontent" data-shorten-article="@(Model.ElementAt(i).ShareArticleMarkup == null ? "true" : "false")" data-article-id="@(Model.ElementAt(i).ArticleId)">
+                @Html.Raw(Model.ElementAt(i).ShareArticleMarkup == null ? Model.ElementAt(i).ArticleMarkup : Model.ElementAt(i).ShareArticleMarkup)
+            </div>
+            <div class="btnsect">
+                <div class="userlist">
+                    @{int targetUserCount = ((i % 2) == 1) ? 10 : 4;}
+                    @foreach (var user in Model.ElementAt(i).UserMappings)
+                    {
+                        --targetUserCount;
+                        if (targetUserCount > 0)
+                        {
+                        <a title="@(user.FullName)" href="/u/@(user.Id)">
+                            <img src="@((user.UserProfileImageUrl == null || user.UserProfileImageUrl.Trim().Equals(string.Empty)) ? "/Images/user_white.png" : user.UserProfileImageUrl)" alt width="20px;" /></a>
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                </div>
+                <div class="actionbtns">
+                    @if (Model.ElementAt(i).UserLikesArticle)
+                    {
+                        <a href="#" class="action unlikeaction" data-article-id="@(Model.ElementAt(i).ArticleId)">
+                            <img class="actionbtnimg" src="/images/heart_filled_sm.png" alt height="10px" /><span>Unlike</span></a>
+                    }
+                    else
+                    {
+                        <a href="#" class="action likeaction" data-article-id="@(Model.ElementAt(i).ArticleId)">
+                            <img class="actionbtnimg" src="/images/heart_empty_sm.png" alt height="10px" /><span>Like</span></a>
+                    }
+                    <a href="/article/sharearticleoverlay/?id=@(Model.ElementAt(i).ArticleId)" class="action shareaction">
+                        <img class="actionbtnimg" src="/images/reclip_sm.png" alt height="10px" /><span>Share</span></a>
+                    <a href="/a/@(Model.ElementAt(i).ArticleId)" class="action lastaction commentaction">
+                        <img class="actionbtnimg" src="/images/talk_icon.png" alt width="10px" /><span>Comment</span></a>
+                </div>
+            </div>
+        </div>
+        }
+    }
+</div>
+@if (Model == null || Model.Count() == 0)
+{      
+    <div class="pipflynoresults">
+           No articles found.
+    </div>
+}

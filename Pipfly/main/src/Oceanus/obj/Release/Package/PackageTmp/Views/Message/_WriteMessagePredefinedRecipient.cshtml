@@ -1,0 +1,43 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        $('#messageBodyInput').elastic();
+    });
+</script>
+<div class="formfields" id="writereviewform">
+    <form id="frmWritePredefinedMsgRecipient">
+        <div class="formfieldpadding">
+        <div class="formfield">
+            <div class="lbl">
+                To:</div>
+            <div class="field">
+                <div id="msgrecipient" rid="@(ViewBag.RecipientId)">
+                    <span id="msgrecipientname">@(ViewBag.RecipientName)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="formfieldpadding">
+        <div class="formfield">
+            <div class="lbl">
+                Subject:</div>
+            <div class="field">
+                <input id="messageSubjectInput" class="validate[required]" /></div>
+        </div>
+    </div>
+        <div class="formfieldpadding">
+        <div class="formfield">
+            <div class="lbl">
+                Message:
+            </div>
+            <div class="field">
+                <textarea id="messageBodyInput" class="validate[required]" rows="3" cols="1"></textarea></div>
+        </div>
+    </div>
+        <br />
+        <div class="btns">
+        <a href="#" class="btnbluestyle" data-sid="sendPredefinedVendorMessage">Send</a>&nbsp;
+        <a href="#" class="btnstyle close" onclick="javascript: $.fancybox.close();$('#frmWritePredefinedMsgRecipient').validationEngine('hideAll');return false;">
+            Cancel</a>
+    </div>
+    </form>
+</div>

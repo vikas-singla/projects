@@ -1,0 +1,72 @@
+﻿/* TAB MENU   
+----------------------------------------------------------*/
+.navcontainer
+{
+    height:100%;
+    width:354px;
+    float:left;
+}
+
+.navcontainer .navmenu
+{
+    width: 100%;
+    height:100%;
+}
+
+
+/* Click Vertical MENU */
+
+.clickvmenu, .clickvmenunarrow
+{
+    list-style-type: none;
+    margin: 5px 0;
+    padding: 0;
+    position:absolute;
+    border:1px solid #e0e0e0;
+    overflow:hidden;
+    display:none;
+    top:11px;
+    left:0px;
+    background-color: #f0f0f0;
+    z-index:500;
+}
+
+.clickvmenu
+{    
+    width: 180px;
+    text-align:left;
+}
+
+.clickvmenunarrow
+{
+    width:24px;    
+    text-align:center;
+}
+
+.clickvmenu li a
+{
+    background-color: #f0f0f0;
+    display: block;
+    width: 100%;
+    padding: 3px;
+    text-decoration: none;
+}
+
+.clickvmenunarrow li a
+{
+    background-color: #f0f0f0;
+    display: block;
+    width: 100%;
+    padding: 1px;
+    text-decoration: none;
+}
+
+.clickvmenu li a:visited, .clickvmenu li a:active, .clickvmenunarrow li a:visited, .clickvmenunarrow li a:active
+{
+    background-color:#f0f0f0;
+}
+
+.clickvmenu li a:hover, .clickvmenunarrow li a:hover
+{
+    background-color:#d0d0d0;
+}

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Oceanus.ViewModels.Shared.TagViewModel>
+<div class="topicrecommendations">
+    <div class="section" style="margin-top: 0;">
+        <div class="sectiontitle">
+            <div class="titletext">
+                Topics You May Like</div>
+        </div>
+        <div class="container">
+            @for(int i = 0; i < Model.Count(); ++i)
+            {
+                <div class="result @(i == (Model.Count() - 1) ? "" : "lightbtmborder")">
+                    <div class="topicimg">
+                        <img src="/images/topic_icon.png" width="35px" />
+                    </div>
+                    <div class="topicdetails">
+                        <div>
+                            <a href="/topic?topic=@(Model.ElementAt(i).Id)" class="tagname">@(Model.ElementAt(i).TagName)</a></div>
+                        <div class="topicstats">
+                            @(Model.ElementAt(i).NumTopicPosts)
+                            posts&nbsp;&#149;&nbsp;@(Model.ElementAt(i).NumClips)
+                            photos/videos
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

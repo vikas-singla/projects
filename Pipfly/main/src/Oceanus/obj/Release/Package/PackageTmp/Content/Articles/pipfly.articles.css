@@ -1,0 +1,360 @@
+﻿.aggregatemaincontainer
+{
+    clear:both;
+    margin:0 auto;
+    position:relative;
+    opacity:1.0;
+    border:0px solid #E0E0E0;
+    border-width:1px 0 0 1px;
+}
+
+.articlecollagetitle
+{
+    margin:5px 0;
+    padding:5px;
+    font-size:12px;
+    margin-bottom:10px;
+    border-bottom:1px double #d9d9d9;
+    border-bottom-width:3px;
+    position:relative;
+    text-align:center;
+    overflow:auto;
+}
+
+.articlecollagetitle .leftabsalign
+{
+    position:absolute;
+    left:0;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.articlemaincontainer
+{
+    clear:both;
+    margin:0 auto;
+    position:relative;
+    opacity:1.0;
+    border:0px solid #E0E0E0;
+    border-width:1px 0 0 1px;
+}
+
+.articlewidthbigrect .articlecontent
+{
+    width:948px;
+    height:246px;
+    margin:0 auto;
+    overflow:hidden;
+}
+
+.articlecontainer .websource
+{
+    clear:both;
+    height:15px;
+    padding:8px 15px 5px 15px;
+    overflow:hidden;
+}
+
+.articlecontainer .websource a, .articlecontainer .websource a:visited, .articlecontainer .websource a:active
+{
+    text-decoration:none;
+    color:#777;
+    font-size:12px;
+}
+
+.articlecontainer .websource a:hover
+{
+    text-decoration:none;
+    color:#106FB8;
+    font-size:12px;
+}
+
+.articlewidthbigrect
+{
+    width:958px;
+    height:318px;
+    overflow:hidden;
+}
+
+.articlewidthbigrect .oceanus-content img
+{
+    height:150px;
+}
+
+.articlewidthbigrect .oceanus-post-img
+{
+    height:150px;
+}
+
+.articlewidthrect .articlecontent
+{
+    width:628px;
+    height:256px;
+    margin:0 auto;
+    overflow:hidden;  
+}
+
+.articlewidthrect
+{
+    width:638px;
+    height:318px;
+    overflow:hidden;
+}
+
+.articlewidthrect .oceanus-content img
+{
+    margin-right: 10px;
+    margin-bottom: 8px;
+}
+
+.articlewidthrect .oceanus-post-img
+{
+    margin-right: 10px;
+    margin-bottom: 8px;
+}
+
+
+.articlewidthsmallsquare .articlecontent
+{
+    width:308px;
+    height:256px;
+    margin:0 auto;
+    overflow:hidden;
+}
+
+.articlewidthsmallsquare
+{
+    width:318px;
+    height:318px;
+    overflow:hidden;
+}
+
+.articlewidthsmallsquare .oceanus-content img
+{
+    margin-right: 10px;
+    margin-bottom: 8px;
+}
+
+.articlewidthsmallsquare .oceanus-post-img
+{
+    margin-right: 10px;
+    margin-bottom: 8px;
+}
+
+.articlewidthsmalllong
+{
+    width:318px;
+    height:638px;
+    overflow:hidden;
+}
+
+.articlewidthsmalllong .articlecontent
+{
+    width:308px;
+    height:576px;
+    overflow:hidden;
+}
+
+.articlecontainer .btnsect .action, .articlecontainer .btnsect .action:visited, .articlecontainer .btnsect .action:hover, .articlecontainer .btnsect .action:active, .articlecontainer .btnsect .action:link
+{
+    font-size:11px;
+    color:#444;
+    position:relative;
+    margin:0 4px;
+}
+
+.articlecontainer .btnsect .action:hover
+{
+    color:#106fb8;
+}
+
+.articlecontainer .btnsect .unlikeaction, .articlecontainer .btnsect .unlikeaction:visited, .articlecontainer .btnsect .unlikeaction:link
+{
+    color:#aaa;
+    font-style:italic;
+}
+
+.articlecontainer .btnsect .actionlast
+{
+    margin-right:0;
+}
+
+.articlecontainer .btnsect span
+{
+    position:relative;
+    top:-1px;
+}
+
+.articlecontainer .btnsect img
+{
+    margin-right:3px;
+}
+
+.articlecontainer .btnsect .actionbtnimg
+{
+    height:10px;
+}
+
+.articlecontainer .btnsect
+{
+    background-color: #FAFAFA;
+    padding: 2px;
+    height:32px;
+    text-align:left;
+    display:block;
+    position:relative;
+}
+
+.articlecontainer .btnsect .userlist
+{
+    float:left;
+    padding:4px;
+}
+
+.articlecontainer .btnsect .actionbtns
+{
+    padding:8px 0;
+    float:right;
+}
+
+.articlecontainer
+{   
+    background-color: rgba(255, 255, 255, 1); 
+    border-right: 1px solid #E0E0E0;
+    border-bottom: 1px solid #E0E0E0;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    opacity:1.0;
+    display:block;
+    overflow:hidden;
+    float:left;
+}
+
+.oceanus-content
+{
+    padding:0;
+    margin:0 10px 10px 10px;
+    line-height:20px;
+    clear:both;
+    overflow:auto;
+    font-size:14px;
+    font-weight:normal;
+    text-shadow:none;
+    font-style:normal;
+    font-variant:normal;
+    word-wrap: break-word;
+}
+
+.oceanus-content a:link, .oceanus-content a:active, .oceanus-content a:visited, .oceanus-content a, .oceanus-content a:hover
+{
+    font-size:14px;
+    font-weight:normal;
+    text-shadow:none;
+    font-style:normal;
+    font-variant:normal;
+    color:#444;
+}
+
+.oceanus-content a:hover
+{
+    color:#106fb8;
+    text-decoration:none;
+}
+
+.oceanus-content h1, 
+.oceanus-content h2,
+.oceanus-content h3,
+.oceanus-content h4,
+.oceanus-content h5,
+.oceanus-content h6
+{
+    word-wrap: break-word;
+}
+
+.oceanus-content p
+{
+    font-size:14px;
+    line-height:20px;
+    font-weight:normal;
+    text-shadow:none;
+    font-style:normal;
+    font-variant:normal;
+    margin:14px 0;
+    word-wrap: break-word;
+}
+
+.oceanus-content img
+{
+    max-width:885px;
+    float:left;
+    text-align:center;
+    padding:5px;
+    margin:0 auto;
+    margin-right:10px;
+    margin-bottom:10px;
+    background:#fff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0 0 5px #ccc;
+    -moz-box-shadow: 0 0 5px #ccc;
+    -webkit-box-shadow: 0 0 5px #ccc;
+}
+
+.oceanus-content .oceanus-post-img
+{
+    max-width:885px;
+    clear:both;
+    float:left;
+    padding:5px;
+    margin-right:10px;
+    margin-bottom:10px;
+    background:#fff;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0 0 5px #ccc;
+    -moz-box-shadow: 0 0 5px #ccc;
+    -webkit-box-shadow: 0 0 5px #ccc;
+}
+
+.oceanus-content .oceanus-title
+{
+    text-align:left;
+    font-size:20px;
+    line-height:25px;
+    padding-bottom:8px;
+    margin:0;
+    font-family: 'PT Sans' !important;
+}
+
+.oceanus-content h3, .oceanus-content h4, .oceanus-content h5, .oceanus-content h6
+{
+    font-size:14px;
+    line-height:16px;
+    font-weight:bold;
+}
+
+.oceanus-content h2, .oceanus-content h3, .oceanus-content h4, .oceanus-content h5, .oceanus-content h6
+{
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+.oceanus-content-link, .oceanus-content-link:hover, .oceanus-content-link:link, .oceanus-content-link:active
+{
+    float:right;
+    background: #106fb8;
+    background: -webkit-gradient(linear,left top,left bottom,from(#0296E8),to(#106fb8));
+    background: -moz-linear-gradient(top,#0296E8,#106fb8);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0296E8',endColorstr='#106fb8');
+    border: 1px solid #106fb8;
+    box-shadow: 0 1px 2px #f0f0f0;
+    -webkit-box-shadow: 0 1px 2px #f0f0f0;
+    color:#fff;
+    font-size:16px;
+    padding:3px 6px;
+    font-weight:bold;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    font-weight:bold;   
+}

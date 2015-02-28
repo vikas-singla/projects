@@ -1,0 +1,13 @@
+﻿<div class="userprofilewall">
+    <div class="section" style="margin-top: 0px;">
+        <div class="sectiontitle">
+            <div class="titletext">Activity Feed</div>
+        </div>
+        <div class="userwall">
+            <div id="userwallposts">
+                @{Html.RenderAction("GetUserWebPosts", "Activity", new { userId = ViewBag.UserId });}
+            </div>
+        </div>
+    </div>
+</div> 
+

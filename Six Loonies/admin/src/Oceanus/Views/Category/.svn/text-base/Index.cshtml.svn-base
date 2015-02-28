@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Oceanus.ViewModels.CategoryViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Categories</h2>
+
+<table>
+    <tr>
+        <th>
+            Select a category
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Name, "Index", "Listings", new { categoryId = item.Id }, null)
+        </td>
+
+        @if (User.Identity.IsAuthenticated){
+            <td>
+                @* 
+                    Should not use links to perform deletes
+                    http://stephenwalther.com/blog/archive/2009/01/21/asp.net-mvc-tip-46-ndash-donrsquot-use-delete-links-because.aspx
+                *@
+                @using (Html.BeginForm("Delete", "Category", new { id = item.Id } ))
+                {
+                    <input type="image" src="/Images/delete.png" alt="X" />
+                }
+            </td>
+        }
+    </tr>
+}
+
+</table>

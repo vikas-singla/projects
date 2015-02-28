@@ -1,0 +1,234 @@
+﻿.CPD_ContentTable
+{
+    width: 100%;
+    text-align: left;
+    margin-top:10px;
+}
+
+.CPD_ProgressionControlColumnStyle
+{
+    width: 250px;
+    vertical-align: top;
+}
+
+.CPD_ContentColumnStyle
+{
+    width: 724px;
+    vertical-align: top;
+}
+
+.RelatedCPDSectionLeftStyle
+{
+    border: none;
+    vertical-align: top;
+    padding:10px 20px 5px 0px;
+    width: 470px;
+}
+
+.RelatedCPDSectionRightStyle
+{
+    border: none;
+    vertical-align: top;
+    padding:10px 0px 5px 20px;
+    width: 470px;
+}
+
+.RelatedPositionsListStyle
+{
+    padding: 1px 1px 1px 1px;
+    background-color: #fff;
+    color: #505050;
+}
+
+.RelatedPositionsListStyle ul
+{
+    margin: 0px;
+    padding: 0px 0px 0px 14px;
+}
+
+.RelatedPositionsListStyle li
+{
+    font-size: 12px;
+    list-style: square none outside;
+}
+
+.RelatedPositionsCompanyHeader
+{
+    background-color: #fff;
+    color: #004a7f;
+    vertical-align: middle;
+    font-size: 12px;
+    text-align: left;
+    width: 100%;
+    font-weight: bold;
+    border-bottom: 1px dotted #d9d9d9;
+}
+
+.RelatedCPDSectionLeftStyle .RelatedContainerHeader .RelatedHeaderlabelstyle, .RelatedCPDSectionRightStyle .RelatedContainerHeader .RelatedHeaderlabelstyle
+{
+    color: #5DAE21;
+    border: none;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: left;
+    vertical-align: middle;
+    padding: 1px;
+}
+.RelatedCPDSectionLeftStyle .RelatedContainerHeader, .RelatedCPDSectionRightStyle .RelatedContainerHeader
+{
+    background-color: #fff;
+    vertical-align: middle;
+    text-align: left;
+    width: 100%;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.RelatedCPDSectionLeftStyle .RelatedContainerbody, .RelatedCPDSectionRightStyle .RelatedContainerbody
+{
+    background-color: #fff;
+    width: 100%;
+    text-align: left;
+    font-size: 12px;
+    color: #505050;
+    line-height: 1.4em;
+    padding-top: 10px;
+}
+
+.RelatedPositionsCompanyHeader a, a:visited
+{
+    color: #106fb8;
+    font-size: 10px;
+    font-weight:normal;
+}
+
+.RelatedPositionsListStyle a, a:visited
+{
+    color: #106fb8;
+    font-weight:normal;
+    font-size: 12px;
+}
+
+.RelatedCPDSectionLeftStyle .RelatedContainerFooter
+{
+    background-color: #fff;
+    min-height: 18px;
+    width: 435px;
+    text-align: right;
+}
+
+.RelatedCPDSectionRightStyle .RelatedContainerFooter
+{
+    background-color: #fff;
+    min-height: 18px;
+    width: 435px;
+    text-align: right;
+}
+
+.RelatedMoreLinkStyle
+{
+    font-style: normal;
+    font-size: 11px;
+    color: #106fb8;
+}
+
+.CPD_SectionStyle
+{
+    border: none;
+    vertical-align: top;
+    width: 100%;
+    padding-bottom: 15px;
+}
+
+.CPD_PositionHeaderLeftCol
+{
+    min-width: 11px;
+    max-width: 11px;
+    height: 27px;
+    background: url('/Assets/Images/BlueHeaderBg_left.png') no-repeat;
+}
+
+.CPD_PositionHeaderMiddleCol
+{
+    height: 27px;
+    width: auto;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 11px;
+    padding: 0px 20px 0px 20px;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: left;
+    background: url('/Assets/Images/BlueHeaderBg_middle.png') repeat-x;
+}
+
+.CPD_PositionHeaderRightCol
+{
+    min-width: 12px;
+    max-width: 12px;
+    height: 27px;
+    background: url('/Assets/Images/BlueHeaderBg_right.png') no-repeat;
+}
+
+.CPD_PositionHeaderEmptyLeftCol
+{
+    height: 27px;
+    width: 50%;
+    background: url('/Assets/Images/BlueLine.png') repeat-x;
+    vertical-align: middle;
+}
+
+.CPD_PositionHeaderEmptyCol
+{
+    height: 27px;
+    width: 50%;
+    background: url('/Assets/Images/BlueLine.png') repeat-x;
+    vertical-align: middle;
+}
+
+.CPD_SectionStyle .CPD_ContainerHeader .CPD_Headerlabelstyle
+{
+    color: #505050;
+    border: none;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: left;
+    vertical-align: middle;
+    padding: 1px;
+}
+.CPD_SectionStyle .CPD_ContainerHeader
+{
+    background-color: #fff;
+    vertical-align: middle;
+    text-align: left;
+    width: 100%;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.CPD_SectionStyle .CPD_Containerbody
+{
+    background-color: #fff;
+    width: 100%;
+    text-align: left;
+    font-size: 12px;
+    color: #505050;
+    line-height: 1.4em;
+    padding-top: 10px;
+}
+
+.RelatedCPD_Content
+{
+    width: 100%;
+    padding: 5px 0px 5px 0px;
+    border: none;
+}
+
+.RelatedCPD_Content .Related
+{
+    font-style: normal;
+    font-size: 14px;
+    font-weight: bold;
+    color: #505050;
+    text-align: left;
+    height: 22px;
+    border-bottom: 1px solid #d0d0d0;
+}

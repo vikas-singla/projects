@@ -1,0 +1,75 @@
+﻿.DiscussionThreadPageTitleTable
+{
+    width: 100%;
+    padding: 5px 0px 5px 0px;
+    border: none;
+}
+
+.DiscussionListPageHeader
+{
+    font-style: normal;
+    font-size: 18px;
+    font-weight: bold;
+    color: #004A7F;
+    text-align: left;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.DiscussionThreadListTableStyle
+{
+    width: 100%;
+    text-align: left;
+}
+
+.DiscussionThreadIconColumn
+{
+    width: 60px;
+    text-align: center;
+}
+
+.DiscussionThreadIconColumn img
+{
+    outline: none;
+    display: block;
+    width: 50px;
+    overflow: hidden;
+}
+
+.DiscussionThreadTextColumn
+{
+    width: 914px;
+}
+
+.DiscussionThreadListTableStyle tr td
+{
+    border-bottom: 1px dotted #d0d0d0;
+    padding: 5px 0px 5px 0px;
+}
+
+.DiscussionThreadLinkButtonStyle, .DiscussionThreadLinkButtonStyle:hover, .DiscussionThreadLinkButtonStyle:active, .DiscussionThreadLinkButtonStyle:visited
+{
+    color: #106fb8;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.DiscussionThreadListTableStyle tr.odd
+{
+    background-color: #f0f0f0;
+}
+
+.DiscussionThreadListTableStyle .subheader
+{
+    color: #505050;
+    font-size: 10px;
+}
+
+.DiscussionThreadListLinkStyle, .DiscussionThreadListLinkStyle:active, .DiscussionThreadListLinkStyle:hover, .DiscussionThreadListLinkStyle:visited
+{
+    color: #106fb8;
+    padding: 0px;
+    border-width: 0px;
+    font-size: 10px;
+    font-weight: bold;
+}

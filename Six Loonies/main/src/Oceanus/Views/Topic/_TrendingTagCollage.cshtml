@@ -1,0 +1,92 @@
+﻿@using Oceanus.Data
+@using Oceanus.ViewModels
+@using Oceanus.ViewModels.Shared
+@using SquishIt.Framework
+@model IEnumerable<TagViewModel>
+@{
+    @MvcHtmlString.Create(
+    Bundle.Css()
+        .Add("~/Content/tag/pipfly.tag.trending.css")
+        .Add("~/Content/tag/pipfly.tag.collage.css")
+        .ForceRelease()
+        .Render("~/cache/pipfly.tag.trending.#.css")
+    );
+}
+@{
+    @MvcHtmlString.Create(
+        Bundle.JavaScript()
+        .Add("~/Scripts/pipfly.tags.trending.page.js")
+        .Render("~/cache/pipfly.tags.trending.page.#.js")
+    );
+}
+<div class="tagcollage">
+    @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var tag in Model)
+        {
+            if (tag.TagPhoto != null)
+            {
+                int? targetWidth = null;
+                int? targetHeight = null;
+                double photoRatio = (double)((tag.TagPhoto.ImageWidth * 1.0) / tag.TagPhoto.ImageHeight);
+                int adjHeight = (int)(((225 * 1.0) / tag.TagPhoto.ImageWidth) * tag.TagPhoto.ImageHeight);
+                if (adjHeight < 225)
+                {
+                    targetHeight = 225;
+                }
+                else
+                {
+                    targetWidth = 225;
+                }
+        <div class="tagcollageitem">
+            <a href="/t/@(tag.LowerTagName)" class="tagphotocollageitem"><span class="photocontent">
+                <span class="tag">#@(tag.TagName)
+                </span><span class="stats">
+                    @(ViewBag.UserFirstName != null ? ("By " + ViewBag.UserFirstName + ":") : "")
+                    @(tag.NumClips)
+                    photos/videos&nbsp;&#149;&nbsp;@(tag.NumArticles)
+                    articles </span></span>
+                <img src="@(tag.TagPhoto.ImageUrl != null ? ("/uploads/scrapbook/" + tag.TagPhoto.ImageUrl) : tag.TagPhoto.SourceUrl)" 
+                alt style="@(targetWidth == null ? "" : ("width:" + targetWidth + "px"));@(targetHeight == null ? "" : ("height:" + targetHeight + "px"))"/>
+            </a>
+            <div class="btns">
+                @if (tag.CurrUserIsFollower)
+                {
+                    <a href="#" class="btnundo unfollowtopicbtn" data-topic-id="@(tag.Id)">
+                        <img src="/images/tick.png" width="16px" height="16px" alt /><span>Unfollow</span></a>
+                }
+                else
+                {
+                    <a href="#" class="btnstyle followtopicbtn" data-topic-id="@(tag.Id)">
+                        <img src="/images/plus.gif" width="16px" height="16px" alt /><span>Follow</span></a>
+                }
+            </div>
+        </div>
+            }
+            else
+            {
+        <div class="tagcollageitem">
+            <a href="/t/@(tag.LowerTagName)" class="tagsimplecollageitem"><span class="content">
+                <span class="tag">#@(tag.TagName)
+                </span><span class="stats">
+                    @(ViewBag.UserFirstName != null ? ("By " + ViewBag.UserFirstName + ":") : "")
+                    @(tag.NumClips)
+                    photos/videos&nbsp;&#149;&nbsp;@(tag.NumArticles)
+                    articles </span></span></a>
+            <div class="btns">
+                @if (tag.CurrUserIsFollower)
+                {
+                    <a href="#" class="btnundo unfollowtopicbtn" data-topic-id="@(tag.Id)">
+                        <img src="/images/tick.png" width="16px" height="16px" alt /><span>Unfollow</span></a>
+                }
+                else
+                {
+                    <a href="#" class="btnstyle followtopicbtn" data-topic-id="@(tag.Id)">
+                        <img src="/images/plus.gif" width="16px" height="16px" alt /><span>Follow</span></a>
+                }
+            </div>
+        </div>
+            }
+        }
+    }
+</div>

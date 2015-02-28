@@ -1,0 +1,82 @@
+﻿@using Oceanus.ViewModels.Shared
+
+@model BaseFilterableViewModel
+           
+<script type="text/javascript">
+
+function @(ViewData["FormId"])_PrepareOrSubmit() {
+
+    var form = $('#@(ViewData["FormId"])');
+
+    // disable all empty parameters and page parameter
+    form.find(':input[value=""]').attr('disabled', true);
+    
+    var submitCallback = @(ViewData["SubmitCallbackJSFunction"] ?? "null");
+    
+    // call the sumbmission callback if it exists, otherwise submit the form.
+    if (submitCallback != null) {
+        submitCallback();
+    }
+    else {
+        form.submit();
+    }
+}
+
+function @(ViewData["FormId"])_PreparePage(page) {
+    var hPage = $('input:hidden[name="Page"]');
+    hPage.attr("value", page);
+}
+
+$(document).ready(function() {
+    // wire up click handler for pager links
+    $("a[id^='ctlPage']").click(function() {
+
+        // get page value from data-page attribute 
+        var targetPage = $(this).attr("data-page");
+
+        @(ViewData["FormId"])_PreparePage(targetPage);
+
+        @(ViewData["FormId"])_PrepareOrSubmit();
+    });
+});
+    
+</script>
+
+@* this check is here instead of above because the parent view may want to submit the form based on results per page *@
+
+@if (Model.TotalPages > 1)
+{
+    <div class="resultspager">
+
+        @Html.HiddenFor(m => m.Page)
+
+        @* Show first and previous page links *@
+        @if (Model.TotalPages > 1 && Model.Page > 1)
+        {
+        <a href="javascript:void(0);" id="ctlPagePrevious" data-page="@(Model.Page - 1)">Previous</a>
+        }
+        
+        @* Show page links before current page *@
+        @for (int i = Math.Max(1, Model.Page - 4); i < Model.Page; i++)
+        {
+        <a href="javascript:void(0);" id="ctlPage@(Model.Page)" data-page="@(i)" class="otherpagelinkstyle">@(i)</a>
+        }
+
+        @* Show current page *@ 
+        <span class="bold currpagelink">@Model.Page</span> 
+        
+        @* Show page links after current page *@
+        @for (int i = Model.Page + 1; i <= Math.Min(Model.Page + 4, Model.TotalPages); i++)
+        {
+        <a href="javascript:void(0);" id="ctlPage@(Model.Page)" data-page="@(i)" class="otherpagelinkstyle">@(i)</a>
+        }
+        
+        @* Show next and last page links *@
+        @if (Model.TotalPages > 1 && Model.Page < Model.TotalPages)
+        {
+        <a href="javascript:void(0);" id="ctlPageNext" data-page="@(Model.Page + 1)">Next</a>
+        }
+    
+    </div>
+     
+}

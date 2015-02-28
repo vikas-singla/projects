@@ -1,0 +1,11 @@
+﻿@using Oceanus.ViewModels.Shared
+@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/Overlay/sixloonies.general.overlay.css")
+            .Add("~/Content/Overlay/sixloonies.expandnetwork.overlay.css")
+            .ForceRelease()
+            .Render("~/cache/listing.index.#.css")
+        );
+}

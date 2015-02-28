@@ -1,0 +1,19 @@
+﻿$(document).ready(function () {
+    $('.flaglink').click(function () {
+        var id = $(this).attr("id") + "";
+        id = id.replace("flaglink_", "");
+        $('.clickvmenu').hide();
+        $('.clickvmenunarrow').hide();
+        $('.flaglinkgray').attr("class", "flaglink");
+        $('.degreeddlinkgray').attr("class", "degreeddlink");
+        $('#clickvmenu_' + id).show();
+        $(this).attr("class", "flaglinkgray");
+        return false
+    });
+    $(document.body).click(function (e) {
+        if (!$(e.target).is('.flaglink')) {
+            $('.clickvmenu').hide();
+            $('.flaglinkgray').attr("class", "flaglink")
+        }
+    })
+});

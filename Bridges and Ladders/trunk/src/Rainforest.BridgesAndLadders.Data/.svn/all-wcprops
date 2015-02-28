@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/rainforest/!svn/ver/213/BridgesAndLadders/trunk/src/Rainforest.BridgesAndLadders.Data
+END
+Rainforest.BridgesAndLadders.Data.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/rainforest/!svn/ver/212/BridgesAndLadders/trunk/src/Rainforest.BridgesAndLadders.Data/Rainforest.BridgesAndLadders.Data.csproj
+END
+App.Config
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/rainforest/!svn/ver/211/BridgesAndLadders/trunk/src/Rainforest.BridgesAndLadders.Data/App.Config
+END
+BridgesAndLadders.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/rainforest/!svn/ver/211/BridgesAndLadders/trunk/src/Rainforest.BridgesAndLadders.Data/BridgesAndLadders.Designer.cs
+END
+SampleItem.cs
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/rainforest/!svn/ver/212/BridgesAndLadders/trunk/src/Rainforest.BridgesAndLadders.Data/SampleItem.cs
+END
+BridgesAndLadders.mdf
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/rainforest/!svn/ver/212/BridgesAndLadders/trunk/src/Rainforest.BridgesAndLadders.Data/BridgesAndLadders.mdf
+END
+BridgesAndLadders_log.LDF
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/rainforest/!svn/ver/212/BridgesAndLadders/trunk/src/Rainforest.BridgesAndLadders.Data/BridgesAndLadders_log.LDF
+END
+EntityDataAccess.cs
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/rainforest/!svn/ver/213/BridgesAndLadders/trunk/src/Rainforest.BridgesAndLadders.Data/EntityDataAccess.cs
+END
+BridgesAndLadders.edmx
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/rainforest/!svn/ver/211/BridgesAndLadders/trunk/src/Rainforest.BridgesAndLadders.Data/BridgesAndLadders.edmx
+END
+UserDataAccess.cs
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/rainforest/!svn/ver/212/BridgesAndLadders/trunk/src/Rainforest.BridgesAndLadders.Data/UserDataAccess.cs
+END

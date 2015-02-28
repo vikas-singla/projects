@@ -1,0 +1,82 @@
+﻿@model Oceanus.ViewModels.ReviewViewModel
+<div class="userreview extdarkbtmborder">
+    <div class="vendorinfo">
+        <a href="/vendor/@(Model.VendorId)">@(Model.VendorName)</a><span class="date">@(Model.AddedOn.ToString("MMMM d, yyyy"))</span>
+    </div>
+    <div class="reviewdimens">
+        @for (int i = 0; i < Model.ReviewAttributes.Count(); ++i)
+        {
+            if (i % 3 == 0)
+            {
+            @Html.Raw("<div class=\"dimens\">")        
+            }
+            else
+            {
+            @Html.Raw("<div class=\"dimens marginleft10\">")
+            }
+            <div class="dimenstext">@(Model.ReviewAttributes.ElementAt(i).ReviewAttributeName)</div>
+            <div class="stars bigstars">
+                <div class="rateit" data-rateit-starwidth="16" data-rateit-starheight="16"
+                        data-rateit-resetable="false" data-rateit-value="@(Model.ReviewAttributes.ElementAt(i).ReviewAttributeValue)" data-rateit-readonly="true">
+                </div>
+            </div>
+            @Html.Raw("</div>")
+        }
+    </div>
+    @if (Model.ReviewBulletPoints.Where(point => point.TypeWhatWasLiked == true).Count() > 0)
+    {
+        <div class="comments">
+            <div class="bold">
+                What was liked?</div>
+            <div class="list">
+                @foreach (var bullet in Model.ReviewBulletPoints.Where(point => point.TypeWhatWasLiked == true))
+                {
+                    <div class="entry">
+                        <div class="main">
+                            <span class="lightgraytext">&#149; </span>@(bullet.BulletText)</div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    @if (Model.ReviewBulletPoints.Where(point => point.TypeCanBeBetter == true).Count() > 0)
+    {
+        <div class="comments">
+            <div class="bold margintop5">
+                What can be done better?</div>
+            <div class="list">
+                @foreach (var bullet in Model.ReviewBulletPoints.Where(point => point.TypeCanBeBetter == true))
+                {
+                    <div class="entry">
+                        <div class="main">
+                            <span class="lightgraytext">&#149; </span>@(bullet.BulletText)</div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    @if (Model.ReviewBulletPoints.Where(point => point.TypeExpectationsExceeded == true).Count() > 0)
+    {
+        <div class="comments">
+            <div class="bold margintop5">
+                How were expectations exceeded?</div>
+            <div class="list">
+                @foreach (var bullet in Model.ReviewBulletPoints.Where(point => point.TypeExpectationsExceeded == true))
+                {
+                    <div class="entry">
+                        <div class="main">
+                            <span class="lightgraytext">&#149; </span>@(bullet.BulletText)</div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    @if (Model.OtherComments != null && !Model.OtherComments.Trim().Equals(string.Empty))
+    {
+        <div class="comments">
+            <div class="bold graybg margintop5 marginbottom5">
+                Other Comments / Inside Scoop:
+            </div>@(Model.OtherComments)
+        </div>
+    }
+</div>

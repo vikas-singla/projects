@@ -1,0 +1,12 @@
+﻿<div class="section">
+    <div class="sectiontitle">
+        <div class="titletext">
+            Radar
+        </div>
+        <div class="radarcomingsoon">
+            <img src="/images/comingsoon.jpg" alt />
+        </div>
+    </div>
+    <div class="fullsect">
+    </div>
+</div>

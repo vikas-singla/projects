@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Oceanus.ViewModels.BasePostViewModel>
+<div class="fullsect">
+    <div class="section" style="margin-top: 0px;">
+        <div class="userwall">
+            <div class="walltitle">
+                <div class="walltitletext">
+                    Write something on this page...
+                </div>
+                @*<div class="commentsmenu bold">
+                    <a rel="#directfriendsview" class="selbtn commentsmenuitem">Show All</a> <span class="lighttext">
+                        | </span><a rel="#friendsoffriendsview" class="commentsmenuitem">Show Comments by Friends</a>
+                </div>*@
+            </div>
+            <div id="newwalltextpost" class="newwallpost">
+                <textarea id="newwallpostinput" rows="1"></textarea>
+                <div class="wallposttextareaarrow">
+                </div>
+                <div class="postbtns">
+                    <a href="#" id="addnewuserpostbtn" class="btnbluestyle" data-page-id="@(ViewBag.PageId)">
+                        Post</a>
+                </div>
+            </div>
+            <div id="userwallposts">
+                @{Html.RenderPartial("_BookmarkletPosts", Model);}
+            </div>
+        </div>
+    </div>
+</div> 

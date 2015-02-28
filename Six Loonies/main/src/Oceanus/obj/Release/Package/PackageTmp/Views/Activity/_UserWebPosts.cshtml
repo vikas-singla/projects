@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Oceanus.ViewModels.WebPostViewModel>
+@if (Model != null && Model.Count() > 0)
+{
+    foreach (var WallPost in Model)
+    {
+    <div class="wallpost">
+        <div style="clear: both; overflow: auto;">
+            <div class="postuserimg" title="@(WallPost.ContributingUserProfile.FullName)">
+                <a href="/u/@(WallPost.ContributingUserProfile.Id)"><img src="@(WallPost.ContributingUserProfile.UserProfileImageUrl == null ? "/images/user.jpg" : (WallPost.ContributingUserProfile.UserProfileImageUrl))" width="40px" alt /></a>
+            </div>
+            <div class="postcontent">
+                <div style="clear: both; padding-bottom: 3px;">
+                    <a href="/u/@(WallPost.ContributingUserProfile.Id)" style="font-weight:bold;">@(WallPost.ContributingUserProfile.FullName)</a>
+                    wrote:</div>
+                @(WallPost.WallText)
+                @if (WallPost.AssociatedWebPage != null)
+                {
+                    <div class="sourceWebPageSect">
+                        <div class="webicon">
+                            <img src="/images/web_icon.png" alt /></div>
+                        <div class="webpagedetails">
+                            <div class="webpagedescriptor">
+                                Posted on following web page:</div>
+                            <div class="webpagetitle">
+                                <a target="_blank" href="@(WallPost.AssociatedWebPage.PageUrl)">@(WallPost.AssociatedWebPage.PageTitle)</a></div>
+                            <div class="webpageurl">@((new Uri(WallPost.AssociatedWebPage.PageUrl)).Host.Replace("www.", ""))</div>
+                        </div>
+                    </div>
+                }
+                <div class="postfooter">
+                    <a href="#" class="">Like</a> <span>&nbsp;&#149;&nbsp;</span> <a href="#" class="showpostcommentsbtn" data-post-comments="pcb@(WallPost.Id)">
+                        Comment</a> <span>&nbsp;&#149;&nbsp;</span>
+                    @(WallPost.ContributionDate.ToString("MMMM d, yyyy"))
+                </div>
+                <div class="postcommentblock pcb@(WallPost.Id)" style="display:none;padding-top:5px;">
+                    @{Html.RenderAction("GetWallPostComments", "Activity", new { wallPostId = WallPost.Id });}
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+}
+else
+{
+    <div class="emptywall">
+    </div>
+}

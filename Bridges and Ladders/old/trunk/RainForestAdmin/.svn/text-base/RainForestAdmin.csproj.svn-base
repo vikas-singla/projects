@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{51360276-6E05-417F-B910-DB1397A21FF1}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RainForestAdmin</RootNamespace>
+    <AssemblyName>RainForestAdmin</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=3.5.40412.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SupportPages\AddCompanyInfoLinkedPages\AddCompanyHeads.aspx" />
+    <Content Include="SupportPages\AddCompanyInfoLinkedPages\AddCompanyPicturesVideos.aspx" />
+    <Content Include="SupportPages\AddCompanyInfoLinkedPages\CompanyLocation.aspx" />
+    <Content Include="MainPages\EditDetails.aspx" />
+    <Content Include="Account\ChangePassword.aspx" />
+    <Content Include="Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Account\Login.aspx" />
+    <Content Include="Account\Register.aspx" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="MultiFunctionGrid-Future\CompanyInfo.aspx" />
+    <Content Include="MainPages\BasicCompanyInfo.aspx" />
+    <Content Include="NotificationPages\DBOperationSucceeded.aspx" />
+    <Content Include="SupportPages\EditCompanyInfoLinkedPages\EditLocationDetails.aspx" />
+    <Content Include="SupportPages\EditCompanyInfoLinkedPages\EditCompanyHeads.aspx" />
+    <Content Include="SupportPages\EditCompanyInfoLinkedPages\EditLocationPics.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="SupportPages\AddCompanyInfoLinkedPages\AddCompanyHeads.aspx.cs">
+      <DependentUpon>AddCompanyHeads.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SupportPages\AddCompanyInfoLinkedPages\AddCompanyHeads.aspx.designer.cs">
+      <DependentUpon>AddCompanyHeads.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SupportPages\AddCompanyInfoLinkedPages\AddCompanyPicturesVideos.aspx.cs">
+      <DependentUpon>AddCompanyPicturesVideos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SupportPages\AddCompanyInfoLinkedPages\AddCompanyPicturesVideos.aspx.designer.cs">
+      <DependentUpon>AddCompanyPicturesVideos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BusinessObjectClasses\CompanyProfileEntry.cs" />
+    <Compile Include="BusinessObjectClasses\AddCompanyHeads.cs" />
+    <Compile Include="BusinessObjectClasses\CompanyLocationInfo.cs" />
+    <Compile Include="BusinessObjectClasses\CompanyPictures.cs" />
+    <Compile Include="BusinessObjectClasses\GrowthLadder.cs" />
+    <Compile Include="SupportPages\AddCompanyInfoLinkedPages\CompanyLocation.aspx.cs">
+      <DependentUpon>CompanyLocation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SupportPages\AddCompanyInfoLinkedPages\CompanyLocation.aspx.designer.cs">
+      <DependentUpon>CompanyLocation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseOperations.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatabaseOperations.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="MultiFunctionGrid-Future\Company.cs" />
+    <Compile Include="DbClasses\DBOperations.cs" />
+    <Compile Include="MainPages\EditDetails.aspx.cs">
+      <DependentUpon>EditDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MainPages\EditDetails.aspx.designer.cs">
+      <DependentUpon>EditDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.designer.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RainForestAdmin.Master.cs">
+      <DependentUpon>RainForestAdmin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RainForestAdmin.Master.designer.cs">
+      <DependentUpon>RainForestAdmin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MultiFunctionGrid-Future\CompanyInfo.aspx.cs">
+      <DependentUpon>CompanyInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MultiFunctionGrid-Future\CompanyInfo.aspx.designer.cs">
+      <DependentUpon>CompanyInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MainPages\BasicCompanyInfo.aspx.cs">
+      <DependentUpon>BasicCompanyInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MainPages\BasicCompanyInfo.aspx.designer.cs">
+      <DependentUpon>BasicCompanyInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationPages\DBOperationSucceeded.aspx.cs">
+      <DependentUpon>DBOperationSucceeded.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotificationPages\DBOperationSucceeded.aspx.designer.cs">
+      <DependentUpon>DBOperationSucceeded.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SupportPages\EditCompanyInfoLinkedPages\EditLocationDetails.aspx.cs">
+      <DependentUpon>EditLocationDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SupportPages\EditCompanyInfoLinkedPages\EditLocationDetails.aspx.designer.cs">
+      <DependentUpon>EditLocationDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SupportPages\EditCompanyInfoLinkedPages\EditCompanyHeads.aspx.cs">
+      <DependentUpon>EditCompanyHeads.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SupportPages\EditCompanyInfoLinkedPages\EditCompanyHeads.aspx.designer.cs">
+      <DependentUpon>EditCompanyHeads.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SupportPages\EditCompanyInfoLinkedPages\EditLocationPics.aspx.cs">
+      <DependentUpon>EditLocationPics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SupportPages\EditCompanyInfoLinkedPages\EditLocationPics.aspx.designer.cs">
+      <DependentUpon>EditLocationPics.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\Web.config" />
+    <Content Include="RainForestAdmin.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DatabaseOperations.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DatabaseOperations.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DatabaseOperations.dbml.layout">
+      <DependentUpon>DatabaseOperations.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>6054</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

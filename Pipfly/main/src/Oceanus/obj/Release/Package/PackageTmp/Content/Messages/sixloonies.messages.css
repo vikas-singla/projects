@@ -1,0 +1,504 @@
+﻿.msgtageditbtn, .msgtageditbtn:visited
+{
+    position: absolute;
+    right: 5px;
+    top: 7px;
+    display: block;
+    width: 7px;
+    height: 7px;
+    font-size: 1px;
+    background: url('/images/close.gif');
+}
+
+.msgtageditbtn:hover
+{
+    background-position: 7px;
+}
+
+.messageoverlay
+{
+    z-index: 10000;
+    background-color: #fff;
+    width: 475px;
+    padding: 0;
+    margin: 0;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.messageoverlay .content
+{
+    padding: 10px;
+    width: 455px;
+    min-height: 200px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.messageoverlay .overlaytitle, .messageoverlay .title
+{
+    width: 430px;
+    margin: 0 auto 0 auto;
+    font-variant: small-caps;
+    font-size: 16px;
+    color: #333;
+    text-align: left;
+    padding: 5px 2px 5px 2px;
+    font-weight: bold;
+}
+
+.messageoverlay .title
+{
+    text-align: center;
+    font-size: 18px;
+    color: #FF3030;
+}
+
+.messageoverlay .formfieldpadding
+{
+    padding:2px 0px;
+}
+
+.messageoverlay .overlaytitle
+{
+    border-bottom: 2px solid #FF3030;
+}
+
+.messageoverlay .formfields
+{
+    width: 430px;
+    margin: 0 auto 0 auto;
+    padding: 10px 0;
+}
+
+.messageoverlay .formfields .formfield
+{
+    width: 100%;
+    padding: 3px 0px 0px 0px;
+    display: block;
+    overflow: auto;
+    clear: both;
+}
+
+.messageoverlay .formfields .formfield .lbl
+{
+    width: 70px;
+    display: block;
+    text-align: left;
+    font-weight:bold;
+    float: left;
+}
+
+.messageoverlay .formfields .formfield .field
+{
+    display: block;
+    width: 340px;
+    float: left;
+    margin-left: 10px;
+}
+
+.messageoverlay .formfields .formfield .field textarea
+{
+    resize: none;
+    width: 100%;
+}
+
+.messageoverlay .formfields .btns
+{
+    width: 405px;
+    clear: both;
+    display: block;
+    text-align: right;
+    margin: 2px auto;
+}
+
+.messageoverlay .formfields .fieldctrlfullwidth textarea, .messageoverlay .formfields .fieldctrlfullwidth input
+{
+    resize: none;
+    width: 100%;
+}
+
+.messageoverlay #messagetosect
+{
+    width: 344px;
+    border: 1px solid #C9C9C9;
+    padding: 0px;
+    overflow: auto;
+    margin: 0px;
+    cursor: text;
+}
+
+#messageSubjectInput
+{
+    width: 340px;
+}
+
+#messageToArgs
+{
+    float: left;
+    display: inline;
+}
+
+.messageToTokenizer
+{
+    float: left;
+    max-width: 336px;
+    padding: 0;
+    display: block;
+    overflow: hidden;
+    cursor: text;
+}
+
+#messageToInput
+{
+    min-height: 18px;
+    height: 18px;
+    padding: 2px 2px;
+    margin: 0px 2px;
+    display: block;
+    border: none;
+    outline:none;
+    box-shadow: inset 0 1px 2px #fff;
+}
+
+.messagelisting
+{
+    width: 100%;
+    display: block;
+}
+
+.messagelisting .message
+{
+    width: 100%;
+    margin-bottom: 15px;
+    height: 60px;
+    display: block;
+    overflow: hidden;
+}
+
+.messagelisting .messageunreadbg
+{
+    background-color:#f4f4f4;
+}
+
+.messagelisting .message .userpic
+{
+    display: block;
+    width: 50px;
+    float: left;
+    height: 50px;
+    padding-right: 20px;
+}
+
+.messagelisting .message .messagedetails .unreadmarker
+{
+    position:absolute;
+    top:15px;
+    left:-15px;
+    cursor:default;
+    font-weight:bold;
+    color:#106fb8;
+}
+
+.messagelisting .message .messagedetails
+{
+    float: left;
+    display: block;
+    width: 600px;
+    position: relative;
+}
+
+.messagelisting .message .messagedetails .sendername:hover
+{
+    color: #333;
+    text-decoration: none;
+    border-bottom: 1px dashed #999999;
+}
+
+.messagelisting .message .messagedetails .sendername
+{
+    color: #333;
+}
+
+.messagelisting .message .messagedetails .datestamp
+{
+    color:#909090;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+}
+
+.messagelisting .message .messagedetails .quote
+{   
+    font-weight:normal;
+    background: #ACACAC;
+    color: #F0F0F0;
+    padding:1px 10px;
+    position:absolute;
+    top:20px;
+    right:3px;
+    font-size:12px;
+    text-align:center;
+    font-weight:bold;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.messagelisting .message .messagedetails .subject
+{
+    width: 450px;
+    display: block;
+    clear: both;
+}
+
+.messagelisting .message .messagedetails .quotesubject
+{
+    width: 375px;
+    display: block;
+    clear: both;
+}
+
+.msgdetails
+{
+    width:940px;
+    margin:0px 10px 0px 10px;
+    display:block;
+    overflow:auto;
+    padding-bottom:25px;
+}
+
+.msgdetails .detailspanel
+{
+    width: 670px;
+    padding: 5px 0px 0px 0px;
+    clear: both;
+    float: left;
+    text-align: left;
+}
+
+.msgdetails .detailspanel .msglist, .msgdetails .detailspanel .responseinput
+{
+    margin-top:15px;
+    clear:both;
+    width:100%;
+}
+
+.msgdetails .detailspanel .responseinput .price
+{
+    display:block;
+    margin:10px 0;
+    overflow:auto;
+    float:left;
+    position:relative;
+}
+
+.msgdetails .detailspanel .responseinput .price .pricelbl .smalltext
+{
+    position:relative;
+    top:-1px;
+}
+
+.msgdetails .detailspanel .responseinput .price .pricelbl
+{
+    float:left;
+    position:relative;
+    top:3px;
+    margin-right:10px;
+    text-align:left;
+}
+
+.msgdetails .detailspanel .responseinput .quotebudgetinput
+{
+    float:left;
+    text-align:left;
+    color:#106fb8;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.msgdetails .detailspanel .responseinput .quotebudgetinput input
+{
+    width:45px;
+    margin:0 0 0 3px;
+    font-weight:normal;
+    font-size:15px;
+}
+
+.msgdetails .detailspanel .responseinput .quotebudgetinput .cents
+{
+    color:#333;
+    font-weight:normal;
+    font-size:15px;
+}
+
+.msgdetails .detailspanel .responseinput .inputstyle
+{
+    padding:10px;
+    background:#f4f4f4;
+}
+
+.msgdetails .detailspanel .responseinput .links
+{
+    padding-top: 10px;
+    width:100%;
+    text-align:right;
+}
+
+.msgdetails .detailspanel .responseinput .inputstyle textarea
+{
+    resize:none;
+    width:644px;
+}
+
+.msgdetails .detailspanel .responseinput .responselbl
+{
+    color:#a0a0a0;
+    font-weight:bold;
+    padding-bottom:10px;
+}
+
+.msgdetails .detailspanel .msglist .response
+{
+    width:100%;
+    overflow:auto;
+    padding-top:5px;
+    padding-bottom:10px;
+    border-bottom:1px solid #e9e9e9;
+}
+
+.msgdetails .detailspanel .msglist .response .userpic
+{
+    display: block;
+    width: 50px;
+    float: left;
+    height: 50px;
+    padding-right: 15px;
+}
+
+.msgdetails .detailspanel .msglist .response .responsedetails
+{
+    float:left;
+    display:block;
+    width:605px;
+    text-align:left;
+    position:relative;
+}
+
+.msgdetails .detailspanel .msglist .response .responsedetails .username:hover
+{
+    text-decoration: none;
+    border-bottom: 1px dashed #106fb8;
+}
+
+.msgdetails .detailspanel .msglist .response .responsedetails .username
+{
+}
+
+.msgdetails .detailspanel .msglist .response .responsedetails .quote
+{
+    font-weight:normal;
+    background: #ACACAC;
+    color: #F0F0F0;
+    padding:1px 10px;
+    position:absolute;
+    top:20px;
+    right:3px;
+    font-size:14px;
+    text-align:center;
+    font-weight:bold;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.msgdetails .detailspanel .msglist .response .responsedetails .datestamp
+{    
+    color:#909090;
+    font-weight:normal;
+    position:absolute;
+    top:3px;
+    right:3px;
+}
+
+.msgdetails .detailspanel .msglist .response .responsedetails .text
+{
+    margin-top:5px;
+    clear:both;
+    display:block;
+    width:505px;
+}
+
+.msgdetails .detailspanel .subject
+{
+    clear: both;
+    width: 100%;
+    font-size:20px;
+    line-height:20px;
+    font-weight: bold;
+    margin-top:10px;
+    padding: 5px 2px 5px 2px;
+    border-top:2px solid #d9d9d9;
+}
+
+.msgdetails .detailspanel .bodytext
+{
+    text-align: left;
+    line-height: 18px;
+    padding-top: 5px;
+}
+
+.msgdetails .messagesidepanel
+{
+    width: 230px;
+    padding: 0px 0px 10px 10px;
+    margin-left: 30px;
+    margin-top:-10px;
+    float: left;
+    text-align: left;
+    overflow: hidden;
+}
+
+.msgdetails .messagesidepanel .participantlink
+{
+    width:100%;
+    display:block;
+    overflow:auto;
+}
+
+.msgdetails .messagesidepanel .participantlink:hover
+{
+    background-color:#f4f4f4;
+}
+
+.msgdetails .messagesidepanel .participant
+{
+    clear:both;
+    display:block;
+    width:100%;
+    height:40px;
+    overflow:hidden;
+    padding:2px 0px;
+    border-bottom:1px solid #e9e9e9;
+}
+
+.msgdetails .messagesidepanel .participant .photo
+{
+    float:left;
+    display:block;
+    width:30px;
+    height:30px;
+    margin:5px 10px 5px 5px;
+    overflow:hidden;   
+}
+
+.msgdetails .messagesidepanel .participant .name
+{
+    width:175px;
+    float:left;
+    display:block;
+    height:30px;
+    padding:5px;
+    font-weight:bold;
+}

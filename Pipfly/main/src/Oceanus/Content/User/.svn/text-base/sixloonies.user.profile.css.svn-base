@@ -1,0 +1,253 @@
+﻿.profile
+{
+    margin:20px 10px 20px 10px;
+    width:940px;
+}
+
+.profile .radarcomingsoon
+{
+    text-align:center;
+    padding:50px;
+}
+
+#facebooksigninbtn3
+{
+    position:relative;
+    height:16px;
+    max-height:16px;
+    overflow:hidden;
+}
+
+#facebooksigninbtn3 img
+{
+    float:left;
+    position:relative;
+    padding:0px;
+    margin:0px;
+    padding-right:5px;
+}
+
+.profile .graypromptsect
+{
+    color:#888;
+    background:#fff;
+    min-height:30px;
+    border:2px dashed #e0e0e0;
+    font-family: "lucida grande" ,tahoma,verdana,arial,sans-serif;
+    font-weight:normal;
+    display:block;
+    vertical-align:middle;
+    text-align:left;
+    text-decoration:none;
+    position:relative;
+    clear:both;
+    padding:10px;
+}
+
+.profile .graypromptsect .center
+{
+    text-align:center;
+    display:block;
+}
+
+.profile .tabbtns .tabs a, .profile .tabbtns .tabs a:visited, .profile .tabbtns .tabs a:hover
+{
+    padding:0 11px;
+}
+
+.profile .leftsect
+{
+    width: 680px;
+    float: left;
+    text-align: left;
+}
+
+.profile .profileoverview
+{
+    width: 230px;
+    padding: 0px 0px 0px 10px;
+    margin: 0;
+    margin-left: 20px;
+    float: left;
+    display: inline-block;
+    overflow: hidden;
+    text-align: left;
+}
+
+.profile .profileoverview .basic
+{
+    clear: both;
+    width: 220px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.profile .profileoverview .profileimagecontainer img
+{
+    border:1px solid #d0d0d0;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.profile .profileoverview .profileimagecontainer
+{
+    width: 192px;
+    margin:10px 15px 20px 15px;
+    overflow: hidden;
+    display: block;
+    clear:both;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.btnundo, .btnundo:visited
+{
+    border: 1px solid #aaa;
+}
+
+.profile .profileoverview .userdetails
+{
+    width: 210px;
+    padding:5px;
+    text-align:center;
+    margin-bottom:25px;
+    font-size:25px;
+    color:#106fb8;
+    clear:both;
+}
+
+.profile .userprofilerequestnotice
+{
+    padding: 10px;
+    background: #fcf49c;
+    margin-bottom: 20px;
+    border:1px solid #d9d9d9;
+    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+.profile .profilebtns
+{
+    margin-top:10px;
+    margin-bottom: 15px;
+    width: 220px;
+    padding: 5px 0px;
+    text-align: center;
+    display: block;
+    clear: both;
+}
+
+.profile .profilebtns a
+{
+    margin-bottom:10px;
+}
+
+.profile .stats
+{
+    clear: both;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: block;
+    overflow: auto;
+    border-top: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.profile .stats .stat
+{
+    height: 100%;
+    width: 67px;
+    height:68px;
+    float: left;
+    text-align: center;
+    display: block;
+    padding: 6px 3px;
+}
+
+.profile .stats .stat .num
+{
+    margin-bottom:4px;
+    margin-top:3px;
+}
+
+.profile .stats .stat .num span
+{
+    font-weight:bold;
+    color: #f0f0f0;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3) !important;
+    font-size:14px;
+    line-height:18px;
+    background: #ACACAC;
+    padding:1px 10px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.profile .stats .stat .lbl
+{
+    font-size: 10px;
+    display: block;
+    line-height: 14px;
+}
+
+.profile .userreview .vendorinfo
+{
+    width: 100%;
+    position: relative;
+    height: 14px;
+    vertical-align: middle;
+    margin: 5px 0px 10px 0px;
+}
+
+.profile .userreview .vendorinfo a, .profile .userreview .vendorinfo a:visited, .profile .userreview .vendorinfo a:hover
+{
+    font-weight: bold;
+    font-size: 14px;
+    color: #bd3b61;
+}
+
+.profile .userreview .vendorinfo .date
+{
+    top: 3px;
+}
+
+.profile .welcome_msg
+{
+    width: 660px;
+    display:block;
+    padding: 10px;
+    background: #fcf49c;
+    min-height: 50px;
+    margin-bottom: 25px;
+    box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.profile .welcome_msg .title
+{
+    font-size:17px;
+    font-weight:bold;
+}
+
+.profile .welcome_msg .point
+{
+    padding:1px 0px;
+}
+
+.profile #nomsgs
+{
+    width:100%;
+    text-align:center;
+}

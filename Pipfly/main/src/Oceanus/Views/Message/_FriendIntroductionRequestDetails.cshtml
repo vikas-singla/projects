@@ -1,0 +1,270 @@
+﻿@model Oceanus.ViewModels.FriendIntroRequestViewModel
+<link href="@Url.Content("~/Content/Messages/sixloonies.askforintro.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/scripts/sixloonies.message.friend.introduction.js"></script>
+@if (ViewBag.NotAuthorized)
+{
+    <div class="fullsect bold">
+        You are not authorized to view this message.</div>
+}
+else
+{
+    <div class="breadcomb">
+        <a href="/">Home</a>&nbsp;&raquo;&nbsp;<a href="/account/profile?userid=@(ViewBag.UserId)">Friend
+            Introduction Requests</a>&nbsp;&raquo;&nbsp;<span>From @(Model.InitiatingUserProfile.FullName)</span>
+    </div>
+    
+    if (Model.InitiatingUserId == ViewBag.UserId && Model.TargetUserHasAccepted)
+    {
+        <div class='success'><span class='hpadtext'><span class='notificonalign'><img src='/images/tick.png' alt /></span>Congratulations! You are now friends with @(Model.TargetUserProfile.FullName).</span></div>
+    
+        <div class="fullsect friendintrorequestdetails">
+            <div class="detailspanel">
+                <div class="subject">
+                    Introduction Request
+                </div>
+                <div class="initiatingUserComments">
+                    <div class="bold">
+                        You wrote to @(Model.ConnectingFriendUserProfile.FullName):
+                    </div>
+                    <div class="normaltext">@(Model.MessageToConnectingFriend)</div>
+                </div>
+                <div class="introtargetpanel">
+                    <div class="connectingfriendmsgtotargetuser">
+                    <div class="askintrodetailppl">
+                        <div class="askintrouser">
+                            <div class="photo">
+                                <a href="/account/profile?userId=@(Model.ConnectingFriendUserId)">
+                                    <img src="/images/user.jpg" width="70px" height="70px" alt />
+                                </a>
+                            </div>
+                            <div class="name">
+                                <a href="/account/profile?userId=@(Model.ConnectingFriendUserId)">@(Model.ConnectingFriendUserProfile.FirstName)</a>
+                            </div>
+                        </div>
+                        <div class="askintroarrow">
+                            <img src="/images/green_arrow_right.png" width="20px" height="20px" alt /></div>
+                        <div class="askintrouser">
+                            <div class="photo">
+                                <a href="/account/profile?userId=@(Model.TargetUserId)">
+                                    <img src="/images/user.jpg" width="70px" height="70px" alt />
+                                </a>
+                            </div>
+                            <div class="name">
+                                <a href="/account/profile?userId=@(Model.TargetUserId)">@(Model.TargetUserProfile.FirstName)</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="initUserCommentsToTarget">
+                        <div class="bold">
+                            @(Model.ConnectingFriendUserProfile.FirstName)'s message to @(Model.TargetUserProfile.FullName)
+                        </div>
+                        <textarea cols="1" rows="1" readonly="readonly">@(Model.ConnectingUserMessageToTargetUser)</textarea>
+                    </div>
+                </div>
+                    <div class="initusermsgtotargetuser">
+                        <div class="askintrodetailppl">
+                        <div class="askintrouser">
+                            <div class="photo">
+                                <a href="/account/profile?userId=@(Model.InitiatingUserId)">
+                                    <img src="/images/user.jpg" width="70px" height="70px" alt />
+                                </a>
+                            </div>
+                            <div class="name">
+                                <a href="/account/profile?userId=@(Model.InitiatingUserId)">@(Model.InitiatingUserProfile.FirstName)</a>
+                            </div>
+                        </div>
+                        <div class="askintroarrow">
+                            <img src="/images/green_arrow_right.png" width="20px" height="20px" alt /></div>
+                        <div class="askintrouser">
+                            <div class="photo">
+                                <a href="/account/profile?userId=@(Model.TargetUserId)">
+                                    <img src="/images/user.jpg" width="70px" height="70px" alt />
+                                </a>
+                            </div>
+                            <div class="name">
+                                <a href="/account/profile?userId=@(Model.TargetUserId)">@(Model.TargetUserProfile.FirstName)</a>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="initUserCommentsToTarget">
+                            <div class="bold">
+                                Your attached message to @(Model.TargetUserProfile.FirstName)
+                            </div>
+                            <textarea cols="1" rows="1" readonly="readonly">@(Model.InitiatingUserMessageToTargetUser)</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="initiatingUserComments darktopborder">
+                    <div class="bold">
+                        @(Model.TargetUserProfile.FullName)'s reply to you:
+                    </div>
+                    <div class="normaltext">@(Model.TargetUserMessageToInitUser)</div>
+                </div>
+            </div>
+        </div>        
+    }
+    else
+    {    
+        <div class="fullsect friendintrorequestdetails">
+            <div class="detailspanel">
+                <div class="subject">
+                    Introduction Request</div>
+                @if (Model.ConnectingFriendUserId == ViewBag.UserId)
+                {
+                    <div class="initiatingUserComments">
+                        <div class="bold">
+                            @(Model.InitiatingUserProfile.FullName)
+                            wrote:
+                        </div>
+                        <div class="normaltext">@(Model.MessageToConnectingFriend)</div>
+                    </div>
+                }
+                else if (Model.TargetUserId == ViewBag.UserId)
+                {
+                    <div class="initiatingUserComments">
+                        <div class="bold">
+                            @(Model.ConnectingFriendUserProfile.FullName)
+                            wrote:
+                        </div>
+                        <div class="normaltext">@(Model.ConnectingUserMessageToTargetUser)</div>
+                    </div>
+                }
+                <div class="introtargetpanel">
+                    @if (Model.ConnectingFriendUserId == ViewBag.UserId)
+                    {
+                        <text>Introduce @(Model.InitiatingUserProfile.FirstName)
+                        to @(Model.TargetUserProfile.FullName):
+                        <br /></text>
+                    }
+                    else if (Model.TargetUserId == ViewBag.UserId)
+                    {
+                        <text>Message from @(Model.InitiatingUserProfile.FirstName):</text>
+                    }
+                    <br />
+                    @if (Model.ConnectingFriendUserId == ViewBag.UserId)
+                    {
+                        <div class="connectingfriendmsgtotargetuser">
+                            <div class="askintrodetailppl">
+                                <div class="askintrouser">
+                                    <div class="photo">
+                                        <a href="/account/profile?userId=@(Model.ConnectingFriendUserId)">
+                                            <img src="/images/user.jpg" width="70px" height="70px" alt />
+                                        </a>
+                                    </div>
+                                    <div class="name">
+                                        <a href="/account/profile?userId=@(Model.ConnectingFriendUserId)">You</a>
+                                    </div>
+                                </div>
+                                <div class="askintroarrow">
+                                    <img src="/images/green_arrow_right.png" width="20px" height="20px" alt /></div>
+                                <div class="askintrouser">
+                                    <div class="photo">
+                                        <a href="/account/profile?userId=@(Model.TargetUserId)">
+                                            <img src="/images/user.jpg" width="70px" height="70px" alt />
+                                        </a>
+                                    </div>
+                                    <div class="name">
+                                        <a href="/account/profile?userId=@(Model.TargetUserId)">@(Model.TargetUserProfile.FirstName)</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="friendIntroDetailsComments">
+                                <div class="bold">
+                                    Your message to @(Model.TargetUserProfile.FirstName)
+                                </div>
+                                <textarea id="msgToTargetUserInput" cols="1" rows="1">@(Model.ConnectingUserMessageToTargetUser)</textarea>
+                            </div>
+                        </div>
+                    }
+                    <div class="initusermsgtotargetuser">
+                        <div class="askintrodetailppl">
+                            <div class="askintrouser">
+                                <div class="photo">
+                                    <a href="/account/profile?userId=@(Model.InitiatingUserId)">
+                                        <img src="/images/user.jpg" width="70px" height="70px" alt />
+                                    </a>
+                                </div>
+                                <div class="name">
+                                    <a href="/account/profile?userId=@(Model.InitiatingUserId)">@(Model.InitiatingUserProfile.FirstName)</a>
+                                </div>
+                            </div>
+                            <div class="askintroarrow">
+                                <img src="/images/green_arrow_right.png" width="20px" height="20px" alt /></div>
+                            <div class="askintrouser">
+                                <div class="photo">
+                                    <a href="/account/profile?userId=@(Model.TargetUserId)">
+                                        <img src="/images/user.jpg" width="70px" height="70px" alt />
+                                    </a>
+                                </div>
+                                <div class="name">
+                                    <a href="/account/profile?userId=@(Model.TargetUserId)">@(Model.TargetUserProfile.FirstName)</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="initUserCommentsToTarget">
+                            @if (Model.ConnectingFriendUserId == ViewBag.UserId)
+                            {
+                                <div class="bold">
+                                    Attached message from @(Model.InitiatingUserProfile.FirstName)
+                                    to @(Model.TargetUserProfile.FirstName)
+                                </div>
+                            }
+                            <textarea cols="1" rows="1" readonly="readonly">@(Model.InitiatingUserMessageToTargetUser)</textarea>
+                        </div>
+                    </div>
+                    @if (Model.ConnectingFriendUserId == ViewBag.UserId)
+                    {
+                        <div class="links">
+                            @if (Model.IntroductionForwardedToTargetUser)
+                            {
+                                <span class='disabledbtn'>Introduction Forwarded</span>
+                            }
+                            else
+                            {
+                                <a href="#" class="btnbluestyle" id="msgforwardfriendintrobtn" data-reqid="@(Model.FriendIntroRequestId)">
+                                    Forward Introduction</a>
+                            }
+                        </div>
+                    }
+                    else if (Model.TargetUserId == ViewBag.UserId)
+                    {
+                        <div class="targetUserCommentsToInitUser">
+                            <div class="bold">
+                                Reply to @(Model.InitiatingUserProfile.FirstName)
+                            </div>
+                            <textarea cols="1" rows="1" id="targetUserMsgToInitUserInput">@(Model.TargetUserMessageToInitUser)</textarea>
+                        </div>                    
+                        <div class="links">
+                            @if (Model.TargetUserHasAccepted)
+                            {
+                                <span class='disabledbtn'>Introduction Accepted</span>
+                            }
+                            else
+                            {
+                                <a href="#" class="btnbluestyle" id="acceptfriendintrobtn" data-reqid="@(Model.FriendIntroRequestId)">
+                                    Reply & Accept Introduction</a>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="friendintrorequestsidepanel">
+                <div class="section">
+                    <div class="sectiontitle">
+                        <div class="titletext">
+                            Introduction Requester
+                        </div>
+                    </div>
+                </div>
+                <a href="/account/profile?userId=@(Model.InitiatingUserProfile.UserId)" class="participantlink">
+                    <div class="participant">
+                        <div class="name">
+                            @(Model.InitiatingUserProfile.FullName)</div>
+                        <div class="photo">
+                            <img src="/images/user.jpg" width="30px" height="30px" alt /></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+}

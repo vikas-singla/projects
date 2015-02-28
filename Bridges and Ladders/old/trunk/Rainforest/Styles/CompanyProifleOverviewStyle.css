@@ -1,0 +1,122 @@
+﻿.CP_CompanyName
+{
+    color: #004A7F;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 0px;
+    vertical-align: middle;
+    text-align: left;
+}
+.CP_PlainSectionStyle
+{
+    vertical-align: top;
+}
+.CP_MainTable
+{
+    width: 100%;
+}
+.CP_HeaderTable
+{
+    width: 100%;
+    padding-top: 5px;
+}
+.ProfileHeaderNavColumnStyle
+{
+    width: 50%;
+    text-align: left;
+}
+.ProfileHeaderActionsColumnStyle
+{
+    width: 50%;
+    text-align: right;
+}
+.CP_DescHeaderStyle
+{
+    padding: 1px 1px 1px 1px;
+    background-color: #fff;
+    color: #505050;
+}
+.CP_LogoColumnStyle
+{
+    border-bottom: 1px solid #d0d0d0;
+    width: 50%;
+    text-align: left;
+}
+.CP_ShareItColumnStyle
+{
+    border-bottom: 1px solid #d0d0d0;
+    width: 50%;
+    text-align: right;
+}
+.CP_DescHeaderStyle li
+{
+    font-size: 12px;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: square;
+}
+.CP_MainTable tr td
+{
+    vertical-align: top;
+}
+.CP_SectionStyle
+{
+    border: none;
+    vertical-align: top;
+    width: 100%;
+}
+.CPFooterMoreLinkStyle, .CPFooterMoreLinkStyle:active, .CPFooterMoreLinkStyle:hover, .CPFooterMoreLinkStyle:visited
+{
+    font-style: normal;
+    font-size: 11px;
+}
+.tbl_profilefields
+{
+    width: 100%;
+    vertical-align: top;
+}
+.tbl_profilefields .label
+{
+    text-align: right;
+    width: 125px;
+    padding: 3px 0px 3px 0px;
+    border-bottom: 1px dotted #d9d9d9;
+}
+.tbl_profilefields .value
+{
+    text-align: left;
+    width: 310px;
+    padding: 3px 0px 3px 15px;
+    border-bottom: 1px dotted #d9d9d9;
+}
+.lbl_profilefieldstyle
+{
+    color: #5DAE21;
+    text-align: right;
+    font-size: 12px;
+    font-weight: bold;
+}
+.lbl_profilefieldvaluestyle
+{
+    color: #505050;
+    text-align: right;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.link_profilehierarchyNav, .link_profilehierarchyNav:visited
+{
+    color: #106fb8;
+    padding: 0px;
+    border-width: 0px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.lbl_profilenamenav
+{
+    color: #505050;
+    text-align: right;
+    font-size: 12px;
+    font-weight: bold;
+}

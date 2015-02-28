@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/projects/!svn/ver/483/main/src/Oceanus/ViewModels/SocialNetwork
+END
+NetworkConnectionPathViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/projects/!svn/ver/475/main/src/Oceanus/ViewModels/SocialNetwork/NetworkConnectionPathViewModel.cs
+END
+BaseFriendIntroRequestViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/projects/!svn/ver/483/main/src/Oceanus/ViewModels/SocialNetwork/BaseFriendIntroRequestViewModel.cs
+END
+FriendIntroRequestViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/projects/!svn/ver/483/main/src/Oceanus/ViewModels/SocialNetwork/FriendIntroRequestViewModel.cs
+END

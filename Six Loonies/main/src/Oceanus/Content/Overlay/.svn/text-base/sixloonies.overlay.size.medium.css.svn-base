@@ -1,0 +1,120 @@
+﻿.mediumoverlay {
+	z-index:10000;
+	background-color:#fff;
+	width:475px;
+	padding:0;
+	margin:0;
+	z-index:9999999;
+}
+
+.mediumoverlay .content
+{
+    padding:10px;
+    width:455px;
+    min-height:150px;
+    overflow:hidden;
+    margin:0 auto;
+}
+
+.mediumoverlay .overlaytitle, .mediumoverlay .title
+{
+    width:430px;
+    margin:0 auto 0 auto;
+    font-size:15px;
+    color:#444;
+    text-align:left;
+    padding:5px 2px 10px 2px;
+    font-weight:bold;
+}
+
+.mediumoverlay .title
+{
+    text-align:center;
+    font-size:18px;
+    color:#FF3030;
+}
+
+.mediumoverlay .overlaytitle
+{
+    border-bottom:2px solid #FF3030;
+}
+
+.mediumoverlay .formfields
+{
+    width:430px;
+    margin:0 auto 0 auto;
+    padding:10px 0px 10px 0px;
+}
+
+.mediumoverlay .formfield
+{
+    width:430px;
+    overflow:hidden;
+    clear:both;
+    padding:2px 0px 2px 0px;
+}
+
+.mediumoverlay .formfields .fieldlblfullwidth
+{
+    width:100%;
+    text-align:left;
+    font-weight:bold;
+    padding:2px 0px 2px 0px;
+}
+
+.mediumoverlay .formfields .fieldlblfullwidth .smalltext
+{
+    font-size:10px;
+    position:relative;
+    top:-1px;
+}
+
+.mediumoverlay .formfields .fieldctrlfullwidth
+{
+    width:100%;
+    text-align:left;
+    padding:2px 0px 2px 0px;
+}
+
+.mediumoverlay .formfield .lbl
+{
+    width:115px;
+    vertical-align:top;
+    padding-right:10px;
+    float:left;
+}
+
+.mediumoverlay .formfield .field input, .mediumoverlay .formfield .field textarea
+{
+    width:289px;
+    resize: none;
+}
+
+.mediumoverlay .formfield .field
+{
+    width:295px;
+    float:left;
+    padding-left:10px;
+    text-align:left;
+}
+
+.mediumoverlay .formfields .btns
+{
+    width:100%;
+    text-align:right;
+    padding:7px 0px 4px 0px;
+}
+
+.mediumoverlay .formfields .fieldctrlfullwidth textarea, .mediumoverlay .formfields .fieldctrlfullwidth input
+{    
+    resize: none;
+    width:100%;
+}
+
+.mediumoverlay .formfields input[type="checkbox"]
+{
+    width:auto;
+    margin-right:5px;
+    position:relative;
+    top:2px;
+}

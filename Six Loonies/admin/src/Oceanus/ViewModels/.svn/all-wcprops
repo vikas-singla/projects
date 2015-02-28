@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/projects/!svn/ver/446/admin/src/Oceanus/ViewModels
+END
+ServicePackagesViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/projects/!svn/ver/4/admin/src/Oceanus/ViewModels/ServicePackagesViewModel.cs
+END
+ServiceViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/projects/!svn/ver/4/admin/src/Oceanus/ViewModels/ServiceViewModel.cs
+END
+VirtualCitiesServedViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/projects/!svn/ver/4/admin/src/Oceanus/ViewModels/VirtualCitiesServedViewModel.cs
+END
+VendorImageViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/projects/!svn/ver/152/admin/src/Oceanus/ViewModels/VendorImageViewModel.cs
+END
+CityStateLocationViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/projects/!svn/ver/4/admin/src/Oceanus/ViewModels/CityStateLocationViewModel.cs
+END
+VendorImagesViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/projects/!svn/ver/26/admin/src/Oceanus/ViewModels/VendorImagesViewModel.cs
+END
+SignUpViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/projects/!svn/ver/4/admin/src/Oceanus/ViewModels/SignUpViewModel.cs
+END
+PhysicalVendorLocationsViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/projects/!svn/ver/4/admin/src/Oceanus/ViewModels/PhysicalVendorLocationsViewModel.cs
+END
+ListingViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/projects/!svn/ver/4/admin/src/Oceanus/ViewModels/ListingViewModel.cs
+END
+ViewModelBase.cs
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/projects/!svn/ver/4/admin/src/Oceanus/ViewModels/ViewModelBase.cs
+END
+ReferenceLocationStatesViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/projects/!svn/ver/4/admin/src/Oceanus/ViewModels/ReferenceLocationStatesViewModel.cs
+END
+ListingsViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/projects/!svn/ver/4/admin/src/Oceanus/ViewModels/ListingsViewModel.cs
+END
+CategoryViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/projects/!svn/ver/4/admin/src/Oceanus/ViewModels/CategoryViewModel.cs
+END
+VendorViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/projects/!svn/ver/446/admin/src/Oceanus/ViewModels/VendorViewModel.cs
+END

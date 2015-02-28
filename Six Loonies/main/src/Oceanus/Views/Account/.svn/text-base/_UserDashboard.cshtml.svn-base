@@ -1,0 +1,32 @@
+﻿@model Oceanus.ViewModels.UserProfileViewModel
+<div class="fullsect" id="udash">
+    <div class="welcome_msg">
+        <div class="title">
+            Welcome to Six Loonies!
+        </div>
+        <div class="margintop10">
+            Dashboard is the place for you to check your Messages, view your Radar for updates
+            from Professionals, Businesses and Users you follow, interact with Friends, and much more.
+            <br />
+            <br />
+            <div class="point">
+                <a href="/how" class="bold">Learn How It Works</a> — Discover what is possible with Six Loonies.</div>
+            <div class="point">
+                <a href="#addVendorForm" class="bold" id="dashboardaddvendorbtn">List Your Services</a> — If you're a professional who provides
+                a service, create your profile to get discovered.</div>
+            <div class="point">
+                <a href="#" class="bold" id="dashboardfriendslink">Connect With Friends</a> — Share, discover and ask friends
+                to find who provides the best services.</div>
+            <div class="point">
+                <a href="#" class="bold">Follow</a> — Follow other Individuals or Businesses to
+                get updates on the latest buzz.</div>            
+        </div>
+    </div>
+    @{Html.RenderAction("PendingFriendRequests", "Account", new { userId = Model.UserId });}
+    @{Html.RenderAction("GetFriendIntroductionListingsForUser", "Message");}
+    @{Html.RenderAction("GetVendorQuoteListingsForUser", "Message", new { user = Model.UserId });}
+    @{Html.RenderAction("GetMessageListingsForUser", "Message", new { user = Model.UserId });}
+</div>
+<div style="display: none;">
+    @{Html.RenderPartial("~/Views/Message/_WriteMessage.cshtml");}
+</div>

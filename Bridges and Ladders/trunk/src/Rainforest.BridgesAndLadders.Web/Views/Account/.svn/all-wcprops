@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/trunk/src/Rainforest.BridgesAndLadders.Web/Views/Account
+END
+ChangePassword.aspx
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/trunk/src/Rainforest.BridgesAndLadders.Web/Views/Account/ChangePassword.aspx
+END
+LogOn.aspx
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/trunk/src/Rainforest.BridgesAndLadders.Web/Views/Account/LogOn.aspx
+END
+ChangePasswordSuccess.aspx
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/trunk/src/Rainforest.BridgesAndLadders.Web/Views/Account/ChangePasswordSuccess.aspx
+END
+Register.aspx
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/trunk/src/Rainforest.BridgesAndLadders.Web/Views/Account/Register.aspx
+END

@@ -1,0 +1,70 @@
+﻿@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.JavaScript()
+        .Add("~/Scripts/sixloonies.marklet.clipitem.js")
+        .ForceRelease()
+        .Render("~/cache/sixloonies.marklet.clip.#.js")
+    );
+}
+<script type="text/javascript">
+    function sl_getPhotoSelectImgStylePerHeight(width, height) {
+        if (Math.max(height, width) > 233) {
+            if (height < width) {
+                return "margin-top: " + parseInt(116 - 116 * (height / width)) + "px;";
+            }
+            return "";
+        } else {
+            return "margin-top: " + parseInt(116 - height / 2) + "px;";
+        }
+    }
+
+    $(document).ready(function () {
+        var style = sl_getPhotoSelectImgStylePerHeight(@(ViewBag.ImageWidth), @(ViewBag.ImageHeight));
+        $('#clipimagephototag').attr("style", style);
+    });
+</script>
+<div class="fullsect maincontentsect">
+    <div class="formcontainer">
+        <form id="sl_frmClipImage">
+        <div class="clipimagetitle">
+            Clip Photo
+        </div>
+        <div class="clipimagephoto">
+            <img id="clipimagephototag" alt src="@(ViewBag.ImageUrl)" data-width="@(ViewBag.ImageWidth)" data-height="@(ViewBag.ImageHeight)" />
+        </div>
+        <div class="formfields darkleftborder">
+            <div class="formfield">
+                <div class="lbl">
+                    Description:
+                </div>
+                <div class="field">
+                    <div class="descfield">
+                        <textarea id="sl_addclipdesc" name="description" rows="1" cols="1" class="validate[required]"></textarea>
+                        <div class="descfieldcaption">
+                            Type <b>#</b> to add tags (e.g., #awesome) in the description
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="formfield" style="margin-top: 10px;">
+                <div class="lbl">
+                    Share With <span class="smalltext" style="color: #888; position: relative; top: -1px;">
+                        (optional)</span>:</div>
+                <div class="field">
+                    <input id="shareRecipientInput" />
+                </div>
+            </div>
+            <br />
+            <div class="btns">
+                <a href="#" class="btnbluestyle" id="sl_addclipbtn" data-page-url="@(ViewBag.PageUrl)" data-page-title="@(ViewBag.PageTitle)" data-page-desc="@(ViewBag.PageDescription)">
+                    Clip Photo</a>
+            </div>
+            <div id="sl_processingcaption" style="display: none;">
+                <img src="/images/transparent_loader.gif" width="16px" alt /><span style="padding-left: 10px;
+                    position: relative; top: -5px;">Processing Clip...</span>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/projects/!svn/ver/446/admin/src/Oceanus/Controllers
+END
+HomeController.cs
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Controllers/HomeController.cs
+END
+PhysicalLocationsController.cs
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/projects/!svn/ver/96/admin/src/Oceanus/Controllers/PhysicalLocationsController.cs
+END
+ControllerBase.cs
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Controllers/ControllerBase.cs
+END
+AccountController.cs
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Controllers/AccountController.cs
+END
+ListingsController.cs
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Controllers/ListingsController.cs
+END
+CategoryController.cs
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Controllers/CategoryController.cs
+END
+VendorController.cs
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/projects/!svn/ver/446/admin/src/Oceanus/Controllers/VendorController.cs
+END
+ServicePackagesController.cs
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/projects/!svn/ver/114/admin/src/Oceanus/Controllers/ServicePackagesController.cs
+END
+VirtualLocationController.cs
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/projects/!svn/ver/233/admin/src/Oceanus/Controllers/VirtualLocationController.cs
+END
+ServiceController.cs
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Controllers/ServiceController.cs
+END
+VendorImageController.cs
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/projects/!svn/ver/220/admin/src/Oceanus/Controllers/VendorImageController.cs
+END
+SignUpController.cs
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Controllers/SignUpController.cs
+END

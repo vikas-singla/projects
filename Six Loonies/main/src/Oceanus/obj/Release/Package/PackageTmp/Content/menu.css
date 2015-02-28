@@ -1,0 +1,107 @@
+﻿/* TAB MENU   
+----------------------------------------------------------*/
+.navcontainer
+{
+    height:100%;
+    float:left;
+}
+
+.navcontainer .navlink
+{
+    display:block;
+    float:left;
+    line-height:55px;
+    height:55px;
+}
+
+.navcontainer .navlink a, .navcontainer .navlink a:visited, .navcontainer .navlink a:active
+{
+    color:#555;
+    line-height:21px;
+    height:21px;
+    margin:10px 0;
+    padding:7px 9px;
+    border:1px solid transparent;
+    font-weight:bold;
+    font-size:12px;
+    text-decoration:none;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    text-shadow: rgba(0, 0, 0, .0976563) 0 1px 0;
+}
+
+.navcontainer .navlink a:hover
+{
+    line-height:21px;
+    height:21px;
+    color:#009EDF;
+    margin:10px 0;
+    padding:7px 9px;
+    border:1px solid #009EDF;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:12px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    text-shadow: rgba(0, 0, 0, .0976563) 0 1px 0;
+}
+
+
+/* Click Vertical MENU */
+
+.clickvmenu, .clickvmenunarrow
+{
+    list-style-type: none;
+    margin: 5px 0;
+    padding: 0;
+    position:absolute;
+    border:1px solid #e0e0e0;
+    overflow:hidden;
+    display:none;
+    top:11px;
+    left:0px;
+    background-color: #f0f0f0;
+    z-index:500;
+}
+
+.clickvmenu
+{    
+    width: 180px;
+    text-align:left;
+}
+
+.clickvmenunarrow
+{
+    width:24px;    
+    text-align:center;
+}
+
+.clickvmenu li a
+{
+    background-color: #f0f0f0;
+    display: block;
+    width: 100%;
+    padding: 3px;
+    text-decoration: none;
+}
+
+.clickvmenunarrow li a
+{
+    background-color: #f0f0f0;
+    display: block;
+    width: 100%;
+    padding: 1px;
+    text-decoration: none;
+}
+
+.clickvmenu li a:visited, .clickvmenu li a:active, .clickvmenunarrow li a:visited, .clickvmenunarrow li a:active
+{
+    background-color:#f0f0f0;
+}
+
+.clickvmenu li a:hover, .clickvmenunarrow li a:hover
+{
+    background-color:#d0d0d0;
+}

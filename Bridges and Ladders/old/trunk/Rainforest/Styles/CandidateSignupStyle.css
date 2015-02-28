@@ -1,0 +1,166 @@
+﻿#div_joinnowheader
+{
+    color: #000000;
+    background:  transparent;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-width: 0px;
+    text-align: left;
+    width: 275px;
+    
+}
+
+.header_seperator_style
+{
+    background:  transparent url('/Assets/Images/graphics-dotted-line.gif') repeat-x bottom;
+}
+
+#div_joinnowfields
+{
+    color: #000000;
+    background-color: transparent;
+    margin-top: -5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border-width: 0px;
+    background-repeat: no-repeat;
+    width: 275px;
+}
+
+#tbl_joinnowfields
+{
+    color: #000000;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    border: none;
+    width: 100%;
+}
+
+#rightcolumn1
+{
+    text-align: right;
+    width: 65px;
+}
+
+#rightcolumn2
+{
+    text-align: right;
+    width: 65px;
+}
+
+#rightcolumn3
+{
+    text-align: right;
+    width: 65px;
+}
+
+#rightcolumn4
+{
+    text-align: right;
+    width: 65px;
+}
+
+.lbl_joinnowstarstyle
+{
+    font-size: 15px;
+    font-weight: bold;
+    color: #808080;
+    vertical-align: middle;
+}
+
+.link_signinstyle
+{
+    font-style: normal;
+    font-size: 10px;
+    color: #004A7F;
+}
+
+.lbl_signinStyle
+{
+    font-size: 10px;
+    font-weight: bold;
+    color: #808080;
+    vertical-align: middle;
+}
+
+.lbl_joinnowstyle
+{
+    color: #004A7F;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 10px;
+    height: 30px;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.lbl_joinnowsubtext
+{
+    color: #000000;
+    background-color: transparent;
+    font-size: 12px;
+    font-weight: bold;
+    font-variant:small-caps;
+    padding-top: 20px;
+    margin-left: 10px;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.lbl_fieldstyle
+{
+    color: #808080;
+    background-color: transparent;
+    text-align: right;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.textbox_inputstyle
+{
+    color: #000000;
+    background-color: #ffffff;
+    border-color: #C0C0C0;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 12px;
+    width: 162px;
+}
+
+.btn_joinnowStyle
+{
+    padding: 1px 3px 1px 4px;
+    cursor: pointer;
+    background: #2F9E00;
+    color: #fff;
+    border: 1px solid #0e1f5b;
+    border-left-color: #D9DFEA;
+    border-top-color: #D9DFEA;
+    font-size: 11px;
+    font-weight: bold;
+    height: 22px;
+    width: 100px;
+}
+
+.SignupControlMainTableStyle
+{
+    height: 300px;
+}
+
+.SignupControlLeftColumnStyle
+{
+    width: 625px;
+}
+
+.SignupControlRightColumnStyle
+{
+    width: 295px;
+    background: url('/Assets/Images/Signup_pg_fields_background.png') no-repeat scroll left bottom;
+}

@@ -1,0 +1,91 @@
+﻿.aboutus
+{
+    width:680px;
+    float:left;
+    font-size:14px;
+    display:block;
+    margin:0 20px 10px 40px;
+    text-align:left;
+}
+
+.aboutus .heading
+{
+    font-size:23px;
+    color:#666;
+    font-weight:bold;
+    padding:30px 0 30px 0;
+    text-align:left;
+    clear:both;
+}
+
+.aboutus .aboususprofile .leftalign
+{
+    width: 70px;
+    float: left;
+    margin-right: 8px;
+}
+
+.aboutus .aboususprofile .photo
+{
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    border: 1px solid #d9d9d9;
+    clear: both;
+}
+
+.aboutus .normaltext
+{
+    padding-bottom: 15px;
+    text-align: left;
+}
+
+.aboutus .subheader
+{
+    font-size:20px;
+    font-weight:bold;
+    color:#666;
+    padding:30px 0px 30px 0px;
+}
+
+.aboutus .text
+{
+    font-weight: normal;
+    text-align: left;
+    font-size:14px;
+    line-height:22px;
+}
+
+.aboutus .boxsection
+{
+    width: 100%;
+    margin-top: 10px;
+    overflow: auto;
+    clear: both;
+    padding: 10px 0px 10px 0px;
+}
+
+.aboutus .boxsection .box
+{
+    width: 60px;
+    margin-right: 20px;
+    float: left;
+    background-color: #fff;
+    color: #fff;
+    vertical-align: middle;
+}
+
+.aboutus .boxsection .boxtext b
+{
+    font-size: 16px;
+    overflow: auto;
+}
+
+.aboutus .boxsection .boxtext
+{
+    width: 600px;
+    text-align: left;
+    float: left;
+    font-size:14px;
+    line-height:22px;
+}

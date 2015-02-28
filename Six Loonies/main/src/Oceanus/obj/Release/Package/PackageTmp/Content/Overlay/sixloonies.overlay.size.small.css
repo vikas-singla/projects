@@ -1,0 +1,80 @@
+﻿.smallOverlay
+{
+    z-index: 10000;
+    background-color: #fff;
+    width: 375px;
+    padding: 0;
+    margin: 0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.smallOverlay .content
+{
+    padding: 10px;
+    width: 355px;
+    min-height: 100px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.smallOverlay .overlaytitle, .smallOverlay .title
+{
+    width: 330px;
+    margin: 0 auto 0 auto;
+    font-variant: small-caps;
+    font-size: 16px;
+    color: #333;
+    text-align: left;
+    padding: 5px 2px 5px 2px;
+    font-weight: bold;
+}
+
+.smallOverlay .title
+{
+    text-align: center;
+    font-size: 18px;
+    color: #FF3030;
+}
+
+.smallOverlay .overlaytitle
+{
+    border-bottom: 2px solid #ff3030;
+}
+
+.smallOverlay .formfields
+{
+    width: 310px;
+    margin: 10px auto;
+    padding: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    overflow: auto;
+    display: block;
+}
+
+.smallOverlay .formfields .formfield, .smallOverlay .formfields .formfield .lbl, .smallOverlay .formfields .formfield .field
+{
+    width: 310px;
+    overflow: auto;
+    display: block;
+}
+
+.smallOverlay .formfields .formfield .lbl
+{
+    padding-bottom: 5px;
+}
+
+.smallOverlay .formfields .formfield .field input
+{
+    width: 304px;
+}
+
+.smallOverlay .formfields .btns
+{
+    width: 310px;
+    text-align: right;
+    padding: 3px 0px 3px 0px;
+}

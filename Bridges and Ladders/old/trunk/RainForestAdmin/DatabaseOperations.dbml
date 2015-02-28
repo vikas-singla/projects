@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="rainforest_db" Class="DatabaseOperationsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.TBL_Company" Member="TBL_Companies">
+    <Type Name="TBL_Company">
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IndustryId" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyLogo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="overallEmployees" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="overallEmployeesIndia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="companyurl" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="contactinfo" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Fortune1000" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="WorkCulture" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Experience" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="RecruitmentProcess" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Benefits" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="companyTypeId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="companyOriginId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="TBL_Company_TBL_Company" Member="TBL_Company2" ThisKey="CompanyId" OtherKey="CompanyId" Type="TBL_Company" Cardinality="One" />
+      <Association Name="TBL_Company_TBL_Company_Location" Member="TBL_Company_Locations" ThisKey="CompanyId" OtherKey="companyId" Type="TBL_Company_Location" />
+      <Association Name="TBL_Company_TBL_Company" Member="TBL_Company1" ThisKey="CompanyId" OtherKey="CompanyId" Type="TBL_Company" IsForeignKey="true" />
+      <Association Name="TBL_Industry_TBL_Company" Member="TBL_Industry" ThisKey="IndustryId" OtherKey="IndustryId" Type="TBL_Industry" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_Company_Locations" Member="TBL_Company_Locations">
+    <Type Name="TBL_Company_Location">
+      <Column Name="companyLocationId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="locationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="companyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="isCompanyHQ" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="isMainOfficeOfCountry" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="TBL_Company_TBL_Company_Location" Member="TBL_Company" ThisKey="companyId" OtherKey="CompanyId" Type="TBL_Company" IsForeignKey="true" />
+      <Association Name="TBL_Location_TBL_Company_Location" Member="TBL_Location" ThisKey="locationId" OtherKey="LocationId" Type="TBL_Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_Company_Origin" Member="TBL_Company_Origins">
+    <Type Name="TBL_Company_Origin">
+      <Column Name="companyOriginId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="origin" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_Company_Type" Member="TBL_Company_Types">
+    <Type Name="TBL_Company_Type">
+      <Column Name="companyTypeId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="companyType" Type="System.String" DbType="VarChar(128) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_Industry" Member="TBL_Industries">
+    <Type Name="TBL_Industry">
+      <Column Name="IndustryId" Type="System.Byte" DbType="TinyInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="IndustryName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="TBL_Industry_TBL_Company" Member="TBL_Companies" ThisKey="IndustryId" OtherKey="IndustryId" Type="TBL_Company" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_Location" Member="TBL_Locations">
+    <Type Name="TBL_Location">
+      <Column Name="LocationId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(512) NOT NULL" CanBeNull="false" />
+      <Column Name="State" Type="System.String" DbType="NVarChar(512)" CanBeNull="true" />
+      <Column Name="Country" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressLine1" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="AddressLine2" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="AddressLine3" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="PostalCode" Type="System.String" DbType="NVarChar(32) NOT NULL" CanBeNull="false" />
+      <Association Name="TBL_Location_TBL_Company_Location" Member="TBL_Company_Locations" ThisKey="LocationId" OtherKey="locationId" Type="TBL_Company_Location" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_Company_Pics" Member="TBL_Company_Pics">
+    <Type Name="TBL_Company_Pic">
+      <Column Name="CompanyPicId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LocationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PicturePath" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="VideoPath" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TBL_Company_Heads" Member="TBL_Company_Heads">
+    <Type Name="TBL_Company_Head">
+      <Column Name="CompanyHeadId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CompanyId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LocationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="HeadName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Desgination" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

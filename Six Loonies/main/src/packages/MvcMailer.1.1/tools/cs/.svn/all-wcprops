@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/projects/!svn/ver/776/main/src/packages/MvcMailer.1.1/tools/cs
+END
+MailerTemplate.cs.t4
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/projects/!svn/ver/776/main/src/packages/MvcMailer.1.1/tools/cs/MailerTemplate.cs.t4
+END
+MailerMethodTemplate.cs.t4
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/projects/!svn/ver/776/main/src/packages/MvcMailer.1.1/tools/cs/MailerMethodTemplate.cs.t4
+END
+IMailerTemplate.cs.t4
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/projects/!svn/ver/776/main/src/packages/MvcMailer.1.1/tools/cs/IMailerTemplate.cs.t4
+END
+IMailerMethodTemplate.cs.t4
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/projects/!svn/ver/776/main/src/packages/MvcMailer.1.1/tools/cs/IMailerMethodTemplate.cs.t4
+END

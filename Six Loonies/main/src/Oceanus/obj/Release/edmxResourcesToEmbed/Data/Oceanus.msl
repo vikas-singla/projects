@@ -1,0 +1,443 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OceanusModelStoreContainer" CdmEntityContainer="OceanusEntities">
+    <EntitySetMapping Name="aspnet_Users">
+      <EntityTypeMapping TypeName="OceanusModel.aspnet_Users">
+        <MappingFragment StoreEntitySet="aspnet_Users">
+          <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+          <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+          <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+          <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserLevels">
+      <EntityTypeMapping TypeName="OceanusModel.UserLevel">
+        <MappingFragment StoreEntitySet="UserLevel">
+          <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+          <ScalarProperty Name="UserLevelId" ColumnName="UserLevelId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Registrations">
+      <EntityTypeMapping TypeName="OceanusModel.Registration">
+        <MappingFragment StoreEntitySet="Registrations">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="OceanusModel.Message">
+        <MappingFragment StoreEntitySet="Message">
+          <ScalarProperty Name="InitiatingUserId" ColumnName="InitiatingUserId" />
+          <ScalarProperty Name="IsSpam" ColumnName="IsSpam" />
+          <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+          <ScalarProperty Name="InitialSendTimestamp" ColumnName="InitialSendTimestamp" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MessageResponses">
+      <EntityTypeMapping TypeName="OceanusModel.MessageResponses">
+        <MappingFragment StoreEntitySet="MessageResponses">
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+          <ScalarProperty Name="MessageResponseId" ColumnName="MessageResponseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SixLooniesFriendConnections">
+      <EntityTypeMapping TypeName="OceanusModel.SixLooniesFriendConnection">
+        <MappingFragment StoreEntitySet="SixLooniesFriendConnections">
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="SecondUserId" ColumnName="SecondUserId" />
+          <ScalarProperty Name="FirstUserId" ColumnName="FirstUserId" />
+          <ScalarProperty Name="SixLooniesFriendConnectionId" ColumnName="SixLooniesFriendConnectionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SixLooniesPendingFriendRequests">
+      <EntityTypeMapping TypeName="OceanusModel.SixLooniesPendingFriendRequest">
+        <MappingFragment StoreEntitySet="SixLooniesPendingFriendRequests">
+          <ScalarProperty Name="IsDeclined" ColumnName="IsDeclined" />
+          <ScalarProperty Name="InitiatedOn" ColumnName="InitiatedOn" />
+          <ScalarProperty Name="TargetSixLooniesUserId" ColumnName="TargetSixLooniesUserId" />
+          <ScalarProperty Name="TargetFacebookUserUID" ColumnName="TargetFacebookUserUID" />
+          <ScalarProperty Name="InitiatingUserId" ColumnName="InitiatingUserId" />
+          <ScalarProperty Name="SixLooniesPendingFriendRequestId" ColumnName="SixLooniesPendingFriendRequestId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MessageVisibilities">
+      <EntityTypeMapping TypeName="OceanusModel.MessageVisibility">
+        <MappingFragment StoreEntitySet="MessageVisibility">
+          <ScalarProperty Name="MessageIsUnread" ColumnName="MessageIsUnread" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+          <ScalarProperty Name="MessageVisibilityId" ColumnName="MessageVisibilityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FriendIntroductionRequests">
+      <EntityTypeMapping TypeName="OceanusModel.FriendIntroductionRequest">
+        <MappingFragment StoreEntitySet="FriendIntroductionRequests">
+          <ScalarProperty Name="InitUserHasReadTargetUserAcceptance" ColumnName="InitUserHasReadTargetUserAcceptance" />
+          <ScalarProperty Name="TargetUserMessageToInitUser" ColumnName="TargetUserMessageToInitUser" />
+          <ScalarProperty Name="TargetUserHasAccepted" ColumnName="TargetUserHasAccepted" />
+          <ScalarProperty Name="IntroductionForwardedToTargetUser" ColumnName="IntroductionForwardedToTargetUser" />
+          <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+          <ScalarProperty Name="TargetUserHasReadMessage" ColumnName="TargetUserHasReadMessage" />
+          <ScalarProperty Name="ConnectingUserMessageToTargetUser" ColumnName="ConnectingUserMessageToTargetUser" />
+          <ScalarProperty Name="InitiatingUserMessageToTargetUser" ColumnName="InitiatingUserMessageToTargetUser" />
+          <ScalarProperty Name="TargetUserId" ColumnName="TargetUserId" />
+          <ScalarProperty Name="ConnectingFriendHasReadMessage" ColumnName="ConnectingFriendHasReadMessage" />
+          <ScalarProperty Name="MessageToConnectingFriend" ColumnName="MessageToConnectingFriend" />
+          <ScalarProperty Name="ConnectingFriendUserId" ColumnName="ConnectingFriendUserId" />
+          <ScalarProperty Name="InitiatingUserId" ColumnName="InitiatingUserId" />
+          <ScalarProperty Name="InitialSendTimestamp" ColumnName="InitialSendTimestamp" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="FriendIntroRequestId" ColumnName="FriendIntroRequestId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetFriendNetworkConnectionsPath" FunctionName="OceanusModel.Store.GetFriendNetworkConnectionsPath">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="OceanusModel.NetworkConnectionPath">
+          <ScalarProperty Name="FromUID" ColumnName="FromUID" />
+          <ScalarProperty Name="ToUID" ColumnName="ToUID" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="NetworkPath" ColumnName="NetworkPath" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="PendingRegistrations">
+      <EntityTypeMapping TypeName="OceanusModel.PendingRegistration">
+        <MappingFragment StoreEntitySet="PendingRegistrations">
+          <ScalarProperty Name="numberOfPastNoticeAttempts" ColumnName="numberOfPastNoticeAttempts" />
+          <ScalarProperty Name="lastEmailNoticeDate" ColumnName="lastEmailNoticeDate" />
+          <ScalarProperty Name="initialRegistrationDate" ColumnName="initialRegistrationDate" />
+          <ScalarProperty Name="confirmationKey" ColumnName="confirmationKey" />
+          <ScalarProperty Name="membershipUserId" ColumnName="membershipUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Membership">
+      <EntityTypeMapping TypeName="OceanusModel.aspnet_Membership">
+        <MappingFragment StoreEntitySet="aspnet_Membership">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptWindowStart" ColumnName="FailedPasswordAnswerAttemptWindowStart" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+          <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+          <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+          <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+          <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+          <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+          <ScalarProperty Name="LoweredEmail" ColumnName="LoweredEmail" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobilePIN" ColumnName="MobilePIN" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="OceanusModel.Category">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="IsVisibleOnListingPg" ColumnName="IsVisibleOnListingPg" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="GetFriendsOfFriendIDs" FunctionName="OceanusModel.Store.GetFriendsOfFriendIDs" />
+    <EntitySetMapping Name="UserWallPostComments">
+      <EntityTypeMapping TypeName="OceanusModel.UserWallPostComment">
+        <MappingFragment StoreEntitySet="UserWallPostComments">
+          <ScalarProperty Name="UserWallPostId" ColumnName="UserWallPostId" />
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookmarkMappings">
+      <EntityTypeMapping TypeName="OceanusModel.BookmarkMapping">
+        <MappingFragment StoreEntitySet="BookmarkMappings">
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="WebPageId" ColumnName="WebPageId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="BookmarkId" ColumnName="BookmarkId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebPageTagMappings">
+      <EntityTypeMapping TypeName="OceanusModel.WebPageTagMapping">
+        <MappingFragment StoreEntitySet="WebPageTagMappings">
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="WebPageId" ColumnName="WebPageId" />
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="TagMappingId" ColumnName="TagMappingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhotoVideoClipTagMappings">
+      <EntityTypeMapping TypeName="OceanusModel.PhotoVideoClipTagMapping">
+        <MappingFragment StoreEntitySet="PhotoVideoClipTagMapping">
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="ClipId" ColumnName="ClipId" />
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="ClipTagMappingId" ColumnName="ClipTagMappingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebPageShares">
+      <EntityTypeMapping TypeName="OceanusModel.WebPageShare">
+        <MappingFragment StoreEntitySet="WebPageShares">
+          <ScalarProperty Name="NumShares" ColumnName="NumShares" />
+          <ScalarProperty Name="LastShareDate" ColumnName="LastShareDate" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="WebPageId" ColumnName="WebPageId" />
+          <ScalarProperty Name="WebPageShareId" ColumnName="WebPageShareId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserWallPosts">
+      <EntityTypeMapping TypeName="OceanusModel.UserWallPost">
+        <MappingFragment StoreEntitySet="UserWallPosts">
+          <ScalarProperty Name="WebPageId" ColumnName="WebPageId" />
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="WallText" ColumnName="WallText" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WebPages">
+      <EntityTypeMapping TypeName="OceanusModel.WebPage">
+        <MappingFragment StoreEntitySet="WebPage">
+          <ScalarProperty Name="IsFlaggedAsSpam" ColumnName="IsFlaggedAsSpam" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="PageDescription" ColumnName="PageDescription" />
+          <ScalarProperty Name="PageTitle" ColumnName="PageTitle" />
+          <ScalarProperty Name="LowerPageUrl" ColumnName="LowerPageUrl" />
+          <ScalarProperty Name="PageUrl" ColumnName="PageUrl" />
+          <ScalarProperty Name="WebDomainUrl" ColumnName="WebDomainUrl" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticleClipTagMappings">
+      <EntityTypeMapping TypeName="OceanusModel.ArticleClipTagMapping">
+        <MappingFragment StoreEntitySet="ArticleClipTagMapping">
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="ArticleClipId" ColumnName="ArticleClipId" />
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="ClipTagMappingId" ColumnName="ClipTagMappingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhotoVideoClipUserMappings">
+      <EntityTypeMapping TypeName="OceanusModel.PhotoVideoClipUserMapping">
+        <MappingFragment StoreEntitySet="PhotoVideoClipUserMapping">
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="PhotoVideoClipId" ColumnName="PhotoVideoClipId" />
+          <ScalarProperty Name="MappingId" ColumnName="MappingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticleClipUserMappings">
+      <EntityTypeMapping TypeName="OceanusModel.ArticleClipUserMapping">
+        <MappingFragment StoreEntitySet="ArticleClipUserMapping">
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ArticleClipId" ColumnName="ArticleClipId" />
+          <ScalarProperty Name="MappingId" ColumnName="MappingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserWebPageLikes">
+      <EntityTypeMapping TypeName="OceanusModel.UserWebPageLike">
+        <MappingFragment StoreEntitySet="UserWebPageLikes">
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="WebPageId" ColumnName="WebPageId" />
+          <ScalarProperty Name="UserLikesId" ColumnName="UserLikesId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticleComments">
+      <EntityTypeMapping TypeName="OceanusModel.ArticleComment">
+        <MappingFragment StoreEntitySet="ArticleComments">
+          <ScalarProperty Name="ArticleClipId" ColumnName="ArticleClipId" />
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserArticleClipLikes">
+      <EntityTypeMapping TypeName="OceanusModel.UserArticleClipLike">
+        <MappingFragment StoreEntitySet="UserArticleClipLikes">
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="ArticleClipId" ColumnName="ArticleClipId" />
+          <ScalarProperty Name="UserArticleClipLikeId" ColumnName="UserArticleClipLikeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserPhotoVideoClipLikes">
+      <EntityTypeMapping TypeName="OceanusModel.UserPhotoVideoClipLike">
+        <MappingFragment StoreEntitySet="UserPhotoVideoClipLikes">
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="PhotoVideoClipId" ColumnName="PhotoVideoClipId" />
+          <ScalarProperty Name="UserClipLikeId" ColumnName="UserClipLikeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhotoVideoClips">
+      <EntityTypeMapping TypeName="OceanusModel.PhotoVideoClip">
+        <MappingFragment StoreEntitySet="PhotoVideoClips">
+          <ScalarProperty Name="ClipProcessed" ColumnName="ClipProcessed" />
+          <ScalarProperty Name="ImageHeight" ColumnName="ImageHeight" />
+          <ScalarProperty Name="ImageWidth" ColumnName="ImageWidth" />
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="VideoProviderId" ColumnName="VideoProviderId" />
+          <ScalarProperty Name="VideoId" ColumnName="VideoId" />
+          <ScalarProperty Name="VideoEmbedUrl" ColumnName="VideoEmbedUrl" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="SourceUrl" ColumnName="SourceUrl" />
+          <ScalarProperty Name="WebPageId" ColumnName="WebPageId" />
+          <ScalarProperty Name="ClipId" ColumnName="ClipId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="OceanusModel.Tag">
+        <MappingFragment StoreEntitySet="Tags">
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="LowerCaseTagName" ColumnName="LowerCaseTagName" />
+          <ScalarProperty Name="TagName" ColumnName="TagName" />
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhotoVideoClipDescriptions">
+      <EntityTypeMapping TypeName="OceanusModel.PhotoVideoClipDescription">
+        <MappingFragment StoreEntitySet="PhotoVideoClipDescriptions">
+          <ScalarProperty Name="ClipId" ColumnName="ClipId" />
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="DescriptionText" ColumnName="DescriptionText" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProfiles">
+      <EntityTypeMapping TypeName="OceanusModel.UserProfile">
+        <MappingFragment StoreEntitySet="UserProfile">
+          <ScalarProperty Name="ShowGetStartedScreen" ColumnName="ShowGetStartedScreen" />
+          <ScalarProperty Name="UserProfileImageUrl" ColumnName="UserProfileImageUrl" />
+          <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+          <ScalarProperty Name="PromptUserForFBFriends" ColumnName="PromptUserForFBFriends" />
+          <ScalarProperty Name="FacebookUserUID" ColumnName="FacebookUserUID" />
+          <ScalarProperty Name="FacebookToken" ColumnName="FacebookToken" />
+          <ScalarProperty Name="UserLevelId" ColumnName="UserLevelId" />
+          <ScalarProperty Name="NumThumbsUp" ColumnName="NumThumbsUp" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserProfileId" ColumnName="UserProfileId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhotoVideoClipComments">
+      <EntityTypeMapping TypeName="OceanusModel.PhotoVideoClipComment">
+        <MappingFragment StoreEntitySet="PhotoVideoClipComments">
+          <ScalarProperty Name="ClipId" ColumnName="ClipId" />
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ArticleClips">
+      <EntityTypeMapping TypeName="OceanusModel.ArticleClip">
+        <MappingFragment StoreEntitySet="ArticleClip">
+          <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="ArticleType" ColumnName="ArticleType" />
+          <ScalarProperty Name="ArticleText" ColumnName="ArticleText" />
+          <ScalarProperty Name="ArticleTitle" ColumnName="ArticleTitle" />
+          <ScalarProperty Name="ShareArticleMarkup" ColumnName="ShareArticleMarkup" />
+          <ScalarProperty Name="ArticleMarkup" ColumnName="ArticleMarkup" />
+          <ScalarProperty Name="WebPageId" ColumnName="WebPageId" />
+          <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FacebookFriendLists">
+      <EntityTypeMapping TypeName="OceanusModel.FacebookFriendList">
+        <MappingFragment StoreEntitySet="FacebookFriendList">
+          <ScalarProperty Name="InvitedToSixLoonies" ColumnName="InvitedToSixLoonies" />
+          <ScalarProperty Name="FacebookFriendSixLooniesUID" ColumnName="FacebookFriendSixLooniesUID" />
+          <ScalarProperty Name="FriendProfilePhotoUrl" ColumnName="FriendProfilePhotoUrl" />
+          <ScalarProperty Name="FacebookFriendName" ColumnName="FacebookFriendName" />
+          <ScalarProperty Name="FacebookFriendUID" ColumnName="FacebookFriendUID" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FacebookFriendListId" ColumnName="FacebookFriendListId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserToUserFollowingMappings">
+      <EntityTypeMapping TypeName="OceanusModel.UserToUserFollowingMapping">
+        <MappingFragment StoreEntitySet="UserToUserFollowingMapping">
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="FollowingUserId" ColumnName="FollowingUserId" />
+          <ScalarProperty Name="FollowedUserId" ColumnName="FollowedUserId" />
+          <ScalarProperty Name="FollowerMappingId" ColumnName="FollowerMappingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserToTagFollowingMappings">
+      <EntityTypeMapping TypeName="OceanusModel.UserToTagFollowingMapping">
+        <MappingFragment StoreEntitySet="UserToTagFollowingMapping">
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="FollowingUserId" ColumnName="FollowingUserId" />
+          <ScalarProperty Name="MappingId" ColumnName="MappingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

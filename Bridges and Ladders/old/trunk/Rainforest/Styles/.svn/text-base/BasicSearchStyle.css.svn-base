@@ -1,0 +1,52 @@
+﻿.tbl_basicSearchMainTable
+{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.textbox_basicJobSearchFieldStyle
+{
+    border-color: #C0C0C0;
+    background-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+    width:180px;
+    font-size:12px;
+    color:#242424;
+}
+
+.watermark_basicJobSearchFieldStyle
+{
+    border-color: #C0C0C0;
+    border-style: solid;
+    border-width: 1px;
+    background-color:#ffffff;
+    font-size:12px;
+    width:180px;
+    color:#A5A5A5;
+}
+
+.lbl_basicjobsearchstyle
+{
+    color: #808080;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.btn_basicjobsearchStyle
+{
+    padding: 1px 3px 1px 4px;
+    cursor: pointer;
+    background: #EBEBEB;
+    color: #000000;
+    border: 1px solid #0e1f5b;
+    border-left-color: #D9DFEA;
+    border-top-color: #D9DFEA;
+    font-size: 11px;
+    font-weight: bold;
+    width:55px;
+    height: 22px;
+}

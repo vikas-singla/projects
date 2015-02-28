@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Oceanus.ViewModels.VirtualCitiesServedViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+<h3>
+    Virtual Locations</h3>
+@if (Model == null || Model.Count() == 0)
+{ 
+    <p>
+        There are currently no virtual locations associated with vendor.</p>
+}
+<table>
+    <tr>
+        <th>
+            City
+        </th>
+        <th>
+            LocationStatesId
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.City
+            </td>
+            <td>
+                @item.LocationStatesId
+            </td>
+            <td>
+                <input type="image" src="/Images/delete.png" alt="X" onclick="javascript: deleteVirtualLocation('@(item.Id)');" />
+            </td>
+        </tr>
+    }
+</table>

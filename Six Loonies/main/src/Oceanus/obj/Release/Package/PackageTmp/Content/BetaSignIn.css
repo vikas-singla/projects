@@ -1,0 +1,45 @@
+﻿.welcome
+{
+    width:940px;
+    margin:10px auto;
+    overflow:auto;
+}
+
+.welcome .logo
+{
+    text-align:center;
+    width:300px;
+    margin:0 auto;
+    overflow:auto;
+}
+
+.welcome .logo img
+{
+    border:none;
+}
+
+.registercontainer
+{
+    width:650px;
+    padding:10px;
+    margin:0 auto;
+    overflow:auto;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.35);
+    -moz-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.35);
+    -webkit-box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.35);
+    border:1px solid #f0f0f0;
+}
+
+.btnshowcasecontainer
+{
+    width:650px;
+    padding:10px;
+    margin:0 auto;
+    overflow:auto;
+    font-weight:bold;
+    font-size:14px;
+    text-align:center;
+}

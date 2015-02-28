@@ -1,0 +1,55 @@
+﻿@using Oceanus.ViewModels.Shared
+@model IEnumerable<BaseTagViewModel>
+<script type="text/javascript" src="/scripts/sixloonies.marklet.topics.js"></script>
+@{bool preExistingTopics = Model != null && Model.Count() > 0;}
+<div class="section topicsection" style="margin-top: 0px;">
+    <div class="sectiontitle">
+        <div class="titletext">
+            Page Topics
+        </div>
+        @if (preExistingTopics)
+        {     
+            <div class="alignright">
+                <a href="#addservform" class="editsect" id="addWebPageTopicsBtn">+ Add</a>
+            </div>    
+        }
+    </div>
+    @if (preExistingTopics)
+    {        
+        <div id="readonlytopics" class="fullsect">
+            @foreach (var Tag in Model)
+            {
+                <a href="#" class="taglink">@(Tag.TagName)</a>        
+            }
+        </div>    
+    }
+    else
+    {
+        <div id="readonlytopics">
+            Help others discover this page by associating topics:</div>
+    }
+    <div id="edittopics" class="fullsect" style="@(preExistingTopics ? "display:none;" : "")">
+        @foreach (var Topic in Model)
+        {
+            <span class="topicedit">@(Topic.TagName)<a href="#" class="topiceditbtn topicdelbtn" data-page-id="@(ViewBag.WebPageId)" data-tid="@(Topic.Id)"></a></span>
+        }
+        @if (!preExistingTopics)
+        {
+            <div class="addfirsttopic">
+                <input id="addtopicinput" class="inputoffset" />
+                <button class="btnbluestyle" id="addPageTopic" data-page-id="@(ViewBag.WebPageId)">
+                    Add</button>
+            </div>
+        }
+        else
+        {
+            <div class="addtopic">
+                <input id="addtopicinput" class="inputoffset" />
+                <button class="btnbluestyle" id="addPageTopic" data-page-id="@(ViewBag.WebPageId)">
+                    Add</button>
+                <button class="btnstyle" id="editPageTopicDone">
+                    Cancel</button>
+            </div>
+        }
+    </div>
+</div>

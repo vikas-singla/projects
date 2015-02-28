@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/old/trunk/DatabaseService
+END
+DBService.svc
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/old/trunk/DatabaseService/DBService.svc
+END
+Web.Release.config
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/old/trunk/DatabaseService/Web.Release.config
+END
+Web.config
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/old/trunk/DatabaseService/Web.config
+END
+IDBService.cs
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/old/trunk/DatabaseService/IDBService.cs
+END
+DBService.svc.cs
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/old/trunk/DatabaseService/DBService.svc.cs
+END
+DatabaseService.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/old/trunk/DatabaseService/DatabaseService.csproj
+END
+Web.Debug.config
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/old/trunk/DatabaseService/Web.Debug.config
+END

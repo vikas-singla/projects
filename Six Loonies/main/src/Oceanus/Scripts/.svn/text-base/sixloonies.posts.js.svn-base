@@ -1,0 +1,148 @@
+﻿$(document).ready(function () {
+    $("#frmAddVendorPost").validationEngine({ promptPosition: "topRight", scroll: false });
+    $("#frmAddVendorVideoPost").validationEngine({ promptPosition: "topRight", scroll: false });
+
+    $('#addtextpostbtn').click(function () {
+        hide('#addphotopost');
+        hide('#addvideopost');
+        show('#addtextpost');
+        $("#frmAddVendorPost").validationEngine('hideAll');
+        $("#frmAddVendorVideoPost").validationEngine('hideAll');
+        $('#addphotopostbtn').attr("class", "");
+        $('#addvideopostbtn').attr("class", "");
+        $('#addtextpostbtn').attr("class", "selbtn");
+
+        return false;
+    });
+
+    $('a').click(function () {
+        $('#frmAddVendorPost').validationEngine('hideAll');
+    });
+
+    $('#addphotopostbtn').click(function () {
+
+        hide('#addtextpost');
+        hide('#addvideopost');
+        show('#addphotopost');
+        $("#frmAddVendorPost").validationEngine('hideAll');
+        $("#frmAddVendorVideoPost").validationEngine('hideAll');
+        $('#addtextpostbtn').attr("class", "");
+        $('#addvideopostbtn').attr("class", "");
+        $('#addphotopostbtn').attr("class", "selbtn");
+
+        return false;
+    });
+
+    $('#addvideopostbtn').click(function () {
+        hide('#addphotopost');
+        hide('#addtextpost');
+        show('#addvideopost');
+        $("#frmAddVendorPost").validationEngine('hideAll');
+        $("#frmAddVendorVideoPost").validationEngine('hideAll');
+        $('#addphotopostbtn').attr("class", "");
+        $('#addtextpostbtn').attr("class", "");
+        $('#addvideopostbtn').attr("class", "selbtn");
+
+        return false;
+    });
+
+    $('#addTextPostBtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        if ($('#frmAddVendorPost').validationEngine('validate')) {
+
+            $('#frmAddVendorPost').validationEngine('hideAll');
+            var vendorId = $(this).attr("data-vid") + "";
+            addVendorTextPost(vendorId);
+        }
+
+        return false;
+    });
+
+    $('#addVideoPostBtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        if ($('#frmAddVendorVideoPost').validationEngine('validate')) {
+
+            $('#frmAddVendorVideoPost').validationEngine('hideAll');
+            var vendorId = $(this).attr("data-vid") + "";
+            addVendorVideoPost(vendorId);
+        }
+
+        return false;
+    });
+
+    $('.deletepostlink').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        var postID = $(this).attr("data-post-id") + "";
+        var vendorId = $(this).attr("data-vid") + "";
+        deletePost(postID, vendorId);
+
+        return false;
+    });
+});
+
+function addVendorTextPost(vendorId) {
+    // serialize input fields in form with name attributes where name attribute is key
+    var dataObject = $("#frmAddVendorPost").serializeJSON();
+
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Post/AddTextPost",
+        data: dataObject,
+        success: function (result) {
+            showSuccessNotification('Post has been published.');
+            $('#vposts').load("/Post/GetVendorPosts?vendorId=" + vendorId);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Post could not be published. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function addVendorVideoPost(vendorId) {
+    // serialize input fields in form with name attributes where name attribute is key
+    var dataObject = $("#frmAddVendorVideoPost").serializeJSON();
+
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Post/AddVideoPost",
+        data: dataObject,
+        success: function (result) {
+            showSuccessNotification('Post has been published.');
+            $('#vposts').load("/Post/GetVendorPosts?vendorId=" + vendorId);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Post could not be published. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function deletePost(postId, vendorId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Post/DeletePost",
+        data: {
+            postId: postId
+        },
+        success: function (result) {
+            showSuccessNotification('Post has been deleted.');
+            $('#vposts').load("/Post/GetVendorPosts?vendorId=" + vendorId);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Post could not be deleted. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}

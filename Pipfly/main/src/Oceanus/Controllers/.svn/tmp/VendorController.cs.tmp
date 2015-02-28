@@ -1,0 +1,1841 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Oceanus.Data;
+using System.Collections;
+using Oceanus.ViewModels;
+using Oceanus.Attributes;
+using System.Web.Security;
+using Oceanus.Models;
+using Oceanus.ViewModels.Shared;
+using System.Web.UI;
+
+namespace Oceanus.Controllers
+{
+    [BrowserCache(PreventBrowserCaching = true)]
+    public class VendorController : ControllerBase
+    {
+        #region GET/POST actions
+
+        public ActionResult Index(int vendorId)
+        {
+            var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+            VendorViewModel vendorViewModel = null;
+
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid? loggedInUserGuid = (user != null) ? ((Guid)user.ProviderUserKey) : ((Guid?)null);
+
+            SetViewBagData(vendorId);
+
+            if (vendor == null)
+            {
+                //profile not found for website visitor - redirect to homepage
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (VendorHelper.IsUserVendorProfileAuthor(vendorId, Database, user) || Roles.IsUserInRole(SixLooniesMembership.UserRoles.Moderator.ToString()) || Roles.IsUserInRole(SixLooniesMembership.UserRoles.SuperAdmin.ToString()))
+            {
+                //show the "edit" view if the user owns the professional profile
+                vendorViewModel = vendor.ToVendorViewModel();
+
+                if (Roles.IsUserInRole(SixLooniesMembership.UserRoles.Moderator.ToString()) || Roles.IsUserInRole(SixLooniesMembership.UserRoles.SuperAdmin.ToString()))
+                {
+                    ViewBag.ModeratorOrSuperAdminLoggedIn = true;
+                }
+                else
+                {
+                    ViewBag.ModeratorOrSuperAdminLoggedIn = false;
+                }
+
+                return View("Edit", vendorViewModel);
+            }
+            else if (vendor.IsPublished && !vendor.IsPendingReview)
+            {
+                vendorViewModel = vendor.ToVendorViewModel();
+
+                if (user != null)
+                {
+                    var followerMappingFound = Database.VendorUserFollowerMappings.Where(f => f.UserId == loggedInUserGuid && f.VendorId == vendorId);
+                    if (followerMappingFound != null && followerMappingFound.Count() > 0)
+                    {
+                        vendorViewModel.CurrentUserIsFollower = true;
+                    }
+                    else
+                    {
+                        vendorViewModel.CurrentUserIsFollower = false;
+                    }
+                }
+            }
+            else if (!vendor.IsPublished && !vendor.IsFlaggedAsDeleted)
+            {
+                return RedirectToAction("Index", "Error", new { message = SixLooniesMembership.VendorProfileWaitingApprovalMessage });
+            }
+            else
+            {
+                //profile not found for website visitor - redirect to homepage
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(vendorViewModel);
+        }
+
+        public ActionResult VendorUnpublishedIndex(int vendorId, string key)
+        {
+            VendorHelper.AddVendorProfileCookies(vendorId, key);
+
+            var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+            VendorViewModel vendorViewModel = null;
+
+            SetViewBagData(vendorId);
+
+            if (vendor.IsPublished || !vendor.profileKey.ToString().ToLower().Equals(key.ToLower()))
+            {
+                return RedirectToAction("Index", "Error", new { message = SixLooniesMembership.NoPermissionMessage });
+            }
+
+            ViewBag.ShowVendorIntroMsg = true;
+
+            //show the "edit" view if the vendor has not been published (ONLY IF THE LOGGED IN USER IS THE ONE WHO CREATED THE PROFILE)
+            vendorViewModel = vendor.ToVendorViewModel();
+            return View("Edit", vendorViewModel);
+        }
+
+        [Authorize]
+        public ActionResult RejectVendorProfile(int vendorId, string comments)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            Vendor vendorModel = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+            if (vendorModel != null && vendorModel.IsPublished && vendorModel.IsPendingReview)
+            {
+                MessageHelper.CreateMessage("[{\"FullName\":\"\", \"UserId\":\"" + vendorModel.ContributingUserId.ToString() + "\"}]", "Your recent profile submission on Six Loonies", comments, User, out dbMessage, out successful, Database);
+
+                if (successful)
+                {
+                    //reject profile
+                    vendorModel.IsPendingReview = false;
+                    vendorModel.IsPublished = false;
+                    Database.SaveChanges();
+                }
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult AcceptVendorProfile(int vendorId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            Vendor vendorModel = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+            if (vendorModel != null && vendorModel.IsPublished && vendorModel.IsPendingReview)
+            {
+                //accept profile
+                vendorModel.IsPendingReview = false;
+                Database.SaveChanges();
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult DeleteProfile(int vendorId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            Vendor vendorModel = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+            if (vendorModel != null)
+            {
+                vendorModel.IsFlaggedAsDeleted = true;
+                Database.SaveChanges();
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage, vendorId = vendorId });
+        }
+
+        [Authorize]
+        public ActionResult SubmitForReview(int vendorId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            Vendor vendorModel = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+            if (vendorModel != null && !vendorModel.IsPublished && !vendorModel.IsPendingReview)
+            {
+                vendorModel.IsPendingReview = true;
+                vendorModel.IsPublished = true;
+                Database.SaveChanges();
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage, vendorId = vendorId });
+        }
+
+        [Authorize]
+        public ActionResult AddWebsite(int vendorId, string websiteURL)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            Vendor vendorModel = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+            if (vendorModel != null)
+            {
+                vendorModel.WebsiteURL = websiteURL;
+                Database.SaveChanges();
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult AddEmail(int vendorId, string email)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            Vendor vendorModel = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+            if (vendorModel != null)
+            {
+                vendorModel.Email = email;
+                Database.SaveChanges();
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult AddVendorStory(int vendorId, string story)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            Vendor vendorModel = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+            if (vendorModel != null)
+            {
+                vendorModel.Description = story;
+                vendorModel.ShortDescription = story;
+                Database.SaveChanges();
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult AddVendorService(int vendorId, string serviceName, string serviceDescription)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            serviceName = serviceName.Trim();
+            serviceDescription = serviceDescription.Trim();
+
+            if (Database.Services.Any(s => s.VendorId == vendorId && s.Name == serviceName))
+            {
+                dbMessage = "Service already exists for vendor";
+            }
+            else
+            {
+                VendorServicesViewModel serviceViewModel = new VendorServicesViewModel(null, vendorId, serviceName, serviceDescription, serviceDescription);
+
+                Database.Services.AddObject(serviceViewModel.ToVendorServiceModel());
+                Database.SaveChanges();
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult DeleteVendorService(int vendorId, int serviceId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            var serviceModel = Database.Services.Where(s => s.VendorId == vendorId && s.Id == serviceId).FirstOrDefault();
+
+            if (serviceModel != null)
+            {
+                Database.Services.DeleteObject(serviceModel);
+                Database.SaveChanges();
+
+                dbMessage = "Service deleted for vendor";
+            }
+            else
+            {
+                dbMessage = "Service does not exist for vendor";
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult EditVendorService(int vendorId, int serviceId, string serviceName, string serviceDescription)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            var serviceModel = Database.Services.Where(s => s.VendorId == vendorId && s.Id == serviceId).FirstOrDefault();
+
+            if (serviceModel != null)
+            {
+                serviceModel.Name = serviceName;
+                serviceModel.Description = serviceDescription;
+                Database.SaveChanges();
+
+                dbMessage = "Service updated for vendor";
+            }
+            else
+            {
+                dbMessage = "Service does not exist for vendor";
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult CreateVendor(string name)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+            Vendor vendorModel = null;
+
+            name = (name == null) ? string.Empty : name.Trim();
+
+            try
+            {
+                if (!name.Equals(string.Empty))
+                {
+                    MembershipUser user = Membership.GetUser(User.Identity.Name);
+                    Guid userGuid = (Guid)user.ProviderUserKey;
+
+                    VendorViewModel vendorViewModel = new VendorViewModel(null, name, null, null, null, null, null, null, null, false, false, userGuid, DateTime.Now, null, null, false);
+                    vendorModel = vendorViewModel.ToVendorModel();
+
+                    Database.Vendors.AddObject(vendorModel);
+                    Database.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage, vendorId = (vendorModel == null ? -1 : vendorModel.Id) });
+        }
+
+        public ActionResult GetAddVendorForm()
+        {
+            return PartialView("_AddVendor");
+        }
+
+        [Authorize]
+        [ValidateInput(false)]
+        public ActionResult AddReviewUserThumbsUp(Guid targetUser, string comments, int reviewId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                var review = Database.Reviews.Where(r => r.Id == reviewId).FirstOrDefault();
+
+                if (review != null)
+                {
+                    var reviewContributingUserProfile = Database.UserProfiles.Where(u => u.UserId == review.ContributingUserId).FirstOrDefault();
+
+                    if (reviewContributingUserProfile != null)
+                    {
+                        reviewContributingUserProfile.NumThumbsUp = reviewContributingUserProfile.NumThumbsUp + 1;
+
+                        UserThumbsUpRatingsViewModel ratingViewModel = new UserThumbsUpRatingsViewModel(null, targetUser, comments, userGuid, DateTime.Now, reviewId, null);
+                        UserThumbsUpRating ratingModel = ratingViewModel.ToUserThumbsUpModel();
+
+                        Database.UserThumbsUpRatings.AddObject(ratingModel);
+                        Database.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage }, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        public ActionResult CreateRelatedQuestion(string qTitle, string qDetail, int vendorId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+            int questionId = -1; //Question Id
+
+            try
+            {
+
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //save WikiTexts first
+                WikiTextViewModel titleWikiTextViewModel = new WikiTextViewModel(null, qTitle, userGuid, false, false, false, false, false, DateTime.Now);
+                WikiText titleWikiText = titleWikiTextViewModel.ToWikiTextModel();
+                WikiTextViewModel detailWikiTextViewModel = null;
+                WikiText detailWikiText = null;
+
+                if (qDetail != null && !qDetail.Trim().Equals(string.Empty))
+                {
+                    detailWikiTextViewModel = new WikiTextViewModel(null, qDetail, userGuid, false, false, false, false, false, DateTime.Now);
+                    detailWikiText = detailWikiTextViewModel.ToWikiTextModel();
+                    Database.WikiTexts.AddObject(detailWikiText);
+                }
+
+
+                Database.WikiTexts.AddObject(titleWikiText);
+                //save changes
+                Database.SaveChanges();
+
+                //create a question now
+                SixAnswersQuestionViewModel questionViewModel = null;
+                if (detailWikiText != null)
+                {
+                    questionViewModel = new SixAnswersQuestionViewModel(titleWikiText.WikiTextId, detailWikiText.WikiTextId, null,
+                        userGuid, 0, DateTime.Now, 0, false, false, DateTime.Now);
+                }
+                else
+                {
+                    questionViewModel = new SixAnswersQuestionViewModel(titleWikiText.WikiTextId, null, null,
+                        userGuid, 0, DateTime.Now, 0, false, false, DateTime.Now);
+                }
+
+                SixAnswerQuestion question = questionViewModel.ToQuestionModel();
+
+                Database.SixAnswerQuestions.AddObject(question);
+
+                //link question to vendor
+                VendorRelatedQuestionMappingViewModel vendorQuestionMappingViewModel = new VendorRelatedQuestionMappingViewModel(null, vendorId, question.QuestionId, userGuid, DateTime.Now);
+                VendorRelatedQuestionMapping vendorQuestionMapping = vendorQuestionMappingViewModel.ToVendorRelatedQuestionModel();
+
+                Database.VendorRelatedQuestionMappings.AddObject(vendorQuestionMapping);
+                Database.SaveChanges();
+
+                questionId = question.QuestionId;
+                successful = true;
+                dbMessage = "Question Saved";
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage, qid = questionId });
+        }
+
+        public ActionResult SearchQuestionsAutoComplete(string searchText, int maxResults)
+        {
+            IEnumerable<SixAnswerQuestion> questions = Database.SixAnswerQuestions.Where(quest => quest.WikiText1.Text.Contains(searchText)).Take(maxResults);
+            IEnumerable<BarebonesSixAnswersQuestionViewModel> questionsViewModel = questions.Select(quest => quest.ToBarebonesQuestionViewModel());
+            return Json(questionsViewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult SearchCityLocationsAutoComplete(string searchText, int maxResults)
+        {
+            searchText = searchText.ToLower();
+            IEnumerable<ReferenceCity> locations = Database.ReferenceCities.Where(loc => loc.FullCityLocation.StartsWith(searchText)).Take(maxResults);
+            IEnumerable<BaseLocationsViewModel> locationsViewModel = locations.Select(loc => loc.ToBaseLocationsViewModel());
+
+            return Json(locationsViewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetVendorStory(int vendorId)
+        {
+            String story = null;
+            var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+            if (vendor != null)
+            {
+                story = vendor.Description;
+
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+
+                if (VendorHelper.ShowVendorEditCapabilityToUser(vendorId, Database, user))
+                {
+                    ViewBag.ShowEditCapability = true;
+                }
+                else
+                {
+                    ViewBag.ShowEditCapability = false;
+                }
+            }
+
+            ViewBag.VendorId = vendorId;
+
+            return PartialView("_VendorStory", story);
+        }
+
+        [Authorize]
+        public ActionResult GetEditServiceForm(int serviceId)
+        {
+            VendorServicesViewModel serviceViewModel = null;
+
+            var serviceModel = Database.Services.Where(s => s.Id == serviceId).FirstOrDefault();
+
+            if (serviceModel != null)
+            {
+                serviceViewModel = serviceModel.ToVendorServicesViewModel();
+            }
+
+            return PartialView("_EditService", serviceViewModel);
+        }
+
+        [Authorize]
+        public ActionResult GetDeleteServiceForm(int serviceId)
+        {
+            VendorServicesViewModel serviceViewModel = null;
+
+            var serviceModel = Database.Services.Where(s => s.Id == serviceId).FirstOrDefault();
+
+            if (serviceModel != null)
+            {
+                serviceViewModel = serviceModel.ToVendorServicesViewModel();
+            }
+
+            return PartialView("_DeleteService", serviceViewModel);
+        }
+
+        public ActionResult GetVendorEmail(int vendorId)
+        {
+            var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+            BaseVendorViewModel baseVendorViewModel = null;
+
+            if (vendor != null)
+            {
+                baseVendorViewModel = vendor.ToBaseVendorViewModel();
+            }
+
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+
+            if (VendorHelper.ShowVendorEditCapabilityToUser(vendorId, Database, user))
+            {
+                ViewBag.ShowEditCapability = true;
+            }
+            else
+            {
+                ViewBag.ShowEditCapability = false;
+            }
+
+            ViewBag.VendorId = vendorId;
+
+            return PartialView("_VendorEmail", baseVendorViewModel);
+        }
+
+        public ActionResult GetVendorWebsite(int vendorId)
+        {
+            var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+            BaseVendorViewModel baseVendorViewModel = null;
+
+            if (vendor != null)
+            {
+                baseVendorViewModel = vendor.ToBaseVendorViewModel();
+            }
+
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+
+            if (VendorHelper.ShowVendorEditCapabilityToUser(vendorId, Database, user))
+            {
+                ViewBag.ShowEditCapability = true;
+            }
+            else
+            {
+                ViewBag.ShowEditCapability = false;
+            }
+
+            ViewBag.VendorId = vendorId;
+
+            return PartialView("_VendorWebsite", baseVendorViewModel);
+        }
+
+        public ActionResult GetVendorServices(int vendorId)
+        {           
+            IEnumerable<VendorServicesViewModel> services = null;   
+            var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+            if(vendor != null)
+            {
+                services = vendor.Services.Select(serv => serv.ToVendorServicesViewModel());
+            }
+
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+
+            if (VendorHelper.ShowVendorEditCapabilityToUser(vendorId, Database, user))
+            {
+                ViewBag.ShowEditCapability = true;
+            }
+            else
+            {
+                ViewBag.ShowEditCapability = false;
+            }
+
+            ViewBag.VendorId = vendorId;
+
+            return PartialView("_ServicesOverview", services);
+        }
+
+        public ActionResult GetVendorCategories(int vendorId)
+        {
+            var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+            IEnumerable<VendorCategoryMappingViewModel> categoryMappings = null;
+
+            if (vendor != null)
+            {
+                categoryMappings = vendor.VendorCategoryMappings.Select(cat => cat.ToVendorCategoryMappingViewModel());
+            }
+
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+
+            if (VendorHelper.ShowVendorEditCapabilityToUser(vendorId, Database, user))
+            {
+                ViewBag.ShowEditCapability = true;
+            }
+            else
+            {
+                ViewBag.ShowEditCapability = false;
+            }
+
+            ViewBag.VendorId = vendorId;
+
+            return PartialView("_VendorCategory", categoryMappings);
+        }
+
+        public ActionResult GetVendorStats(int vendorId)
+        {
+            VendorStatsViewModel vendorStats = null;
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid? loggedInUserGuid = (user != null) ? ((Guid)user.ProviderUserKey) : ((Guid?)null);
+
+            var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+            if (vendor != null)
+            {
+                vendorStats = vendor.GetVendorStatsViewModel(Database, loggedInUserGuid);
+            }
+
+            if (VendorHelper.ShowVendorEditCapabilityToUser(vendorId, Database, user))
+            {
+                ViewBag.ShowEditCapability = true;
+            }
+            else
+            {
+                ViewBag.ShowEditCapability = false;
+            }
+
+            return PartialView("_VendorStats", vendorStats);
+        }
+
+        public ActionResult Portfolio(int vendorId)
+        {
+            String vendorName = null;
+
+            var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+            vendorName = (vendor == null ? null : vendor.Name);
+
+            ViewBag.VendorName = vendorName;
+
+            var imagesPorfolio =
+                Database.VendorImages.Where(vi => vi.vendorId == vendorId).AsEnumerable().Select(
+                    vi => vi.ToVendorImageViewModel());
+
+            var videosPortfolio =
+                Database.VendorVideos.Where(vi => vi.VendorId == vendorId).AsEnumerable().Select(
+                    vi => vi.ToVendorVideosViewModel());
+
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+
+            if (VendorHelper.ShowVendorEditCapabilityToUser(vendorId, Database, user))
+            {
+                ViewBag.ShowVendorEditCapabilityToUser = true;
+            }
+            else
+            {
+                ViewBag.ShowVendorEditCapabilityToUser = false;
+            }
+
+            SetViewBagData(vendorId);
+
+            var vm = new VendorPortfolioViewModel()
+            {
+                VendorId = vendorId,
+                PortfolioImages = imagesPorfolio,
+                PortfolioVideos = videosPortfolio
+            };
+
+            return PartialView("_Portfolio", vm);
+        }
+
+        public ActionResult AllReviews(int vendorId)
+        {
+            SetViewBagData(vendorId);
+
+            IEnumerable<ReviewViewModel> reviewsViewModel = null;
+
+            var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+            if (vendor != null)
+            {
+                var reviews = Database.Reviews.Where(rev => rev.VendorId == vendorId);
+
+                if (reviews != null && reviews.Count() > 0)
+                {
+                    reviewsViewModel = reviews.AsEnumerable().Select(m => m.ToReviewViewModel());
+                }
+
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+
+                if (VendorHelper.ShowVendorEditCapabilityToUser(vendorId, Database, user))
+                {
+                    ViewBag.ShowVendorEditCapabilityToUser = true;
+                }
+                else
+                {
+                    ViewBag.ShowVendorEditCapabilityToUser = false;
+                }
+            }
+
+            return PartialView("_AllReviews", reviewsViewModel);
+        }
+
+        public ActionResult GetRelatedQuestionsAutoComplete(string searchText, int maxResults)
+        {
+            IEnumerable<SixAnswerQuestion> questions = Database.SixAnswerQuestions.Where(quest => quest.WikiText1.Text.Contains(searchText)).Take(maxResults);
+            IEnumerable<BarebonesSixAnswersQuestionViewModel> questionsViewModel = questions.Select(quest => quest.ToBarebonesQuestionViewModel());
+            return Json(questionsViewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        public ActionResult AddRelatedQuestion(int questionId, int vendorId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+                if (vendor != null)
+                {
+                    var existingQuestion = Database.SixAnswerQuestions.Where(c => c.QuestionId == questionId).FirstOrDefault();
+
+                    //does the question exist?
+                    if (existingQuestion != null)
+                    {
+                        //check if the question is already associated to the vendor
+                        var questionMapping = Database.VendorRelatedQuestionMappings.Where(mapping => (mapping.VendorId == vendorId && mapping.QuestionId == questionId)).FirstOrDefault();
+
+                        if (questionMapping == null)
+                        {
+                            VendorRelatedQuestionMappingViewModel vendorQuestionMappingViewModel = new VendorRelatedQuestionMappingViewModel(null, vendorId, questionId, userGuid, DateTime.Now);
+                            VendorRelatedQuestionMapping vendorQuestionMapping = vendorQuestionMappingViewModel.ToVendorRelatedQuestionModel();
+
+                            Database.VendorRelatedQuestionMappings.AddObject(vendorQuestionMapping);
+                            Database.SaveChanges();
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetRelatedQuestions(int vendorId)
+        {
+            IEnumerable<VendorRelatedQuestionMapping> relatedQuestions = Database.VendorRelatedQuestionMappings.Where(mapping => mapping.VendorId == vendorId).AsEnumerable();
+            IEnumerable<VendorRelatedQuestionMappingViewModel> relatedQuestionsViewModel = null;
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+
+            if (relatedQuestions != null)
+            {
+                relatedQuestionsViewModel = relatedQuestions.Select(mapping => mapping.ToVendorRelatedQuestionMappingViewModel());
+            }
+
+            ViewBag.VendorId = vendorId;
+
+            if (VendorHelper.ShowVendorEditCapabilityToUser(vendorId, Database, user))
+            {
+                ViewBag.ShowVendorEditCapabilityToUser = true;
+            }
+            else
+            {
+                ViewBag.ShowVendorEditCapabilityToUser = false;
+            }
+
+            return PartialView("_RelatedQuestions", relatedQuestionsViewModel);
+        }
+
+        public ActionResult Followers(int vendorId)
+        {
+            SetViewBagData(vendorId);
+
+            IEnumerable<VendorUserFollowerMapping> vendorFollowerMappings = null;
+
+            MembershipUser currUserMembership = Membership.GetUser(User.Identity.Name);
+
+            var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+            if (vendor != null)
+            {
+                ViewBag.VendorContributingUser = vendor.ContributingUserId;
+            }
+
+            if (currUserMembership != null)
+            {
+                Guid currUserGuid = (Guid)currUserMembership.ProviderUserKey;
+                vendorFollowerMappings = Database.VendorUserFollowerMappings.Where(mapping => mapping.VendorId == vendorId && mapping.UserId != currUserGuid);
+
+                var currUser = Database.UserProfiles.Where(u => u.UserId == currUserGuid).FirstOrDefault();
+                SetViewBagCurrUserProfile(currUser.ToUserProfileViewModel());
+                ViewBag.CurrUserIsFollower = Database.VendorUserFollowerMappings.Where(mapping => mapping.UserId == currUserGuid && mapping.VendorId == vendorId).Count() > 0;
+            }
+            else
+            {
+                vendorFollowerMappings = Database.VendorUserFollowerMappings.Where(mapping => mapping.VendorId == vendorId);
+                ViewBag.CurrUserIsFollower = false;
+            }
+
+            IEnumerable<UserProfileViewModel> followingUsers = null;
+
+            if (vendorFollowerMappings.Count() > 0)
+            {
+                followingUsers = vendorFollowerMappings.Select(u => u.aspnet_Users.UserProfiles.First().ToUserProfileViewModel());
+                followingUsers = UserHelper.FlagCurrentUserAsFollowerIfApplicable(followingUsers, currUserMembership, null);
+            }
+
+            return PartialView("_Followers", followingUsers);
+        }
+
+        public ActionResult GetWriteReviewView(int vendorId)
+        {
+            SetViewBagData(vendorId);
+
+            List<ReviewAttribute> reviewAttributes = new List<ReviewAttribute>();
+            var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+            if (vendor != null)
+            {
+                var categoryMappings = Database.VendorCategoryMappings.Where(map => map.VendorId == vendorId).AsEnumerable();
+
+                if (categoryMappings != null && categoryMappings.Count() > 0)
+                {
+                    var categories = categoryMappings.Select(map => map.Category.ToCategoryViewModel()).Distinct();
+
+                    if (categories != null)
+                    {
+                        foreach (var category in categories)
+                        {
+                            var mappedReviewAttrIds = Database.CategoryReviewAttributeMappings.Where(map => map.CategoryId == category.Id).AsEnumerable();
+
+                            reviewAttributes.AddRange(mappedReviewAttrIds.Select(attr => attr.ReviewAttribute));
+                        }
+                    }
+                }
+            }
+
+            return PartialView("_WriteReview", reviewAttributes.Distinct().Select(attr => attr.ToReviewAttributeViewModel()));
+        }
+
+        public ActionResult GetReviewSummaryAttributes(int vendorId)
+        {
+            var avgReviewAttrs = Database.ExecuteStoreQuery<AverageReviewAttributeValueViewModel>("SELECT RA.AttributeName, AVG(RAV.AttributeValue) AttributeValue, RAV.ReviewAttributeId FROM ReviewAttributes RA, ReviewAttributeValues RAV, Review R, Vendors V WHERE R.VendorId = @p0 AND RAV.ReviewId = R.Id AND RA.ID = RAV.ReviewAttributeId GROUP BY RAV.ReviewAttributeId, RA.AttributeName", vendorId).ToList();
+
+            ViewBag.VendorId = vendorId;
+
+            List<AverageReviewAttributeValueViewModel> results = AddOverallRatingToAttributeList(avgReviewAttrs);
+
+            return PartialView("_ReviewSummaryRatings", results);
+        }
+
+        public ActionResult GetCategoriesAutoComplete(string searchText, int maxResults)
+        {
+            IEnumerable<Category> categories = Database.Categories.Where(c => c.Name.Contains(searchText)).Take(maxResults);
+            IEnumerable<CategoryViewModel> categoriesViewModel = categories.Select(c => c.ToCategoryViewModel());
+            return Json(categoriesViewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetVendorTraitsAutoComplete(string searchText, int maxResults)
+        {
+            IEnumerable<Tag> tags = Database.Tags.Where(t => t.VendorTraitsTagMappings.Count > 0 && t.TagName.Contains(searchText)).Take(maxResults);
+            IEnumerable<TagViewModel> tagViewModel = tags.Select(t => t.ToTagViewModel());
+            return Json(tagViewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        public ActionResult Follow(int vid)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //check if the user is already following the vendor
+                var vendorFollowerMapping = Database.VendorUserFollowerMappings.Where(mapping => (mapping.VendorId == vid && mapping.UserId == userGuid)).FirstOrDefault();
+
+                if (vendorFollowerMapping == null)
+                {
+                    VendorUserFollowerMappingViewModel viewModel = new VendorUserFollowerMappingViewModel(null, vid, userGuid, DateTime.Now);
+                    VendorUserFollowerMapping followerModel = viewModel.ToVendorFollowerUserMapping();
+
+                    Database.VendorUserFollowerMappings.AddObject(followerModel);
+                    Database.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult FollowUser(Guid userToFollowId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //check if the user is already following the other user
+                var existingMapping = Database.UserToUserFollowingMappings.Where(mapping => mapping.FollowedUserId == userToFollowId && mapping.FollowingUserId == userGuid).FirstOrDefault();
+
+                if (existingMapping == null)
+                {
+                    UserToUserFollowerMappingViewModel viewModel = new UserToUserFollowerMappingViewModel(null, userToFollowId, userGuid, DateTime.Now);
+                    UserToUserFollowingMapping mappingModel = viewModel.ToUserToUserFollowingMapping();
+
+                    Database.UserToUserFollowingMappings.AddObject(mappingModel);
+                    Database.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult UnfollowUser(Guid followedUserId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //check if the user is already following the other user
+                var userToUserMapping = Database.UserToUserFollowingMappings.Where(mapping => (mapping.FollowedUserId == followedUserId && mapping.FollowingUserId == userGuid)).FirstOrDefault();
+
+                if (userToUserMapping != null)
+                {
+                    Database.UserToUserFollowingMappings.DeleteObject(userToUserMapping);
+                    Database.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult Unfollow(int vid)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //check if the user is already following the vendor
+                var vendorFollowerMapping = Database.VendorUserFollowerMappings.Where(mapping => (mapping.VendorId == vid && mapping.UserId == userGuid)).FirstOrDefault();
+
+                if (vendorFollowerMapping != null)
+                {
+                    Database.VendorUserFollowerMappings.DeleteObject(vendorFollowerMapping);
+                    Database.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult DeleteCategory(int vid, int cid)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                var category = Database.VendorCategoryMappings.Where(c => (c.CategoryId == cid && c.VendorId == vid)).FirstOrDefault();
+
+                if (category != null)
+                {
+                    Database.VendorCategoryMappings.DeleteObject(category);
+                    Database.SaveChanges();
+
+                    dbMessage = "Category Deleted";
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult DeleteTrait(int vid, int tid)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                var tag = Database.VendorTraitsTagMappings.Where(t => (t.TagId == tid && t.VendorId == vid)).FirstOrDefault();
+
+                if (tag != null)
+                {
+                    Database.VendorTraitsTagMappings.DeleteObject(tag);
+                    Database.SaveChanges();
+
+                    dbMessage = "Tag Deleted";
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        [ValidateInput(false)]
+        public ActionResult DeleteVendorVideo(int vid, int videoId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                //retrieve the video
+                VendorVideo existingVideoRecord = Database.VendorVideos.Where(v => (v.VendorId == vid && v.Id == videoId)).FirstOrDefault();
+
+                if (existingVideoRecord != null)
+                {
+                    Database.VendorVideos.DeleteObject(existingVideoRecord);
+                    Database.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage }, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [ValidateInput(false)]
+        public ActionResult UpdateVendorVideo(int vendorId, int videoId, string title, string description)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            title = title == null ? string.Empty : title.Trim();
+            description = description == null ? string.Empty : description.Trim();
+
+            try
+            {
+                //retrieve the video
+                VendorVideo existingVideoRecord = Database.VendorVideos.Where(v => (v.VendorId == vendorId && v.Id == videoId)).FirstOrDefault();
+
+                if (existingVideoRecord != null)
+                {
+                    existingVideoRecord.Title = title;
+                    existingVideoRecord.Description = description;
+
+                    Database.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage }, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        [ValidateInput(false)]
+        public ActionResult AddVendorVideo(int vendorId, string title, string description, string videoURL)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            title = title == null ? string.Empty : title.Trim();
+            videoURL = videoURL == null ? string.Empty : videoURL.Trim();
+            description = description == null ? string.Empty : description.Trim();
+
+            try
+            {
+                if (!title.Equals(string.Empty) && !videoURL.Equals(string.Empty))
+                {
+                    MembershipUser user = Membership.GetUser(User.Identity.Name);
+                    Guid userGuid = (Guid)user.ProviderUserKey;
+                    bool isYouTube = false;
+                    bool isVimeo = false;
+                    string videoId = string.Empty;
+
+                    VideoHelper.RetrieveVideoId(videoURL, out isYouTube, out isVimeo, out videoId);
+
+                    if (videoId != null && !videoId.Equals(string.Empty))
+                    {
+                        videoId = videoId.Trim();
+
+                        //check if video already exists
+                        VendorVideo existingVideoRecord = Database.VendorVideos.Where(v => (v.VendorId == vendorId && v.VideoIdentfier.ToLower().Equals(videoId) && v.IsYouTube == isYouTube && v.IsVimeo == isVimeo)).FirstOrDefault();
+
+                        if (existingVideoRecord == null)
+                        {
+                            VendorVideosViewModels videoViewModel = new VendorVideosViewModels(null, vendorId, title, description, videoId, isYouTube, isVimeo);
+                            VendorVideo videoModel = videoViewModel.ToVendorVideoModel();
+
+                            Database.VendorVideos.AddObject(videoModel);
+                            Database.SaveChanges();
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage }, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        public ActionResult AddCategory(int vid, string category)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+            category = category.Trim();
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                var vendor = Database.Vendors.Where(v => v.Id == vid).FirstOrDefault();
+
+                if (vendor != null)
+                {
+                    var existingCategory = Database.Categories.Where(c => c.Name.ToLower().Equals(category.ToLower())).FirstOrDefault();
+
+                    //does the category already exist?
+                    if (existingCategory != null)
+                    {
+                        //check if the category is already associated to the vendor
+                        var categoryMappings = Database.VendorCategoryMappings.Where(mapping => (mapping.VendorId == vid && mapping.CategoryId == existingCategory.Id)).FirstOrDefault();
+
+                        if (categoryMappings == null)
+                        {
+                            VendorCategoryMappingViewModel categoryMappingViewModel = new ViewModels.VendorCategoryMappingViewModel(null, vid, existingCategory.Id, userGuid, DateTime.Now);
+                            VendorCategoryMapping categoryMapping = categoryMappingViewModel.ToVendorCategoryMapping();
+
+                            Database.VendorCategoryMappings.AddObject(categoryMapping);
+                            Database.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        CategoryViewModel categoryViewModel = new CategoryViewModel(null, category, userGuid, DateTime.Now);
+                        Category newCategory = categoryViewModel.ToCategoryModel();
+
+                        Database.Categories.AddObject(newCategory);
+                        Database.SaveChanges();
+
+                        VendorCategoryMappingViewModel categoryMappingViewModel = new ViewModels.VendorCategoryMappingViewModel(null, vid, newCategory.Id, userGuid, DateTime.Now);
+                        VendorCategoryMapping categoryMapping = categoryMappingViewModel.ToVendorCategoryMapping();
+
+                        Database.VendorCategoryMappings.AddObject(categoryMapping);
+                        Database.SaveChanges();
+                    }
+                }
+                else
+                {
+                    dbMessage = "Failed. Vendor does not exist";
+                    successful = false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult AddTrait(int vid, string trait)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+            trait = trait.Trim();
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                var vendor = Database.Vendors.Where(v => v.Id == vid).FirstOrDefault();
+
+                if (vendor != null)
+                {
+                    var existingTag = Database.Tags.Where(t => t.TagName.ToLower().Equals(trait.ToLower())).FirstOrDefault();
+
+                    //does the trait (i.e. tag) already exist?
+                    if (existingTag != null)
+                    {
+                        //check if the trait is already associated to the vendor
+                        var tagMappings = Database.VendorTraitsTagMappings.Where(mapping => (mapping.VendorId == vid && mapping.TagMappingId == existingTag.TagId)).FirstOrDefault();
+
+                        if (tagMappings == null)
+                        {
+                            VendorTraitsTagMappingViewModel tagMappingViewModel = new ViewModels.VendorTraitsTagMappingViewModel(null, vid, existingTag.TagId, userGuid, DateTime.Now);
+                            VendorTraitsTagMapping tagMapping = tagMappingViewModel.ToTagMapping();
+
+                            Database.VendorTraitsTagMappings.AddObject(tagMapping);
+                            Database.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        TagViewModel tagViewModel = new TagViewModel(null, trait, userGuid, DateTime.Now);
+                        Tag newTag = tagViewModel.ToTag();
+
+                        Database.Tags.AddObject(newTag);
+                        Database.SaveChanges();
+
+                        VendorTraitsTagMappingViewModel tagMappingViewModel = new ViewModels.VendorTraitsTagMappingViewModel(null, vid, newTag.TagId, userGuid, DateTime.Now);
+                        VendorTraitsTagMapping tagMapping = tagMappingViewModel.ToTagMapping();
+
+                        Database.VendorTraitsTagMappings.AddObject(tagMapping);
+                        Database.SaveChanges();
+                    }
+                }
+                else
+                {
+                    dbMessage = "Failed. Vendor does not exist";
+                    successful = false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult GetTellAFriendForm(int vendorId)
+        {
+            List<AllFriendConnectionsViewModel> allFriendsOnAndNotOnSixLoonies = new List<AllFriendConnectionsViewModel>();
+
+            ViewBag.VendorId = vendorId;
+
+            MembershipUser currUserMembership = Membership.GetUser(User.Identity.Name);
+            Guid currUserGuid = (Guid)currUserMembership.ProviderUserKey;
+
+            //get friend details for those that are users on six loonies
+            var sixLooniesFriends = Database.SixLooniesFriendConnections.Where(f => f.FirstUserId == currUserGuid || f.SecondUserId == currUserGuid).AsEnumerable();
+
+            foreach (var sixLooniesFriend in sixLooniesFriends)
+            {
+                bool firstConnectionIsLoggedInUser = (sixLooniesFriend.FirstUserId == currUserGuid);
+
+                var friendUserProfile = Database.UserProfiles.Where(u => u.UserId == ((firstConnectionIsLoggedInUser) ? sixLooniesFriend.SecondUserId : sixLooniesFriend.FirstUserId)).FirstOrDefault();
+
+                if (friendUserProfile != null)
+                {
+                    allFriendsOnAndNotOnSixLoonies.Add(friendUserProfile.ToAllFriendsConnectionsViewModel());
+                }
+            }
+
+            //get friend details for those that are on facebook but not on six loonies
+            var facebookFriendsNotOnSixLoonies = Database.FacebookFriendLists.Where(f => f.UserId == currUserGuid && f.FacebookFriendSixLooniesUID == null).AsEnumerable();
+            IEnumerable<AllFriendConnectionsViewModel> facebookFriendList = facebookFriendsNotOnSixLoonies.Select(f => f.ToAllFriendsConnectionsViewModel());
+
+            allFriendsOnAndNotOnSixLoonies.AddRange(facebookFriendList);
+
+            return PartialView("_TellFriendAboutVendor", allFriendsOnAndNotOnSixLoonies);
+        }
+
+        [Authorize]
+        public ActionResult GetAskToReviewForm(int vendorId)
+        {
+            List<AllFriendConnectionsViewModel> allFriendsOnAndNotOnSixLoonies = new List<AllFriendConnectionsViewModel>();
+
+            ViewBag.VendorId = vendorId;
+
+            MembershipUser currUserMembership = Membership.GetUser(User.Identity.Name);
+            Guid currUserGuid = (Guid)currUserMembership.ProviderUserKey;
+
+            //get friend details for those that are users on six loonies
+            var sixLooniesFriends = Database.SixLooniesFriendConnections.Where(f => f.FirstUserId == currUserGuid || f.SecondUserId == currUserGuid).AsEnumerable();
+
+            foreach (var sixLooniesFriend in sixLooniesFriends)
+            {
+                bool firstConnectionIsLoggedInUser = (sixLooniesFriend.FirstUserId == currUserGuid);
+
+                var friendUserProfile = Database.UserProfiles.Where(u => u.UserId == ((firstConnectionIsLoggedInUser) ? sixLooniesFriend.SecondUserId : sixLooniesFriend.FirstUserId)).FirstOrDefault();
+
+                if (friendUserProfile != null)
+                {
+                    allFriendsOnAndNotOnSixLoonies.Add(friendUserProfile.ToAllFriendsConnectionsViewModel());
+                }
+            }
+
+            //get friend details for those that are on facebook but not on six loonies
+            var facebookFriendsNotOnSixLoonies = Database.FacebookFriendLists.Where(f => f.UserId == currUserGuid && f.FacebookFriendSixLooniesUID == null).AsEnumerable();
+            IEnumerable<AllFriendConnectionsViewModel> facebookFriendList = facebookFriendsNotOnSixLoonies.Select(f => f.ToAllFriendsConnectionsViewModel());
+
+            allFriendsOnAndNotOnSixLoonies.AddRange(facebookFriendList);
+
+            return PartialView("_AskToReview", allFriendsOnAndNotOnSixLoonies);
+        }
+
+        [Authorize]
+        public ActionResult GetFriendOfFriendsConnections(int vendorId)
+        {
+            IEnumerable<NetworkConnectionPathViewModel> secondDegreeNetworkConnectionViewModels = null;
+
+            MembershipUser currUserMembership = Membership.GetUser(User.Identity.Name);
+            if (currUserMembership != null)
+            {
+                Guid currUserGuid = (Guid)currUserMembership.ProviderUserKey;
+
+                var vendorProfile = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+                if (vendorProfile != null)
+                {
+                    var secondDegreeConnectionModels = Database.Get2ndDegreeVendorNetworkConnectionsPath(currUserGuid, vendorId).ToList();
+                    secondDegreeNetworkConnectionViewModels = secondDegreeConnectionModels.Select(n => n.ToNetworkConnectionsPathViewModel(Database));
+
+                    ViewBag.UserId = currUserGuid;
+                    ViewBag.VendorId = vendorProfile.Id;
+                    ViewBag.VendorName = vendorProfile.Name;
+                }
+            }
+
+            return PartialView("_ConnectedToVendorSecondDegree", secondDegreeNetworkConnectionViewModels);
+        }
+
+        [Authorize]
+        public ActionResult GetVendorDirectFriendConnections(int vendorId)
+        {
+            List<UserProfileViewModel> friendConnectionsList = new List<UserProfileViewModel>();
+
+            MembershipUser currUserMembership = Membership.GetUser(User.Identity.Name);
+            if (currUserMembership != null)
+            {
+                Guid currUserGuid = (Guid)currUserMembership.ProviderUserKey;
+
+                var vendorProfile = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+                if (vendorProfile != null)
+                {
+                    var userSixLooniesFriendListModel = Database.SixLooniesFriendConnections.Where(f => (f.FirstUserId == currUserGuid || f.SecondUserId == currUserGuid) &&
+                        Database.Reviews.Where(r => r.VendorId == vendorId && (r.ContributingUserId == ((f.FirstUserId == currUserGuid) ? f.SecondUserId : f.FirstUserId))).AsEnumerable().Count() > 0).AsEnumerable();
+
+                    foreach (var friend in userSixLooniesFriendListModel)
+                    {
+                        Guid friendGuid = (friend.FirstUserId == currUserGuid) ? friend.SecondUserId : friend.FirstUserId;
+                        UserProfile friendUserProfile = Database.UserProfiles.Where(u => u.UserId == friendGuid).FirstOrDefault();
+
+                        if (friendUserProfile != null)
+                        {
+                            friendConnectionsList.Add(friendUserProfile.ToUserProfileViewModel());
+                        }
+
+                    }
+
+                    ViewBag.UserId = currUserGuid;
+                    ViewBag.VendorId = vendorProfile.Id;
+                    ViewBag.VendorName = vendorProfile.Name;
+                }
+            }
+
+            return PartialView("_ConnectedToVendorFirstDegree", friendConnectionsList);
+        }
+
+        public ActionResult GetVendorTraits(int vendorId)
+        {
+            IEnumerable<TagViewModel> model = new List<TagViewModel>();
+            var mappings = Database.VendorTraitsTagMappings.Where(mapping => mapping.VendorId == vendorId);
+
+            if (mappings != null && mappings.Count() > 0)
+            {
+                model = mappings.AsEnumerable().Select(m => m.Tag.ToTagViewModel());
+            }
+
+            ViewBag.VendorId = vendorId;
+
+            return PartialView("_VendorTraits", model);
+        }
+
+        public ActionResult GetReviewDistribution(int vendorId, int? reviewAttributeId)
+        {
+            List<ReviewDistributionViewModel> result = new List<ReviewDistributionViewModel>();
+            IEnumerable<ReviewDistributionViewModel> reviewRatingsDistr = null;
+            IEnumerable<ReviewDistributionViewModel> overallRatingDistr = null;
+
+            if (reviewAttributeId != null && reviewAttributeId > 0)
+            {
+                reviewRatingsDistr = Database.ExecuteStoreQuery<ReviewDistributionViewModel>("SELECT RA.AttributeName, RAV.AttributeValue, count(RAV.attributeValue) AttributeValueCount FROM ReviewAttributeValues RAV, Review R, ReviewAttributes RA WHERE RAV.ReviewId = R.Id AND R.VendorId = @p0 AND RAV.reviewattributeid = RA.ID AND RAV.reviewattributeid = @p1 GROUP BY RA.attributeName, RAV.attributevalue", vendorId, reviewAttributeId).ToList();
+            }
+            else
+            {
+                overallRatingDistr = Database.ExecuteStoreQuery<ReviewDistributionViewModel>("SELECT RESULT.AttributeName, RESULT.AttributeValue, COUNT(RESULT.AttributeValueCount) AttributeValueCount FROM (SELECT 'Overall Rating' AttributeName, (ROUND(AVG(RAV.AttributeValue), 0)) AttributeValue, 0 AttributeValueCount FROM ReviewAttributeValues RAV, Review R, ReviewAttributes RA WHERE RAV.ReviewId = R.Id AND R.VendorId = @p0 AND RAV.reviewattributeid = RA.ID GROUP BY R.Id ) RESULT GROUP BY RESULT.AttributeName, RESULT.AttributeValue", vendorId).ToList();
+            }
+
+            if (overallRatingDistr != null && overallRatingDistr.Count() > 0)
+            {
+                result.AddRange(overallRatingDistr);
+            }
+            if (reviewRatingsDistr != null && reviewRatingsDistr.Count() > 0)
+            {
+                result.AddRange(reviewRatingsDistr);
+            }
+
+            ViewBag.VendorId = vendorId;
+
+            return PartialView("_ReviewSummaryRatingsDistChart", result);
+        }
+
+        [Authorize]
+        public ActionResult TellAFriend(List<string> recipients, string message, int vendorId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                if (User.Identity != null && User.Identity.Name != null && Membership.GetUser(User.Identity.Name) != null)
+                {
+                    MembershipUser user = Membership.GetUser(User.Identity.Name);
+                    Guid userGuid = (Guid)user.ProviderUserKey;
+
+                    if (recipients.Count > 0)
+                    {
+                        //retrieve user profile of currently logged in user
+                        var userProfile = Database.UserProfiles.Where(u => u.UserId == userGuid).FirstOrDefault();
+
+                        //retrieve vendor name
+                        var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+                        if (vendor != null)
+                        {
+                            if (userProfile != null)
+                            {
+                                foreach (string recipient in recipients)
+                                {
+                                    bool isSixLooniesRecipient = recipient.ToLower().IndexOf("sl:") > 0;
+                                    bool isFacebookRecipient = recipient.ToLower().IndexOf("fb:") > 0;
+
+                                    string cleanedUpRecipient = recipient.Replace("[", "").Replace("]", "").Replace("\"", "").Replace("'", "");
+                                    int slashIndex = cleanedUpRecipient.IndexOf("/"); //Delimeter in the 'Recipient ID' to include both six loonies UID and facebook UID (hence, avoiding DB call)
+
+                                    if (isSixLooniesRecipient)
+                                    {
+                                        //six loonies recipient - post a message
+
+                                        //retrieve six loonies recipient ID
+                                        string sixLooniesRecipient = (slashIndex > 0 ? cleanedUpRecipient.Substring(0, slashIndex) : cleanedUpRecipient);
+                                        sixLooniesRecipient = sixLooniesRecipient.Substring(3, sixLooniesRecipient.Length - 3);
+
+                                        MessageHelper.CreateMessageWithUserID(sixLooniesRecipient, "Check out " + vendor.Name + "'s profile", message, User, out dbMessage, out successful, Database);
+                                    }
+
+                                    if (isFacebookRecipient)
+                                    {
+                                        string facebookRecipient = string.Empty;
+
+                                        //facebook recipient
+                                        facebookRecipient = (slashIndex > 0 ? cleanedUpRecipient.Substring(slashIndex + 1, cleanedUpRecipient.Length - slashIndex - 1) : cleanedUpRecipient);
+                                        facebookRecipient = facebookRecipient.Substring(3, facebookRecipient.Length - 3);
+
+                                        long fbUID = -1;
+                                        bool validFBUID = long.TryParse(facebookRecipient, out fbUID);
+
+                                        if (validFBUID)
+                                        {
+                                            var domain = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+                                            bool querySuccessful = AccountController.PostToFacebookWall(fbUID, userProfile.FacebookToken, null, "Check out " + vendor.Name + "'s profile on Six Loonies", domain + "/vendor/" + vendorId,
+                                                message, null, "http://www.sixloonies.com/images/sitetheme/SixLooniesLogo.png", null, false);
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult AskToReview(List<string> recipients, string message, int vendorId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                if (User.Identity != null && User.Identity.Name != null && Membership.GetUser(User.Identity.Name) != null)
+                {
+                    MembershipUser user = Membership.GetUser(User.Identity.Name);
+                    Guid userGuid = (Guid)user.ProviderUserKey;
+
+                    if (recipients.Count > 0)
+                    {
+                        //retrieve user profile of currently logged in user
+                        var userProfile = Database.UserProfiles.Where(u => u.UserId == userGuid).FirstOrDefault();
+
+                        //retrieve vendor name
+                        var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+                        if (vendor != null)
+                        {
+                            if (userProfile != null)
+                            {
+                                foreach (string recipient in recipients)
+                                {
+                                    bool isSixLooniesRecipient = recipient.ToLower().IndexOf("sl:") > 0;
+                                    bool isFacebookRecipient = recipient.ToLower().IndexOf("fb:") > 0;
+
+                                    string cleanedUpRecipient = recipient.Replace("[", "").Replace("]", "").Replace("\"", "").Replace("'", "");
+                                    int slashIndex = cleanedUpRecipient.IndexOf("/"); //Delimeter in the 'Recipient ID' to include both six loonies UID and facebook UID (hence, avoiding DB call)
+
+                                    if (isSixLooniesRecipient)
+                                    {
+                                        //six loonies recipient - post a message
+
+                                        //retrieve six loonies recipient ID
+                                        string sixLooniesRecipient = (slashIndex > 0 ? cleanedUpRecipient.Substring(0, slashIndex) : cleanedUpRecipient);
+                                        sixLooniesRecipient = sixLooniesRecipient.Substring(3, sixLooniesRecipient.Length - 3);
+
+                                        MessageHelper.CreateMessageWithUserID(sixLooniesRecipient, "Please write a review for \"" + vendor.Name + "\"", message, User, out dbMessage, out successful, Database);
+                                    }
+
+                                    if (isFacebookRecipient)
+                                    {
+                                        string facebookRecipient = string.Empty;
+
+                                        //facebook recipient
+                                        facebookRecipient = (slashIndex > 0 ? cleanedUpRecipient.Substring(slashIndex + 1, cleanedUpRecipient.Length - slashIndex - 1) : cleanedUpRecipient);
+                                        facebookRecipient = facebookRecipient.Substring(3, facebookRecipient.Length - 3);
+
+                                        long fbUID = -1;
+                                        bool validFBUID = long.TryParse(facebookRecipient, out fbUID);
+
+                                        if (validFBUID)
+                                        {
+                                            var domain = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+                                            bool querySuccessful = AccountController.PostToFacebookWall(fbUID, userProfile.FacebookToken, null, "Please write a review for \"" + vendor.Name + "\" on Six Loonies", domain + "/vendor/" + vendorId,
+                                                message, null, "http://www.sixloonies.com/images/sitetheme/SixLooniesLogo.png", null, false);
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        [ValidateInput(false)]
+        public ActionResult AddTextReview(int vendorId, string starRatings, List<string> liked, List<string> better, List<string> exceedexp, string comments)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                if (User.Identity != null && User.Identity.Name != null && Membership.GetUser(User.Identity.Name) != null)
+                {
+                    MembershipUser user = Membership.GetUser(User.Identity.Name);
+                    Guid userGuid = (Guid)user.ProviderUserKey;
+
+                    //delete any existing review by the user
+                    var existingReviewsByUser = Database.Reviews.Where(r => r.VendorId == vendorId && r.ContributingUserId == userGuid).AsEnumerable();
+
+                    //delete prior review by user
+                    foreach (var existingReview in existingReviewsByUser)
+                    {
+                        Database.Reviews.DeleteObject(existingReview);
+                    }
+
+                    if (starRatings != null && !starRatings.Trim().Equals(string.Empty))
+                    {
+                        //create and save the basic review object
+                        ReviewViewModel reviewViewModel = new ReviewViewModel(null, vendorId, comments, userGuid, DateTime.Now, false, false, false);
+                        Review reviewModel = reviewViewModel.ToReviewModel();
+
+                        Database.Reviews.AddObject(reviewModel);
+                        Database.SaveChanges();
+
+                        //create and save the review attribute values
+                        string[] starRatingsList = starRatings.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                        List<ReviewAttributeValueViewModel> reviewAttributeViewModelList = GetReviewAttributeValues(reviewModel.Id, starRatingsList);
+                        IEnumerable<ReviewAttributeValue> reviewAttributeValueModelList = reviewAttributeViewModelList.Select(attr => attr.ToReviewAttributeValueModel());
+
+                        foreach (ReviewAttributeValue reviewAttributeValueModel in reviewAttributeValueModelList)
+                        {
+                            Database.ReviewAttributeValues.AddObject(reviewAttributeValueModel);
+                        }
+
+                        //create and save the review bullet points
+                        List<ReviewBulletPointsViewModel> likedReviewBulletPointsViewModelList = GetReviewBulletPoints(reviewModel.Id, liked, true, false, false);
+                        List<ReviewBulletPointsViewModel> betterReviewBulletPointsViewModelList = GetReviewBulletPoints(reviewModel.Id, better, false, true, false);
+                        List<ReviewBulletPointsViewModel> expReviewBulletPointsViewModelList = GetReviewBulletPoints(reviewModel.Id, exceedexp, false, false, true);
+
+                        IEnumerable<ReviewBulletPoint> likedReviewBulletPointsModelList = likedReviewBulletPointsViewModelList.Select(l => l.ToReviewBulletPointsModel());
+                        IEnumerable<ReviewBulletPoint> betterReviewBulletPointsModelList = betterReviewBulletPointsViewModelList.Select(l => l.ToReviewBulletPointsModel());
+                        IEnumerable<ReviewBulletPoint> expReviewBulletPointsModelList = expReviewBulletPointsViewModelList.Select(l => l.ToReviewBulletPointsModel());
+
+                        AddReviewBulletsPointsToDatabase(likedReviewBulletPointsModelList);
+                        AddReviewBulletsPointsToDatabase(betterReviewBulletPointsModelList);
+                        AddReviewBulletsPointsToDatabase(expReviewBulletPointsModelList);
+
+                        //save changes in DB
+                        Database.SaveChanges();
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+
+        [Authorize]
+        [ValidateInput(false)]
+        public ActionResult AddAudioReview(int vendorId, string starRatings, string comments)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                if (User.Identity != null && User.Identity.Name != null && Membership.GetUser(User.Identity.Name) != null)
+                {
+                    MembershipUser user = Membership.GetUser(User.Identity.Name);
+                    Guid userGuid = (Guid)user.ProviderUserKey;
+
+                    if (starRatings != null && !starRatings.Trim().Equals(string.Empty))
+                    {
+                        //create and save the basic review object
+                        ReviewViewModel reviewViewModel = new ReviewViewModel(null, vendorId, comments, userGuid, DateTime.Now, false, false, false);
+                        Review reviewModel = reviewViewModel.ToReviewModel();
+
+                        Database.Reviews.AddObject(reviewModel);
+                        Database.SaveChanges();
+
+                        //create and save the review attribute values
+                        string[] starRatingsList = starRatings.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                        List<ReviewAttributeValueViewModel> reviewAttributeViewModelList = GetReviewAttributeValues(reviewModel.Id, starRatingsList);
+                        IEnumerable<ReviewAttributeValue> reviewAttributeValueModelList = reviewAttributeViewModelList.Select(attr => attr.ToReviewAttributeValueModel());
+
+                        foreach (ReviewAttributeValue reviewAttributeValueModel in reviewAttributeValueModelList)
+                        {
+                            Database.ReviewAttributeValues.AddObject(reviewAttributeValueModel);
+                        }
+
+                        //save changes in DB
+                        Database.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        #endregion
+
+        #region Helper Methods
+
+        private List<AverageReviewAttributeValueViewModel> AddOverallRatingToAttributeList(IEnumerable<AverageReviewAttributeValueViewModel> attributeList)
+        {
+            List<AverageReviewAttributeValueViewModel> result = new List<AverageReviewAttributeValueViewModel>();
+
+            int numAttributes = attributeList.Count();
+            double attributeSum = 0;
+
+            if (numAttributes > 0)
+            {
+                foreach (AverageReviewAttributeValueViewModel attribute in attributeList)
+                {
+                    attributeSum += attribute.AttributeValue;
+                }
+
+                AverageReviewAttributeValueViewModel overallRatingAttr = new AverageReviewAttributeValueViewModel(null, "Overall Rating", attributeSum / numAttributes);
+
+                result.Add(overallRatingAttr);
+                result.AddRange(attributeList);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Add the objects in the specified list to the Database (Note: objects are not committed using Database.SaveChanges())
+        /// </summary>
+        /// <param name="list">List of bullets to add to the database</param>
+        private void AddReviewBulletsPointsToDatabase(IEnumerable<ReviewBulletPoint> list)
+        {
+            foreach (ReviewBulletPoint bullet in list)
+            {
+                Database.ReviewBulletPoints.AddObject(bullet);
+            }
+        }
+
+        /// <summary>
+        /// Convert the specified list into ReviewBulletPointsViewModel objects
+        /// </summary>
+        /// <param name="reviewId">Reference to the review ID to which to associate the bullet points with</param>
+        /// <param name="bullets">List of bullet points</param>
+        /// <param name="typeWhatWasLiked">Flag: Indicates if the bullet indicates 'What Was Liked' about the vendor</param>
+        /// <param name="typeCanBeBetter">Flag: Indicates if the bullet indicates 'What Can Be Done Better' by the vendor</param>
+        /// <param name="typeExpectationsExceeded">Flag: Indicates if 'How Expectations were Exceeded' by the vendor</param>
+        /// <returns>List of ReviewBulletPointsViewModel objects</returns>
+        private List<ReviewBulletPointsViewModel> GetReviewBulletPoints(int reviewId, List<string> bullets, bool typeWhatWasLiked, bool typeCanBeBetter, bool typeExpectationsExceeded)
+        {
+            List<ReviewBulletPointsViewModel> result = new List<ReviewBulletPointsViewModel>();
+
+            if (bullets != null)
+            {
+                foreach (string bullet in bullets)
+                {
+                    ReviewBulletPointsViewModel reviewBulletPointViewModel = new ReviewBulletPointsViewModel(null, reviewId, bullet, typeWhatWasLiked, typeCanBeBetter, typeExpectationsExceeded);
+                    result.Add(reviewBulletPointViewModel);
+                }
+            }
+
+            return result;
+        }
+
+
+
+        /// <summary>
+        /// Convert the specified star ratings list into ReviewAttributeValueViewModel objects
+        /// </summary>
+        /// <param name="reviewId">Reference to the review ID to which to associate the attributes with</param>
+        /// <param name="starRatings">List of review attributes</param>
+        /// <returns>List of ReviewAttributeValueViewModel objects</returns>
+        private List<ReviewAttributeValueViewModel> GetReviewAttributeValues(int reviewId, string[] starRatings)
+        {
+            List<ReviewAttributeValueViewModel> results = new List<ReviewAttributeValueViewModel>();
+
+            if (starRatings != null && starRatings.Length > 0)
+            {
+                foreach (string starRating in starRatings)
+                {
+                    int colonIndex = starRating.IndexOf(':');
+                    ReviewAttributeValueViewModel attributeViewModel = new ReviewAttributeValueViewModel(null, reviewId, int.Parse(starRating.Substring(0, colonIndex)),
+                        double.Parse(starRating.Substring(colonIndex + 1)));
+
+                    results.Add(attributeViewModel);
+                }
+            }
+
+            return results;
+        }
+
+        #endregion
+
+        #region SetViewBag methods
+
+        private void SetViewBagData(int vendorId)
+        {
+            ViewBag.VendorId = vendorId;
+        }
+
+        private void SetViewBagCurrUserProfile(UserProfileViewModel currUserProfile)
+        {
+            ViewBag.CurrUser = currUserProfile;
+        }
+
+        #endregion
+    }
+}

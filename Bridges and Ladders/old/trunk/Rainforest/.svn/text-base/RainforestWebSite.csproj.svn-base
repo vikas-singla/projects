@@ -1,0 +1,694 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D152BDB2-3DD6-409F-B97A-88402189332C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rainforest</RootNamespace>
+    <AssemblyName>Rainforest</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DeployIisAppPath>Default Web Site/web</DeployIisAppPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=3.5.40412.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ajax_toolkit\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="About.aspx" />
+    <Content Include="Account\ChangePassword.aspx" />
+    <Content Include="Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Account\Login.aspx" />
+    <Content Include="Account\Register.aspx" />
+    <Content Include="Assets\Controls\BasicSearchControl.ascx" />
+    <Content Include="Assets\Controls\CandidateSignupControl.ascx" />
+    <Content Include="Assets\Controls\CandidateSignupWizardControl.ascx" />
+    <Content Include="Assets\Controls\CareerProgressionDetailsControl.ascx" />
+    <Content Include="Assets\Controls\CareerProgressionControl.ascx" />
+    <Content Include="Assets\Controls\CompanyLocations.ascx" />
+    <Content Include="Assets\Controls\CompanyLocationsDetails.ascx" />
+    <Content Include="Assets\Controls\CompanyProfileOverviewControl.ascx" />
+    <Content Include="Assets\Controls\DetailedArticle.ascx" />
+    <Content Include="Assets\Controls\DiscussionThreadDetailControl.ascx" />
+    <Content Include="Assets\Controls\DiscussionThreadList.ascx" />
+    <Content Include="Assets\Controls\InsiderInfo.ascx" />
+    <Content Include="Assets\Controls\InterviewTipsControl.ascx" />
+    <Content Include="Assets\Controls\PaginationControl.ascx" />
+    <Content Include="Assets\Controls\ProfileOverviewCompanyLocationsControl.ascx" />
+    <Content Include="Assets\Controls\ArticleList.ascx" />
+    <Content Include="Assets\Controls\ProfileOverviewImageControl.ascx" />
+    <Content Include="Assets\Controls\ProfileOverviewVideoControl.ascx" />
+    <Content Include="Assets\Controls\CompanySalaryControl.ascx" />
+    <Content Include="Assets\Controls\SalaryDetailControl.ascx" />
+    <Content Include="Assets\Controls\SearchCompany.ascx" />
+    <Content Include="Assets\Controls\SearchControl.ascx" />
+    <Content Include="Assets\Controls\SignupPageDropDownMenuControl.ascx" />
+    <Content Include="Assets\Controls\UserLandingPageControl.ascx" />
+    <Content Include="Assets\Controls\UserNavDropDownMenuControl.ascx" />
+    <Content Include="Assets\Controls\VideoListingControl.ascx" />
+    <Content Include="Assets\Controls\ViewJobDetailsControl.ascx" />
+    <Content Include="Assets\Controls\WorkCulture.ascx" />
+    <Content Include="Assets\Images\1downarrow1-32.png" />
+    <Content Include="Assets\Images\1downarrow1-48.png" />
+    <Content Include="Assets\Images\1uparrow-32.png" />
+    <Content Include="Assets\Images\1uparrow-48.png" />
+    <Content Include="Assets\Images\back-and-forward-icons.jpg" />
+    <Content Include="Assets\Images\background_gradient.png" />
+    <Content Include="Assets\Images\bc_separator.png" />
+    <Content Include="Assets\Images\bgfadegreen.gif" />
+    <Content Include="Assets\Images\bg_body_shadow.png" />
+    <Content Include="Assets\Images\bg_content_shadow.gif" />
+    <Content Include="Assets\Images\black_arrow.png" />
+    <Content Include="Assets\Images\BlueHeaderBg_left.png" />
+    <Content Include="Assets\Images\BlueHeaderBg_middle.png" />
+    <Content Include="Assets\Images\BlueHeaderBg_right.png" />
+    <Content Include="Assets\Images\BlueLine.png" />
+    <Content Include="Assets\Images\Box.png" />
+    <Content Include="Assets\Images\BridgesAndLaddersLogo.gif" />
+    <Content Include="Assets\Images\btn_gray_background.png" />
+    <Content Include="Assets\Images\building_icon.gif" />
+    <Content Include="Assets\Images\Calendar_scheduleHS.png" />
+    <Content Include="Assets\Images\camera_unmount_small.png" />
+    <Content Include="Assets\Images\cam_unmount.png" />
+    <Content Include="Assets\Images\cam_unmount_small.png" />
+    <Content Include="Assets\Images\CareerProgressionBoxBottom.png" />
+    <Content Include="Assets\Images\CareerProgressionBoxMiddle.png" />
+    <Content Include="Assets\Images\CareerProgressionBoxTop.png" />
+    <Content Include="Assets\Images\CareerTracksBackground.png" />
+    <Content Include="Assets\Images\center_tile.gif" />
+    <Content Include="Assets\Images\chat.png" />
+    <Content Include="Assets\Images\close.png" />
+    <Content Include="Assets\Images\CompanyLogos\AlvarezMarshal.gif" />
+    <Content Include="Assets\Images\CompanyLogos\BearingPoint.gif" />
+    <Content Include="Assets\Images\CompanyLogos\CornerstoneResearch_Logo.gif" />
+    <Content Include="Assets\Images\CompanyLogos\Deloitte_Logo.png" />
+    <Content Include="Assets\Images\CompanyLogos\gallup.jpg" />
+    <Content Include="Assets\Images\CompanyLogos\Huron_logo_master2.jpg" />
+    <Content Include="Assets\Images\CompanyLogos\ibm_logo.jpg" />
+    <Content Include="Assets\Images\CompanyLogos\Keane_Inc.gif" />
+    <Content Include="Assets\Images\CompanyLogos\kpmg_logo.gif" />
+    <Content Include="Assets\Images\CompanyLogos\ksa_logo.gif" />
+    <Content Include="Assets\Images\CompanyLogos\logo_alixpartners.gif" />
+    <Content Include="Assets\Images\CompanyLogos\logo_GallupConsulting.gif" />
+    <Content Include="Assets\Images\CompanyLogos\PWC-logo.jpg" />
+    <Content Include="Assets\Images\CompanyProfiles\Fullsize400x300\Deloitte-Milwaukee.gif" />
+    <Content Include="Assets\Images\CompanyProfiles\Fullsize400x300\DeloitteOfficeChicago.gif" />
+    <Content Include="Assets\Images\CompanyProfiles\Fullsize400x300\deloittePennslyvania.gif" />
+    <Content Include="Assets\Images\CompanyProfiles\Fullsize400x300\deloittescooter.gif" />
+    <Content Include="Assets\Images\CompanyProfiles\Thumbnails125x94\Deloitte-Milwaukee.gif" />
+    <Content Include="Assets\Images\CompanyProfiles\Thumbnails125x94\DeloitteOfficeChicago.gif" />
+    <Content Include="Assets\Images\CompanyProfiles\Thumbnails125x94\deloittePennslyvania.gif" />
+    <Content Include="Assets\Images\CompanyProfiles\Thumbnails125x94\deloittescooter.gif" />
+    <Content Include="Assets\Images\Container_body_bg.png" />
+    <Content Include="Assets\Images\Container_footer_bg.png" />
+    <Content Include="Assets\Images\Container_topheader_bg.png" />
+    <Content Include="Assets\Images\cross_shield.png" />
+    <Content Include="Assets\Images\discussion_icon.png" />
+    <Content Include="Assets\Images\discussion_user_bg.png" />
+    <Content Include="Assets\Images\email.png" />
+    <Content Include="Assets\Images\Experience Icon.png" />
+    <Content Include="Assets\Images\film.png" />
+    <Content Include="Assets\Images\Globe2.png" />
+    <Content Include="Assets\Images\Globe2_small.png" />
+    <Content Include="Assets\Images\graphics-dotted-line.gif" />
+    <Content Include="Assets\Images\gray_site_bg.png" />
+    <Content Include="Assets\Images\header_fade_blue_background.png" />
+    <Content Include="Assets\Images\HOME.png" />
+    <Content Include="Assets\Images\icon_bargraph.gif" />
+    <Content Include="Assets\Images\icon_CORE.jpg" />
+    <Content Include="Assets\Images\icon_eye_small.gif" />
+    <Content Include="Assets\Images\inside_scoop_small.png" />
+    <Content Include="Assets\Images\JobDetails_Header_bg.png" />
+    <Content Include="Assets\Images\kxkb.png" />
+    <Content Include="Assets\Images\left.gif" />
+    <Content Include="Assets\Images\left_cap.gif" />
+    <Content Include="Assets\Images\link-partners-icon.png" />
+    <Content Include="Assets\Images\link.gif" />
+    <Content Include="Assets\Images\loading.gif" />
+    <Content Include="Assets\Images\magglass.png" />
+    <Content Include="Assets\Images\minimenu-info.png" />
+    <Content Include="Assets\Images\mydocuments.png" />
+    <Content Include="Assets\Images\my_documents.png" />
+    <Content Include="Assets\Images\NavMenu_Seperator.png" />
+    <Content Include="Assets\Images\Nav_left_arrow.png" />
+    <Content Include="Assets\Images\Nav_right_arrow.png" />
+    <Content Include="Assets\Images\notification.png" />
+    <Content Include="Assets\Images\person_svg.png" />
+    <Content Include="Assets\Images\pin.png" />
+    <Content Include="Assets\Images\questionmark.gif" />
+    <Content Include="Assets\Images\right.gif" />
+    <Content Include="Assets\Images\right_cap.gif" />
+    <Content Include="Assets\Images\scroll-left.gif" />
+    <Content Include="Assets\Images\scroll-right.gif" />
+    <Content Include="Assets\Images\Signup_pg_fields_background.png" />
+    <Content Include="Assets\Images\Step0.gif" />
+    <Content Include="Assets\Images\Step1.gif" />
+    <Content Include="Assets\Images\Step10.gif" />
+    <Content Include="Assets\Images\Step2.gif" />
+    <Content Include="Assets\Images\Step3.gif" />
+    <Content Include="Assets\Images\Step4.gif" />
+    <Content Include="Assets\Images\Step5.gif" />
+    <Content Include="Assets\Images\Step6.gif" />
+    <Content Include="Assets\Images\Step7.gif" />
+    <Content Include="Assets\Images\Step8.gif" />
+    <Content Include="Assets\Images\Step9.gif" />
+    <Content Include="Assets\Images\step_seperator.gif" />
+    <Content Include="Assets\Images\thumbs-down.gif" />
+    <Content Include="Assets\Images\thumbs-up.gif" />
+    <Content Include="Assets\Images\tip.png" />
+    <Content Include="Assets\Images\TopLine_MasterPage.png" />
+    <Content Include="Assets\Controls\LoginControl.ascx" />
+    <Content Include="Assets\Images\TRITANIUM GENERIC APPLICATION.png" />
+    <Content Include="Assets\Images\TRITANIUM MAN FOLDER.png" />
+    <Content Include="Assets\Images\TRITANIUM MAN.png" />
+    <Content Include="Assets\Images\TRITANIUM PLANET EARTH.png" />
+    <Content Include="Assets\Images\TRITANIUM WRENCH.png" />
+    <Content Include="Assets\Images\Up_gray_arrow.png" />
+    <Content Include="Assets\Images\white.png" />
+    <Content Include="Assets\Images\WorkIcon_small.jpg" />
+    <Content Include="Assets\JavaScript\jquery.tools.min.js" />
+    <Content Include="Assets\JavaScript\navmenu.js" />
+    <Content Include="Assets\JavaScript\slideshowcontrol.js" />
+    <Content Include="Assets\JavaScript\swfobject.js" />
+    <Content Include="Assets\JavaScript\videopopup.js" />
+    <Content Include="Assets\SampleData\CareerProgression.xml" />
+    <Content Include="Assets\SampleData\InterviewTipsData.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Assets\SampleData\OfficeLocations.xml" />
+    <Content Include="BingLocations.svc" />
+    <Content Include="Pages\Article\Default.aspx" />
+    <Content Include="Pages\Career\Default.aspx" />
+    <Content Include="Pages\Companies\Profile\Default.aspx" />
+    <Content Include="Pages\CompanyLocation\Default.aspx" />
+    <Content Include="Pages\Discussion\Default.aspx" />
+    <Content Include="Pages\Companies\Default.aspx" />
+    <Content Include="Pages\InsiderInfo\Default.aspx" />
+    <Content Include="Pages\InterviewTips\Default.aspx" />
+    <Content Include="Pages\User\Default.aspx" />
+    <Content Include="Pages\Videos\Default.aspx" />
+    <Content Include="Pages\WorkCulture\Default.aspx" />
+    <None Include="Service References\Locations\configuration91.svcinfo" />
+    <None Include="Service References\Locations\configuration.svcinfo" />
+    <None Include="Service References\Locations\Rainforest.Locations.GeocodeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\Locations\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Styles\BasicSearchStyle.css" />
+    <Content Include="Styles\CandidateSignupStyle.css" />
+    <Content Include="Styles\CandidateSignupWizardControl.css" />
+    <Content Include="Styles\CareerProgressionDetailsControlStyle.css" />
+    <Content Include="Styles\CareerProgressionControlStyle.css" />
+    <Content Include="Styles\CompanyLocations.css" />
+    <Content Include="Styles\CompanyLocationsDetails.css" />
+    <Content Include="Styles\CompanyProifleOverviewStyle.css" />
+    <Content Include="Styles\ArticleDetails.css" />
+    <Content Include="Styles\DiscussionThreadDetails.css" />
+    <Content Include="Styles\ArticleListStyle.css" />
+    <Content Include="Styles\DiscussionThreadListStyle.css" />
+    <Content Include="Styles\InsiderInfo.css" />
+    <Content Include="Styles\InterviewTipsControlStyle.css" />
+    <Content Include="Styles\LogonStyle.css" />
+    <Content Include="Styles\MasterStyle.css" />
+    <Content Include="Styles\PaginationControlStyle.css" />
+    <Content Include="Styles\ProfileOverviewCompanyLocationsStyle.css" />
+    <Content Include="Styles\profileoverviewimagecontrolstyle.css" />
+    <Content Include="Styles\VideoControlStyle.css" />
+    <Content Include="Styles\CompanySalaryControlStyle.css" />
+    <Content Include="Styles\SalaryDetailsControlStyle.css" />
+    <Content Include="Styles\SearchCompany.css" />
+    <Content Include="Styles\SearchControlStyle.css" />
+    <Content Include="Styles\SignupPageDropDownMenuStyle.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Styles\UserLandingPageStyle.css" />
+    <Content Include="Styles\UserNavDropDownMenuStyle.css" />
+    <Content Include="Styles\videooverlay.css" />
+    <Content Include="Styles\videopopup.css" />
+    <Content Include="Styles\ViewJobDetailsStyle.css" />
+    <Content Include="Styles\WorkCulture.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About.aspx.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="About.aspx.designer.cs">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ChangePasswordSuccess.aspx.designer.cs">
+      <DependentUpon>ChangePasswordSuccess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\Register.aspx.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Register.aspx.designer.cs">
+      <DependentUpon>Register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\BasicSearchControl.ascx.cs">
+      <DependentUpon>BasicSearchControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\BasicSearchControl.ascx.designer.cs">
+      <DependentUpon>BasicSearchControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\CandidateSignupControl.ascx.cs">
+      <DependentUpon>CandidateSignupControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\CandidateSignupControl.ascx.designer.cs">
+      <DependentUpon>CandidateSignupControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\CandidateSignupWizardControl.ascx.cs">
+      <DependentUpon>CandidateSignupWizardControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\CandidateSignupWizardControl.ascx.designer.cs">
+      <DependentUpon>CandidateSignupWizardControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\CareerProgressionDetailsControl.ascx.cs">
+      <DependentUpon>CareerProgressionDetailsControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\CareerProgressionDetailsControl.ascx.designer.cs">
+      <DependentUpon>CareerProgressionDetailsControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\CareerProgressionControl.ascx.cs">
+      <DependentUpon>CareerProgressionControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\CareerProgressionControl.ascx.designer.cs">
+      <DependentUpon>CareerProgressionControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\CompanyLocations.ascx.cs">
+      <DependentUpon>CompanyLocations.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\CompanyLocations.ascx.designer.cs">
+      <DependentUpon>CompanyLocations.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\CompanyLocationsDetails.ascx.cs">
+      <DependentUpon>CompanyLocationsDetails.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\CompanyLocationsDetails.ascx.designer.cs">
+      <DependentUpon>CompanyLocationsDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\CompanyProfileOverviewControl.ascx.cs">
+      <DependentUpon>CompanyProfileOverviewControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\CompanyProfileOverviewControl.ascx.designer.cs">
+      <DependentUpon>CompanyProfileOverviewControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\DetailedArticle.ascx.cs">
+      <DependentUpon>DetailedArticle.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\DetailedArticle.ascx.designer.cs">
+      <DependentUpon>DetailedArticle.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\DiscussionThreadDetailControl.ascx.cs">
+      <DependentUpon>DiscussionThreadDetailControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\DiscussionThreadDetailControl.ascx.designer.cs">
+      <DependentUpon>DiscussionThreadDetailControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\DiscussionThreadList.ascx.cs">
+      <DependentUpon>DiscussionThreadList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\DiscussionThreadList.ascx.designer.cs">
+      <DependentUpon>DiscussionThreadList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\InsiderInfo.ascx.cs">
+      <DependentUpon>InsiderInfo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\InsiderInfo.ascx.designer.cs">
+      <DependentUpon>InsiderInfo.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\InterviewTipsControl.ascx.cs">
+      <DependentUpon>InterviewTipsControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\InterviewTipsControl.ascx.designer.cs">
+      <DependentUpon>InterviewTipsControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\PaginationControl.ascx.cs">
+      <DependentUpon>PaginationControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\PaginationControl.ascx.designer.cs">
+      <DependentUpon>PaginationControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\ProfileOverviewCompanyLocationsControl.ascx.cs">
+      <DependentUpon>ProfileOverviewCompanyLocationsControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\ProfileOverviewCompanyLocationsControl.ascx.designer.cs">
+      <DependentUpon>ProfileOverviewCompanyLocationsControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\ArticleList.ascx.cs">
+      <DependentUpon>ArticleList.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\ArticleList.ascx.designer.cs">
+      <DependentUpon>ArticleList.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\ProfileOverviewImageControl.ascx.cs">
+      <DependentUpon>ProfileOverviewImageControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\ProfileOverviewImageControl.ascx.designer.cs">
+      <DependentUpon>ProfileOverviewImageControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\ProfileOverviewVideoControl.ascx.cs">
+      <DependentUpon>ProfileOverviewVideoControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\ProfileOverviewVideoControl.ascx.designer.cs">
+      <DependentUpon>ProfileOverviewVideoControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\CompanySalaryControl.ascx.cs">
+      <DependentUpon>CompanySalaryControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\CompanySalaryControl.ascx.designer.cs">
+      <DependentUpon>CompanySalaryControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\SalaryDetailControl.ascx.cs">
+      <DependentUpon>SalaryDetailControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\SalaryDetailControl.ascx.designer.cs">
+      <DependentUpon>SalaryDetailControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\SearchCompany.ascx.cs">
+      <DependentUpon>SearchCompany.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\SearchCompany.ascx.designer.cs">
+      <DependentUpon>SearchCompany.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\SearchControl.ascx.cs">
+      <DependentUpon>SearchControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\SearchControl.ascx.designer.cs">
+      <DependentUpon>SearchControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\SignupPageDropDownMenuControl.ascx.cs">
+      <DependentUpon>SignupPageDropDownMenuControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\SignupPageDropDownMenuControl.ascx.designer.cs">
+      <DependentUpon>SignupPageDropDownMenuControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\UserLandingPageControl.ascx.cs">
+      <DependentUpon>UserLandingPageControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\UserLandingPageControl.ascx.designer.cs">
+      <DependentUpon>UserLandingPageControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\UserNavDropDownMenuControl.ascx.cs">
+      <DependentUpon>UserNavDropDownMenuControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\UserNavDropDownMenuControl.ascx.designer.cs">
+      <DependentUpon>UserNavDropDownMenuControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\VideoListingControl.ascx.cs">
+      <DependentUpon>VideoListingControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\VideoListingControl.ascx.designer.cs">
+      <DependentUpon>VideoListingControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\ViewJobDetailsControl.ascx.cs">
+      <DependentUpon>ViewJobDetailsControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\ViewJobDetailsControl.ascx.designer.cs">
+      <DependentUpon>ViewJobDetailsControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\WorkCulture.ascx.cs">
+      <DependentUpon>WorkCulture.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\WorkCulture.ascx.designer.cs">
+      <DependentUpon>WorkCulture.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="BingLocations.svc.cs">
+      <DependentUpon>BingLocations.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Controls\LoginControl.ascx.cs">
+      <DependentUpon>LoginControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assets\Controls\LoginControl.ascx.designer.cs">
+      <DependentUpon>LoginControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="IBingLocations.cs" />
+    <Compile Include="Pages\Article\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Article\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Career\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Career\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Companies\Profile\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Companies\Profile\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CompanyLocation\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\CompanyLocation\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Discussion\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Discussion\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Companies\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Companies\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\InsiderInfo\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\InsiderInfo\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\InterviewTips\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\InterviewTips\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\User\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\User\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Videos\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Videos\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WorkCulture\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\WorkCulture\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RainForest.Master.cs">
+      <DependentUpon>RainForest.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RainForest.Master.designer.cs">
+      <DependentUpon>RainForest.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\Locations\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Account\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RainForest.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Locations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Locations\GeocodeService.wsdl" />
+    <None Include="Service References\Locations\GeocodeService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Locations\GeocodeService1.wsdl" />
+    <None Include="Service References\Locations\GeocodeService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Locations\GeocodeService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Locations\GeocodeService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\Locations\GeocodeService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>6051</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,108 @@
+﻿@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/how/sixloonies.howitworks.css")
+            .Add("~/Content/sixloonies.aboutus.menu.css")
+            .ForceRelease()
+            .Render("~/cache/sixloonies.howitworks.#.css")
+        );
+}
+<div class="breadcomb">
+    <div class="breadcombtext">
+        <a href="/">Home</a>&nbsp;&raquo;&nbsp;<span>How it works?</span>
+    </div>
+    <div class="alignright">
+        <a href="#addVendorForm" class="btnyellowstyle" id="addvendorbtn" title="Don't see a professional or business that provides a service you know? Create a profile for them and start the buzz.">Add a Professional or Business</a>
+    </div>
+</div>
+<div class="fullsect">
+    <div class="aboutmenu">
+        <a href="/about" class="aboutitem">What is Six Loonies?</a> <a href="/how" class="aboutitem selaboutitem">
+            How it Works</a><a href="/contact" class="aboutitem">Contact Us</a> <a href="/guidelines"
+                class="aboutitem">Etiquette</a> <a href="/terms" class="aboutitem">Terms</a>
+        <a href="/privacy" class="aboutitem">Privacy</a>
+    </div>
+    <div class="howitworks">
+        <div class="heading">
+            How it works?
+        </div>
+        <div class="point">
+            <div class="rightalignpoint">
+                <div class="img">
+                    <img src="/images/how/listing.jpg" alt />
+                </div>
+                <div class="text">
+                    <div class="titlepoint">
+                        Generate a buzz!</div>
+                    Tell us about a professional or business that provides a service if they have impressed you
+                </div>
+                <div class="text">
+                <br />
+                <br />
+                    <div class="titlepoint">
+                        ... and spread the word to your friends</div>
+                    With Six Loonies, you can determine which professionals or businesses your friends have liked or reviewed or bookmarked. 
+                    And guess what, your friends will be able to do the same based on what you have discovered and shared.
+                </div>
+            </div>
+            <div class="leftalignpoint">
+                <div class="img">
+                    <img src="/images/how/search.jpg" alt />
+                </div>
+                <div class="text">
+                    <div class="titlepoint">
+                        Search for a specific service</div>
+                    Looking for a photographer, DJ, hair stylist or other professionals or businesses
+                    that provide a service for your next party or event? Just do a search!
+                </div>
+            </div>
+            <div class="rightalignpoint">
+                <div class="img">
+                    <img src="/images/how/profile.jpg" alt />
+                </div>
+                <div class="text">
+                    <div class="titlepoint">
+                        Browse Professional Profiles</div>
+                    Browse through the profile of a professional or business to see a showcase of their
+                    sample work, learn about the services they provide, determine if they're located
+                    where you need them and read their story.
+                </div>
+            </div>
+            <div class="leftalignpoint">
+                <div class="img">
+                    <img src="/images/how/reviews.jpg" alt />
+                </div>
+                <div class="text">
+                    <div class="titlepoint">
+                        Discover what others are saying</div>
+                    Get the buzz on what other people are saying about the professional or business
+                    in a format that is relevant. Avoid reading pages and pages of reviews; we make
+                    our reviews tailored to services so that they tell you what you need to know.
+                </div>
+            </div>
+            <div class="rightalignpoint">
+                <div class="img">
+                    <img src="/images/how/connections.jpg" alt />
+                </div>
+                <div class="text">
+                    <div class="titlepoint">
+                        Connect with your friends</div>
+                    We make it really easy for you to connect with your friends to get an opinion
+                    on a professional or business and if they would recommend them to you.
+                </div>
+            </div>
+            <div class="leftalignpoint">
+                <div class="img">
+                    <img src="/images/how/quote.jpg" alt />
+                </div>
+                <div class="text">
+                    <div class="titlepoint">
+                        Get a Quote</div>
+                    Think you found a professional or business that may be the right fit? Simply ask
+                    them for a price quote to confirm.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

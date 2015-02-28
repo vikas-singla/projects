@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Oceanus.ViewModels.SearchUserViewModel>
+@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/user/pipfly.user.collage.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.user.collage.#.css")
+        );
+}
+<div class="usercollage">
+    @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var user in Model)
+        {
+        <div class="usercollageitem">
+            <a href="/u/@(user.Id)" class="userphotocollageitem"><span class="photocontent"><span
+                class="tag">@(user.FullName)
+            </span></span>
+                <img src="@(user.UserProfileImageUrl == null ? "/images/user.jpg" : (user.UserProfileImageUrl))" alt />
+            </a>
+        </div>
+        }
+    }
+</div>
+@if (Model == null || Model.Count() == 0)
+{      
+    <div class="pipflynoresults">
+        No persons found.</div>
+}

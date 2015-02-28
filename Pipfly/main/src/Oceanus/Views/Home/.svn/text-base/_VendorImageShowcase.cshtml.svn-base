@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Oceanus.ViewModels.VendorImageShowcaseViewModel>
+@if (Model != null && Model.Count() > 0)
+{
+    <script type="text/javascript" src="/scripts/plugins/galleria.min.js"></script>
+    <script type="text/javascript" src="/content/galleria/themes/galleriaclassic/galleria.classic.min.js"></script>
+    <div class="vendorimageshowcase">
+        <div id="homepagegalleria">
+            @foreach (var photo in Model)
+            {
+                <img title="@(photo.Title)" alt data-vname="@(photo.VendorName)" data-vid="@(photo.VendorId)" src="/uploads/@(Oceanus.Controllers.ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS)/@(photo.VendorId)/@(photo.ImageUrl).thumb.home.jpg" />
+            }
+        </div>
+        <div id="vendorinfocontainer"></div>
+    </div>
+            if (Request.Browser.IsMobileDevice == true)
+            {
+    <script type="text/javascript">
+        // Initialize Galleria
+        $('#homepagegalleria').galleria({
+            autoplay: 5000,
+            transitionSpeed: 2000,
+            imageCrop: true,
+            debug: false,
+            thumbnails: 'empty',
+            carousel: false,
+            showImagenav: true,
+            showCounter: false,
+            transition: 'fade',
+            transitionSpeed: 100,
+            idleTime: 99999999999,
+            extend: function (options) {
+                this.bind("image", function (e) {
+                    var gallery = this; // "this" is the gallery instance
+
+                    var current = gallery.getData(gallery.getIndex());
+                    var currImg = current.original;
+                    var nameText = $(currImg).attr('data-vname');
+                    var vid = $(currImg).attr('data-vid');
+
+                    var html = "<a class='showcasevendorname' href='/vendor/" + vid + "'>" + nameText + "</a>";
+                    $('.vendorimageshowcase').html($('.vendorimageshowcase').html() + html);
+                });
+            } 
+        });
+
+        this.bind("image", function (e) {
+            
+        });
+    </script>
+            }
+            else
+            {
+    <script type="text/javascript">
+        // Initialize Galleria
+        $('#homepagegalleria').galleria({
+            autoplay: 5000,
+            transitionSpeed: 2000,
+            imageCrop: true,
+            showInfo: false,
+            debug: false,
+            thumbnails: 'empty',
+            carousel: false,
+            showCounter: false,
+            imagePan: true,
+            transition: 'fade',
+            transitionSpeed: 100,
+            imagePosition: '0% 0%',
+            clicknext: true,
+            showImagenav: true,
+            idleTime: 99999999999,
+            extend: function (options) {
+                this.bind("image", function (e) {
+                    var gallery = this; // "this" is the gallery instance
+
+                    var current = gallery.getData(gallery.getIndex());
+                    var currImg = current.original;
+                    var nameText = $(currImg).attr('data-vname');
+                    var vid = $(currImg).attr('data-vid');
+
+                    var html = "<a class='showcasevendorname' href='/vendor/" + vid + "'>" + nameText + "</a>";
+                    $('#vendorinfocontainer').html(html);
+                });            
+            } 
+        });        
+    </script>
+    }
+}
+else
+{
+}

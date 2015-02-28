@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/projects/!svn/ver/790/main/src/Oceanus/Logging
+END
+Log4NetLogger.cs
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/projects/!svn/ver/790/main/src/Oceanus/Logging/Log4NetLogger.cs
+END
+Logger.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/projects/!svn/ver/790/main/src/Oceanus/Logging/Logger.cs
+END
+ILogger.cs
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/projects/!svn/ver/790/main/src/Oceanus/Logging/ILogger.cs
+END

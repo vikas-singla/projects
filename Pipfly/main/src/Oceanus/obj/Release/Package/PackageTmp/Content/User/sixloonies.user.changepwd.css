@@ -1,0 +1,98 @@
+﻿.parentcontainer 
+{
+    width:500px;
+    background-color:#fff;
+    border:none;
+    border-bottom:1px solid #e0e0e0;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.parentcontainer .bcontainer
+{
+    width:500px;
+}
+
+.editor-label
+{
+    font-weight:bold;
+}
+
+.changepwdpage
+{
+    text-align:left;
+    width:450px;
+    margin:10px auto;
+    padding:20px;
+    border: 1px solid #c9c9c9;
+    box-shadow: 0px 0px 5px #e0e0e0;
+    -moz-box-shadow: 0px 0px 5px #e0e0e0;
+    -webkit-box-shadow: 0px 0px 5px #e0e0e0;
+    background-color:#fff;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+}
+
+.changepwdpage .validation-summary-errors
+{
+    background-color: #FFF5F5;
+    border: 1px solid #FE8392;
+    font-size: 12px;
+    margin: 0px auto;
+    clear: both;
+    padding:10px 10px 10px 60px;
+    font-weight: bold;
+    text-align: left;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: url('/images/error.png') 15px 15px no-repeat;
+}
+
+.changepwdpage .signinheader
+{
+    margin:5px auto 20px auto;
+    font-size:18px;
+    font-weight:bold;
+    padding-bottom:8px;
+    border-bottom: 1px double #d9d9d9;
+    border-bottom-width:3px;
+}
+
+.changepwdpage .horizrule
+{
+    margin-top:20px;
+    margin-bottom:5px;
+    border-top:1px solid #d9d9d9;
+    text-align:center;
+    position:relative;
+}
+
+.changepwdpage .horizrule span
+{
+    position:relative;
+    padding:0px 5px;
+    color:#888;
+    top:-9px;
+    background:#fff;
+}
+
+.changepwdpage .editor-label
+{
+    padding-bottom:3px;
+}
+
+.changepwdpage .editor-field input
+{
+    width:400px;
+    padding:7px;
+}
+
+.changepwdpage .btnbluestyle
+{
+    font-size:14px;
+    padding:5px 7px;
+}

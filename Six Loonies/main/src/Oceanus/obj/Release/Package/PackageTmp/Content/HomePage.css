@@ -1,0 +1,242 @@
+﻿.home
+{
+    width:970px;
+    margin:25px auto 5px auto;
+    padding:0;
+    overflow:auto;
+    background:#fff;
+    -webkit-box-shadow: 0px 0px 5px 1px rgba(100,100,100,0.1);
+    -moz-box-shadow: 0px 0px 5px 1px rgba(100,100,100,0.1);
+    box-shadow: 0px 0px 5px 1px rgba(100,100,100,0.1);
+    border: 1px solid #DADADA;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.fblogin
+{
+    clear:both;
+    overflow:auto;
+    padding:5px;
+}
+
+.fblogin .title
+{
+    font-size:14px;
+    font-weight:bold;
+    padding-bottom:5px;
+    border-bottom:1px solid #d9d9d9;
+    margin-bottom:15px;
+}
+
+.fblogin .terms
+{
+    clear:both;
+    display:block;
+    padding-top:10px;
+}
+
+.home .top
+{
+    clear:both;
+    overflow:auto;
+    padding:5px;
+}
+
+#searchdisplay
+{
+    width:450px;
+    margin-top:30px;
+    margin-left:272px;
+}
+
+#searchsiteinput
+{
+    width:415px;
+}
+
+.home .logo
+{
+    width:180px;
+    padding:10px;
+    float:left;
+    overflow:auto;
+}
+
+.home .logo img
+{
+    border:none;
+}
+
+.home .toptopics
+{
+    clear:both;
+    background:#fafafa;
+    min-height:150px;
+}
+
+.home .toptopics .title
+{
+    padding:5px;
+    font-size: 22px;
+    line-height: 22px;
+    font-weight: normal;
+    text-align:center;
+    color:#999;
+    padding:10px;
+    font-family: 'Rancho', cursive;
+    border-top:1px solid #d9d9d9;
+}
+
+.home .whatsect
+{
+    clear:both;
+    padding:10px;
+    min-height:200px;
+    border-top:1px solid #d9d9d9;
+}
+
+.home .whatsect #video_link, .home .whatsect #video_link:hover, .home .whatsect #video_link:active, .home .whatsect #video_link:visited
+{
+    font-size:14px;
+    color:#106fb8;
+}
+
+.home .whatsect .leftpanel
+{
+    float:left;
+    width:501px;
+    margin-left:10px;
+    margin-right:39px;
+}
+
+.home .whatsect .rightpanel
+{
+    float:left;
+    width:370px;
+    padding:10px 20px 10px 10px;
+}
+
+.home .whatsect .header
+{
+    margin-top:70px;
+    font-size:30px;   
+    font-family: 'PT Sans' !important;
+    text-shadow: 2px 2px 5px #ddd;
+}
+
+.home .whatsect .subtext
+{
+    font-size:14px;
+    line-height:22px;
+    margin:20px 0 90px 0;
+}
+
+.home #registerform
+{
+    padding:10px 0;
+}
+
+.home #registerform .sectiontext
+{
+    font-size:17px;
+    font-weight:bold;
+    text-shadow: 2px 2px 5px #ddd;
+}
+
+.home #registerform .smalltext
+{
+    padding:7px 0;
+    font-size:12px;
+}
+
+.home #registerform fieldset
+{  
+    border-top:1px solid #d9d9d9;
+    padding-top:10px;
+}
+
+.home #registerform fieldset p
+{
+    clear:both;
+    padding:10px 0;
+    text-align:right;
+}
+
+.home #registerform fieldset p a, .home #registerform fieldset p a:hover, .home #registerform fieldset p a:visited
+{
+    padding:10px 15px;
+}
+
+.home #registerform fieldset input[type="text"], .home #registerform fieldset input[type="password"], .home #registerform fieldset textarea
+{
+    padding:5px;
+    font-size:14px;
+    width:250px;
+}
+
+.home #registerform fieldset .editor-label
+{
+    clear:both;
+    padding:5px 0;
+    line-height:32px;
+    float:left;
+    text-align:right;
+    padding-right:20px;
+    width:85px;
+}
+
+.home #registerform fieldset .editor-field
+{
+    padding:5px 0;
+    float:left;
+    width:190px;
+}
+
+.viewclip
+{
+    clear:both;
+    display:block;
+    overflow:auto;
+    width:720px;
+    margin:0 auto;
+    padding:0;
+    background:#fff;
+}
+
+.viewclip .clipcontainer
+{
+    clear:both;
+    display:block;
+    overflow:auto;
+    position:relative;
+}
+
+.viewclip .clipcontainer
+{
+    text-align:center;
+    padding:10px;
+    width:700px;
+    background:#f8f8f8;
+    overflow:hidden;
+    border-bottom:1px solid #e0e0e0;
+}
+
+.viewclip .clipbtns
+{
+    clear:both;
+    display:block;
+    overflow:auto;
+    padding:5px 10px;
+    position:relative;
+    background:#f8f8f8;
+    border-top:1px solid #fff;
+    border-bottom:1px solid #e0e0e0;
+    text-align:center;
+}
+
+.viewclip .clipbtns .mainbtns
+{
+    text-align:center;
+}

@@ -1,0 +1,164 @@
+﻿.JobDetailsLblJobTitle
+{
+    font-style:normal;
+    font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size:15px;
+    font-weight:bold;
+    color:#2F9E00;
+    vertical-align:middle;
+    text-align:left;
+    padding: 4px 7px 4px 0px;
+}
+
+.JobDetailsLblJobContentHeaders
+{
+    font-style:normal;
+    font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size:13px;
+    font-weight:bold;
+    color:#004A7F;
+    vertical-align:middle;
+    line-height: 3em;
+    padding: 4px 0px 15px 0px;	
+}
+
+.tbl_jobheader_btns_style
+{
+	text-align:right;
+}
+
+.Tbl_JobDetailsHeader
+{
+	width:100%;
+	height:auto;
+	background: #fff url('/Assets/Images/JobDetails_Header_bg.png') no-repeat scroll left bottom;
+	text-align:left;
+	margin-top:10px;
+	padding:0px 7px 12px 7px;
+}
+
+.btn_jobheaderstyle
+{
+    color: #FFFFFF;
+    background-color: #89ae21;
+    border-style: solid;
+    border-width: 1px;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+    width: 100px;
+    height:20px;
+}
+
+.JobDetails_ImgHrStyle
+{
+	width:695px;
+}
+
+.Tbl_JobDetailsContentEncapsulator
+{
+	color: #505050;
+    background-color: transparent;
+    text-align: left;
+    font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 11px;
+    padding:0px 8px 0px 8px;
+}
+
+.Tbl_JobDetailsEncapsulator
+{
+	background-color:White;
+	margin:2px 5px 10px 10px;
+	width:735px;
+	height:auto;
+	border-color:#C0C0C0;
+	border-style:solid;
+	border-width:1px;
+	padding:0px 4px 0px 4px;
+}
+
+a.link_JobDetailsNavigation
+{
+	color: #004A7F;
+    background-color: transparent;
+    text-align: right;
+    font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 11px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+a.link_JobDetailsEmphasised
+{
+	color: #004A7F;
+    background-color: transparent;
+    text-align: right;
+    font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 13px;
+    line-height:1.5em;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+a.link_JobDetailsDeemphasised
+{
+	color: #808080;
+    background-color: transparent;
+    text-align: right;
+    font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 10px;
+    line-height:1.5em;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+a.link_JobDetails
+{
+	color: #004A7F;
+    background-color: transparent;
+    text-align: right;
+    font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 11px;
+    cursor:pointer;
+}
+
+.list_jobDetailsJobTypeStyle
+{
+	color: #505050;
+    background-color: transparent;
+    text-align: left;
+    font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 11px;
+    margin-left:-30px;
+}
+
+.lbl_jobDetailEmphasisedFieldStyle
+{
+    color: #000000;
+    background-color: transparent;
+    text-align: left;
+    font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    line-height:1.5em;
+}
+
+.lbl_jobDetailFieldstyle
+{
+    color: #000000;
+    background-color: transparent;
+    text-align: left;
+    font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.lbl_jobDetailsFieldValue
+{
+    color: #505050;
+    background-color: transparent;
+    text-align: left;
+    font-family:"lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 11px;
+}

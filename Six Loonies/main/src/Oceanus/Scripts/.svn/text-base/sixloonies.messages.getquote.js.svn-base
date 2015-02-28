@@ -1,0 +1,86 @@
+﻿var vendorQuoteTitleEmptyText = "Headshot photo, DJ for my party, etc.";
+var vendorQuoteDetailsEmptyText = "Provide a description of what you need: \n - special requirements \n - approximate location(s) \n - date(s) of when you need the service (e.g. Jan. 1st) \n - duration of work or commitment required";
+
+$(document).ready(function () {
+    $("#vendorQuoteWhatInput").emptyText(vendorQuoteTitleEmptyText, "emptytextstyle");
+    $("#vendorQuoteMsgBody").emptyText(vendorQuoteDetailsEmptyText, "emptytextstyle");
+
+    $("#frmMsgQuoteDetailsReply").validationEngine({ promptPosition: "topRight", scroll: false });
+    $("#frmGetVendorQuote").validationEngine({ promptPosition: "topRight", scroll: false });
+
+    $('#sendVQuoteMsgBtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        clearDefaultIfEmpty('vendorQuoteWhatInput', vendorQuoteTitleEmptyText);
+        clearDefaultIfEmpty('vendorQuoteMsgBody', vendorQuoteDetailsEmptyText);
+
+        if ($('#frmGetVendorQuote').validationEngine('validate')) {
+            $('#frmGetVendorQuote').validationEngine('hideAll');
+            sendQuoteRequest();
+        }
+
+        return false;
+    });
+
+    $('#sendVQuoteReplyMsgBtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        if ($('#frmMsgQuoteDetailsReply').validationEngine('validate')) {
+            $('#frmMsgQuoteDetailsReply').validationEngine('hideAll');
+            var messageId = $(this).attr("data-mid") + "";
+            addVendorQuoteMessageReply(messageId);
+        }
+
+        return false;
+    });
+});
+
+function sendQuoteRequest(vendorId) {
+
+    // serialize input fields in form with name attributes where name attribute is key
+    var dataObject = $("#frmGetVendorQuote").serializeJSON();
+
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Message/SendVendorGetQuoteMessage",
+        data: dataObject,
+        async: false,
+        success: function (result) {
+            $.fancybox.close();
+            showSuccessNotification('Your price quote request has been sent. You can view your message in your dashboard.');
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Could not send price quote request. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function addVendorQuoteMessageReply(messageId) {
+    var responseText = $.trim($("#msgreplytextbox").val());
+    var price = $.trim($("#vendorReplyPrice").val());
+    $.ajax(
+    {
+        type: "POST",
+        dataType: 'json',
+        traditional: true,
+        url: "/Message/SendVendorGetQuoteMessageReply",
+        data: {
+            getVendorQuoteMessageId: messageId,
+            messageBody: responseText,
+            price: price
+        },
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your message could not be processed. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}

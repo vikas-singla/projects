@@ -1,0 +1,42 @@
+﻿@model Oceanus.ViewModels.WebPageViewModel
+@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+        .Add("~/Content/Bookmarklet/sixloonies.bookmarklet.css")
+        .Add("~/Content/Activity/sixloonies.activity.feed.css")
+        .ForceRelease()
+        .Render("~/cache/pipfly.bookmarklet.activity.#.css")
+    );
+}
+@{
+    @MvcHtmlString.Create(
+        Bundle.JavaScript()
+        .Add("~/Scripts/pipfly.marklet.activity.feed.js")
+        .Render("~/cache/pipfly.bookmarklet.activity.#.js")
+    );
+}
+<div class="fullsect maincontentsect">
+    <div class="discussionsect" id="sl_discussionsect">
+        @{Html.RenderAction("GetBookmarkletUserWallPosts", "Activity", new { userId = ViewBag.LoggedInUserId, pageId = Model.WebPageId });}
+    </div>
+    <div class="othercontentsect">
+        <div class="section" style="margin-top: 0px;">
+            <a class="iframe_pgbtn" href="#" id="sl_pagelikebtn" data-page-id="@(Model.WebPageId)">
+                <img src="/images/heart_empty.png" width="30" alt /><br />
+                + Like</a> <a class="iframe_pgbtn" href="/webpage/GetShareLinkUI?pageId=@(Model.WebPageId)"  data-page-id="@(Model.WebPageId)">
+                    <img src="/images/share.png" width="30" alt /><br />
+                    Share</a>
+        </div>
+        <div id="sl_pagestats" data-page-id="@(Model.WebPageId)">
+            @{Html.RenderPartial("_BookmarkletWebPageStats", Model);}
+        </div>
+        <div class="section">
+            <div class="sectiontitle">
+                <div class="titletext">
+                    Trending Pages</div>
+            </div>
+            There are currently no pages trending on this web domain.
+        </div>
+    </div>
+</div>

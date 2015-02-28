@@ -1,0 +1,60 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace Oceanus.ViewModels
+{
+    public class UserThumbsUpRatingsViewModel
+    {
+        /// <summary>
+        /// Id of the thumbs up rating
+        /// </summary>
+        public int? UserThumbsUpRatingId { get; set; }
+
+        /// <summary>
+        /// Reference to the user who is the target of the thumbs up
+        /// </summary>
+        public Guid TargetUserId { get; set; }
+
+        /// <summary>
+        /// Comments indicating the reason for thumbs-up
+        /// </summary>
+        public string Comments { get; set; }
+
+        /// <summary>
+        /// Reference to the user who gave the thumbs up
+        /// </summary>
+        public Guid ContributingUserId { get; set; }
+
+        /// <summary>
+        /// Date timestamp for when the thumbs up was given
+        /// </summary>
+        public DateTime AddedOn { get; set; }
+        
+        /// <summary>
+        /// Reference to the review that the thumbs up rating applies to
+        /// </summary>
+        public int? VendorReviewId { get; set; }
+
+        /// <summary>
+        /// Reference to the question response that the thumbs up rating applies to
+        /// </summary>
+        public int? SixAnswerQuestionResponseId { get; set; }
+
+        public UserThumbsUpRatingsViewModel()
+        {
+        }
+
+        public UserThumbsUpRatingsViewModel(int? userThumbsUpRatingId_, Guid targetUserId_, string comments_, Guid contributingUserId_, DateTime addedOn_, int? vendorReviewId_, int? sixAnswerQuestionResponseId_)
+        {
+            UserThumbsUpRatingId = userThumbsUpRatingId_;
+            TargetUserId = targetUserId_;
+            Comments = comments_;
+            ContributingUserId = contributingUserId_;
+            AddedOn = addedOn_;
+            VendorReviewId = vendorReviewId_;
+            SixAnswerQuestionResponseId = sixAnswerQuestionResponseId_;
+        }
+    }
+}

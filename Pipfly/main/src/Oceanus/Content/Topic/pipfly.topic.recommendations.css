@@ -1,0 +1,50 @@
+﻿.topicrecommendations
+{
+    clear:both;
+    display:block;
+    padding:0;
+    overflow:auto;
+    background-color:#fff;
+}
+
+.topicrecommendations .container
+{
+    padding:0 10px;
+}
+
+.topicrecommendations .result
+{
+    overflow:auto;
+    padding: 5px 0;
+}
+
+.topicrecommendations .result .topicimg
+{
+    float:left;
+    width:35px;
+    margin-right:15px;
+}
+
+.topicrecommendations .result .topicdetails
+{
+    float:left;
+    width:213px;
+}
+
+.topicrecommendations .result .topicdetails div
+{
+    clear:both;
+}
+
+.topicrecommendations .result .tagname
+{
+    font-size:12px;
+    font-weight:bold;
+}
+
+.topicrecommendations .result .topicstats
+{
+    padding:5px 0 2px 0;
+    color:#808080;
+    font-size:11px;
+}

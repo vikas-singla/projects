@@ -1,0 +1,29 @@
+﻿
+.textbox_searchinputstyle
+{
+    background:#ffffff url(/Assets/Images/magglass.png) no-repeat scroll 3px 4px;
+    padding-left:17px;
+    color: #000000;
+    border-color: #C0C0C0;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 12px;
+    width: 162px;
+    padding-top:2px;
+    padding-bottom:2px;
+}
+
+.btn_gosearchStyle
+{
+    padding: 1px 3px 1px 4px;
+    cursor: pointer;
+    background: #004a7f;
+    color: #FFFFFF;
+    border: 1px solid #0e1f5b;
+    border-left-color: #D9DFEA;
+    border-top-color: #D9DFEA;
+    font-size: 11px;
+    font-weight: bold;
+    width:55px;
+    height: 19px;
+}

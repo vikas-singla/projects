@@ -1,0 +1,33 @@
+@{
+    var domain = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);                
+}
+<div style="width:100%; clear:both">
+    <div style="width:100%">
+        <div style="padding-bottom:10px;margin-bottom:20px;border-bottom:3px solid #d9d9d9;overflow:auto;">
+            <img src="@(domain + "/images/sitetheme/SixLooniesLogo_lg_comb.png")" width="150px" alt />
+        </div>
+    </div>
+    <br />
+    Thank you for creating your account with Six Loonies. To finish the registration
+    process, we just need you to click on the link below to confirm your email.
+    <br />
+    <br />
+    <a href="http://www.sixloonies.com/account/confirm?key=@ViewBag.Key" target="_blank">Confirm Registration</a>
+    <br />
+    <br />
+    Or if the link above does not work, copy and paste the following address in
+    your web browser:<br /><br />
+    <a href="http://www.sixloonies.com/account/confirm?key=@ViewBag.Key" target="_blank">http://www.sixloonies.com/account/confirm?key=@ViewBag.Key</a>
+    <br />
+    <br />
+    Oh and did we mention you are awesome? You are awesome for choosing to use Six Loonies!
+    <br />
+    <br />
+    If you have any questions or want to provide feedback, drop us a note at <a href="mailto:contact@sixloonies.com">
+        contact@sixloonies.com</a>.
+    <br />
+    <br />
+    Cheers,<br />
+    The Six Loonies Team<br /><br />
+    <span class="lightgraytext">© Six Loonies Inc. 2011</span>
+</div>

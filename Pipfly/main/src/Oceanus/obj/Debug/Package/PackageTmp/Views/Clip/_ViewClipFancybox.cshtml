@@ -1,0 +1,94 @@
+﻿@model Oceanus.ViewModels.DetailedPhotoVideoClipViewModel
+@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/activity/sixloonies.activity.feed.css")
+            .Add("~/Content/clips/pipfly.clips.view.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.viewclip.#.css")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+            Bundle.JavaScript()
+            .Add("~/Scripts/pipfly.clip.view.js")
+            .ForceRelease()
+            .Render("~/cache/pipfly.clip.view_#.js")
+        );
+}
+<script type="text/javascript">
+    $(function () {
+        $('a[title]').tipTip();
+        $('img[title]').tipTip();
+        $('div[title]').tipTip();
+        $('span[title]').tipTip();
+        $('input[title]').tipTip();
+        $('textarea[title]').tipTip();
+        $('li[title]').tipTip();
+    });
+</script>
+<div class="viewclip" style="width: 920px; overflow: auto;">
+    <div class="clipcontainer">
+        @if (Model.VideoProviderId == Oceanus.Controllers.VideoHelper.VideoProvider.YouTube.ToString())
+        {
+            <iframe width="900" height="364" src="http://www.youtube.com/embed/@(Model.VideoId)" frameborder="0" allowfullscreen>
+            </iframe>
+        }
+        else if (Model.VideoEmbedUrl == null)
+        {
+            <a href="#" onclick="javascript:jQuery.fancybox.next();">
+                <img src="@(Model.ImageUrl != null ? ("/uploads/scrapbook/" + Model.ImageUrl) : Model.SourceUrl)" height="@((Model.ImageHeight != null && Model.ImageHeight < 600) ? Model.ImageHeight.ToString() : "600")px" alt />
+            </a>
+        }
+        else
+        {
+            @Html.Raw(Model.VideoEmbedUrl);
+        }
+    </div>
+    <div class="clipbtns">
+        <div class="mainbtns">
+            @if (ViewBag.CurrUserLikesClip)
+            {
+                <a href="#" class="unlikeaction btnundo" data-clip-id="@(Model.ClipId)">
+                    <img src="/images/heart_filled_sm.png" alt height="10px" />Unlike</a> 
+            }
+            else
+            {
+                <a href="#" class="likeaction btnstyle" data-clip-id="@(Model.ClipId)">
+                    <img src="/images/heart_empty_sm.png" alt height="10px" />Like</a> 
+            }
+            <a href="/clip/shareclipoverlay/?id=@(Model.ClipId)" class="shareclipaction btnstyle" data-clip-id="@(Model.ClipId)">
+                <img src="/images/reclip_sm.png" alt height="10px" />Share</a> <a href="@(Model.ClipWebPageSourceUrl)" target="_blank" class="btnstyle">
+                    <img src="/images/open_new_window_sm.png" alt height="10px" />View Source</a>
+        </div>
+        <div id="fancybox-buttons">
+            <ul>
+                <li><a class="btnPrev" href="javascript:jQuery.fancybox.prev();;"></a></li>
+                <li><a class="btnNext" href="javascript:jQuery.fancybox.next();"></a></li>
+            </ul>
+        </div>
+        <div class="source">
+            @{
+                string sourceUrl = Model.ClipWebPageSourceUrl;
+                //create the URI
+                sourceUrl = sourceUrl.IndexOf('#') > 0 ? (sourceUrl.Substring(0, sourceUrl.IndexOf('#'))) : sourceUrl;
+                Uri sourceURI = new Uri(sourceUrl);                
+            }
+            Clipped from <a href="@(Model.ClipWebPageSourceUrl)" target="_blank">@(sourceURI.Host.Replace("www.", ""))</a>
+        </div>
+    </div>
+    <div class="clipdetails">
+        <div class="clipleftpane">
+            @{Html.RenderPartial("_ViewClipCaptions", Model.AssociatedDescriptions);}
+            <div id="clipCommentsPostContainer">
+                @{Html.RenderAction("GetClipComments", "Clip", new { clipId = Model.ClipId });}
+            </div>
+        </div>
+        <div class="cliprightpane">
+            <div id="cliplikescontainer">
+                @{Html.RenderAction("GetClipLikes", "Clip", new { clipId = Model.ClipId });}
+            </div>
+        </div>
+    </div>
+</div>

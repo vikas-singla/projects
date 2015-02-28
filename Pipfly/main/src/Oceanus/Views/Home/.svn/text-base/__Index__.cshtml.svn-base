@@ -1,0 +1,169 @@
+﻿@model Oceanus.ViewModels.HomeViewModel
+@if (System.Web.HttpContext.Current.Request.Cookies[Oceanus.Controllers.CookieDefinitions.COOKIE_USER_EMAIL_CONFIRMED_KEY] != null)
+{
+    HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies[Oceanus.Controllers.CookieDefinitions.COOKIE_USER_EMAIL_CONFIRMED_KEY];
+    if (cookie.Value != null && !cookie.Value.Trim().Equals(string.Empty))
+    {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @{string confirmMessage = cookie.Value;}
+            showSuccessNotification('@(confirmMessage)');
+            @{ 
+                                 cookie.Value = null;
+                                 System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
+             }
+        });
+    </script>
+    }
+}
+<div class="homepage">
+    <div class="border">
+    </div>
+    <div class="topsect">
+        <div class="bigsearchpanel">
+            <div class="headline">
+                Find the best source of services.
+            </div>
+            @using (Html.BeginForm("ListingSearch", "Home", null, FormMethod.Get, new { id = "searchForm" }))
+            {
+                <div class="form">
+                    <input type="text" id="servicenameinput" name="service" />
+                    <input type="text" id="searchvendornameinput" name="vendor" />
+                    @*<input type="text" id="locationinput" />*@
+                    <div class="city">@Html.DropDownListFor(m => m.CityId, Model.AvailableCities, new { id = "homepagecitydd" })
+                        &nbsp;</div>
+                </div>
+                <div class="btns">
+                    <a href="#" class="btnbluestyle" style="font-size: 14px; font-weight: bold; padding: 5px 10px;"
+                        onclick="javascript:submitSearchForm();">
+                        <img src="/images/sitetheme/whitemagglass.png" /><span>Search</span></a>
+                </div>
+            }
+        </div>
+        @{Html.RenderAction("GetVendorImageShowcase");}
+    </div>
+    <a class="calltoaction" href="#addVendorForm"><span class="actiontext">List your services
+        for free</span> <span class="btnyellowstyle">Get Started Now</span> </a>
+    <br />
+    <br />
+    <div class="itemtabs">
+        <a href="#" class="selbtn" id="homepagesellservices">For Professionals & Businesses</a>
+        &nbsp;|&nbsp; <a href="#" id="homepagebuyservices">For Consumers</a>
+    </div>
+    <div class="tagline" id="vendortagline">
+        Six Loonies helps bring awareness to your services</div>
+    <div class="tagline" id="consumertagline" style="display: none;">
+        Six Loonies puts you in touch with professionals and businesses</div>
+    <div class="itemizedoverview" id="userreasons" style="display: none;">
+        <div class="row">
+            <div class="overviewitem marginright15">
+                <div class="icon">
+                    <img src="/images/sitetheme/homepage/success.jpg" alt /></div>
+                <div class="itemtitle">
+                    Find the best fit</div>
+                <div class="description">
+                    Easily discover who can provide you the best service</div>
+            </div>
+            <div class="overviewitem marginright15 marginleft15">
+                <div class="icon">
+                    <img src="/images/sitetheme/homepage/unlock.jpg" alt /></div>
+                <div class="itemtitle">
+                    Unlock your friends' experiences</div>
+                <div class="description">
+                    Quickly find and connect with your friends' past expeeriences to make your decision</div>
+            </div>
+            <div class="overviewitem marginleft15">
+                <div class="icon">
+                    <img src="/images/sitetheme/homepage/dollar_icon.jpg" alt /></div>
+                <div class="itemtitle">
+                    Get personalized estimates</div>
+                <div class="description">
+                    With one-click, get a price quote for exactly what you need</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="overviewitem marginright15">
+                <div class="icon">
+                    <img src="/images/sitetheme/homepage/feedback.jpg" alt /></div>
+                <div class="itemtitle">
+                    Find relevant reviews</div>
+                <div class="description">
+                    With reviews customized for each service type, easily discover what matters most</div>
+            </div>
+            <div class="overviewitem marginright15 marginleft15">
+                <div class="icon">
+                    <img src="/images/sitetheme/homepage/QA.jpg" alt /></div>
+                <div class="itemtitle">
+                    Have a question? Just Ask</div>
+                <div class="description">
+                    Use questions to ask or answer that burning question you have about a service</div>
+            </div>
+            <div class="overviewitem marginleft15">
+                <div class="icon">
+                    <img src="/images/sitetheme/homepage/stayintouch.jpg" alt /></div>
+                <div class="itemtitle">
+                    Stay in the loop</div>
+                <div class="description">
+                    Stay connected with the latest scoop about what or who you find interesting</div>
+            </div>
+        </div>
+    </div>
+    <div class="itemizedoverview" id="vendorreasons">
+        <div class="row">
+            <div class="overviewitem marginright15">
+                <div class="icon">
+                    <img src="/images/sitetheme/homepage/eye_icon.jpg" alt /></div>
+                <div class="itemtitle">
+                    Get Noticed for Free</div>
+                <div class="description">
+                    With eye-catching profiles, let the consumers find you rather than the other way
+                    around</div>
+            </div>
+            <div class="overviewitem marginright15 marginleft15">
+                <div class="icon">
+                    <img src="/images/sitetheme/homepage/portfolio.jpg" alt /></div>
+                <div class="itemtitle">
+                    Showcase your work</div>
+                <div class="description">
+                    Easily upload your work portfolio and let the consumers appreciate your talent</div>
+            </div>
+            <div class="overviewitem marginleft15">
+                <div class="icon">
+                    <img src="/images/sitetheme/homepage/chat.jpg" alt /></div>
+                <div class="itemtitle">
+                    Create a buzz</div>
+                <div class="description">
+                    Make it easy for consumers to discover you through their friends and talk about
+                    you</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="overviewitem marginright15 marginleft15">
+                <div class="icon">
+                    <img src="/images/sitetheme/homepage/interact.jpg" alt /></div>
+                <div class="itemtitle">
+                    Engage consumers</div>
+                <div class="description">
+                    Interact with past and potential consumers and build a fan base like no where else</div>
+            </div>
+            <div class="overviewitem marginright15">
+                <div class="icon">
+                    <img src="/images/sitetheme/homepage/dollar_icon.jpg" alt /></div>
+                <div class="itemtitle">
+                    Provide personalized estimates</div>
+                <div class="description">
+                    Help your prospective consumers by providing price quotes that best fit their needs</div>
+            </div>
+            <div class="overviewitem marginleft15">
+                <div class="icon">
+                    <img src="/images/sitetheme/homepage/grow.jpg" alt /></div>
+                <div class="itemtitle">
+                    Grow your business</div>
+                <div class="description">
+                    With no fuss or catches, sky is the limit when consumers can find you and your services</div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+</div>

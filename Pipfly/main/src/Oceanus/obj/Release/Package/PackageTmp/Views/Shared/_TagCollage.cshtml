@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Oceanus.ViewModels.Shared.TagViewModel>
+@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/tag/pipfly.tag.collage.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.tag.collage.#.css")
+        );
+}
+<div class="tagcollage">
+    @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var tag in Model)
+        {
+            if (tag.TagPhoto != null)
+            {
+                int? targetWidth = null;
+                int? targetHeight = null;
+                double photoRatio = (double)((tag.TagPhoto.ImageWidth * 1.0) / tag.TagPhoto.ImageHeight);
+                int adjHeight = (int)(((225 * 1.0) / tag.TagPhoto.ImageWidth) * tag.TagPhoto.ImageHeight);
+                if (adjHeight < 225)
+                {
+                    targetHeight = 225;
+                }
+                else
+                {
+                    targetWidth = 225;
+                }
+        <div class="tagcollageitem">
+            <a href="/t/@(tag.LowerTagName)" class="tagphotocollageitem"><span class="photocontent">
+                <span class="tag">#@(tag.TagName)
+                </span><span class="stats">
+                    @(ViewBag.UserFirstName != null ? ("By " + ViewBag.UserFirstName + ":") : "")
+                    @(tag.NumClips)
+                    photos/videos&nbsp;&#149;&nbsp;@(tag.NumArticles)
+                    articles </span></span>
+                <img src="@(tag.TagPhoto.ImageUrl != null ? ("/uploads/scrapbook/" + tag.TagPhoto.ImageUrl) : tag.TagPhoto.SourceUrl)" 
+                alt style="@(targetWidth == null ? "" : ("width:" + targetWidth + "px"));@(targetHeight == null ? "" : ("height:" + targetHeight + "px"))"/>
+            </a>
+        </div>
+            }
+            else
+            {
+        <div class="tagcollageitem">
+            <a href="/t/@(tag.LowerTagName)" class="tagsimplecollageitem"><span class="content">
+                <span class="tag">#@(tag.TagName)
+                </span><span class="stats">
+                    @(ViewBag.UserFirstName != null ? ("By " + ViewBag.UserFirstName + ":") : "")
+                    @(tag.NumClips)
+                    photos/videos&nbsp;&#149;&nbsp;@(tag.NumArticles)
+                    articles </span></span></a>
+        </div>
+            }
+        }
+    }
+</div>
+@if (Model == null || Model.Count() == 0)
+{      
+    <div class="pipflynoresults">
+        No hashtags found.</div>
+}

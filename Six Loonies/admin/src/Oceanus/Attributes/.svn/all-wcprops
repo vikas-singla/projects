@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/projects/!svn/ver/135/admin/src/Oceanus/Attributes
+END
+TokenizedAuthorizeAttribute.cs
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/projects/!svn/ver/135/admin/src/Oceanus/Attributes/TokenizedAuthorizeAttribute.cs
+END
+RequiresAuthenticationAttribute.cs
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Attributes/RequiresAuthenticationAttribute.cs
+END
+RequiresRoleAttribute.cs
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Attributes/RequiresRoleAttribute.cs
+END

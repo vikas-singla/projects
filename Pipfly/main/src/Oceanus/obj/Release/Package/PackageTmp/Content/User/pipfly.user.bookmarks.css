@@ -1,0 +1,109 @@
+﻿.userbookmarks
+{
+    clear:both;
+    display:block;
+    padding:0;
+    clear:both;
+    overflow:auto;
+    border: 1px solid #c9c9c9;
+    box-shadow: 0px 0px 5px #e0e0e0;
+    -moz-box-shadow: 0px 0px 5px #e0e0e0;
+    -webkit-box-shadow: 0px 0px 5px #e0e0e0;
+    background-color:#fff;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.userbookmarks .userbookmarkscontent
+{
+    padding:10px;
+}
+
+.userbookmarks .sourceWebPageSect
+{
+    display:block;
+    overflow:auto;
+    margin:10px 0 0 0;
+    padding:10px 0;
+    border-bottom:1px solid #d9d9d9;
+}
+
+.userbookmarks .sourceWebPageSect .webicon
+{
+    float:left;
+    width:50px;
+    height:50px;
+    padding:4px 0;
+    display:block;
+}
+
+.userbookmarks .sourceWebPageSect .webpagedetails
+{
+    float:left;
+    display:block;
+}
+
+.userbookmarks .sourceWebPageSect .webpagedetails .webpagetitle a,
+.userbookmarks .sourceWebPageSect .webpagedetails .webpagetitle a:hover,
+.userbookmarks .sourceWebPageSect .webpagedetails .webpagetitle a:visited
+{
+    clear:both;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.userbookmarks .sourceWebPageSect .webpagedetails .webpageurl
+{
+    clear:both;
+    color:#808080;
+    font-size:12px;
+}
+
+.userbookmarks .sourceWebPageSect .webpagedetails .webpagedescriptor
+{
+    clear:both;
+    color:#666;
+    font-size:11px;
+    width:170px;
+    border-bottom:1px solid #d9d9d9;
+    padding-bottom:2px;
+    font-weight:bold;
+}
+
+.userbookmarks .sourceWebPageSect .trendcontributors
+{
+    clear:both;
+    display:block;
+}
+
+.userbookmarks .sourceWebPageSect .webpagedetails .webpagedesc
+{
+    padding:5px 0 0 0;
+    color:#808080;
+    font-size:12px;
+}
+
+.userbookmarks .sourceWebPageSect .trendcontributors .descriptor
+{
+    border-bottom: 1px solid #D9D9D9;
+    padding:8px 0 2px;
+    font-size:11px;
+    clear: both;
+    color: #666;
+    font-weight:bold;
+    width:90px;
+}
+
+.userbookmarks .userbookmarksfooter
+{
+    padding:5px 0 0 0;
+    font-size:11px;
+}
+
+.userbookmarks .userbookmarksfooter a,
+.userbookmarks .userbookmarksfooter a:hover,
+.userbookmarks .userbookmarksfooter a:visited
+{
+    font-size:11px;
+}

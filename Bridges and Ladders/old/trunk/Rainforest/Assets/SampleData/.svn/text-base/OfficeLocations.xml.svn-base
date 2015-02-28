@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005">
+  <channel xmlns:cfi="http://www.microsoft.com/schemas/rss/core/2005/internal" cfi:lastdownloaderror="None">
+    <link>http://www.flickr.com/photos/</link>
+    <title cf:type="text">The faulkner_usa Pool, with geodata</title>
+    <atom:link href="http://api.flickr.com/services/feeds/geo/?g=322338@N20&amp;lang=en-us&amp;format=feed-georss" rel="self"/>
+    <atom:link href="http://www.flickr.com/photos/" rel="alternate" type="text/html"/>
+    <cf:guid isPermaLink="false">tag:flickr.com,2005:/photos/public/group/322338@N20/geo/</cf:guid>
+    <description cf:type="text">Pictures of my dog in a variety of locations</description>
+    <atom:updated>2006-08-29T15:42:35Z</atom:updated>
+    <lastBuildDate>Tue, 29 Aug 2006 15:42:35 GMT</lastBuildDate>
+    <generator cf:uri="http://www.flickr.com/">Flickr</generator>
+    <item>
+      <link>http://www.flickr.com/photos/shreck/228310988/</link>
+      <title xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="text">Manhattan, NY</title>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://www.flickr.com/photos/shreck/228310988/" rel="alternate" type="text/html"/>
+      <guid isPermaLink="false">tag:flickr.com,2005:/photo/228310988</guid>
+      <atom:published xmlns:atom="http://www.w3.org/2005/Atom">2006-08-29T15:42:35Z</atom:published>
+      <pubDate>Tue, 29 Aug 2006 15:42:35 GMT</pubDate>
+      <atom:updated xmlns:atom="http://www.w3.org/2005/Atom">2006-08-29T15:42:35Z</atom:updated>
+      <dc:date.Taken xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2005-10-02T17:35:35-08:00</dc:date.Taken>
+      <description xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="html">
+        &lt;p&gt;&lt;a href="http://www.flickr.com/people/shreck/"&gt;manshreck&lt;/a&gt; posted a photo:&lt;/p&gt;
+
+        &lt;p&gt;&lt;a href="http://www.flickr.com/photos/shreck/228310988/" title="Manhattan, NY"&gt;&lt;img src="http://farm1.static.flickr.com/74/228310988_33a56d0108_m.jpg" width=240 height=179 alt="Manhattan, NY"&gt;&lt;/a&gt;&lt;/p&gt;
+
+        &lt;p&gt;Faulkner rests after the journey ends, Midtown Manhattan&lt;/p&gt;
+      </description>
+      <author>manshreck</author>
+      <atom:author xmlns:atom="http://www.w3.org/2005/Atom">
+        <atom:name>manshreck</atom:name>
+        <atom:uri>http://www.flickr.com/people/shreck/</atom:uri>
+      </atom:author>
+      <enclosure url="http://farm1.static.flickr.com/74/228310988_33a56d0108_o.jpg" type="image/jpeg" cfi:path="C:\Users\VivekPandey\AppData\Local\Microsoft\Windows\Temporary Internet Files\Enclosure\{98BA2FE4-1EA1-4C01-8DE9-AA8E450F24C1}\Manhattan, NY.jpg" cfi:downloadstatus="Not Downloaded" cfi:lastdownloaderror="None"/>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://farm1.static.flickr.com/74/228310988_33a56d0108_o.jpg" rel="enclosure" type="image/jpeg"/>
+      <georss:point xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">40.746029 -73.979165</georss:point>
+      <geo:lat xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">40.746029</geo:lat>
+      <geo:long xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">-73.979165</geo:long>
+      <woe:woeid xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">23511899</woe:woeid>
+      <cfi:id>12</cfi:id>
+      <cfi:effectiveId>3592125617</cfi:effectiveId>
+      <cfi:read>true</cfi:read>
+      <cfi:downloadurl>http://api.flickr.com/services/feeds/geo/?g=322338@N20&amp;lang=en-us&amp;format=feed-georss</cfi:downloadurl>
+      <cfi:lastdownloadtime>2010-07-20T02:38:50.321Z</cfi:lastdownloadtime>
+    </item>
+    <item>
+      <link>http://www.flickr.com/photos/shreck/228310097/</link>
+      <title xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="text">Hoover Dam, AZ</title>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://www.flickr.com/photos/shreck/228310097/" rel="alternate" type="text/html"/>
+      <guid isPermaLink="false">tag:flickr.com,2005:/photo/228310097</guid>
+      <atom:published xmlns:atom="http://www.w3.org/2005/Atom">2006-08-29T15:41:19Z</atom:published>
+      <pubDate>Tue, 29 Aug 2006 15:41:19 GMT</pubDate>
+      <atom:updated xmlns:atom="http://www.w3.org/2005/Atom">2006-08-29T15:41:19Z</atom:updated>
+      <dc:date.Taken xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2005-08-29T14:38:52-08:00</dc:date.Taken>
+      <description xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="html">
+        &lt;p&gt;&lt;a href="http://www.flickr.com/people/shreck/"&gt;manshreck&lt;/a&gt; posted a photo:&lt;/p&gt;
+
+        &lt;p&gt;&lt;a href="http://www.flickr.com/photos/shreck/228310097/" title="Hoover Dam, AZ"&gt;&lt;img src="http://farm1.static.flickr.com/98/228310097_8202e98ba4_m.jpg" width=240 height=179 alt="Hoover Dam, AZ"&gt;&lt;/a&gt;&lt;/p&gt;
+
+        &lt;p&gt;Faulkner at Hoover Dam&lt;/p&gt;
+      </description>
+      <author>manshreck</author>
+      <atom:author xmlns:atom="http://www.w3.org/2005/Atom">
+        <atom:name>manshreck</atom:name>
+        <atom:uri>http://www.flickr.com/people/shreck/</atom:uri>
+      </atom:author>
+      <enclosure url="http://farm1.static.flickr.com/98/228310097_8202e98ba4_o.jpg" type="image/jpeg" cfi:path="C:\Users\VivekPandey\AppData\Local\Microsoft\Windows\Temporary Internet Files\Enclosure\{98BA2FE4-1EA1-4C01-8DE9-AA8E450F24C1}\Hoover Dam, AZ.jpg" cfi:downloadstatus="Not Downloaded" cfi:lastdownloaderror="None"/>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://farm1.static.flickr.com/98/228310097_8202e98ba4_o.jpg" rel="enclosure" type="image/jpeg"/>
+      <georss:point xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">36.015851 -114.734086</georss:point>
+      <geo:lat xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">36.015851</geo:lat>
+      <geo:long xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">-114.734086</geo:long>
+      <woe:woeid xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">12589233</woe:woeid>
+      <cfi:id>11</cfi:id>
+      <cfi:effectiveId>736398543</cfi:effectiveId>
+      <cfi:read>true</cfi:read>
+      <cfi:downloadurl>http://api.flickr.com/services/feeds/geo/?g=322338@N20&amp;lang=en-us&amp;format=feed-georss</cfi:downloadurl>
+      <cfi:lastdownloadtime>2010-07-20T02:38:50.321Z</cfi:lastdownloadtime>
+    </item>
+    <item>
+      <link>http://www.flickr.com/photos/shreck/228310017/</link>
+      <title xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="text">Los Angeles, CA</title>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://www.flickr.com/photos/shreck/228310017/" rel="alternate" type="text/html"/>
+      <guid isPermaLink="false">tag:flickr.com,2005:/photo/228310017</guid>
+      <atom:published xmlns:atom="http://www.w3.org/2005/Atom">2006-08-29T15:41:12Z</atom:published>
+      <pubDate>Tue, 29 Aug 2006 15:41:12 GMT</pubDate>
+      <atom:updated xmlns:atom="http://www.w3.org/2005/Atom">2006-08-29T15:41:12Z</atom:updated>
+      <dc:date.Taken xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2005-08-26T12:01:46-08:00</dc:date.Taken>
+      <description xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="html">
+        &lt;p&gt;&lt;a href="http://www.flickr.com/people/shreck/"&gt;manshreck&lt;/a&gt; posted a photo:&lt;/p&gt;
+
+        &lt;p&gt;&lt;a href="http://www.flickr.com/photos/shreck/228310017/" title="Los Angeles, CA"&gt;&lt;img src="http://farm1.static.flickr.com/95/228310017_59aa7fb709_m.jpg" width=240 height=179 alt="Los Angeles, CA"&gt;&lt;/a&gt;&lt;/p&gt;
+
+        &lt;p&gt;Faulkner at Echo Lake, Los Angeles. I slept in the car that morning.&lt;/p&gt;
+      </description>
+      <author>manshreck</author>
+      <atom:author xmlns:atom="http://www.w3.org/2005/Atom">
+        <atom:name>manshreck</atom:name>
+        <atom:uri>http://www.flickr.com/people/shreck/</atom:uri>
+      </atom:author>
+      <enclosure url="http://farm1.static.flickr.com/95/228310017_59aa7fb709_o.jpg" type="image/jpeg" cfi:path="C:\Users\VivekPandey\AppData\Local\Microsoft\Windows\Temporary Internet Files\Enclosure\{98BA2FE4-1EA1-4C01-8DE9-AA8E450F24C1}\Los Angeles, CA.jpg" cfi:downloadstatus="Not Downloaded" cfi:lastdownloaderror="None"/>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://farm1.static.flickr.com/95/228310017_59aa7fb709_o.jpg" rel="enclosure" type="image/jpeg"/>
+      <georss:point xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">34.074381 -118.259367</georss:point>
+      <geo:lat xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">34.074381</geo:lat>
+      <geo:long xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">-118.259367</geo:long>
+      <woe:woeid xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2442047</woe:woeid>
+      <cfi:id>10</cfi:id>
+      <cfi:effectiveId>2566312279</cfi:effectiveId>
+      <cfi:read>true</cfi:read>
+      <cfi:downloadurl>http://api.flickr.com/services/feeds/geo/?g=322338@N20&amp;lang=en-us&amp;format=feed-georss</cfi:downloadurl>
+      <cfi:lastdownloadtime>2010-07-20T02:38:50.321Z</cfi:lastdownloadtime>
+    </item>
+    <item>
+      <link>http://www.flickr.com/photos/shreck/102826599/</link>
+      <title xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="text">Yosemite National Park, CA</title>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://www.flickr.com/photos/shreck/102826599/" rel="alternate" type="text/html"/>
+      <guid isPermaLink="false">tag:flickr.com,2005:/photo/102826599</guid>
+      <atom:published xmlns:atom="http://www.w3.org/2005/Atom">2006-02-22T01:32:47Z</atom:published>
+      <pubDate>Wed, 22 Feb 2006 01:32:47 GMT</pubDate>
+      <atom:updated xmlns:atom="http://www.w3.org/2005/Atom">2006-02-22T01:32:47Z</atom:updated>
+      <dc:date.Taken xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2005-08-23T18:54:55-08:00</dc:date.Taken>
+      <description xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="html">
+        &lt;p&gt;&lt;a href="http://www.flickr.com/people/shreck/"&gt;manshreck&lt;/a&gt; posted a photo:&lt;/p&gt;
+
+        &lt;p&gt;&lt;a href="http://www.flickr.com/photos/shreck/102826599/" title="Yosemite National Park, CA"&gt;&lt;img src="http://farm1.static.flickr.com/36/102826599_48c478a390_m.jpg" width=240 height=180 alt="Yosemite National Park, CA"&gt;&lt;/a&gt;&lt;/p&gt;
+
+        &lt;p&gt;John Muir Point, Yosemite National Park&lt;/p&gt;
+      </description>
+      <author>manshreck</author>
+      <atom:author xmlns:atom="http://www.w3.org/2005/Atom">
+        <atom:name>manshreck</atom:name>
+        <atom:uri>http://www.flickr.com/people/shreck/</atom:uri>
+      </atom:author>
+      <enclosure url="http://farm1.static.flickr.com/36/102826599_48c478a390_o.jpg" type="image/jpeg" cfi:path="C:\Users\VivekPandey\AppData\Local\Microsoft\Windows\Temporary Internet Files\Enclosure\{98BA2FE4-1EA1-4C01-8DE9-AA8E450F24C1}\Yosemite National Park, CA.jpg" cfi:downloadstatus="Not Downloaded" cfi:lastdownloaderror="None"/>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://farm1.static.flickr.com/36/102826599_48c478a390_o.jpg" rel="enclosure" type="image/jpeg"/>
+      <georss:point xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">37.810597 -119.508504</georss:point>
+      <geo:lat xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">37.810597</geo:lat>
+      <geo:long xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">-119.508504</geo:long>
+      <woe:woeid xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">12587691</woe:woeid>
+      <cfi:id>9</cfi:id>
+      <cfi:effectiveId>37197104</cfi:effectiveId>
+      <cfi:read>true</cfi:read>
+      <cfi:downloadurl>http://api.flickr.com/services/feeds/geo/?g=322338@N20&amp;lang=en-us&amp;format=feed-georss</cfi:downloadurl>
+      <cfi:lastdownloadtime>2010-07-20T02:38:50.321Z</cfi:lastdownloadtime>
+    </item>
+    <item>
+      <link>http://www.flickr.com/photos/shreck/102817499/</link>
+      <title xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="text">Ptarmigan Lake, AK</title>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://www.flickr.com/photos/shreck/102817499/" rel="alternate" type="text/html"/>
+      <guid isPermaLink="false">tag:flickr.com,2005:/photo/102817499</guid>
+      <atom:published xmlns:atom="http://www.w3.org/2005/Atom">2006-02-22T01:08:21Z</atom:published>
+      <pubDate>Wed, 22 Feb 2006 01:08:21 GMT</pubDate>
+      <atom:updated xmlns:atom="http://www.w3.org/2005/Atom">2006-02-22T01:08:21Z</atom:updated>
+      <dc:date.Taken xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2005-06-29T21:52:39-08:00</dc:date.Taken>
+      <description xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="html">
+        &lt;p&gt;&lt;a href="http://www.flickr.com/people/shreck/"&gt;manshreck&lt;/a&gt; posted a photo:&lt;/p&gt;
+
+        &lt;p&gt;&lt;a href="http://www.flickr.com/photos/shreck/102817499/" title="Ptarmigan Lake, AK"&gt;&lt;img src="http://farm1.static.flickr.com/19/102817499_e2132802e0_m.jpg" width=240 height=180 alt="Ptarmigan Lake, AK"&gt;&lt;/a&gt;&lt;/p&gt;
+
+        &lt;p&gt;Faulkner enjoys a swim&lt;/p&gt;
+      </description>
+      <author>manshreck</author>
+      <atom:author xmlns:atom="http://www.w3.org/2005/Atom">
+        <atom:name>manshreck</atom:name>
+        <atom:uri>http://www.flickr.com/people/shreck/</atom:uri>
+      </atom:author>
+      <enclosure url="http://farm1.static.flickr.com/19/102817499_e2132802e0_o.jpg" type="image/jpeg" cfi:path="C:\Users\VivekPandey\AppData\Local\Microsoft\Windows\Temporary Internet Files\Enclosure\{98BA2FE4-1EA1-4C01-8DE9-AA8E450F24C1}\Ptarmigan Lake, AK.jpg" cfi:downloadstatus="Not Downloaded" cfi:lastdownloaderror="None"/>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://farm1.static.flickr.com/19/102817499_e2132802e0_o.jpg" rel="enclosure" type="image/jpeg"/>
+      <georss:point xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">60.396049 -149.26712</georss:point>
+      <geo:lat xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">60.396049</geo:lat>
+      <geo:long xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">-149.26712</geo:long>
+      <woe:woeid xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">23417030</woe:woeid>
+      <cfi:id>8</cfi:id>
+      <cfi:effectiveId>4230267875</cfi:effectiveId>
+      <cfi:read>true</cfi:read>
+      <cfi:downloadurl>http://api.flickr.com/services/feeds/geo/?g=322338@N20&amp;lang=en-us&amp;format=feed-georss</cfi:downloadurl>
+      <cfi:lastdownloadtime>2010-07-20T02:38:50.321Z</cfi:lastdownloadtime>
+    </item>
+    <item>
+      <link>http://www.flickr.com/photos/shreck/76405588/</link>
+      <title xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="text">Fairbanks, AK</title>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://www.flickr.com/photos/shreck/76405588/" rel="alternate" type="text/html"/>
+      <guid isPermaLink="false">tag:flickr.com,2005:/photo/76405588</guid>
+      <atom:published xmlns:atom="http://www.w3.org/2005/Atom">2005-12-23T00:24:08Z</atom:published>
+      <pubDate>Fri, 23 Dec 2005 00:24:08 GMT</pubDate>
+      <atom:updated xmlns:atom="http://www.w3.org/2005/Atom">2005-12-23T00:24:08Z</atom:updated>
+      <dc:date.Taken xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2005-07-21T01:05:56-08:00</dc:date.Taken>
+      <description xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="html">
+        &lt;p&gt;&lt;a href="http://www.flickr.com/people/shreck/"&gt;manshreck&lt;/a&gt; posted a photo:&lt;/p&gt;
+
+        &lt;p&gt;&lt;a href="http://www.flickr.com/photos/shreck/76405588/" title="Fairbanks, AK"&gt;&lt;img src="http://farm1.static.flickr.com/36/76405588_4a9f2b17ee_m.jpg" width=160 height=240 alt="Fairbanks, AK"&gt;&lt;/a&gt;&lt;/p&gt;
+
+        &lt;p&gt;Faulkner under sedation&lt;/p&gt;
+      </description>
+      <author>manshreck</author>
+      <atom:author xmlns:atom="http://www.w3.org/2005/Atom">
+        <atom:name>manshreck</atom:name>
+        <atom:uri>http://www.flickr.com/people/shreck/</atom:uri>
+      </atom:author>
+      <enclosure url="http://farm1.static.flickr.com/36/76405588_4a9f2b17ee_o.jpg" type="image/jpeg" cfi:path="C:\Users\VivekPandey\AppData\Local\Microsoft\Windows\Temporary Internet Files\Enclosure\{98BA2FE4-1EA1-4C01-8DE9-AA8E450F24C1}\Fairbanks, AK.jpg" cfi:downloadstatus="Not Downloaded" cfi:lastdownloaderror="None"/>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://farm1.static.flickr.com/36/76405588_4a9f2b17ee_o.jpg" rel="enclosure" type="image/jpeg"/>
+      <category domain="http://www.flickr.com/photos/tags/">alaska</category>
+      <georss:point xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">64.859404 -147.787055</georss:point>
+      <geo:lat xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">64.859404</geo:lat>
+      <geo:long xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">-147.787055</geo:long>
+      <woe:woeid xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2507302</woe:woeid>
+      <cfi:id>7</cfi:id>
+      <cfi:effectiveId>2200523521</cfi:effectiveId>
+      <cfi:read>true</cfi:read>
+      <cfi:downloadurl>http://api.flickr.com/services/feeds/geo/?g=322338@N20&amp;lang=en-us&amp;format=feed-georss</cfi:downloadurl>
+      <cfi:lastdownloadtime>2010-07-20T02:38:50.321Z</cfi:lastdownloadtime>
+    </item>
+    <item>
+      <link>http://www.flickr.com/photos/shreck/76405907/</link>
+      <title xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="text">Glacier National Park, MT</title>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://www.flickr.com/photos/shreck/76405907/" rel="alternate" type="text/html"/>
+      <guid isPermaLink="false">tag:flickr.com,2005:/photo/76405907</guid>
+      <atom:published xmlns:atom="http://www.w3.org/2005/Atom">2005-12-23T00:25:28Z</atom:published>
+      <pubDate>Fri, 23 Dec 2005 00:25:28 GMT</pubDate>
+      <atom:updated xmlns:atom="http://www.w3.org/2005/Atom">2005-12-23T00:25:28Z</atom:updated>
+      <dc:date.Taken xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2005-08-04T22:56:52-08:00</dc:date.Taken>
+      <description xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="html">
+        &lt;p&gt;&lt;a href="http://www.flickr.com/people/shreck/"&gt;manshreck&lt;/a&gt; posted a photo:&lt;/p&gt;
+
+        &lt;p&gt;&lt;a href="http://www.flickr.com/photos/shreck/76405907/" title="Glacier National Park, MT"&gt;&lt;img src="http://farm1.static.flickr.com/40/76405907_431f6ba72b_m.jpg" width=240 height=180 alt="Glacier National Park, MT"&gt;&lt;/a&gt;&lt;/p&gt;
+
+        &lt;p&gt;Faulkner spots a deer&lt;/p&gt;
+      </description>
+      <author>manshreck</author>
+      <atom:author xmlns:atom="http://www.w3.org/2005/Atom">
+        <atom:name>manshreck</atom:name>
+        <atom:uri>http://www.flickr.com/people/shreck/</atom:uri>
+      </atom:author>
+      <enclosure url="http://farm1.static.flickr.com/40/76405907_431f6ba72b_o.jpg" type="image/jpeg" cfi:path="C:\Users\VivekPandey\AppData\Local\Microsoft\Windows\Temporary Internet Files\Enclosure\{98BA2FE4-1EA1-4C01-8DE9-AA8E450F24C1}\Glacier National Park, MT.jpg" cfi:downloadstatus="Not Downloaded" cfi:lastdownloaderror="None"/>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://farm1.static.flickr.com/40/76405907_431f6ba72b_o.jpg" rel="enclosure" type="image/jpeg"/>
+      <georss:point xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">48.67736 -113.638458</georss:point>
+      <geo:lat xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">48.67736</geo:lat>
+      <geo:long xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">-113.638458</geo:long>
+      <woe:woeid xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">12589098</woe:woeid>
+      <cfi:id>6</cfi:id>
+      <cfi:effectiveId>1939242152</cfi:effectiveId>
+      <cfi:read>true</cfi:read>
+      <cfi:downloadurl>http://api.flickr.com/services/feeds/geo/?g=322338@N20&amp;lang=en-us&amp;format=feed-georss</cfi:downloadurl>
+      <cfi:lastdownloadtime>2010-07-20T02:38:50.321Z</cfi:lastdownloadtime>
+    </item>
+    <item>
+      <link>http://www.flickr.com/photos/shreck/76405904/</link>
+      <title xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="text">Banff, AB</title>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://www.flickr.com/photos/shreck/76405904/" rel="alternate" type="text/html"/>
+      <guid isPermaLink="false">tag:flickr.com,2005:/photo/76405904</guid>
+      <atom:published xmlns:atom="http://www.w3.org/2005/Atom">2005-12-23T00:25:28Z</atom:published>
+      <pubDate>Fri, 23 Dec 2005 00:25:28 GMT</pubDate>
+      <atom:updated xmlns:atom="http://www.w3.org/2005/Atom">2005-12-23T00:25:28Z</atom:updated>
+      <dc:date.Taken xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2005-08-01T23:00:37-08:00</dc:date.Taken>
+      <description xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="html">
+        &lt;p&gt;&lt;a href="http://www.flickr.com/people/shreck/"&gt;manshreck&lt;/a&gt; posted a photo:&lt;/p&gt;
+
+        &lt;p&gt;&lt;a href="http://www.flickr.com/photos/shreck/76405904/" title="Banff, AB"&gt;&lt;img src="http://farm1.static.flickr.com/43/76405904_47fe06e727_m.jpg" width=240 height=160 alt="Banff, AB"&gt;&lt;/a&gt;&lt;/p&gt;
+
+        &lt;p&gt;Looking towards Banff&lt;/p&gt;
+      </description>
+      <author>manshreck</author>
+      <atom:author xmlns:atom="http://www.w3.org/2005/Atom">
+        <atom:name>manshreck</atom:name>
+        <atom:uri>http://www.flickr.com/people/shreck/</atom:uri>
+      </atom:author>
+      <enclosure url="http://farm1.static.flickr.com/43/76405904_47fe06e727_o.jpg" type="image/jpeg" cfi:path="C:\Users\VivekPandey\AppData\Local\Microsoft\Windows\Temporary Internet Files\Enclosure\{98BA2FE4-1EA1-4C01-8DE9-AA8E450F24C1}\Banff, AB.jpg" cfi:downloadstatus="Not Downloaded" cfi:lastdownloaderror="None"/>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://farm1.static.flickr.com/43/76405904_47fe06e727_o.jpg" rel="enclosure" type="image/jpeg"/>
+      <georss:point xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">52.85918 -119.203033</georss:point>
+      <geo:lat xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">52.85918</geo:lat>
+      <geo:long xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">-119.203033</geo:long>
+      <woe:woeid xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2344916</woe:woeid>
+      <cfi:id>5</cfi:id>
+      <cfi:effectiveId>2558025950</cfi:effectiveId>
+      <cfi:read>true</cfi:read>
+      <cfi:downloadurl>http://api.flickr.com/services/feeds/geo/?g=322338@N20&amp;lang=en-us&amp;format=feed-georss</cfi:downloadurl>
+      <cfi:lastdownloadtime>2010-07-20T02:38:50.321Z</cfi:lastdownloadtime>
+    </item>
+    <item>
+      <link>http://www.flickr.com/photos/shreck/76405583/</link>
+      <title xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="text">Denali Highway, AK</title>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://www.flickr.com/photos/shreck/76405583/" rel="alternate" type="text/html"/>
+      <guid isPermaLink="false">tag:flickr.com,2005:/photo/76405583</guid>
+      <atom:published xmlns:atom="http://www.w3.org/2005/Atom">2005-12-23T00:24:07Z</atom:published>
+      <pubDate>Fri, 23 Dec 2005 00:24:07 GMT</pubDate>
+      <atom:updated xmlns:atom="http://www.w3.org/2005/Atom">2005-12-23T00:24:07Z</atom:updated>
+      <dc:date.Taken xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2005-07-01T19:20:31-08:00</dc:date.Taken>
+      <description xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="html">
+        &lt;p&gt;&lt;a href="http://www.flickr.com/people/shreck/"&gt;manshreck&lt;/a&gt; posted a photo:&lt;/p&gt;
+
+        &lt;p&gt;&lt;a href="http://www.flickr.com/photos/shreck/76405583/" title="Denali Highway, AK"&gt;&lt;img src="http://farm1.static.flickr.com/37/76405583_cf87f9cc23_m.jpg" width=240 height=160 alt="Denali Highway, AK"&gt;&lt;/a&gt;&lt;/p&gt;
+
+        &lt;p&gt;Faulkner in the mountains along the Denali Highway&lt;/p&gt;
+      </description>
+      <author>manshreck</author>
+      <atom:author xmlns:atom="http://www.w3.org/2005/Atom">
+        <atom:name>manshreck</atom:name>
+        <atom:uri>http://www.flickr.com/people/shreck/</atom:uri>
+      </atom:author>
+      <enclosure url="http://farm1.static.flickr.com/37/76405583_cf87f9cc23_o.jpg" type="image/jpeg" cfi:path="C:\Users\VivekPandey\AppData\Local\Microsoft\Windows\Temporary Internet Files\Enclosure\{98BA2FE4-1EA1-4C01-8DE9-AA8E450F24C1}\Denali Highway, AK.jpg" cfi:downloadstatus="Not Downloaded" cfi:lastdownloaderror="None"/>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://farm1.static.flickr.com/37/76405583_cf87f9cc23_o.jpg" rel="enclosure" type="image/jpeg"/>
+      <category domain="http://www.flickr.com/photos/tags/">alaska</category>
+      <georss:point xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">61.763703 -149.445304</georss:point>
+      <geo:lat xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">61.763703</geo:lat>
+      <geo:long xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">-149.445304</geo:long>
+      <woe:woeid xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">12587568</woe:woeid>
+      <cfi:id>4</cfi:id>
+      <cfi:effectiveId>2005772422</cfi:effectiveId>
+      <cfi:read>true</cfi:read>
+      <cfi:downloadurl>http://api.flickr.com/services/feeds/geo/?g=322338@N20&amp;lang=en-us&amp;format=feed-georss</cfi:downloadurl>
+      <cfi:lastdownloadtime>2010-07-20T02:38:50.321Z</cfi:lastdownloadtime>
+    </item>
+    <item>
+      <link>http://www.flickr.com/photos/shreck/56104498/</link>
+      <title xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="text">Rochester, NY</title>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://www.flickr.com/photos/shreck/56104498/" rel="alternate" type="text/html"/>
+      <guid isPermaLink="false">tag:flickr.com,2005:/photo/56104498</guid>
+      <atom:published xmlns:atom="http://www.w3.org/2005/Atom">2005-10-25T22:42:32Z</atom:published>
+      <pubDate>Tue, 25 Oct 2005 22:42:32 GMT</pubDate>
+      <atom:updated xmlns:atom="http://www.w3.org/2005/Atom">2005-10-25T22:42:32Z</atom:updated>
+      <dc:date.Taken xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2005-10-22T21:37:17-08:00</dc:date.Taken>
+      <description xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="html">
+        &lt;p&gt;&lt;a href="http://www.flickr.com/people/shreck/"&gt;manshreck&lt;/a&gt; posted a photo:&lt;/p&gt;
+
+        &lt;p&gt;&lt;a href="http://www.flickr.com/photos/shreck/56104498/" title="Rochester, NY"&gt;&lt;img src="http://farm1.static.flickr.com/30/56104498_ea4f4d0e9c_m.jpg" width=240 height=175 alt="Rochester, NY"&gt;&lt;/a&gt;&lt;/p&gt;
+
+      </description>
+      <author>manshreck</author>
+      <atom:author xmlns:atom="http://www.w3.org/2005/Atom">
+        <atom:name>manshreck</atom:name>
+        <atom:uri>http://www.flickr.com/people/shreck/</atom:uri>
+      </atom:author>
+      <enclosure url="http://farm1.static.flickr.com/30/56104498_ea4f4d0e9c_o.jpg" type="image/jpeg" cfi:path="C:\Users\VivekPandey\AppData\Local\Microsoft\Windows\Temporary Internet Files\Enclosure\{98BA2FE4-1EA1-4C01-8DE9-AA8E450F24C1}\Rochester, NY.jpg" cfi:downloadstatus="Not Downloaded" cfi:lastdownloaderror="None"/>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://farm1.static.flickr.com/30/56104498_ea4f4d0e9c_o.jpg" rel="enclosure" type="image/jpeg"/>
+      <category domain="http://www.flickr.com/photos/tags/">faulkner</category>
+      <georss:point xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">43.127697 -77.573776</georss:point>
+      <geo:lat xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">43.127697</geo:lat>
+      <geo:long xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">-77.573776</geo:long>
+      <woe:woeid xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2482949</woe:woeid>
+      <cfi:id>3</cfi:id>
+      <cfi:effectiveId>94324351</cfi:effectiveId>
+      <cfi:read>true</cfi:read>
+      <cfi:downloadurl>http://api.flickr.com/services/feeds/geo/?g=322338@N20&amp;lang=en-us&amp;format=feed-georss</cfi:downloadurl>
+      <cfi:lastdownloadtime>2010-07-20T02:38:50.321Z</cfi:lastdownloadtime>
+    </item>
+    <item>
+      <link>http://www.flickr.com/photos/shreck/54107454/</link>
+      <title xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="text">North Bay, ONT</title>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://www.flickr.com/photos/shreck/54107454/" rel="alternate" type="text/html"/>
+      <guid isPermaLink="false">tag:flickr.com,2005:/photo/54107454</guid>
+      <atom:published xmlns:atom="http://www.w3.org/2005/Atom">2005-10-19T20:08:37Z</atom:published>
+      <pubDate>Wed, 19 Oct 2005 20:08:37 GMT</pubDate>
+      <atom:updated xmlns:atom="http://www.w3.org/2005/Atom">2005-10-19T20:08:37Z</atom:updated>
+      <dc:date.Taken xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2005-06-08T17:40:13-08:00</dc:date.Taken>
+      <description xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="html">
+        &lt;p&gt;&lt;a href="http://www.flickr.com/people/shreck/"&gt;manshreck&lt;/a&gt; posted a photo:&lt;/p&gt;
+
+        &lt;p&gt;&lt;a href="http://www.flickr.com/photos/shreck/54107454/" title="North Bay, ONT"&gt;&lt;img src="http://farm1.static.flickr.com/27/54107454_b629dee37f_m.jpg" width=240 height=180 alt="North Bay, ONT"&gt;&lt;/a&gt;&lt;/p&gt;
+
+        &lt;p&gt;Faulkner liked this barbell tennis ball toy. I would end up leaving it at a campsite near Denali. It might still be there.&lt;/p&gt;
+      </description>
+      <author>manshreck</author>
+      <atom:author xmlns:atom="http://www.w3.org/2005/Atom">
+        <atom:name>manshreck</atom:name>
+        <atom:uri>http://www.flickr.com/people/shreck/</atom:uri>
+      </atom:author>
+      <enclosure url="http://farm1.static.flickr.com/27/54107454_b629dee37f_o.jpg" type="image/jpeg" cfi:path="C:\Users\VivekPandey\AppData\Local\Microsoft\Windows\Temporary Internet Files\Enclosure\{98BA2FE4-1EA1-4C01-8DE9-AA8E450F24C1}\North Bay, ONT.jpg" cfi:downloadstatus="Not Downloaded" cfi:lastdownloaderror="None"/>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://farm1.static.flickr.com/27/54107454_b629dee37f_o.jpg" rel="enclosure" type="image/jpeg"/>
+      <georss:point xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">46.304252 -79.453125</georss:point>
+      <geo:lat xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">46.304252</geo:lat>
+      <geo:long xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">-79.453125</geo:long>
+      <woe:woeid xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">3303</woe:woeid>
+      <cfi:id>2</cfi:id>
+      <cfi:effectiveId>1524920416</cfi:effectiveId>
+      <cfi:read>true</cfi:read>
+      <cfi:downloadurl>http://api.flickr.com/services/feeds/geo/?g=322338@N20&amp;lang=en-us&amp;format=feed-georss</cfi:downloadurl>
+      <cfi:lastdownloadtime>2010-07-20T02:38:50.321Z</cfi:lastdownloadtime>
+    </item>
+    <item>
+      <link>http://www.flickr.com/photos/shreck/54107176/</link>
+      <title xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="text">Adirondack State Park, NY</title>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://www.flickr.com/photos/shreck/54107176/" rel="alternate" type="text/html"/>
+      <guid isPermaLink="false">tag:flickr.com,2005:/photo/54107176</guid>
+      <atom:published xmlns:atom="http://www.w3.org/2005/Atom">2005-10-19T20:07:46Z</atom:published>
+      <pubDate>Wed, 19 Oct 2005 20:07:46 GMT</pubDate>
+      <atom:updated xmlns:atom="http://www.w3.org/2005/Atom">2005-10-19T20:07:46Z</atom:updated>
+      <dc:date.Taken xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2005-06-06T18:42:22-08:00</dc:date.Taken>
+      <description xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="html">
+        &lt;p&gt;&lt;a href="http://www.flickr.com/people/shreck/"&gt;manshreck&lt;/a&gt; posted a photo:&lt;/p&gt;
+
+        &lt;p&gt;&lt;a href="http://www.flickr.com/photos/shreck/54107176/" title="Adirondack State Park, NY"&gt;&lt;img src="http://farm1.static.flickr.com/32/54107176_3b8cdd09ef_m.jpg" width=240 height=180 alt="Adirondack State Park, NY"&gt;&lt;/a&gt;&lt;/p&gt;
+
+        &lt;p&gt;Faulkner in the Adirondacks. The thunderstorm would start soon and we would spend the night at a shelter listening to the rain.&lt;/p&gt;
+      </description>
+      <author>manshreck</author>
+      <atom:author xmlns:atom="http://www.w3.org/2005/Atom">
+        <atom:name>manshreck</atom:name>
+        <atom:uri>http://www.flickr.com/people/shreck/</atom:uri>
+      </atom:author>
+      <enclosure url="http://farm1.static.flickr.com/32/54107176_3b8cdd09ef_o.jpg" type="image/jpeg" cfi:path="C:\Users\VivekPandey\AppData\Local\Microsoft\Windows\Temporary Internet Files\Enclosure\{98BA2FE4-1EA1-4C01-8DE9-AA8E450F24C1}\Adirondack State Park, NY.jpg" cfi:downloadstatus="Not Downloaded" cfi:lastdownloaderror="None"/>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://farm1.static.flickr.com/32/54107176_3b8cdd09ef_o.jpg" rel="enclosure" type="image/jpeg"/>
+      <georss:point xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">44.084625 -73.786926</georss:point>
+      <geo:lat xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">44.084625</geo:lat>
+      <geo:long xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">-73.786926</geo:long>
+      <woe:woeid xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">12589327</woe:woeid>
+      <cfi:id>1</cfi:id>
+      <cfi:effectiveId>1534839935</cfi:effectiveId>
+      <cfi:read>true</cfi:read>
+      <cfi:downloadurl>http://api.flickr.com/services/feeds/geo/?g=322338@N20&amp;lang=en-us&amp;format=feed-georss</cfi:downloadurl>
+      <cfi:lastdownloadtime>2010-07-20T02:38:50.321Z</cfi:lastdownloadtime>
+    </item>
+    <item>
+      <link>http://www.flickr.com/photos/shreck/53746581/</link>
+      <title xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="text">Superior, WI</title>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://www.flickr.com/photos/shreck/53746581/" rel="alternate" type="text/html"/>
+      <guid isPermaLink="false">tag:flickr.com,2005:/photo/53746581</guid>
+      <atom:published xmlns:atom="http://www.w3.org/2005/Atom">2005-10-18T15:37:57Z</atom:published>
+      <pubDate>Tue, 18 Oct 2005 15:37:57 GMT</pubDate>
+      <atom:updated xmlns:atom="http://www.w3.org/2005/Atom">2005-10-18T15:37:57Z</atom:updated>
+      <dc:date.Taken xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">2005-06-09T22:33:19-08:00</dc:date.Taken>
+      <description xmlns:cf="http://www.microsoft.com/schemas/rss/core/2005" cf:type="html">
+        &lt;p&gt;&lt;a href="http://www.flickr.com/people/shreck/"&gt;manshreck&lt;/a&gt; posted a photo:&lt;/p&gt;
+
+        &lt;p&gt;&lt;a href="http://www.flickr.com/photos/shreck/53746581/" title="Superior, WI"&gt;&lt;img src="http://farm1.static.flickr.com/31/53746581_9a2b889248_m.jpg" width=240 height=180 alt="Superior, WI"&gt;&lt;/a&gt;&lt;/p&gt;
+
+        &lt;p&gt;I camped out on Lake Superior next to a guy who listened to classic rock for far too long. Nice sunset, though.&lt;/p&gt;
+      </description>
+      <author>manshreck</author>
+      <atom:author xmlns:atom="http://www.w3.org/2005/Atom">
+        <atom:name>manshreck</atom:name>
+        <atom:uri>http://www.flickr.com/people/shreck/</atom:uri>
+      </atom:author>
+      <enclosure url="http://farm1.static.flickr.com/31/53746581_9a2b889248_o.jpg" type="image/jpeg" cfi:path="C:\Users\VivekPandey\AppData\Local\Microsoft\Windows\Temporary Internet Files\Enclosure\{98BA2FE4-1EA1-4C01-8DE9-AA8E450F24C1}\Superior, WI.jpg" cfi:downloadstatus="Not Downloaded" cfi:lastdownloaderror="None"/>
+      <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="http://farm1.static.flickr.com/31/53746581_9a2b889248_o.jpg" rel="enclosure" type="image/jpeg"/>
+      <georss:point xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">46.561575 -90.441169</georss:point>
+      <geo:lat xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">46.561575</geo:lat>
+      <geo:long xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">-90.441169</geo:long>
+      <woe:woeid xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#" xmlns:georss="http://www.georss.org/georss" xmlns:woe="http://where.yahooapis.com/v1/schema.rng" xmlns:flickr="urn:flickr:" xmlns:media="http://search.yahoo.com/mrss/">12590559</woe:woeid>
+      <cfi:id>0</cfi:id>
+      <cfi:effectiveId>2494834539</cfi:effectiveId>
+      <cfi:read>true</cfi:read>
+      <cfi:downloadurl>http://api.flickr.com/services/feeds/geo/?g=322338@N20&amp;lang=en-us&amp;format=feed-georss</cfi:downloadurl>
+      <cfi:lastdownloadtime>2010-07-20T02:38:50.321Z</cfi:lastdownloadtime>
+    </item>
+  </channel>
+</rss>

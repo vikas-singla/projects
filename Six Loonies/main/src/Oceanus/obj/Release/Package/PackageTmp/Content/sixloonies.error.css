@@ -1,0 +1,21 @@
+﻿.errorsect
+{
+    padding:20px;
+}
+
+.errorsect .imgsect
+{
+    width:300px;
+    height:300px;
+    float:left;
+}
+
+.errorsect .text
+{
+    width:620px;
+    float:left;
+    font-size:40px;
+    line-height:60px;
+    padding-top:40px;
+    font-family: 'Indie Flower', arial, serif;
+}

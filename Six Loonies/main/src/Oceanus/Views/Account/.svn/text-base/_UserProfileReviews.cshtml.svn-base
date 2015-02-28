@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Oceanus.ViewModels.ReviewViewModel>
+<link href="@Url.Content("~/Content/user/sixloonies.user.profile.reviews.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/Plugins/sixloonies.jplayer.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/scripts/jplayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="/scripts/sixloonies.flashdetect.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+    $(document).ready(function () {
+
+        if (flashVersion() == null || flashVersion() == undefined || flashVersion() < 10) {
+            $('.audio').html("[<a href='http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash' target='_blank'>Flash 10</a> is required to listen to audio.]");
+        }
+        else {
+            $("#jquery_jplayer_1").jPlayer({
+                ready: function () {
+                    $(this).jPlayer("setMedia", {
+                        mp3: "/content/test1.mp3"
+                    });
+                },
+                ended: function (event) {
+                    $(this).jPlayer("play");
+                },
+                swfPath: "/scripts/jplayer",
+                Default: "html, flash",
+                supplied: "mp3"
+            });
+        }
+    });
+//]]>
+</script>
+<script type="text/javascript" src="/scripts/sixloonies.flagsddmenu.js"></script>
+<div class="fullsect">
+    <div class="section">
+        <div class="sectiontitle">
+            <div class="titletext">
+                My Reviews
+            </div>
+        </div>
+        @if (Model != null)
+        {
+            foreach (var review in Model)
+            {
+                if (review.ReviewAudio != null)
+                {
+                    Html.RenderPartial("_UserProfileAudioReview", review);
+                }
+                else
+                {
+                    Html.RenderPartial("_UserProfileTextReview", review);
+                }
+            }
+        }
+        else
+        {
+            Guid guidOfUserProfile = ViewBag.UserId;
+            MembershipUser currUserMembership = Membership.GetUser(User.Identity.Name);
+            if (currUserMembership != null)
+            {
+                Guid currUserGuid = (Guid)currUserMembership.ProviderUserKey;
+                if (currUserGuid == guidOfUserProfile)
+                {
+                    <p>There are currently 0 reviews authored by you.</p>
+                }
+                else
+                {
+                    <p>There are currently no reviews by @(ViewBag.UserFirstName).</p>
+                }
+            }
+            else
+            {
+                <p>There are currently no reviews by @(ViewBag.UserFirstName).</p>
+            }
+        }
+    </div>
+</div>

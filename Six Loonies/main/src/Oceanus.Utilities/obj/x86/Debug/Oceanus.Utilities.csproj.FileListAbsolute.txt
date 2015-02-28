@@ -1,0 +1,16 @@
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Debug\Images\delete.png
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Debug\Oceanus.Utilities.exe.config
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Debug\Oceanus.Utilities.exe
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Debug\Oceanus.Utilities.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Debug\Oceanus.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Debug\log4net.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Debug\FacebookAPI.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Debug\Oceanus.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Debug\log4net.xml
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Debug\FacebookAPI.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\obj\x86\Debug\Oceanus.Utilities.exe
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\obj\x86\Debug\Oceanus.Utilities.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Debug\HtmlAgilityPack.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Debug\HtmlAgilityPack.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Debug\HtmlAgilityPack.xml

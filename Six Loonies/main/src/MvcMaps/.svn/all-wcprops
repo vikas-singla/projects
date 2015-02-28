@@ -1,0 +1,155 @@
+K 25
+svn:wc:ra_dav:version-url
+V 43
+/svn/projects/!svn/ver/461/main/src/MvcMaps
+END
+BingMap.cs
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/projects/!svn/ver/34/main/src/MvcMaps/BingMap.cs
+END
+Map.cs
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/projects/!svn/ver/34/main/src/MvcMaps/Map.cs
+END
+MapType.cs
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/projects/!svn/ver/34/main/src/MvcMaps/MapType.cs
+END
+GoogleMap.js
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/projects/!svn/ver/34/main/src/MvcMaps/GoogleMap.js
+END
+LatLng.cs
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/projects/!svn/ver/34/main/src/MvcMaps/LatLng.cs
+END
+IJsonRender.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/projects/!svn/ver/34/main/src/MvcMaps/IJsonRender.cs
+END
+BingMapMode.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/projects/!svn/ver/34/main/src/MvcMaps/BingMapMode.cs
+END
+GooglePushpin.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/projects/!svn/ver/34/main/src/MvcMaps/GooglePushpin.cs
+END
+BingMap.js
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/projects/!svn/ver/34/main/src/MvcMaps/BingMap.js
+END
+Map.js
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/projects/!svn/ver/34/main/src/MvcMaps/Map.js
+END
+IMap.cs
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/projects/!svn/ver/34/main/src/MvcMaps/IMap.cs
+END
+Pushpin.cs
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/projects/!svn/ver/34/main/src/MvcMaps/Pushpin.cs
+END
+BingPolygon.cs
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/projects/!svn/ver/34/main/src/MvcMaps/BingPolygon.cs
+END
+Polygon.cs
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/projects/!svn/ver/34/main/src/MvcMaps/Polygon.cs
+END
+GoogleMapExtensions.cs
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/projects/!svn/ver/34/main/src/MvcMaps/GoogleMapExtensions.cs
+END
+BingPolyline.cs
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/projects/!svn/ver/34/main/src/MvcMaps/BingPolyline.cs
+END
+BingOrientation.cs
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/projects/!svn/ver/34/main/src/MvcMaps/BingOrientation.cs
+END
+Polyline.cs
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/projects/!svn/ver/34/main/src/MvcMaps/Polyline.cs
+END
+IBingPoly.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/projects/!svn/ver/34/main/src/MvcMaps/IBingPoly.cs
+END
+BingMapExtensions.cs
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/projects/!svn/ver/34/main/src/MvcMaps/BingMapExtensions.cs
+END
+DynamicMapOptions.cs
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/projects/!svn/ver/34/main/src/MvcMaps/DynamicMapOptions.cs
+END
+MvcMaps.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/projects/!svn/ver/49/main/src/MvcMaps/MvcMaps.csproj
+END
+MapDataResult.cs
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/projects/!svn/ver/34/main/src/MvcMaps/MapDataResult.cs
+END
+GooglePushpinShowEvents.cs
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/projects/!svn/ver/34/main/src/MvcMaps/GooglePushpinShowEvents.cs
+END
+GoogleMap.cs
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/projects/!svn/ver/34/main/src/MvcMaps/GoogleMap.cs
+END

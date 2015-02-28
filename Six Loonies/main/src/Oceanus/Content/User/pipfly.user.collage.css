@@ -1,0 +1,56 @@
+﻿.usercollage
+{
+    clear:both;
+    margin:0 auto;
+    overflow:auto;
+}
+
+.usercollage .usercollageitem
+{
+    width:239px;
+}
+
+.usercollage .userphotocollageitem, .usercollage .userphotocollageitem:hover, .usercollage .userphotocollageitem:visited, .usercollage .userphotocollageitem:active
+{
+    margin: 0 auto;
+    text-decoration:none;
+    position: relative;
+    background:#fff;
+    text-align: center;
+    display:block;
+    overflow: hidden;    
+    margin:6px 6px 2px 6px;
+    box-shadow: 0px 0px 5px #d9d9d9;
+    -moz-box-shadow: 0px 0px 5px #d9d9d9;
+    -webkit-box-shadow: 0px 0px 5px #d9d9d9;
+    border: 1px solid #d9d9d9;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    width:225px;
+    height:225px;
+}
+
+.usercollage .usercollageitem img
+{
+    overflow: hidden;    
+}
+
+.usercollage .usercollageitem .photocontent
+{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    overflow:auto;
+    background:#333;
+    color:#fff;
+    opacity:0.75;
+    text-align:left;
+    display:block;
+}
+
+.usercollage .usercollageitem:hover .photocontent
+{
+    opacity:0.95;
+}

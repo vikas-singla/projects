@@ -1,0 +1,180 @@
+﻿.MainCompanySalaryTbl
+{
+    width: 435px;
+}
+
+.SalaryFilterTbl
+{
+    width: 435px;
+    border: 1px solid #d9d9d9;
+    margin-bottom: 15px;
+    font-size: 11px;
+}
+
+.SalaryFilterDropDownStyle
+{
+    width: 150px;
+    font-size: 11px;
+}
+
+.SalaryFilterTblRowStyle
+{
+    border-bottom: 1px solid #d9d9d9;
+    background-color: #f0f0f0;
+}
+
+.SalaryFilterTblLbl
+{
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.btn_salaryFilterStyle
+{
+    padding: 1px 3px 1px 4px;
+    cursor: pointer;
+    background: url('/assets/images/btn_gray_background.png');
+    color: #505050;
+    font-size: 11px;
+    border: none;
+    font-weight: bold;
+    width: 95px;
+    height: 24px;
+    border: 1px solid #ccc;
+    border-bottom-color: #999;
+    border-right-color: #999;
+}
+
+.CompanySalaryPosColumn
+{
+    vertical-align: middle;
+    width: 170px;
+    text-align: left;
+    padding: 5px 0px 5px 5px;
+    border-right: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.CompanySalaryDataColumn
+{
+    width: 265px;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 0;
+}
+
+.CompanySalaryPosHeaderColumn
+{
+    width: 170px;
+    font-size: 12px;
+    color: #505050;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    padding: 0px 0px 2px 0px;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.xAxisPanelStyle
+{
+    width: 265px;
+    height: 15px;
+    position: relative;
+    bottom: -2px;
+    padding: 0;
+    clear: both;
+}
+
+.CompanySalaryDataHeaderColumn
+{
+    width: 265px;
+    position: relative;
+    padding: 0;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+.xAxisPanelStyle .xAxis
+{
+    text-align: center;
+    font-size: 10px;
+    white-space: nowrap;
+    color: #505050;
+    position: absolute;
+    bottom: 2px;
+    display: inline;
+}
+
+.xAxisPanelStyle .xAxisTicks
+{
+    position: absolute;
+    bottom: -2px;
+    height: 3px;
+    display: inline;
+    overflow: hidden;
+    border-right: 2px #BBB solid;
+}
+
+.salaryRelativePanel
+{
+    position: relative;
+}
+
+.salaryBar
+{
+    position: absolute;
+    left: 0px;
+    top: 6px;
+    height: 14px;
+    background-color: #5DAE21;
+    border-bottom: 2px solid #dbdbdb;
+    border-right: 2px solid #dbdbdb;
+}
+
+.salaryBar:hover
+{
+    background-color: #79CB3C;
+}
+
+.salaryBarText
+{
+    position: absolute;
+    left: 0px;
+    top: 5px;
+    font-size: 9px;
+    text-align: center;
+    color: #505050;
+    z-index: 1;
+}
+
+.salaryBarWhiteText
+{
+    position: absolute;
+    left: 0px;
+    top: 5px;
+    z-index: 1;
+    font-size: 9px;
+    text-align: center;
+    color: #FFF;
+}
+
+
+.salaryBar span
+{
+    display: none;
+    z-index: 2;
+}
+
+.salaryBar:hover span
+{
+    display: block;
+    position: absolute;
+    top: -112px;
+    left: -33px; /* formatting only styles */
+    z-index: 2;
+    background: transparent url('/assets/images/black_arrow.png');
+    height: 83px;
+    width: 160px;
+    font-size: 12px;
+    padding: 12px 25px 25px 25px;
+    color: #fff;
+    line-height: 1.6em;
+}

@@ -1,0 +1,86 @@
+﻿.expandnetworkoverlay
+{
+    z-index: 10000;
+    background-color: #fff;
+    width: 695px;
+    padding: 0;
+    margin: 0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.expandnetworkoverlay .content
+{
+    padding: 10px;
+    width: 675px;
+    min-height: 200px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.expandnetworkoverlay .overlaytitle, .expandnetworkoverlay .title
+{
+    width: 650px;
+    margin: 0 auto 0 auto;
+    font-variant: small-caps;
+    font-size: 16px;
+    color: #333;
+    text-align: left;
+    padding: 5px 2px 5px 2px;
+    font-weight: bold;
+}
+
+.expandnetworkoverlay .title
+{
+    text-align: center;
+    font-size: 18px;
+    color: #FF3030;
+}
+
+.expandnetworkoverlay .overlaytitle
+{
+    border-bottom: 2px solid #ff3030;
+}
+
+.expandnetworkoverlay .formfields
+{
+    width: 650px;
+    margin: 0 auto 0 auto;
+    padding: 10px 10px 10px 10px;
+}
+
+.expandnetworkoverlay .formfields .fieldlblfullwidth
+{
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+    padding: 2px 0px 2px 0px;
+}
+
+.expandnetworkoverlay .formfields .fieldlblfullwidth .smalltext
+{
+    font-size: 10px;
+    position: relative;
+    top: -1px;
+}
+
+.expandnetworkoverlay .formfields .fieldctrlfullwidth
+{
+    width: 100%;
+    text-align: left;
+    padding: 2px 0px 2px 0px;
+}
+
+.expandnetworkoverlay .formfields .btns
+{
+    width: 100%;
+    text-align: right;
+    padding: 7px 0px 4px 0px;
+}
+
+.expandnetworkoverlay .formfields .fieldctrlfullwidth textarea, .expandnetworkoverlay .formfields .fieldctrlfullwidth input
+{
+    resize: none;
+    width: 644px;
+}

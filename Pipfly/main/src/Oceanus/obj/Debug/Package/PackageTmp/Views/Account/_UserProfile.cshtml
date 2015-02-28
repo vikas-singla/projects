@@ -1,0 +1,160 @@
+﻿@model Oceanus.ViewModels.UserProfileViewModel
+@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/User/sixloonies.user.profile.css")
+            .Add("~/Content/topic/pipfly.topic.recommendations.css")
+            .Add("~/Content/Activity/sixloonies.activity.feed.css")
+            .Add("~/Content/Overlay/sixloonies.overlay.size.medium.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.user.profile.#.css")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/articles/pipfly.articles.css")
+            .Add("~/Content/clips/pipfly.clips.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.collage.#.css")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+            Bundle.JavaScript()
+            .Add("~/Scripts/pipfly.layout.helper.js")
+            .ForceRelease()
+            .Render("~/cache/pipfly.layout.helper_#.js")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+            Bundle.JavaScript()
+            .Add("~/Scripts/pipfly.articles.helper.js")
+            .Add("~/scripts/sixloonies.user.profile.js")
+            .Add("~/scripts/pipfly.activity.feed.js")
+            .ForceRelease()
+            .Render("~/cache/pipfly.user.profile_#.js")
+        );
+}
+<div class="breadcomb">
+    <div class="breadcombtext">
+        <a href="/">Home</a>&nbsp;&raquo;&nbsp;<span>@(Model.FirstName)'s Profile</span>
+    </div>
+</div>
+<div class="fullsect profile">
+    @{ MembershipUser currUserMembership = Request.IsAuthenticated ? Membership.GetUser(User.Identity.Name) : null; }
+    <div class="profileoverview">
+        <div class="basic">
+            <div class="profileimagecontainer">
+                <img id="userprofilephotoimg" src="@(Model.UserProfileImageUrl == null ? "/images/user.jpg" : (Model.UserProfileImageUrl))" alt="user" width="85px" />
+            </div>
+            <div class="userdetails">
+                <div class="name">
+                    @(Model.FirstName + " " + Model.LastName)
+                </div>
+                <div id="userstats">
+                    @{Html.RenderAction("GetUserStats", "Account", new { UserId = Model.UserId });}
+                </div>
+            </div>
+            <div class="userprofilebtns">
+                @if (currUserMembership == null || (!Model.CurrentUserIsFollowing && ((Guid)currUserMembership.ProviderUserKey != Model.UserId)))
+                { 
+                    <a href="#" class="btnstyle followuserbtn" data-uid="@(Model.UserId)">
+                        <img src="/images/plus.gif" width="16px" height="16px" alt /><span>Follow</span>
+                    </a> 
+                }
+                else if(((Guid)currUserMembership.ProviderUserKey != Model.UserId))
+                { 
+                    <a href="#" class="btnundo unfollowuserbtn" data-uid="@(Model.UserId)">
+                        <img src="/images/tick.png" width="16px" height="16px" alt /><span>Unfollow</span>
+                    </a> 
+                }
+                @*@if (currUserMembership != null && ((Guid)currUserMembership.ProviderUserKey == Model.UserId))
+                { 
+                    <a href="#uploadphoto" class="btnstyle" id="uploadprofilephotobtn" data-upid="@(Model.Id)">
+                        Update Profile Photo</a>
+                }*@
+                @*@if (currUserMembership != null && ((Guid)currUserMembership.ProviderUserKey != Model.UserId))
+                {
+                    if (!Model.CurrentUserIsFriend && !Model.CurrentUserHasPendingFriendRequest)
+                    {
+                    <a href="#" class="btnstyle" id="addfriendbtn" data-uid="@(Model.UserId)">Add as Friend</a>
+                    }
+                }*@
+            </div>
+        </div>
+        @*@if (currUserMembership != null && ((Guid)currUserMembership.ProviderUserKey != Model.UserId))
+        {
+            <div class="fullsect">
+                <ul class="userprofiletabs" id="uprofiletabs">
+                    <li><a href="#" rel="#ufollowers">Followers</a></li>
+                </ul>
+            </div>
+            if (Model.CurrentUserHasPendingFriendRequest)
+            {
+            <div class="userprofilerequestnotice">
+                You have <b>sent</b> a friend request to @(Model.FirstName).
+            </div>
+            }
+        }*@
+    </div>
+    <div class="mainsect">
+        <div class="profileoptionbar">
+            <ul class="profilesectiontabs" id="profilesectiontabs" style="@(!(currUserMembership != null && ((Guid)currUserMembership.ProviderUserKey == Model.UserId)) ? "width:510px;" : "width:620px;")">
+                <li class="selected"><a href="#" rel="#utags">
+                    <img src="/images/sitetheme/tab_tag_icon.png" alt /><span class="text">TAGS</span></a></li>
+                <li><a href="#" rel="#uphotos">
+                    <img src="/images/sitetheme/photo_icon.png" alt /><span class="text">PHOTOS</span></a></li>
+                <li><a href="#" rel="#uvideos">
+                    <img src="/images/sitetheme/video_icon.png" alt /><span class="text">VIDEOS</span></a></li>
+                <li><a href="#" rel="#uarticles">
+                    <img src="/images/sitetheme/story_icon.png" alt /><span class="text">ARTICLES</span></a></li>
+                @if (currUserMembership != null && ((Guid)currUserMembership.ProviderUserKey == Model.UserId))
+                {
+                    <li><a href="#" rel="#ufriends">
+                        <img src="/images/user_white.png" alt /><span class="text">FRIENDS</span></a></li>
+                }
+            </ul>
+            <div class="contentfilterbtns" style="left:auto;right:0;">
+                <ul>
+                    <li class="@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? "selected" : "")">Sort By: @(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? "Recently Added" : "Most Popular")
+                        <img src="/Images/scrollarrow_down.gif" alt="" width="12px" height="12px" />
+                        <div class="ddmenu" style="right: -1px; min-width: 120px;">
+                            <div class="menulink">
+                                <a href="/u/@(Model.Id)/">
+                                    Most Popular</a>
+                            </div>
+                            <div class="menulink">
+                                <a href="/u/@(Model.Id)@("/?sortBy=")@((int)Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded)">
+                                    Recently Added</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="fullsect" id="utags">
+            @{Html.RenderAction("GetUserTags", "Account", new { userId = Model.UserId, sortBy = ViewBag.SortBy});}
+        </div>
+        <div class="fullsect" id="uphotos" style="display: none;">
+            <a class="paginationlink" href="/clip/GetUserPhotos?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")user_id=@(Html.Encode(Model.Id))&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="1" style="display:none;"></a>
+        </div>
+        <div class="fullsect" id="uarticles" style="display: none;">
+            <a class="paginationlink" href="/article/GetUserArticles?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")user_id=@(Html.Encode(Model.Id))&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="1" style="display:none;"></a>
+        </div>
+        <div class="fullsect" id="uvideos" style="display: none;">
+            <a class="paginationlink" href="/clip/GetUserVideos?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")user_id=@(Html.Encode(Model.Id))&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="1" style="display:none;"></a>
+        </div>
+        @if (currUserMembership != null && ((Guid)currUserMembership.ProviderUserKey == Model.UserId))
+        {
+            Html.RenderPartial("_UserFriends", new ViewDataDictionary { { "UserId", Model.UserId } });
+            
+            <div class="fullsect" id="umessages" style="display: none;">
+                @{Html.RenderAction("PendingFriendRequests", "Account", new { userId = Model.UserId });}
+                @{Html.RenderAction("GetFriendIntroductionListingsForUser", "Message");}
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,1471 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OceanusModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="OceanusEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="aspnet_Users" EntityType="OceanusModel.aspnet_Users" />
+    <EntitySet Name="UserLevels" EntityType="OceanusModel.UserLevel" />
+    <EntitySet Name="Registrations" EntityType="OceanusModel.Registration" />
+    <EntitySet Name="Messages" EntityType="OceanusModel.Message" />
+    <AssociationSet Name="FK_Message_aspnet_Users" Association="OceanusModel.FK_Message_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="Message" EntitySet="Messages" />
+    </AssociationSet>
+    <EntitySet Name="MessageResponses" EntityType="OceanusModel.MessageResponses" />
+    <AssociationSet Name="FK_MessageResponses_aspnet_Users" Association="OceanusModel.FK_MessageResponses_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="MessageRespons" EntitySet="MessageResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MessageResponses_Message" Association="OceanusModel.FK_MessageResponses_Message">
+      <End Role="Message" EntitySet="Messages" />
+      <End Role="MessageRespons" EntitySet="MessageResponses" />
+    </AssociationSet>
+    <EntitySet Name="SixLooniesFriendConnections" EntityType="OceanusModel.SixLooniesFriendConnection" />
+    <AssociationSet Name="FK_SixLooniesFriendConnections_aspnet_Users" Association="OceanusModel.FK_SixLooniesFriendConnections_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="SixLooniesFriendConnection" EntitySet="SixLooniesFriendConnections" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SixLooniesFriendConnections_aspnet_Users1" Association="OceanusModel.FK_SixLooniesFriendConnections_aspnet_Users1">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="SixLooniesFriendConnection" EntitySet="SixLooniesFriendConnections" />
+    </AssociationSet>
+    <EntitySet Name="SixLooniesPendingFriendRequests" EntityType="OceanusModel.SixLooniesPendingFriendRequest" />
+    <AssociationSet Name="FK_SixLooniesPendingFriendRequests_aspnet_Users" Association="OceanusModel.FK_SixLooniesPendingFriendRequests_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="SixLooniesPendingFriendRequest" EntitySet="SixLooniesPendingFriendRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SixLooniesPendingFriendRequests_aspnet_Users1" Association="OceanusModel.FK_SixLooniesPendingFriendRequests_aspnet_Users1">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="SixLooniesPendingFriendRequest" EntitySet="SixLooniesPendingFriendRequests" />
+    </AssociationSet>
+    <EntitySet Name="MessageVisibilities" EntityType="OceanusModel.MessageVisibility" />
+    <AssociationSet Name="FK_MessageVisibility_aspnet_Users" Association="OceanusModel.FK_MessageVisibility_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="MessageVisibility" EntitySet="MessageVisibilities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MessageVisibility_Message" Association="OceanusModel.FK_MessageVisibility_Message">
+      <End Role="Message" EntitySet="Messages" />
+      <End Role="MessageVisibility" EntitySet="MessageVisibilities" />
+    </AssociationSet>
+    <EntitySet Name="FriendIntroductionRequests" EntityType="OceanusModel.FriendIntroductionRequest" />
+    <AssociationSet Name="FK_FriendIntroductionRequests_aspnet_Users" Association="OceanusModel.FK_FriendIntroductionRequests_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="FriendIntroductionRequest" EntitySet="FriendIntroductionRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FriendIntroductionRequests_aspnet_Users1" Association="OceanusModel.FK_FriendIntroductionRequests_aspnet_Users1">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="FriendIntroductionRequest" EntitySet="FriendIntroductionRequests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FriendIntroductionRequests_aspnet_Users2" Association="OceanusModel.FK_FriendIntroductionRequests_aspnet_Users2">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="FriendIntroductionRequest" EntitySet="FriendIntroductionRequests" />
+    </AssociationSet>
+    <FunctionImport Name="GetFriendNetworkConnectionsPath" ReturnType="Collection(OceanusModel.NetworkConnectionPath)">
+      <Parameter Name="FromUserId" Mode="In" Type="Guid" />
+      <Parameter Name="ToUserId" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <EntitySet Name="PendingRegistrations" EntityType="OceanusModel.PendingRegistration" />
+    <AssociationSet Name="FK_PendingRegistrations_aspnet_Users" Association="OceanusModel.FK_PendingRegistrations_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="PendingRegistration" EntitySet="PendingRegistrations" />
+    </AssociationSet>
+    <EntitySet Name="aspnet_Membership" EntityType="OceanusModel.aspnet_Membership" />
+    <AssociationSet Name="FK__aspnet_Me__UserI__22751F6C" Association="OceanusModel.FK__aspnet_Me__UserI__22751F6C">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+    </AssociationSet>
+    <EntitySet Name="Categories" EntityType="OceanusModel.Category" />
+    <AssociationSet Name="FK_Categories_aspnet_Users" Association="OceanusModel.FK_Categories_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="Category" EntitySet="Categories" />
+    </AssociationSet>
+    <FunctionImport Name="GetFriendsOfFriendIDs" ReturnType="Collection(Guid)">
+      <Parameter Name="FromUserId" Mode="In" Type="Guid" />
+    </FunctionImport>
+    <EntitySet Name="UserWallPostComments" EntityType="OceanusModel.UserWallPostComment" />
+    <AssociationSet Name="FK_UserWallPostComments_aspnet_Users" Association="OceanusModel.FK_UserWallPostComments_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="UserWallPostComment" EntitySet="UserWallPostComments" />
+    </AssociationSet>
+    <EntitySet Name="BookmarkMappings" EntityType="OceanusModel.BookmarkMapping" />
+    <AssociationSet Name="FK_BookmarkMappings_aspnet_Users" Association="OceanusModel.FK_BookmarkMappings_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="BookmarkMapping" EntitySet="BookmarkMappings" />
+    </AssociationSet>
+    <EntitySet Name="WebPageTagMappings" EntityType="OceanusModel.WebPageTagMapping" />
+    <EntitySet Name="PhotoVideoClipTagMappings" EntityType="OceanusModel.PhotoVideoClipTagMapping" />
+    <EntitySet Name="WebPageShares" EntityType="OceanusModel.WebPageShare" />
+    <AssociationSet Name="FK_WebPageShares_aspnet_Users" Association="OceanusModel.FK_WebPageShares_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="WebPageShare" EntitySet="WebPageShares" />
+    </AssociationSet>
+    <EntitySet Name="UserWallPosts" EntityType="OceanusModel.UserWallPost" />
+    <AssociationSet Name="FK_UserWallPosts_aspnet_Users" Association="OceanusModel.FK_UserWallPosts_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="UserWallPost" EntitySet="UserWallPosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserWallPostComments_UserWallPosts" Association="OceanusModel.FK_UserWallPostComments_UserWallPosts">
+      <End Role="UserWallPost" EntitySet="UserWallPosts" />
+      <End Role="UserWallPostComment" EntitySet="UserWallPostComments" />
+    </AssociationSet>
+    <EntitySet Name="WebPages" EntityType="OceanusModel.WebPage" />
+    <AssociationSet Name="FK_BookmarkMappings_WebPage" Association="OceanusModel.FK_BookmarkMappings_WebPage">
+      <End Role="WebPage" EntitySet="WebPages" />
+      <End Role="BookmarkMapping" EntitySet="BookmarkMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserWallPosts_WebPage" Association="OceanusModel.FK_UserWallPosts_WebPage">
+      <End Role="WebPage" EntitySet="WebPages" />
+      <End Role="UserWallPost" EntitySet="UserWallPosts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WebPageShares_WebPage" Association="OceanusModel.FK_WebPageShares_WebPage">
+      <End Role="WebPage" EntitySet="WebPages" />
+      <End Role="WebPageShare" EntitySet="WebPageShares" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WebPageTagMappings_WebPage" Association="OceanusModel.FK_WebPageTagMappings_WebPage">
+      <End Role="WebPage" EntitySet="WebPages" />
+      <End Role="WebPageTagMapping" EntitySet="WebPageTagMappings" />
+    </AssociationSet>
+    <EntitySet Name="ArticleClipTagMappings" EntityType="OceanusModel.ArticleClipTagMapping" />
+    <EntitySet Name="PhotoVideoClipUserMappings" EntityType="OceanusModel.PhotoVideoClipUserMapping" />
+    <AssociationSet Name="FK_PhotoVideoClipUserMapping_aspnet_Users" Association="OceanusModel.FK_PhotoVideoClipUserMapping_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="PhotoVideoClipUserMapping" EntitySet="PhotoVideoClipUserMappings" />
+    </AssociationSet>
+    <EntitySet Name="ArticleClipUserMappings" EntityType="OceanusModel.ArticleClipUserMapping" />
+    <AssociationSet Name="FK_ArticleClipUserMapping_aspnet_Users" Association="OceanusModel.FK_ArticleClipUserMapping_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="ArticleClipUserMapping" EntitySet="ArticleClipUserMappings" />
+    </AssociationSet>
+    <EntitySet Name="UserWebPageLikes" EntityType="OceanusModel.UserWebPageLike" />
+    <AssociationSet Name="FK_UserLikes_aspnet_Users" Association="OceanusModel.FK_UserLikes_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="UserWebPageLike" EntitySet="UserWebPageLikes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserLikes_WebPage" Association="OceanusModel.FK_UserLikes_WebPage">
+      <End Role="WebPage" EntitySet="WebPages" />
+      <End Role="UserWebPageLike" EntitySet="UserWebPageLikes" />
+    </AssociationSet>
+    <EntitySet Name="ArticleComments" EntityType="OceanusModel.ArticleComment" />
+    <AssociationSet Name="FK_ArticleComments_aspnet_Users" Association="OceanusModel.FK_ArticleComments_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="ArticleComment" EntitySet="ArticleComments" />
+    </AssociationSet>
+    <EntitySet Name="UserArticleClipLikes" EntityType="OceanusModel.UserArticleClipLike" />
+    <EntitySet Name="UserPhotoVideoClipLikes" EntityType="OceanusModel.UserPhotoVideoClipLike" />
+    <AssociationSet Name="FK_UserArticleClipLikes_aspnet_Users" Association="OceanusModel.FK_UserArticleClipLikes_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="UserArticleClipLike" EntitySet="UserArticleClipLikes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPhotoVideoClipLikes_aspnet_Users" Association="OceanusModel.FK_UserPhotoVideoClipLikes_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="UserPhotoVideoClipLike" EntitySet="UserPhotoVideoClipLikes" />
+    </AssociationSet>
+    <EntitySet Name="PhotoVideoClips" EntityType="OceanusModel.PhotoVideoClip" />
+    <EntitySet Name="Tags" EntityType="OceanusModel.Tag" />
+    <AssociationSet Name="FK_ArticleClipTagMapping_Tags" Association="OceanusModel.FK_ArticleClipTagMapping_Tags">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="ArticleClipTagMapping" EntitySet="ArticleClipTagMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ScrapbookItems_aspnet_Users" Association="OceanusModel.FK_ScrapbookItems_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="PhotoVideoClip" EntitySet="PhotoVideoClips" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClipTagMapping_PhotoVideoClips" Association="OceanusModel.FK_ClipTagMapping_PhotoVideoClips">
+      <End Role="PhotoVideoClip" EntitySet="PhotoVideoClips" />
+      <End Role="PhotoVideoClipTagMapping" EntitySet="PhotoVideoClipTagMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoVideoClips_WebPage" Association="OceanusModel.FK_PhotoVideoClips_WebPage">
+      <End Role="WebPage" EntitySet="WebPages" />
+      <End Role="PhotoVideoClip" EntitySet="PhotoVideoClips" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoVideoClipUserMapping_PhotoVideoClips" Association="OceanusModel.FK_PhotoVideoClipUserMapping_PhotoVideoClips">
+      <End Role="PhotoVideoClip" EntitySet="PhotoVideoClips" />
+      <End Role="PhotoVideoClipUserMapping" EntitySet="PhotoVideoClipUserMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserPhotoVideoClipLikes_PhotoVideoClips" Association="OceanusModel.FK_UserPhotoVideoClipLikes_PhotoVideoClips">
+      <End Role="PhotoVideoClip" EntitySet="PhotoVideoClips" />
+      <End Role="UserPhotoVideoClipLike" EntitySet="UserPhotoVideoClipLikes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClipTagMapping_Tags" Association="OceanusModel.FK_ClipTagMapping_Tags">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="PhotoVideoClipTagMapping" EntitySet="PhotoVideoClipTagMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WebPageTagMappings_Tags" Association="OceanusModel.FK_WebPageTagMappings_Tags">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="WebPageTagMapping" EntitySet="WebPageTagMappings" />
+    </AssociationSet>
+    <EntitySet Name="PhotoVideoClipDescriptions" EntityType="OceanusModel.PhotoVideoClipDescription" />
+    <AssociationSet Name="FK_PhotoVideoClipDescription_aspnet_Users" Association="OceanusModel.FK_PhotoVideoClipDescription_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="PhotoVideoClipDescription" EntitySet="PhotoVideoClipDescriptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoVideoClipDescription_PhotoVideoClips" Association="OceanusModel.FK_PhotoVideoClipDescription_PhotoVideoClips">
+      <End Role="PhotoVideoClip" EntitySet="PhotoVideoClips" />
+      <End Role="PhotoVideoClipDescription" EntitySet="PhotoVideoClipDescriptions" />
+    </AssociationSet>
+    <EntitySet Name="UserProfiles" EntityType="OceanusModel.UserProfile" />
+    <AssociationSet Name="FK_UserProfile_aspnet_Users" Association="OceanusModel.FK_UserProfile_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProfile_UserLevel" Association="OceanusModel.FK_UserProfile_UserLevel">
+      <End Role="UserLevel" EntitySet="UserLevels" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <EntitySet Name="PhotoVideoClipComments" EntityType="OceanusModel.PhotoVideoClipComment" />
+    <AssociationSet Name="FK_PhotoVideoClipComments_aspnet_Users" Association="OceanusModel.FK_PhotoVideoClipComments_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="PhotoVideoClipComment" EntitySet="PhotoVideoClipComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PhotoVideoClipComments_PhotoVideoClips" Association="OceanusModel.FK_PhotoVideoClipComments_PhotoVideoClips">
+      <End Role="PhotoVideoClip" EntitySet="PhotoVideoClips" />
+      <End Role="PhotoVideoClipComment" EntitySet="PhotoVideoClipComments" />
+    </AssociationSet>
+    <EntitySet Name="ArticleClips" EntityType="OceanusModel.ArticleClip" />
+    <AssociationSet Name="FK_ArticleClipTagMapping_Articles" Association="OceanusModel.FK_ArticleClipTagMapping_Articles">
+      <End Role="ArticleClip" EntitySet="ArticleClips" />
+      <End Role="ArticleClipTagMapping" EntitySet="ArticleClipTagMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleClipUserMapping_ArticleClip" Association="OceanusModel.FK_ArticleClipUserMapping_ArticleClip">
+      <End Role="ArticleClip" EntitySet="ArticleClips" />
+      <End Role="ArticleClipUserMapping" EntitySet="ArticleClipUserMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArticleComments_ArticleClip" Association="OceanusModel.FK_ArticleComments_ArticleClip">
+      <End Role="ArticleClip" EntitySet="ArticleClips" />
+      <End Role="ArticleComment" EntitySet="ArticleComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Articles_aspnet_Users" Association="OceanusModel.FK_Articles_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="ArticleClip" EntitySet="ArticleClips" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Story_WebPage" Association="OceanusModel.FK_Story_WebPage">
+      <End Role="WebPage" EntitySet="WebPages" />
+      <End Role="ArticleClip" EntitySet="ArticleClips" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserArticleClipLikes_ArticleClip" Association="OceanusModel.FK_UserArticleClipLikes_ArticleClip">
+      <End Role="ArticleClip" EntitySet="ArticleClips" />
+      <End Role="UserArticleClipLike" EntitySet="UserArticleClipLikes" />
+    </AssociationSet>
+    <EntitySet Name="FacebookFriendLists" EntityType="OceanusModel.FacebookFriendList" />
+    <AssociationSet Name="FK_FacebookFriendList_aspnet_Users" Association="OceanusModel.FK_FacebookFriendList_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="FacebookFriendList" EntitySet="FacebookFriendLists" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FacebookFriendList_aspnet_Users1" Association="OceanusModel.FK_FacebookFriendList_aspnet_Users1">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="FacebookFriendList" EntitySet="FacebookFriendLists" />
+    </AssociationSet>
+    <EntitySet Name="UserToUserFollowingMappings" EntityType="OceanusModel.UserToUserFollowingMapping" />
+    <AssociationSet Name="FK_UserToUserFollowingMapping_aspnet_Users" Association="OceanusModel.FK_UserToUserFollowingMapping_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="UserToUserFollowingMapping" EntitySet="UserToUserFollowingMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserToUserFollowingMapping_aspnet_Users1" Association="OceanusModel.FK_UserToUserFollowingMapping_aspnet_Users1">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="UserToUserFollowingMapping" EntitySet="UserToUserFollowingMappings" />
+    </AssociationSet>
+    <EntitySet Name="UserToTagFollowingMappings" EntityType="OceanusModel.UserToTagFollowingMapping" />
+    <AssociationSet Name="FK_UserToTagFollowingMapping_aspnet_Users" Association="OceanusModel.FK_UserToTagFollowingMapping_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="UserToTagFollowingMapping" EntitySet="UserToTagFollowingMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserToTagFollowingMapping_Tags" Association="OceanusModel.FK_UserToTagFollowingMapping_Tags">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="UserToTagFollowingMapping" EntitySet="UserToTagFollowingMappings" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="aspnet_Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+    <Property Type="Guid" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="LoweredUserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="MobileAlias" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsAnonymous" Nullable="false" />
+    <Property Type="DateTime" Name="LastActivityDate" Nullable="false" />
+    <NavigationProperty Name="Messages" Relationship="OceanusModel.FK_Message_aspnet_Users" FromRole="aspnet_Users" ToRole="Message" />
+    <NavigationProperty Name="MessageResponses" Relationship="OceanusModel.FK_MessageResponses_aspnet_Users" FromRole="aspnet_Users" ToRole="MessageRespons" />
+    <NavigationProperty Name="SixLooniesFriendConnections" Relationship="OceanusModel.FK_SixLooniesFriendConnections_aspnet_Users" FromRole="aspnet_Users" ToRole="SixLooniesFriendConnection" />
+    <NavigationProperty Name="SixLooniesFriendConnections1" Relationship="OceanusModel.FK_SixLooniesFriendConnections_aspnet_Users1" FromRole="aspnet_Users" ToRole="SixLooniesFriendConnection" />
+    <NavigationProperty Name="SixLooniesPendingFriendRequests" Relationship="OceanusModel.FK_SixLooniesPendingFriendRequests_aspnet_Users" FromRole="aspnet_Users" ToRole="SixLooniesPendingFriendRequest" />
+    <NavigationProperty Name="SixLooniesPendingFriendRequests1" Relationship="OceanusModel.FK_SixLooniesPendingFriendRequests_aspnet_Users1" FromRole="aspnet_Users" ToRole="SixLooniesPendingFriendRequest" />
+    <NavigationProperty Name="MessageVisibilities" Relationship="OceanusModel.FK_MessageVisibility_aspnet_Users" FromRole="aspnet_Users" ToRole="MessageVisibility" />
+    <NavigationProperty Name="FriendIntroductionRequests" Relationship="OceanusModel.FK_FriendIntroductionRequests_aspnet_Users" FromRole="aspnet_Users" ToRole="FriendIntroductionRequest" />
+    <NavigationProperty Name="FriendIntroductionRequests1" Relationship="OceanusModel.FK_FriendIntroductionRequests_aspnet_Users1" FromRole="aspnet_Users" ToRole="FriendIntroductionRequest" />
+    <NavigationProperty Name="FriendIntroductionRequests2" Relationship="OceanusModel.FK_FriendIntroductionRequests_aspnet_Users2" FromRole="aspnet_Users" ToRole="FriendIntroductionRequest" />
+    <NavigationProperty Name="PendingRegistration" Relationship="OceanusModel.FK_PendingRegistrations_aspnet_Users" FromRole="aspnet_Users" ToRole="PendingRegistration" />
+    <NavigationProperty Name="aspnet_Membership" Relationship="OceanusModel.FK__aspnet_Me__UserI__22751F6C" FromRole="aspnet_Users" ToRole="aspnet_Membership" />
+    <NavigationProperty Name="Categories" Relationship="OceanusModel.FK_Categories_aspnet_Users" FromRole="aspnet_Users" ToRole="Category" />
+    <NavigationProperty Name="UserWallPostComments" Relationship="OceanusModel.FK_UserWallPostComments_aspnet_Users" FromRole="aspnet_Users" ToRole="UserWallPostComment" />
+    <NavigationProperty Name="BookmarkMappings" Relationship="OceanusModel.FK_BookmarkMappings_aspnet_Users" FromRole="aspnet_Users" ToRole="BookmarkMapping" />
+    <NavigationProperty Name="WebPageShares" Relationship="OceanusModel.FK_WebPageShares_aspnet_Users" FromRole="aspnet_Users" ToRole="WebPageShare" />
+    <NavigationProperty Name="UserWallPosts" Relationship="OceanusModel.FK_UserWallPosts_aspnet_Users" FromRole="aspnet_Users" ToRole="UserWallPost" />
+    <NavigationProperty Name="PhotoVideoClipUserMappings" Relationship="OceanusModel.FK_PhotoVideoClipUserMapping_aspnet_Users" FromRole="aspnet_Users" ToRole="PhotoVideoClipUserMapping" />
+    <NavigationProperty Name="ArticleClipUserMappings" Relationship="OceanusModel.FK_ArticleClipUserMapping_aspnet_Users" FromRole="aspnet_Users" ToRole="ArticleClipUserMapping" />
+    <NavigationProperty Name="UserWebPageLikes" Relationship="OceanusModel.FK_UserLikes_aspnet_Users" FromRole="aspnet_Users" ToRole="UserWebPageLike" />
+    <NavigationProperty Name="ArticleComments" Relationship="OceanusModel.FK_ArticleComments_aspnet_Users" FromRole="aspnet_Users" ToRole="ArticleComment" />
+    <NavigationProperty Name="UserArticleClipLikes" Relationship="OceanusModel.FK_UserArticleClipLikes_aspnet_Users" FromRole="aspnet_Users" ToRole="UserArticleClipLike" />
+    <NavigationProperty Name="UserPhotoVideoClipLikes" Relationship="OceanusModel.FK_UserPhotoVideoClipLikes_aspnet_Users" FromRole="aspnet_Users" ToRole="UserPhotoVideoClipLike" />
+    <NavigationProperty Name="PhotoVideoClips" Relationship="OceanusModel.FK_ScrapbookItems_aspnet_Users" FromRole="aspnet_Users" ToRole="PhotoVideoClip" />
+    <NavigationProperty Name="PhotoVideoClipDescriptions" Relationship="OceanusModel.FK_PhotoVideoClipDescription_aspnet_Users" FromRole="aspnet_Users" ToRole="PhotoVideoClipDescription" />
+    <NavigationProperty Name="UserProfiles" Relationship="OceanusModel.FK_UserProfile_aspnet_Users" FromRole="aspnet_Users" ToRole="UserProfile" />
+    <NavigationProperty Name="PhotoVideoClipComments" Relationship="OceanusModel.FK_PhotoVideoClipComments_aspnet_Users" FromRole="aspnet_Users" ToRole="PhotoVideoClipComment" />
+    <NavigationProperty Name="ArticleClips" Relationship="OceanusModel.FK_Articles_aspnet_Users" FromRole="aspnet_Users" ToRole="ArticleClip" />
+    <NavigationProperty Name="FacebookFriendLists" Relationship="OceanusModel.FK_FacebookFriendList_aspnet_Users" FromRole="aspnet_Users" ToRole="FacebookFriendList" />
+    <NavigationProperty Name="FacebookFriendLists1" Relationship="OceanusModel.FK_FacebookFriendList_aspnet_Users1" FromRole="aspnet_Users" ToRole="FacebookFriendList" />
+    <NavigationProperty Name="UserToUserFollowingMappings" Relationship="OceanusModel.FK_UserToUserFollowingMapping_aspnet_Users" FromRole="aspnet_Users" ToRole="UserToUserFollowingMapping" />
+    <NavigationProperty Name="UserToUserFollowingMappings1" Relationship="OceanusModel.FK_UserToUserFollowingMapping_aspnet_Users1" FromRole="aspnet_Users" ToRole="UserToUserFollowingMapping" />
+    <NavigationProperty Name="UserToTagFollowingMappings" Relationship="OceanusModel.FK_UserToTagFollowingMapping_aspnet_Users" FromRole="aspnet_Users" ToRole="UserToTagFollowingMapping" />
+  </EntityType>
+  <EntityType Name="UserLevel">
+    <Key>
+      <PropertyRef Name="UserLevelId" />
+    </Key>
+    <Property Type="Int32" Name="UserLevelId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="LevelName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserProfiles" Relationship="OceanusModel.FK_UserProfile_UserLevel" FromRole="UserLevel" ToRole="UserProfile" />
+  </EntityType>
+  <EntityType Name="Registration">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Email" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Type="Int32" Name="MessageId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Subject" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="InitialSendTimestamp" Nullable="false" />
+    <Property Type="DateTime" Name="LastUpdatedOn" Nullable="false" />
+    <Property Type="Boolean" Name="IsSpam" />
+    <Property Type="Guid" Name="InitiatingUserId" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_Message_aspnet_Users" FromRole="Message" ToRole="aspnet_Users" />
+    <NavigationProperty Name="MessageResponses" Relationship="OceanusModel.FK_MessageResponses_Message" FromRole="Message" ToRole="MessageRespons" />
+    <NavigationProperty Name="MessageVisibilities" Relationship="OceanusModel.FK_MessageVisibility_Message" FromRole="Message" ToRole="MessageVisibility" />
+  </EntityType>
+  <Association Name="FK_Message_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.Message" Role="Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="InitiatingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MessageResponses">
+    <Key>
+      <PropertyRef Name="MessageResponseId" />
+    </Key>
+    <Property Type="Int32" Name="MessageResponseId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="MessageId" Nullable="false" />
+    <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ContributionDate" Nullable="false" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_MessageResponses_aspnet_Users" FromRole="MessageRespons" ToRole="aspnet_Users" />
+    <NavigationProperty Name="Message" Relationship="OceanusModel.FK_MessageResponses_Message" FromRole="MessageRespons" ToRole="Message" />
+  </EntityType>
+  <Association Name="FK_MessageResponses_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.MessageResponses" Role="MessageRespons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="MessageRespons">
+        <PropertyRef Name="ContributingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MessageResponses_Message">
+    <End Type="OceanusModel.Message" Role="Message" Multiplicity="1" />
+    <End Type="OceanusModel.MessageResponses" Role="MessageRespons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="MessageId" />
+      </Principal>
+      <Dependent Role="MessageRespons">
+        <PropertyRef Name="MessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SixLooniesFriendConnection">
+    <Key>
+      <PropertyRef Name="SixLooniesFriendConnectionId" />
+    </Key>
+    <Property Type="Int64" Name="SixLooniesFriendConnectionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Guid" Name="FirstUserId" Nullable="false" />
+    <Property Type="Guid" Name="SecondUserId" Nullable="false" />
+    <Property Type="DateTime" Name="AddedOn" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_SixLooniesFriendConnections_aspnet_Users" FromRole="SixLooniesFriendConnection" ToRole="aspnet_Users" />
+    <NavigationProperty Name="aspnet_Users1" Relationship="OceanusModel.FK_SixLooniesFriendConnections_aspnet_Users1" FromRole="SixLooniesFriendConnection" ToRole="aspnet_Users" />
+  </EntityType>
+  <Association Name="FK_SixLooniesFriendConnections_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.SixLooniesFriendConnection" Role="SixLooniesFriendConnection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="SixLooniesFriendConnection">
+        <PropertyRef Name="FirstUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SixLooniesFriendConnections_aspnet_Users1">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.SixLooniesFriendConnection" Role="SixLooniesFriendConnection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="SixLooniesFriendConnection">
+        <PropertyRef Name="SecondUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SixLooniesPendingFriendRequest">
+    <Key>
+      <PropertyRef Name="SixLooniesPendingFriendRequestId" />
+    </Key>
+    <Property Type="Int64" Name="SixLooniesPendingFriendRequestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Guid" Name="InitiatingUserId" Nullable="false" />
+    <Property Type="Int64" Name="TargetFacebookUserUID" />
+    <Property Type="Guid" Name="TargetSixLooniesUserId" />
+    <Property Type="DateTime" Name="InitiatedOn" Nullable="false" />
+    <Property Type="Boolean" Name="IsDeclined" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_SixLooniesPendingFriendRequests_aspnet_Users" FromRole="SixLooniesPendingFriendRequest" ToRole="aspnet_Users" />
+    <NavigationProperty Name="aspnet_Users1" Relationship="OceanusModel.FK_SixLooniesPendingFriendRequests_aspnet_Users1" FromRole="SixLooniesPendingFriendRequest" ToRole="aspnet_Users" />
+  </EntityType>
+  <Association Name="FK_SixLooniesPendingFriendRequests_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.SixLooniesPendingFriendRequest" Role="SixLooniesPendingFriendRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="SixLooniesPendingFriendRequest">
+        <PropertyRef Name="InitiatingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SixLooniesPendingFriendRequests_aspnet_Users1">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="0..1" />
+    <End Type="OceanusModel.SixLooniesPendingFriendRequest" Role="SixLooniesPendingFriendRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="SixLooniesPendingFriendRequest">
+        <PropertyRef Name="TargetSixLooniesUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MessageVisibility">
+    <Key>
+      <PropertyRef Name="MessageVisibilityId" />
+    </Key>
+    <Property Type="Int32" Name="MessageVisibilityId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="MessageId" Nullable="false" />
+    <Property Type="Guid" Name="UserId" Nullable="false" />
+    <Property Type="DateTime" Name="AddedOn" Nullable="false" />
+    <Property Type="Boolean" Name="MessageIsUnread" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_MessageVisibility_aspnet_Users" FromRole="MessageVisibility" ToRole="aspnet_Users" />
+    <NavigationProperty Name="Message" Relationship="OceanusModel.FK_MessageVisibility_Message" FromRole="MessageVisibility" ToRole="Message" />
+  </EntityType>
+  <Association Name="FK_MessageVisibility_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.MessageVisibility" Role="MessageVisibility" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="MessageVisibility">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MessageVisibility_Message">
+    <End Type="OceanusModel.Message" Role="Message" Multiplicity="1" />
+    <End Type="OceanusModel.MessageVisibility" Role="MessageVisibility" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="MessageId" />
+      </Principal>
+      <Dependent Role="MessageVisibility">
+        <PropertyRef Name="MessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="NetworkConnectionPath">
+    <Property Type="Guid" Name="FromUID" Nullable="false" />
+    <Property Type="Guid" Name="ToUID" Nullable="false" />
+    <Property Type="Int32" Name="Distance" Nullable="false" />
+    <Property Type="String" Name="NetworkPath" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="FriendIntroductionRequest">
+    <Key>
+      <PropertyRef Name="FriendIntroRequestId" />
+    </Key>
+    <Property Type="Int32" Name="FriendIntroRequestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Subject" Nullable="false" MaxLength="512" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="InitialSendTimestamp" Nullable="false" />
+    <Property Type="Guid" Name="InitiatingUserId" Nullable="false" />
+    <Property Type="Guid" Name="ConnectingFriendUserId" Nullable="false" />
+    <Property Type="String" Name="MessageToConnectingFriend" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="ConnectingFriendHasReadMessage" Nullable="false" />
+    <Property Type="Guid" Name="TargetUserId" Nullable="false" />
+    <Property Type="String" Name="InitiatingUserMessageToTargetUser" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="ConnectingUserMessageToTargetUser" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="TargetUserHasReadMessage" Nullable="false" />
+    <Property Type="DateTime" Name="LastUpdatedOn" Nullable="false" />
+    <Property Type="Boolean" Name="IntroductionForwardedToTargetUser" Nullable="false" />
+    <Property Type="Boolean" Name="TargetUserHasAccepted" Nullable="false" />
+    <Property Type="String" Name="TargetUserMessageToInitUser" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="InitUserHasReadTargetUserAcceptance" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_FriendIntroductionRequests_aspnet_Users" FromRole="FriendIntroductionRequest" ToRole="aspnet_Users" />
+    <NavigationProperty Name="aspnet_Users1" Relationship="OceanusModel.FK_FriendIntroductionRequests_aspnet_Users1" FromRole="FriendIntroductionRequest" ToRole="aspnet_Users" />
+    <NavigationProperty Name="aspnet_Users2" Relationship="OceanusModel.FK_FriendIntroductionRequests_aspnet_Users2" FromRole="FriendIntroductionRequest" ToRole="aspnet_Users" />
+  </EntityType>
+  <Association Name="FK_FriendIntroductionRequests_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.FriendIntroductionRequest" Role="FriendIntroductionRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="FriendIntroductionRequest">
+        <PropertyRef Name="InitiatingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FriendIntroductionRequests_aspnet_Users1">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.FriendIntroductionRequest" Role="FriendIntroductionRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="FriendIntroductionRequest">
+        <PropertyRef Name="ConnectingFriendUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FriendIntroductionRequests_aspnet_Users2">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.FriendIntroductionRequest" Role="FriendIntroductionRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="FriendIntroductionRequest">
+        <PropertyRef Name="TargetUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PendingRegistration">
+    <Key>
+      <PropertyRef Name="membershipUserId" />
+    </Key>
+    <Property Type="Guid" Name="membershipUserId" Nullable="false" />
+    <Property Type="Guid" Name="confirmationKey" Nullable="false" />
+    <Property Type="DateTime" Name="initialRegistrationDate" Nullable="false" />
+    <Property Type="DateTime" Name="lastEmailNoticeDate" Nullable="false" />
+    <Property Type="Int32" Name="numberOfPastNoticeAttempts" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_PendingRegistrations_aspnet_Users" FromRole="PendingRegistration" ToRole="aspnet_Users" />
+  </EntityType>
+  <Association Name="FK_PendingRegistrations_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.PendingRegistration" Role="PendingRegistration" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="PendingRegistration">
+        <PropertyRef Name="membershipUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="aspnet_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+    <Property Type="Guid" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="Password" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="PasswordFormat" Nullable="false" />
+    <Property Type="String" Name="PasswordSalt" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="MobilePIN" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Email" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="LoweredEmail" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PasswordQuestion" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PasswordAnswer" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Type="Boolean" Name="IsApproved" Nullable="false" />
+    <Property Type="Boolean" Name="IsLockedOut" Nullable="false" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="false" />
+    <Property Type="DateTime" Name="LastLoginDate" Nullable="false" />
+    <Property Type="DateTime" Name="LastPasswordChangedDate" Nullable="false" />
+    <Property Type="DateTime" Name="LastLockoutDate" Nullable="false" />
+    <Property Type="Int32" Name="FailedPasswordAttemptCount" Nullable="false" />
+    <Property Type="DateTime" Name="FailedPasswordAttemptWindowStart" Nullable="false" />
+    <Property Type="Int32" Name="FailedPasswordAnswerAttemptCount" Nullable="false" />
+    <Property Type="DateTime" Name="FailedPasswordAnswerAttemptWindowStart" Nullable="false" />
+    <Property Type="String" Name="Comment" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK__aspnet_Me__UserI__22751F6C" FromRole="aspnet_Membership" ToRole="aspnet_Users" />
+  </EntityType>
+  <Association Name="FK__aspnet_Me__UserI__22751F6C">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.aspnet_Membership" Role="aspnet_Membership" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="aspnet_Membership">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="AddedOn" Nullable="false" />
+    <Property Type="Boolean" Name="IsVisibleOnListingPg" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_Categories_aspnet_Users" FromRole="Category" ToRole="aspnet_Users" />
+  </EntityType>
+  <Association Name="FK_Categories_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.Category" Role="Category" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Category">
+        <PropertyRef Name="ContributingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserWallPostComment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CommentText" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="ContributionDate" Nullable="false" />
+    <Property Type="Int32" Name="UserWallPostId" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_UserWallPostComments_aspnet_Users" FromRole="UserWallPostComment" ToRole="aspnet_Users" />
+    <NavigationProperty Name="UserWallPost" Relationship="OceanusModel.FK_UserWallPostComments_UserWallPosts" FromRole="UserWallPostComment" ToRole="UserWallPost" />
+  </EntityType>
+  <Association Name="FK_UserWallPostComments_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.UserWallPostComment" Role="UserWallPostComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserWallPostComment">
+        <PropertyRef Name="ContributingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="BookmarkMapping">
+    <Key>
+      <PropertyRef Name="BookmarkId" />
+    </Key>
+    <Property Type="Int64" Name="BookmarkId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Guid" Name="UserId" Nullable="false" />
+    <Property Type="Int64" Name="WebPageId" Nullable="false" />
+    <Property Type="DateTime" Name="AddedOn" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_BookmarkMappings_aspnet_Users" FromRole="BookmarkMapping" ToRole="aspnet_Users" />
+    <NavigationProperty Name="WebPage" Relationship="OceanusModel.FK_BookmarkMappings_WebPage" FromRole="BookmarkMapping" ToRole="WebPage" />
+  </EntityType>
+  <Association Name="FK_BookmarkMappings_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.BookmarkMapping" Role="BookmarkMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="BookmarkMapping">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="WebPageTagMapping">
+    <Key>
+      <PropertyRef Name="TagMappingId" />
+    </Key>
+    <Property Type="Int64" Name="TagMappingId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="TagId" Nullable="false" />
+    <Property Type="Int64" Name="WebPageId" Nullable="false" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="ContributionDate" Nullable="false" />
+    <NavigationProperty Name="WebPage" Relationship="OceanusModel.FK_WebPageTagMappings_WebPage" FromRole="WebPageTagMapping" ToRole="WebPage" />
+    <NavigationProperty Name="Tag" Relationship="OceanusModel.FK_WebPageTagMappings_Tags" FromRole="WebPageTagMapping" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="PhotoVideoClipTagMapping">
+    <Key>
+      <PropertyRef Name="ClipTagMappingId" />
+    </Key>
+    <Property Type="Int32" Name="ClipTagMappingId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="TagId" Nullable="false" />
+    <Property Type="Int64" Name="ClipId" Nullable="false" />
+    <Property Type="DateTime" Name="ContributionDate" Nullable="false" />
+    <NavigationProperty Name="PhotoVideoClip" Relationship="OceanusModel.FK_ClipTagMapping_PhotoVideoClips" FromRole="PhotoVideoClipTagMapping" ToRole="PhotoVideoClip" />
+    <NavigationProperty Name="Tag" Relationship="OceanusModel.FK_ClipTagMapping_Tags" FromRole="PhotoVideoClipTagMapping" ToRole="Tag" />
+  </EntityType>
+  <EntityType Name="WebPageShare">
+    <Key>
+      <PropertyRef Name="WebPageShareId" />
+    </Key>
+    <Property Type="Int64" Name="WebPageShareId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="WebPageId" Nullable="false" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="LastShareDate" Nullable="false" />
+    <Property Type="Int32" Name="NumShares" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_WebPageShares_aspnet_Users" FromRole="WebPageShare" ToRole="aspnet_Users" />
+    <NavigationProperty Name="WebPage" Relationship="OceanusModel.FK_WebPageShares_WebPage" FromRole="WebPageShare" ToRole="WebPage" />
+  </EntityType>
+  <Association Name="FK_WebPageShares_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.WebPageShare" Role="WebPageShare" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="WebPageShare">
+        <PropertyRef Name="ContributingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserWallPost">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="WallText" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="ContributionDate" Nullable="false" />
+    <Property Type="Int64" Name="WebPageId" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_UserWallPosts_aspnet_Users" FromRole="UserWallPost" ToRole="aspnet_Users" />
+    <NavigationProperty Name="UserWallPostComments" Relationship="OceanusModel.FK_UserWallPostComments_UserWallPosts" FromRole="UserWallPost" ToRole="UserWallPostComment" />
+    <NavigationProperty Name="WebPage" Relationship="OceanusModel.FK_UserWallPosts_WebPage" FromRole="UserWallPost" ToRole="WebPage" />
+  </EntityType>
+  <Association Name="FK_UserWallPosts_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.UserWallPost" Role="UserWallPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserWallPost">
+        <PropertyRef Name="ContributingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserWallPostComments_UserWallPosts">
+    <End Type="OceanusModel.UserWallPost" Role="UserWallPost" Multiplicity="1" />
+    <End Type="OceanusModel.UserWallPostComment" Role="UserWallPostComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserWallPost">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserWallPostComment">
+        <PropertyRef Name="UserWallPostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="WebPage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="WebDomainUrl" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PageUrl" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="LowerPageUrl" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PageTitle" Nullable="false" MaxLength="2048" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PageDescription" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="AddedOn" Nullable="false" />
+    <Property Type="Boolean" Name="IsFlaggedAsSpam" Nullable="false" />
+    <NavigationProperty Name="BookmarkMappings" Relationship="OceanusModel.FK_BookmarkMappings_WebPage" FromRole="WebPage" ToRole="BookmarkMapping" />
+    <NavigationProperty Name="UserWallPosts" Relationship="OceanusModel.FK_UserWallPosts_WebPage" FromRole="WebPage" ToRole="UserWallPost" />
+    <NavigationProperty Name="WebPageShares" Relationship="OceanusModel.FK_WebPageShares_WebPage" FromRole="WebPage" ToRole="WebPageShare" />
+    <NavigationProperty Name="WebPageTagMappings" Relationship="OceanusModel.FK_WebPageTagMappings_WebPage" FromRole="WebPage" ToRole="WebPageTagMapping" />
+    <NavigationProperty Name="UserWebPageLikes" Relationship="OceanusModel.FK_UserLikes_WebPage" FromRole="WebPage" ToRole="UserWebPageLike" />
+    <NavigationProperty Name="PhotoVideoClips" Relationship="OceanusModel.FK_PhotoVideoClips_WebPage" FromRole="WebPage" ToRole="PhotoVideoClip" />
+    <NavigationProperty Name="ArticleClips" Relationship="OceanusModel.FK_Story_WebPage" FromRole="WebPage" ToRole="ArticleClip" />
+  </EntityType>
+  <Association Name="FK_BookmarkMappings_WebPage">
+    <End Type="OceanusModel.WebPage" Role="WebPage" Multiplicity="1" />
+    <End Type="OceanusModel.BookmarkMapping" Role="BookmarkMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebPage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BookmarkMapping">
+        <PropertyRef Name="WebPageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserWallPosts_WebPage">
+    <End Type="OceanusModel.WebPage" Role="WebPage" Multiplicity="1" />
+    <End Type="OceanusModel.UserWallPost" Role="UserWallPost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebPage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserWallPost">
+        <PropertyRef Name="WebPageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WebPageShares_WebPage">
+    <End Type="OceanusModel.WebPage" Role="WebPage" Multiplicity="1" />
+    <End Type="OceanusModel.WebPageShare" Role="WebPageShare" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebPage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WebPageShare">
+        <PropertyRef Name="WebPageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WebPageTagMappings_WebPage">
+    <End Type="OceanusModel.WebPage" Role="WebPage" Multiplicity="1" />
+    <End Type="OceanusModel.WebPageTagMapping" Role="WebPageTagMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebPage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WebPageTagMapping">
+        <PropertyRef Name="WebPageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ArticleClipTagMapping">
+    <Key>
+      <PropertyRef Name="ClipTagMappingId" />
+    </Key>
+    <Property Type="Int64" Name="ClipTagMappingId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="TagId" Nullable="false" />
+    <Property Type="Int64" Name="ArticleClipId" Nullable="false" />
+    <Property Type="DateTime" Name="ContributionDate" Nullable="false" />
+    <NavigationProperty Name="Tag" Relationship="OceanusModel.FK_ArticleClipTagMapping_Tags" FromRole="ArticleClipTagMapping" ToRole="Tag" />
+    <NavigationProperty Name="ArticleClip" Relationship="OceanusModel.FK_ArticleClipTagMapping_Articles" FromRole="ArticleClipTagMapping" ToRole="ArticleClip" />
+  </EntityType>
+  <EntityType Name="PhotoVideoClipUserMapping">
+    <Key>
+      <PropertyRef Name="MappingId" />
+    </Key>
+    <Property Type="Int64" Name="MappingId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="PhotoVideoClipId" Nullable="false" />
+    <Property Type="Guid" Name="UserId" Nullable="false" />
+    <Property Type="DateTime" Name="ContributionDate" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_PhotoVideoClipUserMapping_aspnet_Users" FromRole="PhotoVideoClipUserMapping" ToRole="aspnet_Users" />
+    <NavigationProperty Name="PhotoVideoClip" Relationship="OceanusModel.FK_PhotoVideoClipUserMapping_PhotoVideoClips" FromRole="PhotoVideoClipUserMapping" ToRole="PhotoVideoClip" />
+  </EntityType>
+  <Association Name="FK_PhotoVideoClipUserMapping_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.PhotoVideoClipUserMapping" Role="PhotoVideoClipUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="PhotoVideoClipUserMapping">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ArticleClipUserMapping">
+    <Key>
+      <PropertyRef Name="MappingId" />
+    </Key>
+    <Property Type="Int32" Name="MappingId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="ArticleClipId" Nullable="false" />
+    <Property Type="Guid" Name="UserId" Nullable="false" />
+    <Property Type="DateTime" Name="ContributionDate" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_ArticleClipUserMapping_aspnet_Users" FromRole="ArticleClipUserMapping" ToRole="aspnet_Users" />
+    <NavigationProperty Name="ArticleClip" Relationship="OceanusModel.FK_ArticleClipUserMapping_ArticleClip" FromRole="ArticleClipUserMapping" ToRole="ArticleClip" />
+  </EntityType>
+  <Association Name="FK_ArticleClipUserMapping_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.ArticleClipUserMapping" Role="ArticleClipUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ArticleClipUserMapping">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserWebPageLike">
+    <Key>
+      <PropertyRef Name="UserLikesId" />
+    </Key>
+    <Property Type="Int32" Name="UserLikesId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="WebPageId" Nullable="false" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="AddedOn" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_UserLikes_aspnet_Users" FromRole="UserWebPageLike" ToRole="aspnet_Users" />
+    <NavigationProperty Name="WebPage" Relationship="OceanusModel.FK_UserLikes_WebPage" FromRole="UserWebPageLike" ToRole="WebPage" />
+  </EntityType>
+  <Association Name="FK_UserLikes_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.UserWebPageLike" Role="UserWebPageLike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserWebPageLike">
+        <PropertyRef Name="ContributingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserLikes_WebPage">
+    <End Type="OceanusModel.WebPage" Role="WebPage" Multiplicity="1" />
+    <End Type="OceanusModel.UserWebPageLike" Role="UserWebPageLike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebPage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserWebPageLike">
+        <PropertyRef Name="WebPageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ArticleComment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CommentText" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="ContributionDate" Nullable="false" />
+    <Property Type="Int64" Name="ArticleClipId" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_ArticleComments_aspnet_Users" FromRole="ArticleComment" ToRole="aspnet_Users" />
+    <NavigationProperty Name="ArticleClip" Relationship="OceanusModel.FK_ArticleComments_ArticleClip" FromRole="ArticleComment" ToRole="ArticleClip" />
+  </EntityType>
+  <Association Name="FK_ArticleComments_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.ArticleComment" Role="ArticleComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ArticleComment">
+        <PropertyRef Name="ContributingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserArticleClipLike">
+    <Key>
+      <PropertyRef Name="UserArticleClipLikeId" />
+    </Key>
+    <Property Type="Int64" Name="UserArticleClipLikeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="ArticleClipId" Nullable="false" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="AddedOn" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_UserArticleClipLikes_aspnet_Users" FromRole="UserArticleClipLike" ToRole="aspnet_Users" />
+    <NavigationProperty Name="ArticleClip" Relationship="OceanusModel.FK_UserArticleClipLikes_ArticleClip" FromRole="UserArticleClipLike" ToRole="ArticleClip" />
+  </EntityType>
+  <EntityType Name="UserPhotoVideoClipLike">
+    <Key>
+      <PropertyRef Name="UserClipLikeId" />
+    </Key>
+    <Property Type="Int64" Name="UserClipLikeId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="PhotoVideoClipId" Nullable="false" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="AddedOn" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_UserPhotoVideoClipLikes_aspnet_Users" FromRole="UserPhotoVideoClipLike" ToRole="aspnet_Users" />
+    <NavigationProperty Name="PhotoVideoClip" Relationship="OceanusModel.FK_UserPhotoVideoClipLikes_PhotoVideoClips" FromRole="UserPhotoVideoClipLike" ToRole="PhotoVideoClip" />
+  </EntityType>
+  <Association Name="FK_UserArticleClipLikes_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.UserArticleClipLike" Role="UserArticleClipLike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserArticleClipLike">
+        <PropertyRef Name="ContributingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPhotoVideoClipLikes_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.UserPhotoVideoClipLike" Role="UserPhotoVideoClipLike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserPhotoVideoClipLike">
+        <PropertyRef Name="ContributingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PhotoVideoClip">
+    <Key>
+      <PropertyRef Name="ClipId" />
+    </Key>
+    <Property Type="Int64" Name="ClipId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="WebPageId" Nullable="false" />
+    <Property Type="String" Name="SourceUrl" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ImageUrl" MaxLength="1024" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="VideoEmbedUrl" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="VideoId" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="VideoProviderId" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="ContributionDate" Nullable="false" />
+    <Property Type="Int16" Name="ImageWidth" />
+    <Property Type="Int16" Name="ImageHeight" />
+    <Property Type="Boolean" Name="ClipProcessed" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_ScrapbookItems_aspnet_Users" FromRole="PhotoVideoClip" ToRole="aspnet_Users" />
+    <NavigationProperty Name="PhotoVideoClipTagMappings" Relationship="OceanusModel.FK_ClipTagMapping_PhotoVideoClips" FromRole="PhotoVideoClip" ToRole="PhotoVideoClipTagMapping" />
+    <NavigationProperty Name="WebPage" Relationship="OceanusModel.FK_PhotoVideoClips_WebPage" FromRole="PhotoVideoClip" ToRole="WebPage" />
+    <NavigationProperty Name="PhotoVideoClipUserMappings" Relationship="OceanusModel.FK_PhotoVideoClipUserMapping_PhotoVideoClips" FromRole="PhotoVideoClip" ToRole="PhotoVideoClipUserMapping" />
+    <NavigationProperty Name="UserPhotoVideoClipLikes" Relationship="OceanusModel.FK_UserPhotoVideoClipLikes_PhotoVideoClips" FromRole="PhotoVideoClip" ToRole="UserPhotoVideoClipLike" />
+    <NavigationProperty Name="PhotoVideoClipDescriptions" Relationship="OceanusModel.FK_PhotoVideoClipDescription_PhotoVideoClips" FromRole="PhotoVideoClip" ToRole="PhotoVideoClipDescription" />
+    <NavigationProperty Name="PhotoVideoClipComments" Relationship="OceanusModel.FK_PhotoVideoClipComments_PhotoVideoClips" FromRole="PhotoVideoClip" ToRole="PhotoVideoClipComment" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="TagId" />
+    </Key>
+    <Property Type="Int32" Name="TagId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="TagName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="LowerCaseTagName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="AddedOn" Nullable="false" />
+    <NavigationProperty Name="ArticleClipTagMappings" Relationship="OceanusModel.FK_ArticleClipTagMapping_Tags" FromRole="Tag" ToRole="ArticleClipTagMapping" />
+    <NavigationProperty Name="PhotoVideoClipTagMappings" Relationship="OceanusModel.FK_ClipTagMapping_Tags" FromRole="Tag" ToRole="PhotoVideoClipTagMapping" />
+    <NavigationProperty Name="WebPageTagMappings" Relationship="OceanusModel.FK_WebPageTagMappings_Tags" FromRole="Tag" ToRole="WebPageTagMapping" />
+    <NavigationProperty Name="UserToTagFollowingMappings" Relationship="OceanusModel.FK_UserToTagFollowingMapping_Tags" FromRole="Tag" ToRole="UserToTagFollowingMapping" />
+  </EntityType>
+  <Association Name="FK_ArticleClipTagMapping_Tags">
+    <End Type="OceanusModel.Tag" Role="Tag" Multiplicity="1" />
+    <End Type="OceanusModel.ArticleClipTagMapping" Role="ArticleClipTagMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="TagId" />
+      </Principal>
+      <Dependent Role="ArticleClipTagMapping">
+        <PropertyRef Name="TagId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ScrapbookItems_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.PhotoVideoClip" Role="PhotoVideoClip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="PhotoVideoClip">
+        <PropertyRef Name="ContributingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClipTagMapping_PhotoVideoClips">
+    <End Type="OceanusModel.PhotoVideoClip" Role="PhotoVideoClip" Multiplicity="1" />
+    <End Type="OceanusModel.PhotoVideoClipTagMapping" Role="PhotoVideoClipTagMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhotoVideoClip">
+        <PropertyRef Name="ClipId" />
+      </Principal>
+      <Dependent Role="PhotoVideoClipTagMapping">
+        <PropertyRef Name="ClipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoVideoClips_WebPage">
+    <End Type="OceanusModel.WebPage" Role="WebPage" Multiplicity="1" />
+    <End Type="OceanusModel.PhotoVideoClip" Role="PhotoVideoClip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebPage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhotoVideoClip">
+        <PropertyRef Name="WebPageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoVideoClipUserMapping_PhotoVideoClips">
+    <End Type="OceanusModel.PhotoVideoClip" Role="PhotoVideoClip" Multiplicity="1" />
+    <End Type="OceanusModel.PhotoVideoClipUserMapping" Role="PhotoVideoClipUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhotoVideoClip">
+        <PropertyRef Name="ClipId" />
+      </Principal>
+      <Dependent Role="PhotoVideoClipUserMapping">
+        <PropertyRef Name="PhotoVideoClipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserPhotoVideoClipLikes_PhotoVideoClips">
+    <End Type="OceanusModel.PhotoVideoClip" Role="PhotoVideoClip" Multiplicity="1" />
+    <End Type="OceanusModel.UserPhotoVideoClipLike" Role="UserPhotoVideoClipLike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhotoVideoClip">
+        <PropertyRef Name="ClipId" />
+      </Principal>
+      <Dependent Role="UserPhotoVideoClipLike">
+        <PropertyRef Name="PhotoVideoClipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClipTagMapping_Tags">
+    <End Type="OceanusModel.Tag" Role="Tag" Multiplicity="1" />
+    <End Type="OceanusModel.PhotoVideoClipTagMapping" Role="PhotoVideoClipTagMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="TagId" />
+      </Principal>
+      <Dependent Role="PhotoVideoClipTagMapping">
+        <PropertyRef Name="TagId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WebPageTagMappings_Tags">
+    <End Type="OceanusModel.Tag" Role="Tag" Multiplicity="1" />
+    <End Type="OceanusModel.WebPageTagMapping" Role="WebPageTagMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="TagId" />
+      </Principal>
+      <Dependent Role="WebPageTagMapping">
+        <PropertyRef Name="TagId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PhotoVideoClipDescription">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="DescriptionText" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="ContributionDate" Nullable="false" />
+    <Property Type="Int64" Name="ClipId" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_PhotoVideoClipDescription_aspnet_Users" FromRole="PhotoVideoClipDescription" ToRole="aspnet_Users" />
+    <NavigationProperty Name="PhotoVideoClip" Relationship="OceanusModel.FK_PhotoVideoClipDescription_PhotoVideoClips" FromRole="PhotoVideoClipDescription" ToRole="PhotoVideoClip" />
+  </EntityType>
+  <Association Name="FK_PhotoVideoClipDescription_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.PhotoVideoClipDescription" Role="PhotoVideoClipDescription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="PhotoVideoClipDescription">
+        <PropertyRef Name="ContributingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoVideoClipDescription_PhotoVideoClips">
+    <End Type="OceanusModel.PhotoVideoClip" Role="PhotoVideoClip" Multiplicity="1" />
+    <End Type="OceanusModel.PhotoVideoClipDescription" Role="PhotoVideoClipDescription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhotoVideoClip">
+        <PropertyRef Name="ClipId" />
+      </Principal>
+      <Dependent Role="PhotoVideoClipDescription">
+        <PropertyRef Name="ClipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserProfileId" />
+    </Key>
+    <Property Type="Int32" Name="UserProfileId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Guid" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="FullName" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="NumThumbsUp" Nullable="false" />
+    <Property Type="Int32" Name="UserLevelId" Nullable="false" />
+    <Property Type="String" Name="FacebookToken" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int64" Name="FacebookUserUID" />
+    <Property Type="Boolean" Name="PromptUserForFBFriends" Nullable="false" />
+    <Property Type="Boolean" Name="IsConfirmed" Nullable="false" />
+    <Property Type="String" Name="UserProfileImageUrl" MaxLength="1024" FixedLength="false" Unicode="false" />
+    <Property Type="Boolean" Name="ShowGetStartedScreen" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_UserProfile_aspnet_Users" FromRole="UserProfile" ToRole="aspnet_Users" />
+    <NavigationProperty Name="UserLevel" Relationship="OceanusModel.FK_UserProfile_UserLevel" FromRole="UserProfile" ToRole="UserLevel" />
+  </EntityType>
+  <Association Name="FK_UserProfile_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProfile_UserLevel">
+    <End Type="OceanusModel.UserLevel" Role="UserLevel" Multiplicity="1" />
+    <End Type="OceanusModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserLevel">
+        <PropertyRef Name="UserLevelId" />
+      </Principal>
+      <Dependent Role="UserProfile">
+        <PropertyRef Name="UserLevelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PhotoVideoClipComment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int64" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="CommentText" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="ContributionDate" Nullable="false" />
+    <Property Type="Int64" Name="ClipId" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_PhotoVideoClipComments_aspnet_Users" FromRole="PhotoVideoClipComment" ToRole="aspnet_Users" />
+    <NavigationProperty Name="PhotoVideoClip" Relationship="OceanusModel.FK_PhotoVideoClipComments_PhotoVideoClips" FromRole="PhotoVideoClipComment" ToRole="PhotoVideoClip" />
+  </EntityType>
+  <Association Name="FK_PhotoVideoClipComments_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.PhotoVideoClipComment" Role="PhotoVideoClipComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="PhotoVideoClipComment">
+        <PropertyRef Name="ContributingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PhotoVideoClipComments_PhotoVideoClips">
+    <End Type="OceanusModel.PhotoVideoClip" Role="PhotoVideoClip" Multiplicity="1" />
+    <End Type="OceanusModel.PhotoVideoClipComment" Role="PhotoVideoClipComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhotoVideoClip">
+        <PropertyRef Name="ClipId" />
+      </Principal>
+      <Dependent Role="PhotoVideoClipComment">
+        <PropertyRef Name="ClipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ArticleClip">
+    <Key>
+      <PropertyRef Name="ArticleId" />
+    </Key>
+    <Property Type="Int64" Name="ArticleId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int64" Name="WebPageId" Nullable="false" />
+    <Property Type="String" Name="ArticleMarkup" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ShareArticleMarkup" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ArticleTitle" MaxLength="1024" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ArticleText" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ArticleType" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Type="Guid" Name="ContributingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="ContributionDate" Nullable="false" />
+    <Property Type="Boolean" Name="IsPublished" Nullable="false" />
+    <NavigationProperty Name="ArticleClipTagMappings" Relationship="OceanusModel.FK_ArticleClipTagMapping_Articles" FromRole="ArticleClip" ToRole="ArticleClipTagMapping" />
+    <NavigationProperty Name="ArticleClipUserMappings" Relationship="OceanusModel.FK_ArticleClipUserMapping_ArticleClip" FromRole="ArticleClip" ToRole="ArticleClipUserMapping" />
+    <NavigationProperty Name="ArticleComments" Relationship="OceanusModel.FK_ArticleComments_ArticleClip" FromRole="ArticleClip" ToRole="ArticleComment" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_Articles_aspnet_Users" FromRole="ArticleClip" ToRole="aspnet_Users" />
+    <NavigationProperty Name="WebPage" Relationship="OceanusModel.FK_Story_WebPage" FromRole="ArticleClip" ToRole="WebPage" />
+    <NavigationProperty Name="UserArticleClipLikes" Relationship="OceanusModel.FK_UserArticleClipLikes_ArticleClip" FromRole="ArticleClip" ToRole="UserArticleClipLike" />
+  </EntityType>
+  <Association Name="FK_ArticleClipTagMapping_Articles">
+    <End Type="OceanusModel.ArticleClip" Role="ArticleClip" Multiplicity="1" />
+    <End Type="OceanusModel.ArticleClipTagMapping" Role="ArticleClipTagMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleClip">
+        <PropertyRef Name="ArticleId" />
+      </Principal>
+      <Dependent Role="ArticleClipTagMapping">
+        <PropertyRef Name="ArticleClipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleClipUserMapping_ArticleClip">
+    <End Type="OceanusModel.ArticleClip" Role="ArticleClip" Multiplicity="1" />
+    <End Type="OceanusModel.ArticleClipUserMapping" Role="ArticleClipUserMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleClip">
+        <PropertyRef Name="ArticleId" />
+      </Principal>
+      <Dependent Role="ArticleClipUserMapping">
+        <PropertyRef Name="ArticleClipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArticleComments_ArticleClip">
+    <End Type="OceanusModel.ArticleClip" Role="ArticleClip" Multiplicity="1" />
+    <End Type="OceanusModel.ArticleComment" Role="ArticleComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleClip">
+        <PropertyRef Name="ArticleId" />
+      </Principal>
+      <Dependent Role="ArticleComment">
+        <PropertyRef Name="ArticleClipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Articles_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.ArticleClip" Role="ArticleClip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ArticleClip">
+        <PropertyRef Name="ContributingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Story_WebPage">
+    <End Type="OceanusModel.WebPage" Role="WebPage" Multiplicity="1" />
+    <End Type="OceanusModel.ArticleClip" Role="ArticleClip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WebPage">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArticleClip">
+        <PropertyRef Name="WebPageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserArticleClipLikes_ArticleClip">
+    <End Type="OceanusModel.ArticleClip" Role="ArticleClip" Multiplicity="1" />
+    <End Type="OceanusModel.UserArticleClipLike" Role="UserArticleClipLike" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArticleClip">
+        <PropertyRef Name="ArticleId" />
+      </Principal>
+      <Dependent Role="UserArticleClipLike">
+        <PropertyRef Name="ArticleClipId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FacebookFriendList">
+    <Key>
+      <PropertyRef Name="FacebookFriendListId" />
+    </Key>
+    <Property Type="Int32" Name="FacebookFriendListId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Guid" Name="UserId" Nullable="false" />
+    <Property Type="Int64" Name="FacebookFriendUID" Nullable="false" />
+    <Property Type="String" Name="FacebookFriendName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="FriendProfilePhotoUrl" MaxLength="1024" FixedLength="false" Unicode="true" />
+    <Property Type="Guid" Name="FacebookFriendSixLooniesUID" />
+    <Property Type="Boolean" Name="InvitedToSixLoonies" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_FacebookFriendList_aspnet_Users" FromRole="FacebookFriendList" ToRole="aspnet_Users" />
+    <NavigationProperty Name="aspnet_Users1" Relationship="OceanusModel.FK_FacebookFriendList_aspnet_Users1" FromRole="FacebookFriendList" ToRole="aspnet_Users" />
+  </EntityType>
+  <Association Name="FK_FacebookFriendList_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.FacebookFriendList" Role="FacebookFriendList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="FacebookFriendList">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FacebookFriendList_aspnet_Users1">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="0..1" />
+    <End Type="OceanusModel.FacebookFriendList" Role="FacebookFriendList" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="FacebookFriendList">
+        <PropertyRef Name="FacebookFriendSixLooniesUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserToUserFollowingMapping">
+    <Key>
+      <PropertyRef Name="FollowerMappingId" />
+    </Key>
+    <Property Type="Int64" Name="FollowerMappingId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Guid" Name="FollowedUserId" Nullable="false" />
+    <Property Type="Guid" Name="FollowingUserId" Nullable="false" />
+    <Property Type="DateTime" Name="AddedOn" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_UserToUserFollowingMapping_aspnet_Users" FromRole="UserToUserFollowingMapping" ToRole="aspnet_Users" />
+    <NavigationProperty Name="aspnet_Users1" Relationship="OceanusModel.FK_UserToUserFollowingMapping_aspnet_Users1" FromRole="UserToUserFollowingMapping" ToRole="aspnet_Users" />
+  </EntityType>
+  <Association Name="FK_UserToUserFollowingMapping_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.UserToUserFollowingMapping" Role="UserToUserFollowingMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserToUserFollowingMapping">
+        <PropertyRef Name="FollowedUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserToUserFollowingMapping_aspnet_Users1">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.UserToUserFollowingMapping" Role="UserToUserFollowingMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserToUserFollowingMapping">
+        <PropertyRef Name="FollowingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="UserToTagFollowingMapping">
+    <Key>
+      <PropertyRef Name="MappingId" />
+    </Key>
+    <Property Type="Int64" Name="MappingId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Guid" Name="FollowingUserId" Nullable="false" />
+    <Property Type="Int32" Name="TagId" Nullable="false" />
+    <Property Type="DateTime" Name="AddedOn" Nullable="false" />
+    <NavigationProperty Name="aspnet_Users" Relationship="OceanusModel.FK_UserToTagFollowingMapping_aspnet_Users" FromRole="UserToTagFollowingMapping" ToRole="aspnet_Users" />
+    <NavigationProperty Name="Tag" Relationship="OceanusModel.FK_UserToTagFollowingMapping_Tags" FromRole="UserToTagFollowingMapping" ToRole="Tag" />
+  </EntityType>
+  <Association Name="FK_UserToTagFollowingMapping_aspnet_Users">
+    <End Type="OceanusModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="OceanusModel.UserToTagFollowingMapping" Role="UserToTagFollowingMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserToTagFollowingMapping">
+        <PropertyRef Name="FollowingUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserToTagFollowingMapping_Tags">
+    <End Type="OceanusModel.Tag" Role="Tag" Multiplicity="1" />
+    <End Type="OceanusModel.UserToTagFollowingMapping" Role="UserToTagFollowingMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="TagId" />
+      </Principal>
+      <Dependent Role="UserToTagFollowingMapping">
+        <PropertyRef Name="TagId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,216 @@
+﻿@using Oceanus.Controllers
+@using SquishIt.Framework
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+    <title>Six Loonies</title>
+    <meta http-equiv="Page-Enter" content="blendTrans(Duration=0.05)">
+    <meta http-equiv="Page-Exit" content="blendTrans(Duration=0.05)">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    @{
+        @MvcHtmlString.Create(
+            Bundle.Css()
+                .Add("~/Content/main.css")
+                .Add("~/Content/Plugins/jquery.tiptip.css")
+                .Add("~/Content/Shared/sixloonies.paging.css")
+                .Add("~/Content/Plugins/jquery.autocomplete.css")
+                .Add("~/Content/Plugins/jquery.fancybox-1.3.4.css")
+                .Add("~/Content/Overlay/sixloonies.vendor.overlay.css")
+                .Add("~/Content/Overlay/sixloonies.general.overlay.css")
+                .Add("~/Content/Plugins/jquery.accordian.css")
+                .Add("~/Content/homepage.css")
+                .Add("~/Content/Plugins/validationEngine.jquery.css")
+                .Add("~/Content/Galleria/themes/galleriaclassic/galleria.classic.css")
+                .ForceRelease()
+                .Render("~/cache/sixloonies.home.layout.#.css")
+            );
+    }
+    <link href='http://fonts.googleapis.com/css?family=Comfortaa' rel='stylesheet' type='text/css'>
+    @{
+        @MvcHtmlString.Create(
+                Bundle.JavaScript()
+                .Add("~/Scripts/Plugins/jquery-1.6.1.min.js")
+                .Add("~/Scripts/Plugins/jquery.validate.min.js")
+                .Add("~/Scripts/Plugins/jquery.validate.unobtrusive.min.js")
+                .Add("~/Scripts/Plugins/jquery.easing.min.js")
+                .Add("~/Scripts/Plugins/jquery.easing.compatibility.js")
+                .Add("~/Scripts/Plugins/jquery.unobtrusive-ajax.min.js")
+                .Add("~/Scripts/Plugins/MVCControlToolkit.Controls-0.9.0.min.js")
+                .Render("~/cache/sixloonies.tools.#.js")
+            );
+    }
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.tipTip.minified.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.elastic.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.ui.custom.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.fancybox-1.3.4.pack.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.tinyscrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.validationEngine-en.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.validationEngine.js")"></script>
+    @{
+        @MvcHtmlString.Create(
+            Bundle.JavaScript()
+                .Add("~/Scripts/sixloonies.utils.js")
+                .Add("~/Scripts/sixloonies.helper.js")
+                .Add("~/Scripts/sixloonies.emptytext.js")
+                .Add("~/Scripts/sixloonies.vendor.add.js")
+                .Add("~/Scripts/sixloonies.homepage.js")
+                .Render("~/cache/sixloonies.home.shared.#.js")
+            );
+    }
+    <script type="text/javascript">
+        $(function () {
+            $('[title]').tipTip();
+        });
+
+        $(document).ready(function () {
+            $('textarea').elastic();
+        });
+
+        $(function () {
+            $(".searchinputstyle").emptyText("Search", "emptytextstyle");
+        });
+
+        var loggedin = @User.Identity.IsAuthenticated.ToString().ToLower();
+    </script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-25678729-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</head>
+<body>
+    <div id="bodycontainer">
+        <div class="striphomepageheader">
+            <div class="stripheadercontainer">
+                <div class="navcontainer">
+                    <div class="navmenu">
+                        <ul class="lavaLampBottomStyle" id="lavamenu">
+                            <li class="current"><a href="/">
+                                <img src="/images/sitetheme/home_icon.png" alt />Home</a></li>
+                            <li><a href="/listing" title="View all profiles from professionals and businesses">Browse
+                                All</a></li>
+                            @if (Request.IsAuthenticated)
+                            {   
+                                if (!Roles.IsUserInRole(Oceanus.Models.SixLooniesMembership.UserRoles.Moderator.ToString()) && !Roles.IsUserInRole(Oceanus.Models.SixLooniesMembership.UserRoles.SuperAdmin.ToString()))
+                                {                             
+                                    <text>@{Html.RenderAction("GetUserListingHeaderLink", "Account");}</text>                                                             
+                                }
+                                <li><a href="/account/profile?userid=@(Membership.GetUser().ProviderUserKey)" title="Your dashboard to Six Loonies">
+                                    myDashboard</a></li>
+                            }
+                            @if (Roles.IsUserInRole(Oceanus.Models.SixLooniesMembership.UserRoles.Moderator.ToString()) || Roles.IsUserInRole(Oceanus.Models.SixLooniesMembership.UserRoles.SuperAdmin.ToString()))
+                            {
+                                <li><a href="/admin" title="Manage updates to SixLoonies.com">Administration</a></li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <div class="session">
+                    @if (!Request.IsAuthenticated)
+                    {
+                        <text>@{Html.RenderPartial("_SignInHeader");}</text>
+                        <text>@{Html.RenderPartial("_JoinNowHeader");}</text>
+                    }
+                    else
+                    {
+                        string profileImageUrl = null;
+                        string profileFullName = null;
+
+                        if (System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_USER_PROFILE_IMG_KEY] != null)
+                        {
+                            HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_USER_PROFILE_IMG_KEY];
+                            profileImageUrl = cookie.Value;
+                        }
+                        if (System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_USER_PROFILE_FULLNAME_KEY] != null)
+                        {
+                            HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_USER_PROFILE_FULLNAME_KEY];
+                            profileFullName = cookie.Value;
+                        }
+                        
+                        <a id="userlogged">
+                            <img src="@((profileImageUrl == null || profileImageUrl.Trim().Equals(string.Empty)) ? "/Images/user_white.png" : profileImageUrl)" alt width="20px" height="20px" class="profileimg" /><span
+                                class="screenname">@(profileFullName)
+                            </span>
+                            <img src="/Images/scrollarrow_down.gif" alt width="12px" height="12px" />
+                        </a>
+                        <div id="usersessiondropdown" style="display: none">
+                            <div class="menulink">
+                                <a href="/account/profile?userId=@((Guid)Membership.GetUser().ProviderUserKey)">View
+                                    myDashboard</a>
+                            </div>
+                            <div class="menulink">
+                                <a href="/account/changepassword">Change My Password</a>
+                            </div>
+                            <div class="menulink">
+                                <a href="/account/logoff">Log Off</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="page">
+            <div class="parentcontainer">
+                <div class="bcontainer">
+                    <div id="fb-root">
+                    </div>
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            bool facebookPromptRequired = AccountController.PromptUserForFriends((Guid)Membership.GetUser().ProviderUserKey);
+                            if (facebookPromptRequired)
+                            {
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#fbfriendpromptlink').click();
+                            });
+                        </script>
+                        <a href="#fbexpandnetprompt" id="fbfriendpromptlink" style="display: none;"></a>
+                        <text>@{Html.RenderPartial("_FacebookExpandNetworkPrompt");}</text>
+                            }
+                        }
+                    }
+                    <script type="text/javascript" src="@Url.Content("/scripts/sixloonies.facebook.js")"></script>
+                    <div class="fullsect" id="notification">
+                    </div>
+                    <div class="homepageheader">
+                        <div class="logo">
+                            <div class="logoimg">
+                                <img src="/images/sitetheme/sixloonieslogo_lg.png" alt /></div>
+                            <div class="logotext">
+                                <img src="/images/sitetheme/logotext_lg.png" alt /></div>
+                        </div>
+                    </div>
+                    <a href="#promptlogin" class="btnbluestyle" id="loginbtn" style="display: none">
+                    </a>
+                    <div style="display: none;">
+                        <div class="generaloverlay" id="promptlogin">
+                            <text>@{Html.RenderPartial("_LoginForm");}</text>
+                        </div>
+                    </div>
+                    @RenderBody()
+                    @{Html.RenderAction("GetAddVendorForm", "Vendor");}
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <a class="FooterLinkStyle" href="/about">About</a> &nbsp; <span class="FooterPipeStyle">
+                |</span> &nbsp; <a class="FooterLinkStyle" href="/how">How it Works</a> &nbsp;
+            <span class="FooterPipeStyle">|</span> &nbsp;<a class="FooterLinkStyle" href="/contact">Contact</a>
+            &nbsp; <span class="FooterPipeStyle">|</span> &nbsp; <a class="FooterLinkStyle" href="/guidelines">
+                Etiquette</a> &nbsp; <span class="FooterPipeStyle">|</span> &nbsp; <a class="FooterLinkStyle"
+                    href="/terms">Terms</a> &nbsp; <span class="FooterPipeStyle">|</span> &nbsp;
+            <a class="FooterLinkStyle" href="/privacy">Privacy Policy</a> &nbsp;<span class="FooterPipeStyle">
+                |</span> &nbsp; <span class="FooterCopyrightStyle">© Six Loonies Inc.</span>
+        </div>
+    </div>
+</body>
+</html>

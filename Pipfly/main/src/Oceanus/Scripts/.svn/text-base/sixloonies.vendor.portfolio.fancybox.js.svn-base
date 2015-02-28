@@ -1,0 +1,89 @@
+﻿$(document).ready(function () {    
+
+    $(".editvendorportfolioimg").fancybox({
+        'autoscale': 'true',
+        'modal': false,
+        'showCloseButton': false,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $(".deletevendorportfolioimg").fancybox({
+        'autoscale': 'true',
+        'modal': false,
+        'showCloseButton': false,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $(".editvendorportfoliovid").fancybox({
+        'autoscale': 'true',
+        'modal': false,
+        'showCloseButton': false,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $(".deletevendorportfoliovid").fancybox({
+        'autoscale': 'true',
+        'modal': false,
+        'showCloseButton': false,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#addphotobtn").fancybox({
+        'autoscale': 'true',
+        'modal': false,
+        'showCloseButton': false,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#editphotobtn").fancybox({
+        'autoscale': 'true',
+        'modal': false,
+        'showCloseButton': false,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no',
+        'onComplete': function () {
+            try {
+                var oScrollbar = $('.editimageportfoliosect #editportfolioimgscrollpanel');
+                if (oScrollbar != null) {
+                    oScrollbar.tinyscrollbar_update();
+                }
+            }
+            catch (err) {
+            }
+            try {
+                var oVidScrollbar = $('.editimageportfoliosect #editportfoliovidscrollpanel');
+                if (oVidScrollbar != null) {
+                    oVidScrollbar.tinyscrollbar_update();
+                }
+            }
+            catch (err) {
+            }
+        }
+    });
+
+    $("#addToPortfolioBtn").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+});

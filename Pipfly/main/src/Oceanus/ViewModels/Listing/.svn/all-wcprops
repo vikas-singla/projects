@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/projects/!svn/ver/852/main/src/Oceanus/ViewModels/Listing
+END
+BaseListItemViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/projects/!svn/ver/852/main/src/Oceanus/ViewModels/Listing/BaseListItemViewModel.cs
+END
+ListingViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/projects/!svn/ver/604/main/src/Oceanus/ViewModels/Listing/ListingViewModel.cs
+END
+ListItemViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/projects/!svn/ver/841/main/src/Oceanus/ViewModels/Listing/ListItemViewModel.cs
+END

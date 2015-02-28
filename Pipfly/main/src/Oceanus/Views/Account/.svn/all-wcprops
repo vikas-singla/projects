@@ -1,0 +1,167 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/projects/!svn/ver/843/main/src/Oceanus/Views/Account
+END
+_PendingRegistrationEmail.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/projects/!svn/ver/776/main/src/Oceanus/Views/Account/_PendingRegistrationEmail.cshtml
+END
+SignIn.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/projects/!svn/ver/780/main/src/Oceanus/Views/Account/SignIn.cshtml
+END
+_UserRadar.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/projects/!svn/ver/656/main/src/Oceanus/Views/Account/_UserRadar.cshtml
+END
+_UserExpandNetwork.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/projects/!svn/ver/678/main/src/Oceanus/Views/Account/_UserExpandNetwork.cshtml
+END
+ConfirmRegistration.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/projects/!svn/ver/834/main/src/Oceanus/Views/Account/ConfirmRegistration.cshtml
+END
+_UserFriends.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/projects/!svn/ver/589/main/src/Oceanus/Views/Account/_UserFriends.cshtml
+END
+_UserListings.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/projects/!svn/ver/778/main/src/Oceanus/Views/Account/_UserListings.cshtml
+END
+_UserStats.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/projects/!svn/ver/725/main/src/Oceanus/Views/Account/_UserStats.cshtml
+END
+_UserProfile.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/projects/!svn/ver/778/main/src/Oceanus/Views/Account/_UserProfile.cshtml
+END
+_AddUserPhoto.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/projects/!svn/ver/780/main/src/Oceanus/Views/Account/_AddUserPhoto.cshtml
+END
+ChangePasswordSuccess.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/projects/!svn/ver/780/main/src/Oceanus/Views/Account/ChangePasswordSuccess.cshtml
+END
+_UserFriendsOnSixLoonies.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/projects/!svn/ver/503/main/src/Oceanus/Views/Account/_UserFriendsOnSixLoonies.cshtml
+END
+_UserProfileAudioReview.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/projects/!svn/ver/305/main/src/Oceanus/Views/Account/_UserProfileAudioReview.cshtml
+END
+_UserProfileReviews.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/projects/!svn/ver/592/main/src/Oceanus/Views/Account/_UserProfileReviews.cshtml
+END
+_RegisterForm.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/projects/!svn/ver/305/main/src/Oceanus/Views/Account/_RegisterForm.cshtml
+END
+_PendingFriendRequests.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/projects/!svn/ver/590/main/src/Oceanus/Views/Account/_PendingFriendRequests.cshtml
+END
+_UserConnectionToLoggedInUser.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/projects/!svn/ver/492/main/src/Oceanus/Views/Account/_UserConnectionToLoggedInUser.cshtml
+END
+ChangePassword.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/projects/!svn/ver/780/main/src/Oceanus/Views/Account/ChangePassword.cshtml
+END
+_UserProfileQuestions.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/projects/!svn/ver/592/main/src/Oceanus/Views/Account/_UserProfileQuestions.cshtml
+END
+_SignInForm.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/projects/!svn/ver/834/main/src/Oceanus/Views/Account/_SignInForm.cshtml
+END
+_UserFollowers.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/projects/!svn/ver/592/main/src/Oceanus/Views/Account/_UserFollowers.cshtml
+END
+_RegisterHeaderForm.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/projects/!svn/ver/417/main/src/Oceanus/Views/Account/_RegisterHeaderForm.cshtml
+END
+_UserListingsHeaderLink.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/projects/!svn/ver/860/main/src/Oceanus/Views/Account/_UserListingsHeaderLink.cshtml
+END
+_SignInHeaderForm.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/projects/!svn/ver/417/main/src/Oceanus/Views/Account/_SignInHeaderForm.cshtml
+END
+Register.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/projects/!svn/ver/4/main/src/Oceanus/Views/Account/Register.cshtml
+END
+_UserDashboard.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/projects/!svn/ver/834/main/src/Oceanus/Views/Account/_UserDashboard.cshtml
+END
+_UserProfileTextReview.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/projects/!svn/ver/753/main/src/Oceanus/Views/Account/_UserProfileTextReview.cshtml
+END

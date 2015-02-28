@@ -1,0 +1,228 @@
+﻿var addressLocId = -1;
+var regionLocId = -1;
+
+$(document).ready(function () {
+
+    $('#servicesAvailableInput').click(function () {
+        if ($(this).is(':checked')) {
+            show('#servicesAvailableDesc');
+            hide('#servicesNotAvailableDesc');
+        }
+        else {
+            hide('#servicesAvailableDesc');
+            show('#servicesNotAvailableDesc');
+        }
+    });
+
+    $('#physloctype').click(function () {
+        hide('#editvendorlocationformat');
+        show('#physlocform');
+        hide('#virtlocform');
+        $.fancybox.resize();
+
+        return false;
+    });
+
+    $('#virtloctype').click(function () {
+        hide('#editvendorlocationformat');
+        hide('#physlocform');
+        show('#virtlocform');
+        $.fancybox.resize();
+
+        return false;
+    });
+
+    $('.close').click(function () {
+        show('#editvendorlocationformat');
+        hide('#physlocform');
+        hide('#virtlocform');
+
+        return false;
+    });
+
+    $('#addregionbtnsubmit').click(function () {
+        var vid = $(this).attr("data-vid") + "";
+
+        createVendorLocation(vid);
+
+        return false;
+    });
+
+    $('.deleteaddress').click(function () {
+        var addressId = $(this).attr("data-address-id") + "";
+
+        deleteVendorLocation(addressId);
+
+        return false;
+    });
+
+    $('#addphyslocbtnsubmit').click(function () {
+        var vid = $(this).attr("data-vid") + "";
+
+        createAddressLocation(vid);
+
+        return false;
+    });
+
+    $("#cityInput").autocomplete({
+        minLength: 3,
+        source: function (request, response) {
+            $.ajax({
+                url: "/vendor/SearchCityLocationsAutoComplete", type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 15 },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.FullCityLocation, value: item.FullCityLocation, id: item.Id }
+                    }))
+                }
+            })
+        },
+        select: function (event, ui) {
+            addressLocId = ui.item.id;
+        },
+        open: function (e, ui) {
+            var 
+            acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        },
+        change: function (event, ui) {
+            if (!ui.item) {
+                if ($(".ui-autocomplete li:textEquals('" + $(this).val() + "')").size() == 0 && $(this).val() != $(this).attr("emptytext")) {
+                    // remove invalid value, as it didn't match anything
+                    relQuestId = -1;
+                    $(this).val("");
+                    $(this).data("autocomplete").term = "";
+                    $(this).blur();
+                    return false;
+                }
+            }
+        }
+    });
+
+    $("#virtCityInput").autocomplete({
+        minLength: 3,
+        source: function (request, response) {
+            $.ajax({
+                url: "/vendor/SearchCityLocationsAutoComplete", type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 15 },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.FullCityLocation, value: item.FullCityLocation, id: item.Id }
+                    }))
+                }
+            })
+        },
+        select: function (event, ui) {
+            regionLocId = ui.item.id;
+        },
+        open: function (e, ui) {
+            var 
+            acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        },
+        change: function (event, ui) {
+            if (!ui.item) {
+                if ($(".ui-autocomplete li:textEquals('" + $(this).val() + "')").size() == 0 && $(this).val() != $(this).attr("emptytext")) {
+                    // remove invalid value, as it didn't match anything
+                    relQuestId = -1;
+                    $(this).val("");
+                    $(this).data("autocomplete").term = "";
+                    $(this).blur();
+                    return false;
+                }
+            }
+        }
+    });
+});
+
+function deleteVendorLocation(addressId) {
+
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Locations/DeleteVendorLocation",
+        data: {
+            addressId: addressId
+        },
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Location could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function createVendorLocation(vendorId) {
+
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Locations/AddVendorLocation",
+        data: {
+            vendorId: vendorId,
+            addressLine1: '',
+            addressLine2: '',
+            cityRefId: regionLocId,
+            phone: ''
+        },
+        success: function (result) {
+            $.fancybox.close();
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Region could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function createAddressLocation(vendorId) {
+
+    var addressLine1 = $("#addressLine1Input").val();
+    var addressLine2 = $("#addressLine2Input").val();
+    var phone = $("#phoneInput").val();
+
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Locations/AddVendorLocation",
+        data: {
+            vendorId: vendorId,
+            addressLine1: addressLine1,
+            addressLine2: addressLine2,
+            cityRefId: addressLocId,
+            phone: phone
+        },
+        success: function (result) {
+            $.fancybox.close();
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Address could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}

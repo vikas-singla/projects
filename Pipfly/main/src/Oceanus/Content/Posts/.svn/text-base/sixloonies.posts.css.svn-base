@@ -1,0 +1,211 @@
+﻿.vendorposts
+{
+    width:100%;
+    display:block;
+}
+
+.vendorposts .textpost, .vendorposts .photopost, .vendorposts .videopost
+{
+    clear:both;
+    width:605px;
+    display:block;
+    margin:0px 5px 0px 5px;
+    padding-bottom:15px;
+    overflow:auto;
+}
+
+.vendorposts .photopost img
+{
+    border:none;
+    margin-bottom:10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.vendorposts .post .caption
+{
+    font-weight:normal;
+    font-size:12px;
+    padding-top:5px;
+}
+
+.vendorposts .post .postmenu
+{
+    font-weight:normal;
+    font-size:12px;
+    margin-top:10px;
+    padding:3px 0px;
+    text-align:right;
+}
+
+.vendorposts .post .postmenu .date
+{
+    color:#909090;
+    font-size:10px;
+    font-weight:normal;
+}
+
+.authorpostsect
+{
+    width: 565px;
+    margin: 0 auto 20px auto;
+    background-color: #fff;
+}
+
+.authorpostsect .postinput
+{
+    width: 559px;
+    margin: 5px auto;
+}
+
+.authorpostsect .options
+{
+    width: 100%;
+    overflow:auto;
+    padding: 5px 0px;
+}
+
+.authorpostsect .options .btns
+{
+    float: right;
+    text-align: right;
+}
+
+.postaligncenter
+{
+    position: absolute;
+    left: 250px;
+    margin-top: 4px;
+}
+
+
+#addphotopost .upload .uinput
+{
+    width: 543px;
+    padding: 10px;
+    background-color: #E9E9E9;
+    margin-top: 3px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#addphotopost .upload .uinput ul
+{
+    list-style-type: square;
+    margin-left: 20px;
+}
+
+#addphotopost .upload
+{
+    width: 100%;
+    clear: both;
+    padding-top: 10px;
+}
+
+#addphotopost .bold, #addvideopost .bold,  #addtextpost .bold
+{
+    color: #777;
+}
+
+#addphotopost .uinput ul li
+{
+    color: #777;
+}
+
+#add_photo_post_file_upload_container .uploadifyQueueItem
+{
+    background-color: #FFFFFF;
+    border: none;
+    border-bottom: 1px solid #E5E5E5;
+    font: 11px Verdana, Geneva, sans-serif;
+    height: 50px;
+    margin-top: 0;
+    padding: 10px;
+    width: 350px;
+}
+#add_photo_post_file_upload_container .uploadifyError
+{
+    background-color: #FDE5DD !important;
+    border: none !important;
+    border-bottom: 1px solid #FBCBBC !important;
+}
+
+#add_photo_post_file_upload_container .uploadifyQueueItem .cancel
+{
+    float: right;
+}
+
+#add_photo_post_file_upload_container .uploadifyQueue .completed
+{
+    color: #C5C5C5;
+}
+
+#add_photo_post_file_upload_container .uploadifyProgress
+{
+    background-color: #E5E5E5;
+    margin-top: 10px;
+    width: 100%;
+}
+
+#add_photo_post_file_upload_container .uploadifyProgressBar
+{
+    background-color: #0099FF;
+    height: 3px;
+    width: 1px;
+}
+
+#add_photo_post_file_upload_container #add_photo_post_file_queue
+{
+    border: 1px solid #C9C9C9;
+    background-color: #FFF;
+    height: 45px;
+    margin-bottom: 10px;
+    width: 543px;
+    overflow-y: auto;
+    -webkit-box-shadow: inset 0 1px 2px #d9d9d9;
+    -moz-box-shadow: 1px 1px 2px 1px #f2f2f2 inset;
+    box-shadow: inset 0 1px 2px #d9d9d9;
+}
+
+#add_photo_post_file_upload_container #add_photo_post_file_upload
+{
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+#addvideopost .addpostembedvid
+{
+    width: 100%;
+    clear: both;
+    padding-top: 10px;
+}
+
+#addvideopost .addpostembedvid .addpostmarkupinput
+{
+    background-color: #e9e9e9;
+    width: 543px;
+    clear: both;
+    margin-top: 3px;
+    font-weight: normal;
+    font-size: 12px;
+    display: block;
+    padding: 10px;
+    line-height: 12px;
+    color: #7e7e7e;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#addvideopost .addpostembedvid textarea
+{
+    width: 534px;
+    background-color: #fff;
+    color: #444;
+    resize: none;
+    margin-top: 10px;
+}

@@ -1,0 +1,67 @@
+﻿@model Oceanus.ViewModels.NetworkConnectionPathViewModel
+<div class="content">
+    <div class="overlaytitle">
+        Introduction to @(Model.TargetUserProfile.FullName)
+    </div>
+    <form id="frmAskForIntroMsg">
+        <div class="askintroppl">
+        <div class="askintrouser">
+            <div class="photo">
+                <a href="/account/profile?userId=@(Model.FromUID)">
+                    <img src="/images/user.jpg" width="70px" height="70px" alt />
+                </a>
+            </div>
+            <div class="name">
+                <a href="/account/profile?userId=@(Model.FromUID)">@(Model.FromUserProfile.FullName)</a>
+            </div>
+        </div>
+        <div class="askintroarrow">
+            <img src="/images/green_arrow_right.png" width="20px" height="20px" alt /></div>
+        <div class="askintrouser">
+            <div class="photo">
+                <a href="/account/profile?userId=@(Model.ConnectingFriendID)">
+                    <img src="/images/user.jpg" width="70px" height="70px" alt />
+                </a>
+            </div>
+            <div class="name">
+                <a href="/account/profile?userId=@(Model.ConnectingFriendID)">@(Model.ConnectingFriendName)</a>
+            </div>
+        </div>
+        <div class="askintroarrow">
+            <img src="/images/green_arrow_right.png" width="20px" height="20px" alt /></div>
+        <div class="askintrouser">
+            <div class="photo">
+                <a href="/account/profile?userId=@(Model.TargetUID)">
+                    <img src="/images/user.jpg" width="70px" height="70px" alt />
+                </a>
+            </div>
+            <div class="name">
+                <a href="/account/profile?userId=@(Model.TargetUID)">@(Model.TargetUserProfile.FullName)</a>
+            </div>
+        </div>
+    </div>
+        <div class="friendIntroComments">
+        <div class="bold">
+            Your message to @(Model.TargetUserProfile.FullName)
+        </div>
+        <textarea id="friendIntroTargetUserMsgInput" class="validate[required]" cols="1" rows="1"></textarea>
+    </div>
+        <div class="friendIntroComments">
+        <div class="bold">
+            Include a brief note for @(Model.ConnectingFriendName)
+        </div>
+        <textarea id="friendIntroConnectingUserMsgInput" class="validate[required]" cols="1" rows="1"></textarea>
+    </div>
+        <div class="askintrobtn">
+        <a href="#" class="btnbluestyle" data-sid="sendFriendIntroRequest" data-fuid="@(Model.ConnectingFriendID)" data-tuid="@(Model.TargetUID)" data-initUserName="@(Model.FromUserProfile.FullName)">Ask for Introduction</a>&nbsp; <a href="#" class="btnstyle close"
+            onclick="javascript: $.fancybox.close();$('#frmAskForIntroMsg').validationEngine('hideAll');return false;">Cancel</a></div>
+    </form>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $.fancybox.resize();
+        $('#friendIntroConnectingUserMsgInput').elastic();
+        $('#friendIntroTargetUserMsgInput').elastic();
+    });
+</script>

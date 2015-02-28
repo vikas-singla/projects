@@ -1,0 +1,326 @@
+﻿#promptlogin
+{
+    padding:5px 0px;
+}
+
+#promptlogin .smalltext
+{
+    color:#FF3030;
+    text-align:left;
+}
+
+#promptlogin .sectiontext
+{
+    font-variant:small-caps;
+    font-size:19px;
+    color:#444;
+    font-weight:bold;
+    text-align:left;
+}
+
+#promptlogin .registerleft
+{
+    margin-top:10px;
+    float:left;
+    width:283px;
+    padding-left:20px;
+    padding-right:20px;
+    border-right:2px solid #d9d9d9;
+}
+
+#promptlogin .signinright
+{
+    margin-top:10px;
+    float:left;
+    width:283px;
+    padding:right:20px;
+    padding-left:20px;    
+}
+
+#promptlogin .editor-label
+{
+    font-size:11px;
+    color:#707070;
+}
+
+.session
+{
+    width: 230px;
+    height: 100%;
+    position: relative;
+    display:block;
+    float: right;
+    z-index:999;
+}
+
+#userlogged, #userlogged:hover
+{
+    max-width:230px;
+    height:20px;
+    line-height:20px;
+    padding:10px 0px;
+    display:block;
+    vertical-align:top;
+    float:right;
+    color:#fff;
+    font-weight:bold;
+    text-align:center;
+    position:relative;
+}
+
+#userlogged .profileimg
+{
+    margin-right:6px;
+    height:20px;
+    width:20px;
+    vertical-align:top;
+    display:inline-block;
+}
+
+#userlogged .screenname
+{
+    clear:both;
+    line-height:20px;
+    height:20px;
+    font-weight:bold;
+    display:inline-block;
+}
+
+#userlogged img
+{
+    margin-left:4px;
+}
+
+.loginclose
+{
+    clear:both;
+    padding-top:10px;
+    width:100%;
+    text-align:center;
+}
+
+#joinowdisplay
+{
+    position:absolute;
+    top:0px;
+    right:90px;
+}
+
+#signindisplay
+{
+    position:absolute;
+    top:0px;
+    right:0px;
+}
+
+#signindisplay, #joinowdisplay, #signindisplay:hover, #joinowdisplay:hover
+{
+    text-align: center;
+    color: #fff;
+    vertical-align: top;
+    font-weight:bold;
+    padding: 10px 5px;
+    margin:0;
+    width: 80px;
+    height: 20px;
+    display:block;
+}
+
+#signindropdown .btnbluestyle, #registerdropdown .btnbluestyle
+{
+    box-shadow: 0 1px 2px #909090;
+    -webkit-box-shadow: 0 1px 2px #909090;
+}
+
+#signindropdown, #registerdropdown, #usersessiondropdown
+{
+    clear: both;
+    position: absolute;
+    top: 40px;
+    right: 0;
+    z-index: 999;
+    display:block;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background: #212121;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    zoom: 1;
+    padding:10px;
+    min-width: 160px;
+    min-height:20px;
+    max-height: 400px;
+    overflow:hidden;
+    color:#fff;
+}
+
+#usersessiondropdown
+{
+    padding:0px;
+}
+
+#usersessiondropdown .menulink
+{
+    width:100%;
+    text-decoration:none;
+    font-weight:normal;
+    padding:7px 7px;
+}
+
+#usersessiondropdown .menulink:hover
+{    
+    background: #3a3a3a;
+    font-weight:normal;
+}
+
+#usersessiondropdown .menulink a, #usersessiondropdown .menulink a:active, #usersessiondropdown .menulink a:hover, #usersessiondropdown .menulink a:visited
+{
+    color:#fff;
+    font-weight:normal;
+    font-size:12px;
+    text-decoration:none;
+    padding:3px;
+}
+
+#signindisplay img
+{
+    position: relative;
+    top: 2px;
+}
+
+#signindisplay:hover, #joinowdisplay:hover, #userlogged:hover, .sessionsel
+{
+    background: #2a2a2a;
+    text-decoration: none;
+    font-weight:bold;
+    background: -webkit-gradient(linear,left top,left bottom,from(#444),to(#2a2a2a));
+    background: -moz-linear-gradient(top,#444,#2a2a2a);
+}
+
+#signindisplay a:link, #joinowdisplay a:link
+{
+    color: white;
+}
+
+#signindisplay a:visited, #joinowdisplay a:visited
+{
+    color: white;
+}
+
+#signindisplay a:hover
+{
+    color: white;
+    text-decoration: underline;
+}
+
+.loginsect
+{
+    width: 950px;
+    padding: 5px;
+    display: block;
+    overflow: auto;
+    margin: 25px 0px 25px 0px;
+    text-align: left;
+}
+
+.loginsect .registersect
+{
+    width: 245px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid #d9d9d9;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    padding: 15px;
+    float: left;
+    background:transparent;
+}
+
+.loginsect .signinsect
+{
+    width: 245px;
+    padding: 15px;
+    margin-right: 10px;
+    float: left;
+}
+
+#facebooksigninbtn, #facebooksigninbtn2
+{
+    position:relative;
+    height:16px;
+    max-height:16px;
+    overflow:hidden;
+}
+
+#facebooksigninbtn img, #facebooksigninbtn2 img
+{
+    float:left;
+    position:relative;
+    padding:0px;
+    margin:0px;
+    padding-right:5px;
+}
+
+.signinsect .horizrule, .registersect .horizrule
+{
+    margin-top:20px;
+    margin-bottom:5px;
+    border-top:1px solid #777;
+    text-align:center;
+    position:relative;
+}
+
+.signinsect .horizrule span, .registersect .horizrule span
+{
+    position:relative;
+    padding:0px 5px;
+    top:-9px;
+    background:#212121;
+}
+
+.loginsect .socialsect
+{
+    width: 245px;
+    padding: 15px;
+    margin-right: 10px;
+    float: left;
+}
+
+.loginsect .titleplain
+{
+    width: 100%;
+    font-variant: small-caps;
+    font-size: 18px;
+    color: #444;
+    text-align: left;
+    padding: 5px 0px;
+    border-bottom: 2px solid #e0e0e0;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.loginsect .title
+{
+    width: 100%;
+    font-variant: small-caps;
+    font-size: 18px;
+    border-bottom: 2px solid #FF3030;
+    color: #444;
+    text-align: left;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.loginsect .title .text
+{
+    padding: 5px 2px 5px 2px;
+    text-align: left;
+}

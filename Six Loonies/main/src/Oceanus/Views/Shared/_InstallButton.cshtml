@@ -1,0 +1,106 @@
+﻿@model Oceanus.ViewModels.BaseUserViewModel
+@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/button/pipfly.button.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.button.#.css")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+        Bundle.JavaScript()
+        .Add("~/Scripts/pipfly.install.marklet.js")
+        .ForceRelease()
+        .Render("~/cache/pipfly.install.marklet.#.js")
+    );
+}
+<div class="buttoncontainer">
+    <div class="welcome">
+        @if (Model != null)
+        {
+            <b>@(Model.FirstName)</b><span>, welcome to Pipfly. You're awesome for choosing to sign-up!</span>
+            <div style="float: right;">
+                <a href="/welcome/2" class="btnbluestyle" style="font-size: 12px; padding: 5px 9px; margin: 0;
+                    text-shadow: none;">&raquo;&nbsp;Continue with Signup</a>
+            </div>
+        }
+    </div>
+    <div class="steps" id="chrome" style="display: none;">
+        To get started with clipping and sharing content from the web, install the 'Open
+        Pipfly' button bookmarklet by following the steps below:
+        <ol>
+            <li>Enable the <b>bookmarks bar</b> in Chrome by clicking on the Wrench Icon (in top-right
+                corner) > Bookmarks > Show Bookmarks Bar</li>
+            <li>Drag the 'Open Pipfly' button to the bookmarks bar</li>
+            <li>and that's it. Now, when you come across anything interesting on the web, click
+                on the 'Open Pipfly' button to start clipping and sharing content.</li>
+        </ol>
+    </div>
+    <div class="steps" id="safari" style="display: none;">
+        To get started with clipping and sharing content from the web, install the 'Open
+        Pipfly' button bookmarklet by following the steps below:
+        <ol>
+            <li>Enable the <b>bookmarks bar</b> in Safari by clicking on the Settings Icon (in top-right
+                corner) > Show Bookmarks Bar</li>
+            <li>Drag the 'Open Pipfly' button to the bookmarks bar</li>
+            <li>If prompted for a bookmark name, type 'Open Pipfly' and press OK</li>
+            <li>and that's it. Now, when you come across anything interesting on the web, click
+                on the 'Open Pipfly' button to start clipping and sharing content.</li>
+        </ol>
+    </div>
+    <div class="steps" id="firefox" style="display: none;">
+        To get started with clipping and sharing content from the web, install the 'Open
+        Pipfly' button bookmarklet by following the steps below:
+        <ol>
+            <li>Enable the <b>bookmarks bar</b> in Firefox by clicking on the Bookmarks Icon (in
+                top-right corner) > View Bookmarks Toolbar</li>
+            <li>Drag the 'Open Pipfly' button to the bookmarks bar</li>
+            <li>and that's it. Now, when you come across anything interesting on the web, click
+                on the 'Open Pipfly' button to start clipping and sharing content.</li>
+        </ol>
+    </div>
+    <div class="steps" id="ie9" style="display: none;">
+        To get started with clipping and sharing content from the web, install the 'Open
+        Pipfly' button bookmarklet by following the steps below:
+        <ol>
+            <li>Enable the <b>bookmarks bar</b> by right-clicking on the browser's toolbar and selecting
+                'Favorites Bar'</li>
+            <li>Drag the 'Open Pipfly' button to the bookmarks bar</li>
+            <li>and that's it. Now, when you come across anything interesting on the web, click
+                on the 'Open Pipfly' button to start clipping and sharing content.</li>
+        </ol>
+    </div>
+    <div class="steps" id="ie7" style="display: none;">
+        To get started with clipping and sharing content from the web, install the 'Open
+        Pipfly' button bookmarklet by following the steps below:
+        <ol>
+            <li>Enable the <b>bookmarks bar</b> by right-clicking on the browser's toolbar and selecting
+                'Bookmarks Bar'</li>
+            <li>Right-click on the 'Open Pipfly' button and select 'Add to Favorites'</li>
+            <li>In the 'Add to Favorites' form, select the 'Bookmarks Bar' folder and click on 'Add
+                Favorite' button</li>
+            <li>and that's it. Now, when you come across anything interesting on the web, click
+                on the 'Open Pipfly' button to start clipping and sharing content.</li>
+        </ol>
+    </div>
+    <div class="steps" id="ie8">
+    </div>
+    <div class="steps" id="notsupported" style="display: none;margin-top:-7px;margin-bottom:0;padding:5px;">
+        <img src="/images/error.png" alt style="position:relative;top:4px;margin-right:10px;" /><b>We're sorry but the Pipfly bookmarklet is currently not supported in your browser. </b>
+    </div>
+    <div class="btnshowcasecontainer">
+        <a href="javascript:void((function(){if(!document.sl_number){document.sl_number=Math.random()*99999999;var e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','//www.pipfly.com/scripts/pipfly.marklet.js?r='+document.sl_number);document.body.appendChild(e)}})());"
+            class="btnyellowstyle" style="padding: 10px 20px; font-size: 18px; font-weight: bold;">
+            Open Pipfly</a>
+        <br />
+        <img src="/images/arrow_up.png" alt />
+        <br />
+        Drag this button to your bookmarks bar in the web browser to begin using Pipfly.
+    </div>
+    <div class="btnshowcasevideo">
+        <div class="showcasetitle">See it in action:</div>
+        <iframe width="560" height="315" src="http://www.youtube.com/embed/8nR8DgoEtIA" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>

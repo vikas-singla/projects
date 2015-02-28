@@ -1,0 +1,55 @@
+﻿.PaginationControlMainTable
+{
+    width: auto;
+    text-align: center;
+    padding: 10px 10px 10px 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.PaginationPageNumLinkStyle, .PaginationPageNumLinkStyle:active, .PaginationPageNumLinkStyle:visited
+{
+    color: #004A7F;
+    font-size: 12px;
+    display: block;
+    border: 1px solid #d4d4d4;
+    padding: .3em .7em;
+    margin: 0 .38em 0 0;
+    text-align: center;
+}
+
+.PaginationCurrentPageNumLinkStyle, .PaginationCurrentPageNumLinkStyle:active, .PaginationCurrentPageNumLinkStyle:hover, .PaginationCurrentPageNumLinkStyle:visited
+{
+    color: #004A7F;
+    font-size: 12px;
+    display: block;
+    background: #E4EDF4;
+    border: 1px solid #004A7F;
+    padding: .3em .7em;
+    margin: 0 .38em 0 0;
+    text-align: center;
+}
+
+.PaginationPageNumLinkStyle:hover
+{
+    text-decoration: none;
+    background: #E4EDF4;
+    border: 1px solid #004A7F;
+    color: #004A7F;
+    font-size: 12px;
+    display: block;
+    padding: .3em .7em;
+    margin: 0 .38em 0 0;
+    text-align: center;
+}
+
+.PaginationPrevNextLinkStyle, .PaginationPrevNextLinkStyle:active, .PaginationPrevNextLinkStyle:hover, .PaginationPrevNextLinkStyle:visited
+{
+    color: #5DAE21;
+    font-weight: bold;
+    font-size: 12px;
+    display: block;
+    padding: .3em .7em;
+    margin: 0 .38em 0 0;
+    text-align: center;
+}

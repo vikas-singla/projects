@@ -1,0 +1,57 @@
+﻿@model Oceanus.ViewModels.MessageViewModel
+<link href="@Url.Content("~/Content/Messages/sixloonies.messages.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/scripts/sixloonies.messages.js"></script>
+@if (ViewBag.NotAuthorized)
+{
+    <div class="fullsect bold">You are not authorized to view this message.</div>
+}
+else
+{
+    <div class="breadcomb">
+        <a href="/">Home</a>&nbsp;&raquo;&nbsp;<a href="/account/profile?userid=@(ViewBag.UserId)">Messages</a>&nbsp;&raquo;&nbsp;<span>@(Model.Subject)</span>
+    </div>
+    <div class="fullsect msgdetails">
+        <div class="detailspanel">
+            <div class="subject">@(Model.Subject)</div>
+            <div class="msglist">
+                @foreach (var response in Model.MessageResponses)
+                {
+                    <div class="response">
+                        <div class="userpic">
+                            <img src="/images/user.jpg" width="50px" height="50px" alt />
+                        </div>
+                        <div class="responsedetails">
+                            <a class="username" href="/account/profile?userid=@(response.ContributingUserId)">@(response.ContributingUser.FullName)
+                            </a>
+                            <div class="datestamp">@(response.ContributionDate.ToString("MMMM d, yyyy"))
+                            </div>
+                            <div class="text">
+                                @foreach (var responseLine in (response.Text.Split('\n')))
+                                {
+                                @responseLine
+                                <br />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="responseinput">
+                <div class="responselbl">
+                    Add Your Reply
+                </div>
+                <form id="frmMsgDetailsReply">
+                    <div class="inputstyle">
+                        <textarea cols="1" rows="3" id="msgreplytextbox" class="validate[required]"></textarea>
+                    </div>
+                    <div class="links">
+                        <a href="#" class="btnbluestyle" data-sid="addmsgreplybtn" data-mid="@Model.MessageId">Add Reply</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="messagesidepanel">
+            @{Html.RenderAction("GetMessageParticipants", "Message", new { messageId = Model.MessageId });}
+        </div>
+    </div>
+}

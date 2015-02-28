@@ -1,0 +1,137 @@
+﻿$(document).ready(function () {
+
+    $('#admintabs li a').click(function () {
+        $('#admintabs li a').each(function () {
+            $(this).parent().attr("class", "");
+            var relToHide = $(this).attr("rel") + "";
+            hide(relToHide);
+        });
+
+        var rel = $(this).attr("rel") + "";
+        $(this).parent().attr("class", "selected");
+        show(rel);
+
+        return false;
+    });
+
+    $("#addreviewdimensionbtn").live('click', function () {
+        var categoryId = $(this).attr("data-cat-id") + "";
+        addReviewAttrDimension(categoryId);
+    });
+
+    $(".deletereviewattribute").live('click', function () {
+        var reviewAttributeId = $(this).attr("data-reviewattr-id") + "";
+        var categoryId = $(this).attr("data-cat-id") + "";
+        deleteReviewAttrDimension(reviewAttributeId, categoryId);
+    });
+
+    $(".editreviewdimension").live('click', function () {
+        var categoryId = $(this).attr("data-cid") + "";
+        $('#editreviewdimensioncontent').load("/admin/GetEditReviewAttributeConfigUI?categoryId=" + categoryId);
+    });
+});
+
+function AdminUpdateCategoryVisibility(chkboxname) {
+    PrepareSelectedAdminCategoryVisibilities();
+
+    var responseText = $.trim($('input:hidden[name="SelectedAdminCategoryVisibilities"]').val());
+
+    if (responseText == null || responseText == "") {
+        showErrorNotification('Error: Please select atleast one category.');
+        $("#" + chkboxname).attr("checked", "checked");
+    }
+    else {
+        $.ajax(
+        {
+            type: "POST",
+            dataType: 'json',
+            traditional: true,
+            url: "/Admin/UpdateCategoryVisibilityForListingPage",
+            data: {
+                SelectedCategories: responseText
+            },
+            async: false,
+            success: function (result) {
+                $('#adminconfig').load("/admin/GetAdminConfigUI");
+            },
+            error: function (req, status, error) {
+                showErrorNotification('Error: Could not update category visibility. Notify Administrator and try again later.');
+            }
+        });
+    }
+}
+
+function addReviewAttrDimension(categoryId) {
+    var attributeName = $("#addreviewattrinput").val() + "";
+    var attributeDesc = $("#addreviewattrdescinput").val() + "";
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Admin/AddReviewAttributeDimension",
+        data: {
+            categoryId: categoryId,
+            attributeName: attributeName,
+            attributeDesc: attributeDesc
+        },
+        success: function (result) {
+            if (result.result == "True") {
+                showSuccessNotification('Review dimension has been added.');
+                $('#editreviewdimensioncontent').load("/admin/GetEditReviewAttributeConfigUI?categoryId=" + categoryId);
+            }
+            else {
+                showErrorNotification(result.message);
+            }
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Review dimension could not be added. Please try again later.');
+        }
+    });
+}
+
+function deleteReviewAttrDimension(reviewAttributeId, categoryId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Admin/DeleteReviewAttribute",
+        data: {
+            attr: reviewAttributeId
+        },
+        success: function (result) {
+            if (result.result == "True") {
+                showSuccessNotification('Review dimension has been deleted.');
+                $('#editreviewdimensioncontent').load("/admin/GetEditReviewAttributeConfigUI?categoryId=" + categoryId);
+            }
+            else {
+                showErrorNotification(result.message);
+            }
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Review dimension could not be published. Please try again later.');
+        }
+    });
+}
+
+function updateReviewAttributeMappingUI() {
+    $('#reviewattrmappingsect').load("/admin/GetCategoryReviewAttributeMappings");
+}
+
+function PrepareSelectedAdminCategoryVisibilities() {
+
+    var hSelectedCategories = $('input:hidden[name="SelectedAdminCategoryVisibilities"]');
+    var chkSelectedCategories = $('input:checkbox[id^="adminChkCatVis_"]:checked');
+    var chkAllCategories = $('input:checkbox[id^="adminChkCatVis_"]');
+
+    // clear selected categories hidden field if all are selected
+    if (chkSelectedCategories.length == 0) {
+        hSelectedCategories.val("");
+    }
+    // get the selected categories and create a string array.
+    else {
+        chkSelectedCategories.each(function () {
+            hSelectedCategories.val(hSelectedCategories.val() + $(this).val() + ",");
+        });
+
+        // remove tailing comma
+        hSelectedCategories.val(hSelectedCategories.val().substring(0, hSelectedCategories.val().length - 1));
+    }
+}

@@ -1,0 +1,54 @@
+﻿@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/aboutus/sixloonies.aboutus.css")
+            .Add("~/Content/sixloonies.aboutus.menu.css")
+            .ForceRelease()
+            .Render("~/cache/sixloonies.aboutus.#.css")
+        );
+}
+<div class="breadcomb">
+    <div class="breadcombtext">
+        <a href="/">Home</a>&nbsp;&raquo;&nbsp;<span>What is Six Loonies?</span>
+    </div>
+    <div class="alignright">
+        <a href="#addVendorForm" class="btnyellowstyle" id="addvendorbtn" title="Don't see a professional or business that provides a service you know? Create a profile for them and start the buzz.">Add a Professional or Business</a>
+    </div>
+</div>
+<div class="fullsect">
+    <div class="aboutmenu">
+        <a href="/about" class="selaboutitem">What is Six Loonies?</a><a href="/how" class="aboutitem">How it Works</a> <a href="/contact"
+            class="aboutitem">Contact Us</a> <a href="/guidelines" class="aboutitem">Etiquette</a>
+        <a href="/terms" class="aboutitem">Terms</a> <a href="/privacy" class="aboutitem">Privacy</a>
+    </div>
+    <div class="aboutus">
+        <div class="heading">
+            What is Six Loonies?
+        </div>
+        <div class="subheader">
+            Our Mission
+        </div>
+        <div class="text">
+            Our goal is to connect you with professionals that can provide you the best service
+            that you are looking for.
+        </div>
+        <br />
+        <div class="subheader">
+            Find. Compare. Decide.
+        </div>
+        <div class="text">
+            We let you easily find local services and helps you connect with professionals and
+            business who provide these services. For example, if you are looking to find a photographer
+            to capture that wonderful memory, we will not only help you find top quality photographers
+            in your city, but will also help you make an educated choice.
+            <br />
+            <br />
+            Also, if you are a professional or a business, you can use Six Loonies to spread
+            the word about what you do - at absolutely no cost to you. Our platform is geared
+            only towards services, making sure you and your customers connect in a meaningful
+            and relevant environment.
+        </div>
+        <br />
+    </div>
+</div>

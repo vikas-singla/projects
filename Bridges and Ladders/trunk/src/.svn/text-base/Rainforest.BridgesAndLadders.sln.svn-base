@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Web Developer Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rainforest.BridgesAndLadders.Web", "Rainforest.BridgesAndLadders.Web\Rainforest.BridgesAndLadders.Web.csproj", "{D9107E7A-C156-4EFF-8759-AA73C1F88987}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rainforest.BridgesAndLadders.Common", "Rainforest.BridgesAndLadders.Common\Rainforest.BridgesAndLadders.Common.csproj", "{F990E19F-DDD4-4E0F-8866-714D99F40FAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rainforest.BridgesAndLadders.Admin.Web", "Rainforest.BridgesAndLadders.Admin.Web\Rainforest.BridgesAndLadders.Admin.Web.csproj", "{6E46A34B-BE14-46BA-93AB-FDE467F7BE63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rainforest.BridgesAndLadders.Data", "Rainforest.BridgesAndLadders.Data\Rainforest.BridgesAndLadders.Data.csproj", "{C71C4AD0-F042-4B76-B7FD-FE4BFF5D4FD6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9107E7A-C156-4EFF-8759-AA73C1F88987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9107E7A-C156-4EFF-8759-AA73C1F88987}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9107E7A-C156-4EFF-8759-AA73C1F88987}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9107E7A-C156-4EFF-8759-AA73C1F88987}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F990E19F-DDD4-4E0F-8866-714D99F40FAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F990E19F-DDD4-4E0F-8866-714D99F40FAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F990E19F-DDD4-4E0F-8866-714D99F40FAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F990E19F-DDD4-4E0F-8866-714D99F40FAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E46A34B-BE14-46BA-93AB-FDE467F7BE63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E46A34B-BE14-46BA-93AB-FDE467F7BE63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E46A34B-BE14-46BA-93AB-FDE467F7BE63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E46A34B-BE14-46BA-93AB-FDE467F7BE63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C71C4AD0-F042-4B76-B7FD-FE4BFF5D4FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C71C4AD0-F042-4B76-B7FD-FE4BFF5D4FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C71C4AD0-F042-4B76-B7FD-FE4BFF5D4FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C71C4AD0-F042-4B76-B7FD-FE4BFF5D4FD6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

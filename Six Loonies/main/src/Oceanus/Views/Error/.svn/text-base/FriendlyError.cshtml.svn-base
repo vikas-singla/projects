@@ -1,0 +1,8 @@
+﻿<link href="@Url.Content("~/Content/sixloonies.error.css")" rel="stylesheet" type="text/css" />
+@model Oceanus.ViewModels.ErrorMessageViewModel
+<div class="errorsect">
+    <div class="imgsect">
+        <img src="/images/dog_looking.jpg" width="250px" />
+    </div>
+    <div class="text">@(Model.Message)</div>
+</div>

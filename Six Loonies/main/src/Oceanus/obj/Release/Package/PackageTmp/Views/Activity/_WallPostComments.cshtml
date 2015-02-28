@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Oceanus.ViewModels.UserWallPostCommentViewModel>
+@if (Model != null && Model.Count() > 0)
+{
+    foreach (var WallPostComment in Model)
+    {
+    <div class="wallpostcomment">
+        <div style="clear: both; overflow: auto;">
+            <div class="postcommentuserimg" title="@(WallPostComment.ContributingUserProfile.FullName)">
+                <a href="/u/@(WallPostComment.ContributingUserProfile.Id)"><img src="@(WallPostComment.ContributingUserProfile.UserProfileImageUrl == null ? "/images/user.jpg" : WallPostComment.ContributingUserProfile.UserProfileImageUrl)" width="30px" alt /></a>
+            </div>
+            <div class="postcommentcontent">
+                @(WallPostComment.CommentText)
+                <div class="postcommentfooter">
+                    <a href="#" class="">Like</a><span>&nbsp;&#149;&nbsp;</span>
+                    @(WallPostComment.ContributionDate.ToString("MMMM d, yyyy"))
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+}
+<div class="newpostcomment">
+    @if (ViewBag.LoggedInUserProfileViewModel != null)
+    {
+        Oceanus.ViewModels.BaseUserViewModel loggedInUserViewModel = (Oceanus.ViewModels.BaseUserViewModel)ViewBag.LoggedInUserProfileViewModel;
+        
+        <div class="wallpostcomment">
+            <div style="clear: both; overflow: auto;">
+                <div class="postcommentuserimg" title="@(loggedInUserViewModel.FullName)">
+                    <img src="@(loggedInUserViewModel.UserProfileImageUrl == null ? "/images/user.jpg" : loggedInUserViewModel.UserProfileImageUrl)" width="30px" alt />
+                </div>
+                <div class="postcommentcontent">
+                    <textarea class="newpostcommentinput" data-post-id="@(ViewBag.WallPostId)" rows="1"></textarea>
+                    <div class="postcommentinputboxfooter">
+                        Press <span class="bold" style="color: #111">Enter</span> to post your comment</div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,64 @@
+﻿@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+            Bundle.Css()
+                .Add("~/Content/shared/pipfly.getstarted.css")
+                .ForceRelease()
+                .Render("~/cache/pipfly.getstarted.#.css")
+            );
+}
+@MvcHtmlString.Create(
+        Bundle.JavaScript()
+        .Add("~/Scripts/pipfly.user.invite.friends.js")
+        .Render("~/cache/pipfly.invitefriends.#.js")
+    );
+<div class="welcomeinvitecontainer" id="invitefriendscontainer">
+    <div class="welcome">
+        Invite your friends to Pipfly
+        <div style="float:right;">        
+            <a href="/" class="btnbluestyle" style="font-size: 12px; padding: 5px 9px;margin:0;text-shadow:none;">&raquo;&nbsp;Finish Signup</a>
+        </div>
+    </div>
+    <div style="overflow: auto; clear: both;">
+        <div class="leftpanel">
+            <div class="invitemenu">
+                <a id="invitefbmenuitem" href="#" rel="#invitefriendscontainer #ifacebook" class="invitemenuitem selinvitemenuitem">
+                    Facebook</a> <a href="#" rel="#invitefriendscontainer #iemail" class="invitemenuitem">
+                        Email</a>
+            </div>
+        </div>
+        <div class="rightpanel" id="ifacebook">
+            @{Html.RenderAction("UserProfileExpandNetwork", "Account");}
+        </div>
+        <div class="rightpanel" id="iemail" style="display: none;">
+            <div class="formfields">
+                <div class="formfield">
+                    <div class="lbl">
+                        To:</div>
+                    <div class="field">
+                        <input id="writeMessageToInput" />
+                    </div>
+                </div>
+                <br />
+                <div class="formfield">
+                    <div class="lbl">
+                        Message:
+                    </div>
+                    <div class="field">
+                        <textarea id="writeMessageBodyInput" class="validate[required]" style="min-height:70px;" rows="3" cols="1"></textarea>
+                    </div>
+                </div>
+                <br />
+                <div class="options">
+                    <div class="btns">
+                        <a href="#" class="btnbluestyle" id="sendemailinvitebtn">Send Invite</a> <a href="#"
+                            class="btnstyle" onclick="javascript: $.fancybox.close();">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wizardbtn">
+        <a href="/" class="btnbluestyle" style="font-size: 12px; padding: 5px 9px;">&raquo;&nbsp;Finish Signup</a>
+    </div>
+</div>

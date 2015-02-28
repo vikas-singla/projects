@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OceanusModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="OceanusModelStoreContainer">
+    <EntitySet Name="Categories" EntityType="OceanusModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PhysicalVendorLocations" EntityType="OceanusModel.Store.PhysicalVendorLocations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Reference_LocationStates" EntityType="OceanusModel.Store.Reference_LocationStates" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Registrations" EntityType="OceanusModel.Store.Registrations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ServicePackages" EntityType="OceanusModel.Store.ServicePackages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Services" EntityType="OceanusModel.Store.Services" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VendorImages" EntityType="OceanusModel.Store.VendorImages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Vendors" EntityType="OceanusModel.Store.Vendors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VirtualCitiesServed" EntityType="OceanusModel.Store.VirtualCitiesServed" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Categories_Categories" Association="OceanusModel.Store.FK_Categories_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Categories1" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceImages_Services" Association="OceanusModel.Store.FK_ServiceImages_Services">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="VendorImages" EntitySet="VendorImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServicePackages_Services" Association="OceanusModel.Store.FK_ServicePackages_Services">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="ServicePackages" EntitySet="ServicePackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceVendor" Association="OceanusModel.Store.FK_ServiceVendor">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="Services" EntitySet="Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorLocations_CityStatesLocations" Association="OceanusModel.Store.FK_VendorLocations_CityStatesLocations">
+      <End Role="Reference_LocationStates" EntitySet="Reference_LocationStates" />
+      <End Role="PhysicalVendorLocations" EntitySet="PhysicalVendorLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorLocations_Vendors" Association="OceanusModel.Store.FK_VendorLocations_Vendors">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="PhysicalVendorLocations" EntitySet="PhysicalVendorLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Vendors_Categories" Association="OceanusModel.Store.FK_Vendors_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Vendors" EntitySet="Vendors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VirtualCitiesServed_Reference_LocationStates" Association="OceanusModel.Store.FK_VirtualCitiesServed_Reference_LocationStates">
+      <End Role="Reference_LocationStates" EntitySet="Reference_LocationStates" />
+      <End Role="VirtualCitiesServed" EntitySet="VirtualCitiesServed" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VirtualCitiesServed_Vendors" Association="OceanusModel.Store.FK_VirtualCitiesServed_Vendors">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="VirtualCitiesServed" EntitySet="VirtualCitiesServed" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ParentCategory" Type="int" />
+  </EntityType>
+  <EntityType Name="PhysicalVendorLocations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="VendorId" Type="int" Nullable="false" />
+    <Property Name="RefLocationStateId" Type="int" Nullable="false" />
+    <Property Name="AddressLine1" Type="varchar(max)" Nullable="false" />
+    <Property Name="AddressLine2" Type="varchar(max)" />
+    <Property Name="City" Type="varchar(max)" Nullable="false" />
+    <Property Name="PostalCode" Type="varchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="varchar(max)" />
+    <Property Name="Fax" Type="varchar(max)" />
+    <Property Name="Latitude" Type="float" />
+    <Property Name="Longitude" Type="float" />
+    <Property Name="MapUrl" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Reference_LocationStates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="State" Type="varchar(max)" Nullable="false" />
+    <Property Name="Country" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Registrations">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ServicePackages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ServiceId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Price" Type="float" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Services">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="VendorId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" Nullable="false" />
+    <Property Name="ShortDescription" Type="varchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VendorImages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="vendorId" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar(max)" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="ImageUrl" Type="varchar(max)" Nullable="false" />
+    <Property Name="sourceWebsiteName" Type="varchar(max)" />
+    <Property Name="sourceWebsiteURL" Type="varchar(max)" />
+    <Property Name="copyrightAuthor" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Vendors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ImageUrl" Type="nvarchar(max)" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ShortDescription" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="WebsiteURL" Type="varchar(max)" />
+    <Property Name="Email" Type="varchar(max)" />
+    <Property Name="BusinessPhone" Type="varchar(max)" />
+    <Property Name="Fax" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="VirtualCitiesServed">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="vendorId" Type="int" Nullable="false" />
+    <Property Name="city" Type="varchar(max)" Nullable="false" />
+    <Property Name="LocationStatesId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Categories_Categories">
+    <End Role="Categories" Type="OceanusModel.Store.Categories" Multiplicity="0..1" />
+    <End Role="Categories1" Type="OceanusModel.Store.Categories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Categories1">
+        <PropertyRef Name="ParentCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceImages_Services">
+    <End Role="Vendors" Type="OceanusModel.Store.Vendors" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="VendorImages" Type="OceanusModel.Store.VendorImages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VendorImages">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServicePackages_Services">
+    <End Role="Services" Type="OceanusModel.Store.Services" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ServicePackages" Type="OceanusModel.Store.ServicePackages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ServicePackages">
+        <PropertyRef Name="ServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceVendor">
+    <End Role="Vendors" Type="OceanusModel.Store.Vendors" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Services" Type="OceanusModel.Store.Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Services">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorLocations_CityStatesLocations">
+    <End Role="Reference_LocationStates" Type="OceanusModel.Store.Reference_LocationStates" Multiplicity="1" />
+    <End Role="PhysicalVendorLocations" Type="OceanusModel.Store.PhysicalVendorLocations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reference_LocationStates">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicalVendorLocations">
+        <PropertyRef Name="RefLocationStateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorLocations_Vendors">
+    <End Role="Vendors" Type="OceanusModel.Store.Vendors" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PhysicalVendorLocations" Type="OceanusModel.Store.PhysicalVendorLocations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicalVendorLocations">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Vendors_Categories">
+    <End Role="Categories" Type="OceanusModel.Store.Categories" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Vendors" Type="OceanusModel.Store.Vendors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Vendors">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VirtualCitiesServed_Reference_LocationStates">
+    <End Role="Reference_LocationStates" Type="OceanusModel.Store.Reference_LocationStates" Multiplicity="1" />
+    <End Role="VirtualCitiesServed" Type="OceanusModel.Store.VirtualCitiesServed" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reference_LocationStates">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VirtualCitiesServed">
+        <PropertyRef Name="LocationStatesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VirtualCitiesServed_Vendors">
+    <End Role="Vendors" Type="OceanusModel.Store.Vendors" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="VirtualCitiesServed" Type="OceanusModel.Store.VirtualCitiesServed" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VirtualCitiesServed">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

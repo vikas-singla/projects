@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Oceanus.ViewModels.SixLooniesFriendConnectionViewModel>
+@using Oceanus.ViewModels
+<link href="@Url.Content("~/Content/user/sixloonies.expand.network.friends.css")" rel="stylesheet" type="text/css" />
+<div class="fullsect" id="expandnetworksect">
+    @if (Model != null && Model.Count() > 0)
+    {
+        foreach (var friend in Model)
+        {
+            Guid guidOfUserProfile = ViewBag.UserId;
+            Guid friendGuid = (friend.FirstUserId == guidOfUserProfile) ? friend.SecondUserId : friend.FirstUserId;
+            UserProfileViewModel friendUserProfile = (friend.FirstUserId == guidOfUserProfile) ? friend.SecondUserProfile : friend.FirstUserProfile;
+            
+            <div class="friend">
+                <div class="details">
+                    <div class="leftalign">
+                        <div class="photo">
+                            <img src="/images/user.jpg" width="50px" height="50px" alt title="@(friendUserProfile.FullName)" />
+                        </div>
+                        <div class="name">
+                            @(friendUserProfile.FullName)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>You currently have 0 connections to other people on Six Loonies.</p>
+    }
+</div>

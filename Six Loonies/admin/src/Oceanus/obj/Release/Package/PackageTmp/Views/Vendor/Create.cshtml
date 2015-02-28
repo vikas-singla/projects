@@ -1,0 +1,152 @@
+﻿@model Oceanus.ViewModels.VendorViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+@*<script type="text/javascript">
+
+    function reloadVendorImage() {
+
+        $('#VendorImage').load("/VendorImage/IndexPartialFiltered?vendorId=" + $('#vid').text().trim());
+    }
+</script>
+*@
+
+<script src="@Url.Content("~/Scripts/vendorformwizard.js")" type="text/javascript"></script>
+<div id="wizard">
+    <ul id="mainNav" class="threeStep">
+        <li><a class="wizard_link" title="" step="1"><em>1. Vendor</em><span>Basic Information</span></a></li>
+        <li><a class="wizard_link" title="" step="2" id="wizard_2"><em>2: Services</em><span>Inventory
+            of Services</span></a></li>
+        <li style="background-image: none;"><a class="wizard_link" title="" step="3" id="wizard_3">
+            <em>3: Locations</em><span>Business Locations</span></a></li>
+    </ul>
+    <div style="clear: both">
+    </div>
+    <div id="vid" class="hiddenfield">&nbsp;
+    </div>
+    <div id="sid" class="hiddenfield">&nbsp;
+    </div>
+    <div id="wizardcontentwrap">
+        <div class="wizardcontent" id="step_1">
+            <form name="vendor" action="">
+            <fieldset>
+                <!-- category -->
+                <div>
+                    <div class="editor-label">
+                        Vendor Name
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Name, new { id = "vendorName" })
+                        <label class="error" for="vendorName" id="vendorName_error">
+                            This field is required.</label>
+                    </div>
+                    <div class="editor-label">
+                        Short Description
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextAreaFor(model => model.ShortDescription, new { id = "vendorShortDesc", cols = "80%" })
+                        <label class="error" for="vendorShortDesc" id="vendorShortDesc_error">
+                            This field is required.</label>
+                    </div>
+                    <div class="editor-label">
+                        Full Description
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextAreaFor(model => model.Description, new { id = "vendorFullDesc", cols = "80%" })
+                        <label class="error" for="vendorFullDesc" id="vendorFullDesc_error">
+                            This field is required.</label>
+                    </div>
+                    <div class="editor-label">
+                        Website URL
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Website, new { id = "vendorWebsite" })
+                    </div>
+                    <div class="editor-label">
+                        Email Address
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Email, new { id = "vendorEmail" })
+                    </div>
+                    <div class="editor-label">
+                        Business Phone
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.BusinessPhone, new { id = "vendorBusPhone" })
+                    </div>
+                    <div class="editor-label">
+                        Business Fax
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Fax, new { id = "vendorFax" })
+                    </div>
+                    <br />
+                    <br />
+                    <div>
+                        <a id="service_portfolio_link" href="#">Create Portfolio Image</a>
+                    </div>
+                    <div id="VendorImage">
+                        @Html.Action("IndexPartial", "VendorImage", new { vendorId = Model.Id })
+                    </div>
+                    <br />
+                    <br />
+                    <p>
+                        <input type="submit" value="Next" id="vendorSubmitBtn" />
+                    </p>
+                </div>
+                <br />
+            </fieldset>
+            </form>
+        </div>
+        <div class="wizardcontent" id="step_2">
+            <br />
+            <br />
+            <div id="serviceAdd">
+                @Html.Action("CreatePartial", "Service")
+            </div>
+            <div id="serviceList">
+                <p>
+                    There are currently no services associated with this vendor.</p>
+            </div>
+            <br />
+            <br />
+            <p>
+                <input type="submit" value="Next " id="servicesSubmitBtn" />
+            </p>
+        </div>
+        <div class="wizardcontent" id="step_3">
+            <br />
+            <br />
+            <div id="PhysLocs">
+                <div id="physicalVendorLocationsListAdd">
+                    @Html.Action("CreatePartial", "PhysicalLocations")
+                </div>
+                <br />
+                <br />
+                <div id="physicalVendorLocationsList">
+                    <p>
+                        There are currently no physical locations associated with vendor.</p>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div id="VirtLocs">
+                <div id="virtualVendorLocationsListAdd">
+                    @Html.Action("CreatePartial", "VirtualLocation")
+                </div>
+                <br />
+                <br />
+                <div id="virtualVendorLocationsList">
+                    <p>
+                        There are currently no virtual locations associated with vendor.</p>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div>
+                <input type="button" onclick="javascript: window.location = '/vendor';" value="Finish Vendor Create" />
+            </div>
+        </div>
+    </div>
+</div>

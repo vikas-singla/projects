@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Oceanus.ViewModels.VendorViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<script src="@Url.Content("~/Scripts/jquery.confirm.js")" type="text/javascript"></script>
+<script type="text/javascript">
+
+$(document).ready(function () {
+
+    $('.vendordelete').confirm();
+
+});
+
+</script>
+
+@if (Model == null || Model.Count() == 0)
+{ 
+    <p>There are currently no vendors.</p>
+}
+else
+{ 
+    @Html.Partial("_Create")
+}
+
+
+<table>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @item.Name
+        </td>
+        
+        @if (User.Identity.IsAuthenticated){
+            
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Vendor", new { id = item.Id }, null)
+            </td>
+            <td>
+                @* 
+                    Should not use links to perform deletes
+                    http://stephenwalther.com/blog/archive/2009/01/21/asp.net-mvc-tip-46-ndash-donrsquot-use-delete-links-because.aspx
+                *@
+                @using (Html.BeginForm("Delete", "Vendor", new { id = item.Id }))
+                {
+                    <input class="vendordelete" type="image" src="/Images/delete.png" alt="X" />
+                }
+            </td>
+        }
+    </tr>
+}
+
+</table>
+
+@if ((Model == null || Model.Count() == 0))
+{ 
+    @Html.Partial("_Create")
+}

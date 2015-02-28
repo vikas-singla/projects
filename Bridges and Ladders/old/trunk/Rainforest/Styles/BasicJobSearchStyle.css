@@ -1,0 +1,55 @@
+﻿body
+{
+}
+
+.textbox_basicJobSearchFieldStyle
+{
+    border-color: #C0C0C0;
+    background-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+    width:180px;
+    color:#242424;
+}
+
+.watermark_basicJobSearchFieldStyle
+{
+    border-color: #C0C0C0;
+    border-style: solid;
+    border-width: 1px;
+    background-color:#ffffff;
+    width:180px;
+    color:#A5A5A5;
+}
+
+.lbl_basicjobsearchstyle
+{
+    color: #808080;
+    background-color: transparent;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.btn_basicjobsearchStyle
+{
+    background-image:url('/Assets/Images/btn_gray_background.png');
+    background-repeat:repeat-x;
+    width:50px;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    text-decoration: none;
+    height:22px;
+    border:none;
+    cursor:pointer;
+    margin:0;
+    outline:0;
+    padding:0 6px;
+    border-style:ridge;
+    border-color:#d4d4d4;
+    border-width:1px;
+    vertical-align:top;
+}

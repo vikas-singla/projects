@@ -1,0 +1,45 @@
+﻿@using Oceanus.Data
+@using Oceanus.ViewModels
+@using Oceanus.ViewModels.Shared
+@model IEnumerable<SearchUserViewModel>
+<link href="@Url.Content("~/Content/search/pipfly.search.css")" rel="stylesheet" type="text/css" />
+<div class="searchresults">
+    <div class="section" style="margin-top: 0">
+        <div class="sectiontitle">
+            <div class="titletext" style="padding:10px;">
+                Search Results for '@(ViewBag.SearchTerm)'</div>
+        </div>
+        <div class="searchresultsmenu">
+            <a href="/search/?q=@(Url.Encode(ViewBag.SearchTerm))&page=1&perpage=25" class="searchmenuitem">
+                Topics</a> <a href="#" class="searchmenuitem selsearchmenuitem">People</a>
+        </div>
+        <div class="searchresultscontainer">
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var user in Model)
+                {
+                <div class="result">
+                    <div class="searchuserimg">
+                        <a href="/account/profile?id=@(user.Id)">
+                            <img src="@((user.UserProfileImageUrl == null || user.UserProfileImageUrl.Trim().Equals(string.Empty)) ? "/Images/user.jpg" : user.UserProfileImageUrl)" width="40px" /></a>
+                    </div>
+                    <div class="searchuserdetails">
+                        <div>
+                            <a href="/u/@(user.Id)" class="username">@(user.FullName)</a>
+                        </div>
+                        <div class="userstats">
+                            @(user.UserStats.NumClips)
+                            clips&nbsp;&#149;&nbsp;@(user.UserStats.NumLikes)
+                            likes
+                        </div>
+                    </div>
+                </div>
+                }
+            }
+            else
+            {
+                <div class="noresults">No results found for '@(ViewBag.SearchTerm)'.</div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,128 @@
+﻿var qTitleEmptyText = "Input your question here (e.g. Why is the sky blue?)";
+var qDetailEmptyText = "Enter any additional details about your question";
+var qSearchEmptyText = "Have a question? Search or ask it here";
+
+$(document).ready(function () {
+    $("#frmSixAnswersAskQuestion").validationEngine({ promptPosition: "topRight", scroll: false });
+
+    $('#askQuestionBtnSubmit').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        clearDefaultIfEmpty('questiontitle', qTitleEmptyText);
+
+        if ($('#frmSixAnswersAskQuestion').validationEngine('validate')) {
+
+            $('#frmSixAnswersAskQuestion').validationEngine('hideAll');
+            $('#frmSixAnswersAskQuestion').validationEngine('detach');
+            createQuestion();
+        }
+        return false;
+    });
+
+    $('#askquestionbtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        if ($('#searchquestinput').val() != qSearchEmptyText) {
+            $('#questiontitle').val($('#searchquestinput').val());
+        }
+
+        return false;
+    });
+
+    $("#askquestionbtn").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#searchquestinput").keypress(function () {
+        var hTerm = $('input:hidden[name="Term"]');
+        hTerm.attr("value", $(this).val());
+    });
+
+    $("#searchquestinput").autocomplete({
+        minLength: 0,
+        source: function (request, response) {
+
+            $.ajax({
+                url: "/answers/SearchQuestionsAutoComplete", type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.QuestionTitle, value: item.QuestionTitle, id: item.Id }
+                    }))
+                }
+            })
+        },
+        select: function (event, ui) {
+
+            // item selected, go to page..
+            relQuestId = ui.item.id;
+            window.location.href = "/answers/details/" + relQuestId;
+        },
+        open: function (e, ui) {
+            var 
+            acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        },
+        change: function (event, ui) {
+            if (!ui.item) {
+                if ($(".ui-autocomplete li:textEquals('" + $(this).val() + "')").size() == 0 && $(this).val() != $(this).attr("emptytext")) {
+                    // remove invalid value, as it didn't match anything
+                    relQuestId = -1;
+                    $(this).val("");
+                    $(this).data("autocomplete").term = "";
+                    $(this).blur();
+                    return false;
+                }
+            }
+        }
+    });
+});
+
+
+$(function () {
+    $(".searchinput").emptyText(qSearchEmptyText, "emptytextstyle");
+    $("#questiontitle").emptyText(qTitleEmptyText, "emptytextstyle");
+    $("#questiondetail").emptyText(qDetailEmptyText, "emptytextstyle");
+});
+
+function createQuestion() {
+    // serialize input fields in form with name attributes where name attribute is key
+    var dataObject = $("#frmSixAnswersAskQuestion").serializeJSON();
+
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Answers/CreateQuestion",
+        data: dataObject,
+        success: function (result) {
+            $.fancybox.close();
+            window.location = "/answers/details/" + result.qid;
+        },
+        error: function (req, status, error) {
+            alert("Sorry! Question save failed");
+        }
+    });
+}

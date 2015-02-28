@@ -1,0 +1,56 @@
+﻿.ArticleListPageTitleTable
+{
+    width: 100%;
+    padding: 5px 0px 5px 0px;
+    border: none;
+}
+
+.LinkDiscussionTitle, .LinkDiscussionTitle:active, .LinkDiscussionTitle:hover, .LinkDiscussionTitle:visited
+{
+    padding: 0px;
+    border-width: 0px;
+    font-size: 14px;
+}
+
+.ArticleListPageHeader
+{
+    font-style: normal;
+    font-size: 16px;
+    font-weight: bold;
+    color: #004A7F;
+    text-align: left;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.DiscussionTopicHeading
+{
+    font-style: normal;
+    font-size: 14px;
+    font-weight: bold;
+    color: #505050;
+    text-align: left;
+}
+.DiscussionTopicShortDescription
+{
+    font-style: normal;
+    font-size: 11px;
+    color: #004A7F;
+    text-align: left;
+}
+
+.DiscussionTopicLongDescription
+{
+    font-style: normal;
+    font-size: 12px;
+    color: #505050;
+    text-align: left;
+}
+
+.TopicCategoryAndContributor
+{
+    font-style: normal;
+    font-size: 12px;
+    color: #505050;
+    text-align: left;
+}
+

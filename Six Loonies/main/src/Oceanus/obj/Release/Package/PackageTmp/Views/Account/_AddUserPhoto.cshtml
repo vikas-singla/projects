@@ -1,0 +1,132 @@
+﻿@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+        .Add("~/content/user/sixloonies.user.upload.photo.css")
+        .Render("~/cache/sixloonies.userimgupload.#.css")
+    );
+}
+<script type="text/javascript">
+
+    @{
+        var auth = Request.Cookies[FormsAuthentication.FormsCookieName] == null ? string.Empty : Request.Cookies[FormsAuthentication.FormsCookieName].Value;
+    }
+
+    var userProfileImgFile = "";
+    var saveDisabled = false;
+
+    $(document).ready(function() {
+
+        $('#user_image_upload').uploadify({
+
+            // auth data
+            postData: { AuthToken: '@auth', userProfileId: '@(ViewBag.UserProfileId)' },
+            //uploaderType': 'flash',
+        
+            // plumbing
+            langFile: '@Url.Content("~/Scripts/uploadify/uploadifyLang_en.js")',
+            swf: '@Url.Content("~/Scripts/uploadify/uploadify.swf")',
+            uploader: '@Url.Action("Upload", "Account")',
+
+            folder: '/uploads',
+            checkExisting: '@Url.Action("CheckExisting", "Account")',
+            cancelImage: '@Url.Content("~/Images/cancel.png")',
+        
+            // restrictions
+            fileTypeDesc: 'Image Files (.jpg, .gif, .png)',
+            fileTypeExts: '*.jpg;*.gif;*.png',
+            sizeLimit: 10485760,
+        
+            // styling 
+            buttonText: 'Select File',
+            buttonClass: 'btnbluestyle',
+            queueID: 'user_image_upload_file_queue',
+        
+            // options
+            requeueErrors: false,
+            removeCompleted: false,
+            auto: true,
+            multi: false,
+
+            // events     
+                
+            onUploadStart: function () {
+                if (!saveDisabled) {
+                    $('#addPhotoPostBtn').hide();
+                }
+            },                
+                
+            onUploadSuccess: function(fileMetadata) {
+                userProfileImgFile = fileMetadata.name;
+            },
+            
+            onQueueComplete: function (stats) {
+                $('#addPhotoPostBtn').show();
+                saveDisabled = false;
+            }
+        });
+    });
+
+    function CancelImages(){
+       
+        userProfileImgFile = "";
+        $.fancybox.close();
+    }
+    
+    function SaveUserImage(){
+
+            if (userProfileImgFile.length == 0){
+                alert("Please select a file to update your profile photo.");
+                return;
+            }
+
+            // send form and successful upload data to server
+            $.ajax(
+            {
+                type: "POST",
+                traditional: true,
+                url: '@Url.Action("AddUserImage", "Account")',
+                data: { userProfileId : @(ViewBag.UserProfileId), imageUrl : userProfileImgFile },
+                async: true,
+                success: function (result) {
+                    CancelImages();
+                    if(result.result == "True")
+                    {
+                        showSuccessNotification('Your profile photo has been updated.');
+                        $('#userprofilephotoimg').attr("src", "/uploads/@(Oceanus.Controllers.ImageFolderDefinitions.FOLDER_USER_UPLOADS)/@(ViewBag.UserProfileId)/" + result.imageUrl);
+                    }
+                    else{
+                        showErrorNotification('Your profile photo could not be updated. Please try again later.');
+                    }
+                },
+                error: function (req, status, error) {
+                    // TODO: make this better
+                    alert(error);
+                }
+            });
+        }
+    //}
+</script>
+<div class="fullsect">
+    <div class="formfields">
+        <div class="upload">
+            <div class="uinput">
+                <div id="user_image_upload_container">
+                    <div id="user_image_upload_file_queue">
+                    </div>
+                    <input id="user_image_upload" name="user_image_upload" type="file" />
+                </div>
+                <br />
+                <ul>
+                    <li><span class="bold">JPG/PNG/GIF</span>s only</li>
+                    <li><span class="bold">10 MB </span>maximum (per file)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="btns">
+            <a href="#" class="btnbluestyle" onclick="javascript:SaveUserImage();" data-userprofile-id="@(ViewBag.UserProfileId)">
+                Update Photo</a>&nbsp; <a href="#" id="closeEditVendorServiceBtn" onclick="javascript: $.fancybox.close();" class="btnstyle close">
+                    Cancel</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,840 @@
+﻿var showingAnsSumm = false;
+var ansSummSectId = null;
+var relQuestId = -1;
+
+tinyMCE.init({
+    theme: "advanced",
+    theme_advanced_buttons1: "bold,italic,underline,separator,blockquote,separator,bullist,numlist,undo,redo",
+    theme_advanced_buttons2: "",
+    theme_advanced_buttons3: "",
+    theme_advanced_toolbar_location: "top",
+    theme_advanced_toolbar_align: "left",
+    mode: "exact",
+    plugins: "autoresize",
+    elements: "addanswer",
+    height: "70",
+    width: "100%",
+    force_p_newlines: false,
+    forced_root_block: '',
+    force_br_newlines: true,
+    autoresize_not_availible_height: "10",
+    autoresize_on_init: false,
+    autoresize_hide_scrollbars: true
+});
+
+var tinymceConfigs = [{ theme: "advanced",
+    mode: "none",
+    height: "70",
+    width: "100%",
+    theme_advanced_toolbar_location: "top",
+    theme_advanced_toolbar_align: "left",
+    theme_advanced_buttons1: "bold,italic,underline,separator,blockquote,separator,bullist,numlist,undo,redo",
+    theme_advanced_buttons2: "",
+    theme_advanced_buttons3: "",
+    force_p_newlines: false,
+    force_br_newlines: true,
+    forced_root_block: '',
+    plugins: "autoresize",
+    autoresize_on_init: true,
+    autoresize_hide_scrollbars: true
+}];
+
+function tinyfy(el_id) {
+    tinyMCE.settings = tinymceConfigs[0];
+    tinyMCE.execCommand('mceAddControl', true, el_id);
+}
+
+function detinyfy(el_id) {
+    tinyMCE.execCommand('mceRemoveControl', false, el_id);
+}
+
+function escape_regexp(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
+
+$.expr[':'].textEquals = function (a, i, m) {
+    return $(a).text().match("^" + escape_regexp(m[3]) + "$");
+};
+
+$(function () {
+    $("#relquestinput").emptyText("Enter question to link here", "emptytextstyle");
+    $("#addtopicinput").emptyText("Enter Topic", "emptytextstyle");
+});
+
+$(document).ready(function () {
+
+    String.prototype.startsWith = function (str)
+    { return (this.match("^" + str) == str) }
+
+    $('#edittopicdone').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        show('#readonlytopics');
+        hide('#edittopics');
+        show('#edittopiclink');
+
+        return false;
+    });
+
+    $('.thumbsuplink').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        return false;
+    });
+
+    $("#relquestinput").autocomplete({
+        minLength: 0,
+        source: function (request, response) {
+            $.ajax({
+                url: "/answers/GetRelatedQuestionsAutoComplete", type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.QuestionTitle, value: item.QuestionTitle, id: item.Id }
+                    }))
+                }
+            })
+        },
+        select: function (event, ui) {
+            relQuestId = ui.item.id;
+        },
+        open: function (e, ui) {
+            var 
+            acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        },
+        change: function (event, ui) {
+            if (!ui.item) {
+                if ($(".ui-autocomplete li:textEquals('" + $(this).val() + "')").size() == 0 && $(this).val() != $(this).attr("emptytext")) {
+                    // remove invalid value, as it didn't match anything
+                    relQuestId = -1;
+                    $(this).val("");
+                    $(this).data("autocomplete").term = "";
+                    $(this).blur();
+                    return false;
+                }
+            }
+        }
+    });
+
+    $("#addtopicinput").autocomplete({
+        minLength: 0,
+        source: function (request, response) {
+            $.ajax({
+                url: "/answers/GetQuestionTagsAutoComplete", type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.TagName, value: item.TagName, id: item.Id }
+                    }))
+                }
+            })
+        },
+        select: function (event, ui) {
+            relQuestId = ui.item.id;
+        },
+        open: function (e, ui) {
+            var 
+            acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        },
+        change: function (event, ui) {
+            if (!ui.item) {
+                if ($(".ui-autocomplete li:textEquals('" + $(this).val() + "')").size() == 0 && $(this).val() != $(this).attr("emptytext")) {
+                    // remove invalid value, as it didn't match anything
+                    relQuestId = -1;
+                    $(this).val("");
+                    $(this).data("autocomplete").term = "";
+                    $(this).blur();
+                    return false;
+                }
+            }
+        }
+    });
+
+    $('#addrelqueslink').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        show('.addrelquestion');
+        hide('#addrelqueslink');
+
+        return false;
+    });
+
+    $('#addRelQuestDone').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        hide('.addrelquestion');
+        show('#addrelqueslink');
+
+        return false;
+    });
+
+    $('#edittopiclink').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        hide('#readonlytopics');
+        show('#edittopics');
+        hide('#edittopiclink');
+
+        return false;
+    });
+
+    $('.editques').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        var id = $(this).attr("id") + "";
+        id = id.replace("editqueslink", "");
+        hide('#editquestrig' + id);
+        show('#editquestsect' + id);
+
+        tinyfy('qinput' + id);
+
+        return false;
+    });
+
+    $('.addquesdetails').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        var id = $(this).attr("id") + "";
+        id = id.replace("addqueslink", "");
+        hide('#editquestrig' + id);
+        show('#editquestsect' + id);
+
+        tinyfy('qinput' + id);
+
+        return false;
+    });
+
+    $('.addquessummary').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        var id = $(this).attr("id") + "";
+        id = id.replace("addqueslink", "");
+        show('#anssummsect');
+        hide('#editquestrig' + id);
+        show('#editquestsect' + id);
+
+        showingAnsSumm = true;
+        ansSummSectId = id;
+
+        tinyfy('qinput' + id);
+
+        return false;
+    });
+
+    $('.linkgraynormal').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        var id = $(this).attr("id") + "";
+        if (id.startsWith("editbasicqueslink")) {
+            id = id.replace("editbasicqueslink", "");
+            hide('#editquestrig' + id);
+            show('#editquestsect' + id);
+
+            return false;
+        }
+        else if (id.startsWith("editqueslink")) {
+            id = id.replace("editqueslink", "");
+            $('#editquestrig' + id).hide();
+            $('#editquestsect' + id).show();
+
+            tinyfy('qinput' + id);
+
+            return false;
+        }
+    });
+
+    $('.btnundo').click(function () {
+        var id = $(this).attr("id") + "";
+
+        if (id == "unfollowquestion") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+
+            var qid = $(this).attr("data-qid") + "";
+            if (qid != null) {
+                unfollowQuestion(qid);
+            }
+        }
+
+        return false;
+    });
+
+    $('.btnstyle').click(function () {
+
+        var sid = $(this).attr("data-sid") + "";
+        var id = $(this).attr("id") + "";
+
+        if (sid == "rejectrevision") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+            var qid = $(this).attr("data-qid") + "";
+            var wikiTextId = $(this).attr("data-wtid") + "";
+            var wikiTextRevId = $(this).attr("data-wtrid") + "";
+
+            rejectQRev(qid, wikiTextId, wikiTextRevId);
+            return false;
+        }
+        else if (id.startsWith("cancelqedit")) {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+            id = id.replace("cancelqedit", "");
+            show('#editquestrig' + id);
+            hide('#editquestsect' + id);
+
+            detinyfy('qinput' + id);
+
+            if (showingAnsSumm && ansSummSectId != null && id == ansSummSectId) {
+                showingAnsSumm = false;
+                ansSummSectId = null;
+                hide('#anssummsect');
+            }
+            return false;
+        }
+        else if (id == "followquestion") {
+            var qid = $(this).attr("data-qid") + "";
+            if (qid != null) {
+                followQuestion(qid);
+            }
+            return false;
+        }
+
+    });
+
+    $('#addnewansbtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        var quesId = $(this).attr("data-qid") + "";
+        var text = tinyMCE.get('addanswer').getContent();
+
+        if (text != null && $.trim(text) != "") {
+            addQResponse(quesId, text);
+        }
+        else {
+            alert("Please provide a valid answer");
+        }
+
+        return false;
+    });
+
+    $('.btnbluestyle').click(function () {
+
+        var sid = $(this).attr("data-sid") + "";
+
+        if (sid == "acceptrevision") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+            var qid = $(this).attr("data-qid") + "";
+            var wikiTextId = $(this).attr("data-wtid") + "";
+            var wikiTextRevId = $(this).attr("data-wtrid") + "";
+
+            acceptQRev(qid, wikiTextId, wikiTextRevId);
+            return false;
+        }
+        else if (sid == "submitThumbsUp") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+
+            var targetUserRef = $(this).attr("data-tuser") + "";
+            var index = $(this).attr("data-index") + "";
+            var rid = $(this).attr("data-rid") + "";
+            var qid = $(this).attr("data-qid") + "";
+            var commentsStr = $("#questiondetail" + index).val();
+
+            addUserThumbsUp(targetUserRef, commentsStr, qid, rid);
+            return false;
+        }
+        else if (sid == "addTag") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+            var qid = $(this).attr("data-qid") + "";
+            var tag = $('#addtopicinput').val();
+
+            addTag(qid, tag);
+            return false;
+        }
+        else if (sid == "addRelQuest") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+            if ($(".ui-autocomplete li:textEquals('" + $('#relquestinput').val() + "')").size() == 0) {
+                relQuestId = -1;
+                $('#relquestinput').val('');
+                showErrorNotification("Please select a valid related question that should be associated with the current question.");
+                return false;
+            }
+            else {
+                var qid = $(this).attr("data-qid") + "";
+                addRelQuest(qid, relQuestId);
+            }
+            return false;
+        }
+    });
+
+    $('#reltopicdelbtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        var qid = $(this).attr("data-qid") + "";
+        var tid = $(this).attr("data-tid") + "";
+        deleteTag(qid, tid);
+
+        return false;
+    });
+
+    $(".thumbsuplink").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade'
+    });
+
+    $('.btnbluestyle').click(function () {
+
+        var sid = $(this).attr("data-sid") + "";
+        var id = $(this).attr("id") + "";
+        id = id.replace("updateqbtn", "");
+
+        if (sid == "updateqtitle") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+            var wikiTextId = $(this).attr("data-wtid") + "";
+            var text = $("#qinput" + id).val().trim();
+
+            if (text != null && $.trim(text) != "") {
+                updateQTitle(wikiTextId, text, id);
+                show('#editquestrig' + id);
+                hide('#editquestsect' + id);
+            }
+            else {
+                alert("Please provide a valid question title");
+            }
+            return false;
+        }
+        else if (sid == "addqdetail") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+            var quesId = $(this).attr("data-qid") + "";
+            var detailText = tinyMCE.get('qinput' + id).getContent();
+
+            if (detailText != null && $.trim(detailText) != "") {
+                addQDetails(quesId, detailText, id);
+                show('#editquestrig' + id);
+                hide('#editquestsect' + id);
+            }
+            else {
+                alert("Please provide a valid question details");
+            }
+            return false;
+        }
+        else if (sid == "updateqdetail") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+            var wikiTextId = $(this).attr("data-wtid") + "";
+            var detailText = tinyMCE.get('qinput' + id).getContent();
+
+            if (detailText != null && $.trim(detailText) != "") {
+                updateQDetails(wikiTextId, detailText, id);
+                show('#editquestrig' + id);
+                hide('#editquestsect' + id);
+            }
+            else {
+                alert("Please provide a valid question details");
+            }
+            return false;
+        }
+        else if (sid == "addqsummary") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+            var quesId = $(this).attr("data-qid") + "";
+            var summText = tinyMCE.get('qinput' + id).getContent();
+
+            if (summText != null && $.trim(summText) != "") {
+                addQSummary(quesId, summText, id);
+                show('#editquestrig' + id);
+                hide('#editquestsect' + id);
+            }
+            else {
+                alert("Please provide a valid question summary");
+            }
+            return false;
+        }
+        else if (sid == "updateqsummary") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+            var wikiTextId = $(this).attr("data-wtid") + "";
+            var summText = tinyMCE.get('qinput' + id).getContent();
+
+            if (summText != null && $.trim(summText) != "") {
+                updateQSummary(wikiTextId, summText, id);
+                show('#editquestrig' + id);
+                hide('#editquestsect' + id);
+            }
+            else {
+                alert("Please provide a valid question summary");
+            }
+            return false;
+        }
+        else if (sid == "updateqresponse") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+            var wikiTextId = $(this).attr("data-wtid") + "";
+            var text = tinyMCE.get('qinput' + id).getContent();
+
+            if (text != null && $.trim(text) != "") {
+                updateQResponse(wikiTextId, text, id);
+                show('#editquestrig' + id);
+                hide('#editquestsect' + id);
+            }
+            else {
+                alert("Please provide a valid question summary");
+            }
+            return false;
+        }
+
+    });
+});
+
+function addUserThumbsUp(targetUserRef, commentsStr, qid, rid) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Answers/AddQuestionResponseUserThumbsUp",
+        data: {
+            targetUser: targetUserRef,
+            comments: commentsStr,
+            questionId: qid, 
+            responseId: rid
+        },
+        async: false,
+        success: function (result) {
+            $.fancybox.close();
+            showSuccessNotification('Thank you for your input. Your thumbs up message has been sent.');
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your rating could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function followQuestion(questionToFollow) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Answers/Follow",
+        data: "questionId=" + htmlEncode(questionToFollow),
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: You could not be added as a follower. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function unfollowQuestion(questionToFollow) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Answers/Unfollow",
+        data: "questionId=" + htmlEncode(questionToFollow),
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: You could not be removed as a follower. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+
+function deleteTag(qid, tid) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Answers/DeleteTag",
+        data:
+        {
+            qid: qid,
+            tid: tid
+        },
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Topic could not be deleted. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function addRelQuest(quesId, relatedQuestId) {
+    if (quesId != relatedQuestId) {
+        $.ajax(
+        {
+            type: "POST",
+            url: "/Answers/AddRelatedQuestion",
+            data: "questionId=" + htmlEncode(quesId) + "&relatedQuestionId=" + htmlEncode(relatedQuestId),
+            async: false,
+            success: function (result) {
+                window.location.reload(true);
+            },
+            error: function (req, status, error) {
+                showErrorNotification('Error: Question could not be marked as related. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+            }
+        });
+    }
+    else {
+        showErrorNotification('Error: Cannot link question to self. Please select another related question to link to this question.');
+    }
+}
+
+function addTag(quesId, tag) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Answers/AddTag",
+        data: "qid=" + htmlEncode(quesId) + "&tag=" + htmlEncode(tag),
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Topic could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function acceptQRev(quesId, wtid, wtrid) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Answers/AcceptQuestionRevision",
+        data: "qid=" + htmlEncode(quesId) + "&wtid=" + htmlEncode(wtid) + "&wtrid=" + htmlEncode(wtrid),
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Revision could not be published. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function rejectQRev(quesId, wtid, wtrid) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Answers/RejectQuestionRevision",
+        data: "qid=" + htmlEncode(quesId) + "&wtid=" + htmlEncode(wtid) + "&wtrid=" + htmlEncode(wtrid),
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Revision could not be rejected. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function addQResponse(quesId, text) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Answers/AddQuestionResponse",
+        data: "qid=" + htmlEncode(quesId) + "&text=" + htmlEncode(text),
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Answer could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function updateQResponse(wikiTextId, text, trigCtrlId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Answers/AddQuestionRevision",
+        data: "wtid=" + htmlEncode(wikiTextId) + "&text=" + htmlEncode(text),
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Answer could not be updated. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+            tinyMCE.get('qinput' + id).setContent($('#qtext' + trigCtrlId).html());
+        }
+    });
+}
+
+function updateQTitle(wikiTextId, text, trigCtrlId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Answers/AddQuestionRevision",
+        data: "wtid=" + htmlEncode(wikiTextId) + "&text=" + htmlEncode(text),
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Question title could not be updated. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+            $("#qinput" + id).val($('#qtext' + trigCtrlId).html());
+        }
+    });
+}
+
+function addQSummary(quesId, text, trigCtrlId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Answers/AddQuestionSummary",
+        data: "qid=" + htmlEncode(quesId) + "&qSummary=" + htmlEncode(text),
+        async: false,
+        success: function (result) {
+            $('#qtext' + trigCtrlId).html(text);
+
+            hide('.addquessummary');
+            show('#editqueslink' + trigCtrlId);
+            showSuccessNotification('Thank you for your input. Your question summary input has been added.');
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Question summary could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+            tinyMCE.get('qinput' + id).setContent($('#qtext' + trigCtrlId).html());
+        }
+    });
+}
+
+function updateQSummary(wikiTextId, text, trigCtrlId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Answers/UpdateQuestionSummary",
+        data: "wtid=" + htmlEncode(wikiTextId) + "&qSummary=" + htmlEncode(text),
+        async: false,
+        success: function (result) {
+            $('#qtext' + trigCtrlId).html(text);
+            showSuccessNotification('Thank you for your input. Question summary has been updated.');
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Question summary could not be updated. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+            tinyMCE.get('qinput' + id).setContent($('#qtext' + trigCtrlId).html());
+        }
+    });
+}
+
+function addQDetails(quesId, text, trigCtrlId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Answers/AddQuestionDetails",
+        data: "qid=" + htmlEncode(quesId) + "&qDetail=" + htmlEncode(text),
+        async: false,
+        success: function (result) {
+            $('#qtext' + trigCtrlId).html(text);
+
+            hide('.addquesdetails');
+            show('#editqueslink' + trigCtrlId);
+            showSuccessNotification('Thank you for your input. Your question details input has been saved.');
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Question details could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+            tinyMCE.get('qinput' + id).setContent($('#qtext' + trigCtrlId).html());
+        }
+    });
+}
+
+function updateQDetails(wikiTextId, text, trigCtrlId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Answers/AddQuestionRevision",
+        data: "wtid=" + htmlEncode(wikiTextId) + "&text=" + htmlEncode(text),
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Question details could not be updated. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+            tinyMCE.get('qinput' + id).setContent($('#qtext' + trigCtrlId).html());
+        }
+    });
+}

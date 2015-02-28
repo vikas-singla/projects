@@ -1,0 +1,198 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web.Mvc;
+using System.Web.Security;
+using MVCControlsToolkit.Linq;
+using Oceanus.Data;
+using Oceanus.ViewModels;
+using Oceanus.ViewModels.Shared;
+
+namespace Oceanus.Controllers
+{
+    public class ListingController : ControllerBase
+    {
+        private static readonly FilterOrderMapping<Data.Vendor> OrderByMapping =
+            new FilterOrderMapping<Data.Vendor>()
+                {
+                    { "VendorName", v => v.Name },
+                };
+
+        #region GET actions
+
+        public ActionResult GetVendorsReviewedByFriends()
+        {
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid? loggedInUserGuid = (user != null) ? ((Guid)user.ProviderUserKey) : ((Guid?)null);
+
+            IEnumerable<ListItemViewModel> vendorsReviewedByFriends = null;
+            IEnumerable<Guid> userFriendIDs = null;
+
+            if (loggedInUserGuid != null)
+            {
+                userFriendIDs = Database.SixLooniesFriendConnections.Where(con => con.FirstUserId == loggedInUserGuid || con.SecondUserId == loggedInUserGuid).Select(con => (con.FirstUserId == loggedInUserGuid ? con.SecondUserId : con.FirstUserId)).AsEnumerable();
+                var vendors = Database.Vendors.Where(v => v.Reviews.Where(r => userFriendIDs.Contains(r.ContributingUserId)).Count() > 0).AsEnumerable();
+                vendorsReviewedByFriends = vendors.Select(v => v.ToListingViewModel(Database, loggedInUserGuid, userFriendIDs));
+            }
+
+            return PartialView("_VendorsReviewedByFriends", vendorsReviewedByFriends);
+        }
+
+        public ActionResult GetListingPagePortfolio(int vendorId)
+        {
+            var vendorImagePorfolio = Database.VendorImages.Where(vi => vi.vendorId == vendorId).AsEnumerable();
+            IEnumerable<VendorImageViewModel> portfolioViewModel = null;
+
+            SetViewBagData(vendorId);
+
+            if (vendorImagePorfolio.Count() > 0)
+            {
+                portfolioViewModel = vendorImagePorfolio.Select(vi => vi.ToVendorImageViewModel());
+            }
+
+            return PartialView("_VendorPortfolio", portfolioViewModel);
+        }
+
+        public ActionResult Index(
+            
+            // filter / form params
+            string SelectedCategories,
+            string SelectedServices,
+
+            // search params
+            string VendorName,
+            string CityId,
+            
+            // paging params
+            string OrderBy, string Order, int Page = 1, int ResultsPerPage = 15)
+        {
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid? loggedInUserGuid = (user != null) ? ((Guid)user.ProviderUserKey) : ((Guid?)null);
+
+            if (string.IsNullOrEmpty(OrderBy)) OrderBy = "VendorName";
+            if (string.IsNullOrEmpty(Order)) Order = "Ascending";
+
+            var listingViewModel = new ListingViewModel();
+
+            listingViewModel.AvailableCities = ReferenceData.Instance.AvailableCities;
+
+            string[] selectedCats = null;
+            // get all categories and select those that were selected
+            if (SelectedCategories != null)
+            {
+                selectedCats = SelectedCategories.Split(',');
+
+                // set up available categories and cross reference selection with selected categories
+                listingViewModel.AvailableCategories = Database.Categories
+                    .AsEnumerable()
+                    .Select(c => new SelectListItem()
+                                     {
+                                         Text = c.Name,
+                                         Value = c.Id.ToString(),
+                                         Selected = selectedCats != null && selectedCats.Contains(c.Id.ToString())
+                                     })
+                    .ToList();
+            }
+
+            // set final result transform
+            listingViewModel.Transform = v => v.ToListingViewModel(Database, loggedInUserGuid, null);
+            
+            // add ordering
+            // TODO: implement ascending / descending
+            listingViewModel.OrderByExpressions.Add(new KeyValuePair<LambdaExpression, OrderType>(OrderByMapping[OrderBy], OrderType.Ascending));
+
+            // set filter delegate to be called by paging code
+            listingViewModel.FilterAction =
+                delegate
+                    {
+                        // get queryable version
+                        var results = Database.Vendors.AsQueryable();
+
+                        // match vendor name
+                        if (VendorName != null)
+                        {
+                            results = results.Where(
+                                v => v.Name.ToLower().Contains(VendorName.ToLower()));
+                        }
+
+                        // match city name
+                        int cityIdNumber;
+                        if (CityId != null && Int32.TryParse(CityId, out cityIdNumber) && cityIdNumber > 0)
+                        {
+                            results =
+                                results.Where(
+                                    v => v.VendorLocations.Any(
+                                        c => c.ReferenceCitiesId == cityIdNumber));
+                        }
+
+                        if (SelectedCategories != null)
+                        {
+                            // get selected categories
+                            var selectedCatIds = new List<int>();
+                            foreach (string s in selectedCats)
+                            {
+                                int id;
+                                if (int.TryParse(s, out id))
+                                {
+                                    selectedCatIds.Add((id));
+                                }
+                            }
+
+                            // match selected categories
+                            results =
+                                results.Where(
+                                    v =>
+                                    v.VendorCategoryMappings
+                                        .Select(map => map.Category.Id)
+                                        .Intersect(selectedCatIds)
+                                        .Count() > 0);
+                        }
+
+                        // determine selected services for filtering
+                        if (SelectedServices != null)
+                        {
+                            var selectedServices = SelectedServices.Split(',');
+
+                            foreach(string servicefilter in selectedServices)
+                            {
+                                results = results.Where(v => v.Services.Where(s => s.Name.Contains(servicefilter)).Count() > 0);
+                            }
+
+                            listingViewModel.SelectedServices = selectedServices.ToList();
+                        }
+
+                        return results;
+                    };
+
+            // set up available categories and cross reference selection with selected categories
+            listingViewModel.AvailableCategories = Database.Categories
+                .AsEnumerable()
+                .Select(c => new SelectListItem()
+                    {
+                        Text = c.Name,
+                        Value = c.Id.ToString(),
+                        Selected = selectedCats != null && selectedCats.Contains(c.Id.ToString())
+                    })
+                .ToList();
+
+            // perform filtering and paging
+            listingViewModel.Filter(ResultsPerPage, Page);
+
+            return View(listingViewModel);
+        }
+
+        #endregion
+        
+       
+        #region SetViewBag methods
+
+        private void SetViewBagData(int vendorId)
+        {
+            ViewBag.VendorId = vendorId;
+        }
+
+        #endregion
+
+    }
+}

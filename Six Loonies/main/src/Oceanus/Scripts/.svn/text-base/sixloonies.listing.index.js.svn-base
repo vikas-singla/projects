@@ -1,0 +1,392 @@
+﻿var vendorNameFilterEmptyText = "Search by Professional or Business";
+var cityFilterEmptyText = "Search by city";
+var serviceinputemptytext = "Search for (e.g. Photography)";
+
+function AddService(service) {
+    var hSelectedServices = $('input:hidden[name="SelectedServices"]');
+
+    var val = hSelectedServices.val();
+    var services = val.split(",");
+
+    if (val == "") {
+        services.splice(0, 1);
+    }
+
+    var matchIndex = $.inArray(service, services);
+    if (matchIndex == -1) {
+        services.push(service);    
+    }
+
+    hSelectedServices.val(services.join(","));
+}
+
+function DelService(service) {
+
+    var hSelectedServices = $('input:hidden[name="SelectedServices"]');
+    var val = hSelectedServices.val();
+    var services = val.split(",");
+
+    var matchIndex = $.inArray(service, services);
+    
+    if (matchIndex > -1) {
+        // start index, num items to remove.
+        services.splice(matchIndex, 1);
+    }
+
+    hSelectedServices.val(services.join(","));
+}
+
+function layoutVendorCollage() {
+    var gutterWidth = 20;
+    var columnWidth = 280;
+    var viewportWidth = $('.page').width();
+
+    viewportWidth = viewportWidth - 40;
+
+    if (viewportWidth <= 980) {
+        viewportWidth = 980;
+    }
+
+    var absColsCount = viewportWidth / columnWidth;
+    absColsCount = Math.floor(absColsCount);
+    var actualColCount = absColsCount;
+    var absBlankSpaceWidth = viewportWidth % columnWidth;
+
+    if (absBlankSpaceWidth < (absColsCount * gutterWidth + absColsCount * 2 + 60)) {
+        actualColCount = actualColCount - 1;
+    }
+
+    var columnHeightList = new Array(actualColCount);
+
+    for (var i = 0; i < columnHeightList.length; ++i) {
+        columnHeightList[i] = 10;
+    }
+
+    var vendorCollageSects = $('.vendorcollage');
+
+    var minHeightColIndex = 0;
+    vendorCollageSects.each(function () {
+        $(this).attr('style', 'left:' + (minHeightColIndex * columnWidth + minHeightColIndex * gutterWidth) + 'px;' +
+                              'top:' + (columnHeightList[minHeightColIndex]) + 'px');
+
+        columnHeightList[minHeightColIndex] = columnHeightList[minHeightColIndex] + $(this).height() + gutterWidth + 2;
+
+        var minHeight = 9999999999999999999999;
+        //determine column with the least height
+        for (var i = 0; i < columnHeightList.length; ++i) {
+            if (columnHeightList[i] < minHeight) {
+                minHeightColIndex = i;
+                minHeight = columnHeightList[i];
+            }
+        }
+    });
+
+    //determine the max height
+    var maxHeight = 0;
+    for (var i = 0; i < columnHeightList.length; ++i) {
+        if (columnHeightList[i] > maxHeight) {
+            maxHeight = columnHeightList[i];
+        }
+    }
+
+    var containerWidth = (20 + (actualColCount - 1) * gutterWidth + absColsCount * 2 + actualColCount * columnWidth);
+    var stringHeaderWidth = (actualColCount > 0 ? (2 * -1 * gutterWidth - 8) : 0) + (actualColCount - 1) * gutterWidth + absColsCount * 2 + actualColCount * columnWidth;
+
+    $('.resultsPanel').attr('style', 'overflow:hidden;height:' + (maxHeight + gutterWidth + 60) + 'px;' +
+                                     'width:' + ((actualColCount - 1) * gutterWidth + absColsCount * 2 + actualColCount * columnWidth) + 'px');
+    $('.resultsPanel .resultspagerpanel').attr('style', 'position:relative;top:' + (maxHeight + gutterWidth + 20) + 'px;');
+
+    if (960 < containerWidth) {
+        $('.parentcontainer').attr('style', 'width:' + (20 + (actualColCount - 1) * gutterWidth + absColsCount * 2 + actualColCount * columnWidth) + 'px');
+    }
+    else {
+        $('.parentcontainer').attr('style', 'width:' + 960 + 'px');
+    }
+    if (960 < containerWidth) {
+        $('.parentcontainer .bcontainer').attr('style', 'width:' + (20 + (actualColCount - 1) * gutterWidth + absColsCount * 2 + actualColCount * columnWidth) + 'px');
+    }
+    else {
+        $('.parentcontainer .bcontainer').attr('style', 'width:' + 960 + 'px');
+    }
+    if (960 < stringHeaderWidth) {
+        $('.striphomepageheader .stripheadercontainer').attr('style', 'width:' + stringHeaderWidth + 'px');
+    }
+    else {
+        $('.striphomepageheader .stripheadercontainer').attr('style', 'width:' + 960 + 'px');
+    }
+}
+
+$(window).load(function () {
+    layoutVendorCollage();
+});
+
+var resizeTimer;
+$(window).resize(function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(layoutVendorCollage, 500);
+});
+
+$(document).ready(function () {
+    $('#filterbar').append($('.listingfilterpanel'));
+
+    layoutVendorCollage();
+
+    $('vendorcollage .portfolioimagesect a img').load(function () {
+        layoutVendorCollage();
+    });
+
+    $('#vendornamefilterinput').keypress(function (e) {
+        code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) {
+            SubmitListingForm();
+        }
+    });
+
+    $('#servicenameinput').keypress(function (e) {
+        code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) {
+            SubmitListingForm();
+        }
+    });
+
+    $("#vendornamefilterinput").autocomplete({
+        minLength: 1,
+        source: function (request, response) {
+            $.ajax({
+                url: "/home/SearchVendorNameAutoComplete", type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.Name, value: item.Name, id: item.Id }
+                    }))
+                }
+            })
+        },
+        open: function (e, ui) {
+            var acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        }
+    });
+
+    $("#servicenameinput").autocomplete({
+        minLength: 1,
+        source: function (request, response) {
+            $.ajax({
+                url: "/home/SearchServicesAutoComplete", type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item, value: item, id: item }
+                    }))
+                }
+            })
+        },
+        open: function (e, ui) {
+            var acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        }
+    });
+
+    $("#vendornamefilterinput").emptyText(vendorNameFilterEmptyText, "emptytextstyle");
+    $("#servicenameinput").emptyText(serviceinputemptytext, "emptytextstyle");
+    //    $("#citynamefilterinput").emptyText(cityFilterEmptyText, "emptytextstyle");
+
+    $(".vsamplework").fancybox({
+        autoscale: true,
+        autoDimensions: true,
+        modal: false,
+        padding: 0,
+        showCloseButton: true,
+        transitionIn: 'fade',
+        transitionOut: 'fade',
+        type: 'iframe',
+        width: 615,
+        height: 475,
+        scrolling: 'no'
+    });
+
+    // wire up click handler for form go link
+    $("#inputSubmitFilter").click(function () {
+        SubmitListingForm();
+
+        // stop the button submit
+        return false;
+    });
+
+
+    // wire up click handler for form reset link
+    $("#inputClearFilter").click(function () {
+
+        // get current url and remove the query string
+        var newLink = window.location.href.split("?")[0];
+
+        // redirect to default listing (removing the filter)
+        window.location.replace(newLink);
+
+        // stop the button submit
+        return false;
+    });
+
+    // wire up click handler for service links
+    $('a[id^="lnkService_"]').click(function () {
+        var service = $(this).attr("data-service");
+        AddService(service);
+        SubmitListingForm();
+        return false;
+    });
+
+    $("a[id^='lnkSelectedService_']").click(function () {
+        var service = $(this).attr("data-service");
+        DelService(service);
+        SubmitListingForm();
+        return false;
+    });
+
+    $('.likevendorbtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        var vid = $(this).attr("data-vid") + "";
+
+        if (likeVendor(vid)) {
+            $(this).attr('class', 'btnundo');
+        }
+    });
+
+    $('.tellfriendbtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        var vid = $(this).attr("data-vid") + "";
+
+        $('#tellfriendformpanel').html("");
+        $('#tellfriendformpanel').load("/vendor/GetTellAFriendForm?vendorId=" + vid);
+    });
+
+    $('.listingfilterpanel #categorydropdownbtn').click(function () {
+        var hSelectedCategories = $('input:hidden[name="SelectedCategories"]');
+
+        hSelectedCategories.val('');
+
+        SubmitListingForm();
+    });
+
+    $('.bookmarkbtn').click(function () {
+        alert("Coming Soon!");
+    });
+
+    $('#sortbybuzzbtn').click(function () {
+        alert("Coming Soon!");
+    });
+
+    $('#filterbyfriendsbtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        var hFilterByFriendsInput = $('input:hidden[name="showListingsByFriends"]');
+
+        if (hFilterByFriendsInput.val() != "on") {
+            hFilterByFriendsInput.val('on');
+        }
+        else {
+            hFilterByFriendsInput.val('');
+        }
+
+        SubmitListingForm();
+    });
+
+    $('.listingfilterpanel #categorydropdownbtn #categoryddmenu .menulink a').click(function () {
+        var catVal = $(this).attr('data-cat-val');
+        var hSelectedCategories = $('input:hidden[name="SelectedCategories"]');
+
+        hSelectedCategories.val(catVal);
+
+        SubmitListingForm();
+    });
+
+    $(".tellfriendbtn").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no',
+        'onComplete': function () {
+            try {
+                var oScrollbar = $('.tellfriendscrollpanel');
+                if (oScrollbar != null) {
+                    oScrollbar.tinyscrollbar_update();
+                }
+            }
+            catch (err) {
+            }
+        }
+    });
+});
+
+function likeVendor(vendorId) {
+    var successful = false;
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/LikeVendor",
+        data: {
+            vendorId: vendorId
+        },
+        async: false,
+        success: function (result) {
+            successful = true;
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your like preference could not be saved. Please try again later.');
+        }
+    });
+
+    return successful;
+}
+
+function ClearListingForm() {
+    $("#vendornamefilterinput").val("");
+    $("#citynamefilterinput").val("");
+}
+
+function SubmitListingForm() {
+
+    clearDefaultIfEmpty("servicenameinput", serviceinputemptytext);
+    clearDefaultIfEmpty("vendornamefilterinput", vendorNameFilterEmptyText);
+    clearDefaultIfEmpty("citynamefilterinput", cityFilterEmptyText);
+
+    var form = $('#listingForm');
+    DisableEmptyFormFieldsForSubmission(form);
+    form.submit();
+}

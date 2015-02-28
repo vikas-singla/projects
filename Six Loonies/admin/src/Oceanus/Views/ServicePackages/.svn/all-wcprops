@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/projects/!svn/ver/139/admin/src/Oceanus/Views/ServicePackages
+END
+Index.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Views/ServicePackages/Index.cshtml
+END
+IndexAdmin.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Views/ServicePackages/IndexAdmin.cshtml
+END
+_Create.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Views/ServicePackages/_Create.cshtml
+END
+Create.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/projects/!svn/ver/139/admin/src/Oceanus/Views/ServicePackages/Create.cshtml
+END
+Details.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Views/ServicePackages/Details.cshtml
+END
+Edit.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Views/ServicePackages/Edit.cshtml
+END

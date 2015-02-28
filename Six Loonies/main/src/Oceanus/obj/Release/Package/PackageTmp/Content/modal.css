@@ -1,0 +1,33 @@
+﻿#mask
+{
+    position: absolute; /* important */
+    top: 0px; /* start from top */
+    left: 0px; /* start from left */
+    width: 100%; /* cover the whole page */
+    display: none; /* don't show it '*/ /* styling bellow */
+    background-color: black;
+}
+
+.modal_window
+{
+    position: absolute; /* important so we can position it on center later */
+    display: none; /* don't show it */ /* styling bellow */
+    padding: 50px;
+    border: 1px solid gray;
+    background: #fff;
+    color: black;
+}
+
+.close_modal
+{
+    vertical-align:top;
+    height:25px;
+    display:block;
+    background-color:#d0d0d0;
+    text-align:right;
+    width:100%;
+    position:absolute;
+    font-weight:bold;
+    top:0px;
+    left:0px;
+}

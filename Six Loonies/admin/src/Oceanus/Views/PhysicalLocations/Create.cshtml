@@ -1,0 +1,75 @@
+﻿@model Oceanus.ViewModels.PhysicalVendorLocationsViewModel
+@{
+    ViewBag.Title = "Create";
+}
+<div style="border: 1px solid #e0e0e0;">
+    <h3>
+        Add a new Physical Location</h3>
+    <form name="physicalLocation" action="" id="physLocForm">
+    <fieldset>
+        <div id="plid" class="hiddenfield">
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AddressLine1)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.AddressLine1, new { id = "physicalLocAddressLine1" })
+            <label class="error" for="physicalLocAddressLine1" id="physicalLocAddressLine1_error">
+                This field is required.</label>
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AddressLine2)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.AddressLine2, new { id = "physicalLocAddressLine2" })
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.City)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.City, new { id = "physicalLocCity" })
+            <label class="error" for="physicalLocCity" id="physicalLocCity_error">
+                This field is required.</label>
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PostalCode)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.PostalCode, new { id = "physicalLocPostalCode" })
+            <label class="error" for="physicalLocPostalCode" id="physicalLocPostalCode_error">
+                This field is required.</label>
+        </div>
+        <div class="editor-label">
+            Country
+        </div>
+        <div class="editor-field">
+            <select id="CountryList" name="Countries">
+            </select>
+        </div>
+        <div class="editor-label">
+            State
+        </div>
+        <div class="editor-field">
+            <select id="StateList" name="States">
+            </select>
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Phone)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Phone, new { id = "physicalLocPhone" })
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Fax)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Fax, new { id = "physicalLocFax" })
+        </div>
+        <br />
+        <br />
+        <p>
+            <input type="submit" value="Save Physical Location" id="addLocation" />
+        </p>
+    </fieldset>
+    </form>
+</div>

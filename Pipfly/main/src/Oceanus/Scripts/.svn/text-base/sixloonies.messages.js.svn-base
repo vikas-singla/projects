@@ -1,0 +1,256 @@
+﻿var messageTo = new Array();
+var msgSubjectEmptyText = "Enter subject for message";
+var msgBodyEmptyText = "Enter your message here";
+$(function () {
+    $("#messageToInput").emptyText("Enter name or email", "emptytextstyle");
+    $("#messageSubjectInput").emptyText(msgSubjectEmptyText, "emptytextstyle");
+    $("#messageBodyInput").emptyText(msgBodyEmptyText, "emptytextstyle");
+});
+
+function validateEmail(email) {
+    var re = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+    return email.match(re)
+}
+
+function messageInputChange(evt) {
+    evt = (evt) ? evt : event;
+    var target = (evt.target) ? evt.target : evt.srcElement;
+    var form = target.form;
+    var charCode = (evt.charCode) ? evt.charCode :
+        ((evt.which) ? evt.which : evt.keyCode);
+    if (charCode == 13) {
+        var inputVal = $('#messageToInput').val();
+
+        if (validateEmail(inputVal)) {
+            user = new Object();
+            user.FullName = inputVal;
+            user.UserId = inputVal;
+
+            messageTo.push(user);
+            refreshMessageToUI();
+        }
+
+        $("#messageToInput").val("");
+    }
+    return true;
+}
+
+function escape_regexp(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
+
+$.expr[':'].textEquals = function (a, i, m) {
+    return $(a).text().match("^" + escape_regexp(m[3]) + "$");
+};
+
+$(document).ready(function () {
+    $("#frmWritePredefinedMsgRecipient").validationEngine({ promptPosition: "topRight", scroll: false });
+    $("#frmMsgDetailsReply").validationEngine({ promptPosition: "topRight", scroll: false });
+    $("#frmWriteMsg").validationEngine({ promptPosition: "topRight", scroll: false });
+
+    $('.btnbluestyle').live('click', function () {
+        var sid = $(this).attr("data-sid") + "";
+        if (sid == "sendMessage") {
+
+            clearDefaultIfEmpty('messageBodyInput', msgBodyEmptyText);
+            clearDefaultIfEmpty('messageSubjectInput', msgSubjectEmptyText);
+
+            if ($('#frmWriteMsg').validationEngine('validate')) {
+                $('#frmWriteMsg').validationEngine('hideAll');
+
+                if (messageTo.length > 0) {
+                    addMessage();
+                }
+                else {
+                    alert('Please select atleast one recipient for the message');
+                }
+            }
+
+            return false;
+        }
+        else if (sid == "sendPredefinedVendorMessage") {
+
+            if ($('#frmWritePredefinedMsgRecipient').validationEngine('validate')) {
+                $('#frmWritePredefinedMsgRecipient').validationEngine('hideAll');
+
+                addPredefinedVendorMessage();
+            }
+
+            return false;
+        }
+        else if (sid == "addmsgreplybtn") {
+
+            if ($('#frmMsgDetailsReply').validationEngine('validate')) {
+                $('#frmMsgDetailsReply').validationEngine('hideAll');
+                var msgid = $(this).attr("data-mid") + "";
+                addMessageReply(msgid);
+            }
+
+            return false;
+        }
+    });
+
+    $('#messagetosect').click(function (event) {
+        $('#messageToInput').focus();
+        return false;
+    });
+
+    $("#messageToInput").autocomplete({
+        minLength: 0,
+        source: function (request, response) {
+            $.ajax({
+                url: "/message/GetUsersAutoComplete", type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.FullName, value: item.FullName, id: item.UserId }
+                    }))
+                }
+            })
+        },
+        select: function (event, ui) {
+            user = new Object();
+            user.FullName = ui.item.value;
+            user.UserId = ui.item.id;
+
+            messageTo.push(user);
+            refreshMessageToUI();
+
+            $("#messageToInput").val("");
+
+            return false;
+        },
+        open: function (e, ui) {
+            var 
+            acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        },
+        change: function (event, ui) {
+            if (!ui.item) {
+                if ($(".ui-autocomplete li:textEquals('" + $(this).val() + "')").size() == 0 && $(this).val() != $(this).attr("emptytext")) {
+                    // remove invalid value, as it didn't match anything
+                    relQuestId = -1;
+                    $(this).val("");
+                    $(this).data("autocomplete").term = "";
+                    $(this).blur();
+                    return false;
+                }
+            }
+        }
+    });
+});
+
+function removeRecipientFromMsg(tid) {
+    messageTo.splice(tid, 1);
+    refreshMessageToUI();
+}
+
+function refreshMessageToUI() {
+    $('#messageToArgs').html("");
+    if (messageTo != null) {
+        for (i = 0; i < messageTo.length; ++i) {
+            var htmlstr = "<span class='tageditgray'>" +
+                messageTo[i].FullName + "<a href='#' class='msgtageditbtn' onclick='javascript: removeRecipientFromMsg(" + i + ")' data-tid='" + i + "'></a></span>";
+            $('#messageToArgs').append(htmlstr);
+        }
+    }
+}
+
+function addMessage() {
+    var messageSubject = $.trim($("#messageSubjectInput").val());
+    var messageBody = $.trim($("#messageBodyInput").val());
+    $.ajax(
+    {
+        type: "POST",
+        dataType: 'json',
+        traditional: true,
+        url: "/Message/AddMessage",
+        data: {
+            messageTo: JSON.stringify(messageTo),
+            messageSubject: messageSubject,
+            messageBody: messageBody
+        },
+        async: false,
+        success: function (result) {
+            showSuccessNotification('Your message has been sent. You can view your message in your dashboard.');
+            $.fancybox.close();
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your message could not be processed. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+    messageTo = new Array();
+    refreshMessageToUI();
+}
+
+function addPredefinedVendorMessage() {
+    var messageRecipientID = $.trim($("#msgrecipient").attr("rid") + "");
+    var messageRecipientName = $.trim($("#msgrecipientname").html());
+    var messageSubject = $.trim($("#messageSubjectInput").val());
+    var messageBody = $.trim($("#messageBodyInput").val());
+    messageTo = new Array();
+
+    user = new Object();
+    user.FullName = messageRecipientName;
+    user.UserId = messageRecipientID;
+
+    messageTo.push(user);
+
+    $.ajax(
+    {
+        type: "POST",
+        dataType: 'json',
+        traditional: true,
+        url: "/Message/AddMessage",
+        data: {
+            messageTo: JSON.stringify(messageTo),
+            messageSubject: messageSubject,
+            messageBody: messageBody
+        },
+        async: false,
+        success: function (result) {
+            showSuccessNotification('Your message has been sent. You can view your message in your dashboard.');
+            $.fancybox.close();
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your message could not be processed. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+    messageTo = new Array();
+    refreshMessageToUI();
+}
+
+function addMessageReply(messageId) {
+    var responseText = $.trim($("#msgreplytextbox").val());
+    $.ajax(
+    {
+        type: "POST",
+        dataType: 'json',
+        traditional: true,
+        url: "/Message/AddMessageReply",
+        data: {
+            messageId: messageId,
+            messageBody: responseText
+        },
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your message could not be processed. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}

@@ -1,0 +1,102 @@
+﻿@using Oceanus.Controllers
+@using SquishIt.Framework
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+    <title>Six Loonies</title>
+    <meta http-equiv="Page-Enter" content="blendTrans(Duration=0.05)">
+    <meta http-equiv="Page-Exit" content="blendTrans(Duration=0.05)">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    @{
+        @MvcHtmlString.Create(
+            Bundle.Css()
+                .Add("~/Content/Bookmarklet/sixloonies.bookmarklet.css")
+                .Add("~/Content/Bookmarklet/sixloonies.bookmarklet.topics.css")
+                .Add("~/Content/forms.css")
+                .Add("~/Content/Plugins/jquery.tiptip.css")
+                .Add("~/Content/Plugins/validationEngine.jquery.css")
+                .Add("~/Content/Plugins/jquery.tokeninput.css")
+                .Add("~/Content/Bookmarklet/sixloonies.bookmarklet.iframe.css")
+                .ForceRelease()
+                .Render("~/cache/sixloonies.marklet.shared.#.css")
+            );
+    }
+    <link href='http://fonts.googleapis.com/css?family=Rancho' rel='stylesheet' type='text/css'>
+    @{
+        @MvcHtmlString.Create(
+                Bundle.JavaScript()
+                .Add("~/Scripts/Plugins/jquery-1.7.1.min.js")
+                .Add("~/Scripts/Plugins/jquery.validate.min.js")
+                .Add("~/Scripts/Plugins/jquery.validate.unobtrusive.min.js")
+                .Add("~/Scripts/Plugins/jquery.unobtrusive-ajax.min.js")
+                .Add("~/Scripts/Plugins/MVCControlToolkit.Controls-0.9.0.min.js")
+                .Add("~/scripts/Plugins/jquery.fancybox-1.3.4.pack.js")
+                .Add("~/Scripts/Plugins/jquery.elastic.js")
+                .ForceRelease()
+                .Render("~/cache/sixloonies.bookmarklet.tools.#.js")
+            );
+    }
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.validationEngine-en.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.validationEngine.js")"></script>
+    @{
+        @MvcHtmlString.Create(
+                Bundle.JavaScript()
+                .Add("~/Scripts/Plugins/jquery.tipTip.minified.js")
+                .Add("~/Scripts/pipfly.emptytext.js")
+                .Add("~/Scripts/sixloonies.utils.js")
+                .Add("~/Scripts/pipfly.helper.js")
+                .Add("~/Scripts/Plugins/jquery.tokeninput.js")
+                .Add("~/Scripts/Plugins/jquery.postmessages.js")
+                .ForceRelease()
+                .Render("~/cache/pipfly.marklet.shared.#.js")
+            );
+    }
+    <script type="text/javascript">
+        $(function () {
+            $('a[title]').tipTip();
+            $('div[title]').tipTip();
+            $('span[title]').tipTip();
+            $('input[title]').tipTip();
+            $('textarea[title]').tipTip();
+            $('li[title]').tipTip();
+        });
+
+        $(document).ready(function () {
+            $('textarea').elastic();
+        });
+
+        function refreshBookmarkletForLogin()
+        {
+            var parent_url = '@(ViewBag.WebDomainUrl)';
+            $.postMessage({ sl_login: 1 }, parent_url, parent);
+        }
+
+        var loggedin = @User.Identity.IsAuthenticated.ToString().ToLower();
+    </script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-27307727-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</head>
+<body>
+    <div id="bookmarkpagediscusscontainer">
+        <div class="page" style="width:320px;">
+            <div id="fb-root">
+            </div>
+            <script type="text/javascript" src="@Url.Content("/scripts/pipfly.bookmarklet.login.facebook.js")"></script>
+            <div class="fullsect" id="notification">
+            </div>
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>
+

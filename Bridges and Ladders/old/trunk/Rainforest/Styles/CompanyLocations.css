@@ -1,0 +1,26 @@
+﻿.CPD_HeaderTable
+{
+    width: 100%;
+    vertical-align: top;
+    background-color: #fff;
+    padding-top: 5px;
+}
+.CPD_NavColumnStyle
+{
+    text-align: left;
+}
+.lbl_cpdnamenav
+{
+    color: #505050;
+    text-align: right;
+    font-size: 12px;
+    font-weight: bold;
+}
+.link_cpdhierarchyNav, .link_cpdhierarchyNav:visited
+{
+    color: #106fb8;
+    padding: 0px;
+    border-width: 0px;
+    font-size: 12px;
+    font-weight: bold;
+}

@@ -1,0 +1,6 @@
+﻿@model Oceanus.Filters.ListingNameStartsWithFilter
+           
+@using MVCControlsToolkit.Core
+@using MVCControlsToolkit.Controls
+
+@Html.TypedTextBoxFor(m => m.Name, watermarkCss: "watermark")

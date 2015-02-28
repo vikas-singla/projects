@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Oceanus.ViewModels.BaseFriendIntroRequestViewModel>
+@if (Model != null && Model.Count() > 0)
+{
+    <link href="@Url.Content("~/Content/messages/sixloonies.askforintro.css")" rel="stylesheet" type="text/css" />
+    <div class="fullsect">
+        <div class="section">
+            <div class="sectiontitle">
+                <div class="titletext">
+                    Friend Introduction Requests (@(Model != null ? Model.Count() : 0))
+                </div>
+            </div>
+        </div>
+        <div class="fullsect">
+            <div class="introrequestlisting">
+                @foreach (var request in Model)
+                {
+                    Guid guidOfUserProfile = ViewBag.UserId;
+                    bool initUserIsLoggedIn = request.InitiatingUserId == guidOfUserProfile;
+                    bool connectingUserIsLoggedIn = request.ConnectingFriendUserId == guidOfUserProfile;
+                    bool targetUserIsLoggedIn = request.TargetUserId == guidOfUserProfile;
+                    
+                    <div class="introrequest @(((connectingUserIsLoggedIn && request.ConnectingFriendHasReadMessage) || (targetUserIsLoggedIn && request.TargetUserHasReadMessage) || 
+                        (initUserIsLoggedIn && request.InitUserHasReadTargetUserAcceptance)) == false ? "introrequestunreadbg" : "")">
+                        <div class="userpic">
+                            <img src="/images/user.jpg" width="50px" height="50px" alt />
+                        </div>
+                        <div class="introrequestdetails">
+                            @if (!((connectingUserIsLoggedIn && request.ConnectingFriendHasReadMessage) || (targetUserIsLoggedIn && request.TargetUserHasReadMessage) ||
+                                   (initUserIsLoggedIn && request.InitUserHasReadTargetUserAcceptance)))
+                            {
+                                <div class="unreadmarker" title="Unread Friend Introduction Request">
+                                    &#149;</div>
+                            }
+                            <a class="sendername" href="/account/profile?userid=@(request.InitiatingUserId)">@(request.InitiatingUserProfile.FullName)
+                            </a>
+                            <div class="subject">
+                                @if (request.InitiatingUserId == guidOfUserProfile && request.TargetUserHasAccepted)
+                                {
+                                    <a href="/message/introduction/@(request.FriendIntroRequestId)" class="@((connectingUserIsLoggedIn ? request.ConnectingFriendHasReadMessage : request.TargetUserHasReadMessage) ? "bold " : "")">Re: @(request.Subject)</a>                                
+                                }
+                                else
+                                {
+                                    <a href="/message/introduction/@(request.FriendIntroRequestId)" class="@((connectingUserIsLoggedIn ? request.ConnectingFriendHasReadMessage : request.TargetUserHasReadMessage) ? "bold " : "")">@(request.Subject)</a>
+                                }
+                            </div>
+                            <div class="datestamp">@(request.LastUpdatedOn.ToString("MMMM d, yyyy"))
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,1204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OceanusModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="OceanusEntitiesLive" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="OceanusModel.Category" />
+    <EntitySet Name="CategoryReviewAttributeMappings" EntityType="OceanusModel.CategoryReviewAttributeMapping" />
+    <EntitySet Name="FacebookFriendLists" EntityType="OceanusModel.FacebookFriendList" />
+    <EntitySet Name="Messages" EntityType="OceanusModel.Message" />
+    <EntitySet Name="MessageResponses" EntityType="OceanusModel.MessageRespons" />
+    <EntitySet Name="MessageVisibilities" EntityType="OceanusModel.MessageVisibility" />
+    <EntitySet Name="PhysicalVendorLocations" EntityType="OceanusModel.PhysicalVendorLocation" />
+    <EntitySet Name="Reference_LocationStates" EntityType="OceanusModel.Reference_LocationStates" />
+    <EntitySet Name="ReferenceCities" EntityType="OceanusModel.ReferenceCity" />
+    <EntitySet Name="Registrations" EntityType="OceanusModel.Registration" />
+    <EntitySet Name="Reviews" EntityType="OceanusModel.Review" />
+    <EntitySet Name="ReviewAttributes" EntityType="OceanusModel.ReviewAttribute" />
+    <EntitySet Name="ReviewAttributeValues" EntityType="OceanusModel.ReviewAttributeValue" />
+    <EntitySet Name="ReviewAudios" EntityType="OceanusModel.ReviewAudio" />
+    <EntitySet Name="ReviewBulletPoints" EntityType="OceanusModel.ReviewBulletPoint" />
+    <EntitySet Name="ServicePackages" EntityType="OceanusModel.ServicePackage" />
+    <EntitySet Name="Services" EntityType="OceanusModel.Service" />
+    <EntitySet Name="SixAnswerQuestions" EntityType="OceanusModel.SixAnswerQuestion" />
+    <EntitySet Name="SixAnswerQuestionResponses" EntityType="OceanusModel.SixAnswerQuestionRespons" />
+    <EntitySet Name="SixAnswerQuestionTagMappings" EntityType="OceanusModel.SixAnswerQuestionTagMapping" />
+    <EntitySet Name="SixAnswersQuestionFollowerMappings" EntityType="OceanusModel.SixAnswersQuestionFollowerMapping" />
+    <EntitySet Name="SixAnswersRelatedQuestionMappings" EntityType="OceanusModel.SixAnswersRelatedQuestionMapping" />
+    <EntitySet Name="SixLooniesFriendConnections" EntityType="OceanusModel.SixLooniesFriendConnection" />
+    <EntitySet Name="SixLooniesPendingFriendRequests" EntityType="OceanusModel.SixLooniesPendingFriendRequest" />
+    <EntitySet Name="Tags" EntityType="OceanusModel.Tag" />
+    <EntitySet Name="UserLevels" EntityType="OceanusModel.UserLevel" />
+    <EntitySet Name="UserProfiles" EntityType="OceanusModel.UserProfile" />
+    <EntitySet Name="UserThumbsUpRatings" EntityType="OceanusModel.UserThumbsUpRating" />
+    <EntitySet Name="UserToUserFollowingMappings" EntityType="OceanusModel.UserToUserFollowingMapping" />
+    <EntitySet Name="VendorCategoryMappings" EntityType="OceanusModel.VendorCategoryMapping" />
+    <EntitySet Name="VendorImages" EntityType="OceanusModel.VendorImage" />
+    <EntitySet Name="VendorRelatedQuestionMappings" EntityType="OceanusModel.VendorRelatedQuestionMapping" />
+    <EntitySet Name="Vendors" EntityType="OceanusModel.Vendor" />
+    <EntitySet Name="VendorTraitsTagMappings" EntityType="OceanusModel.VendorTraitsTagMapping" />
+    <EntitySet Name="VendorUserFollowerMappings" EntityType="OceanusModel.VendorUserFollowerMapping" />
+    <EntitySet Name="VendorVideos" EntityType="OceanusModel.VendorVideo" />
+    <EntitySet Name="VirtualCitiesServeds" EntityType="OceanusModel.VirtualCitiesServed" />
+    <EntitySet Name="WikiTexts" EntityType="OceanusModel.WikiText" />
+    <EntitySet Name="WikiTextPendingRevisions" EntityType="OceanusModel.WikiTextPendingRevision" />
+    <EntitySet Name="WikiTextRevisions" EntityType="OceanusModel.WikiTextRevision" />
+    <AssociationSet Name="FK_CategoryAttributeMapping_Categories" Association="OceanusModel.FK_CategoryAttributeMapping_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="CategoryReviewAttributeMapping" EntitySet="CategoryReviewAttributeMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorCategoryMapping_Categories" Association="OceanusModel.FK_VendorCategoryMapping_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="VendorCategoryMapping" EntitySet="VendorCategoryMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CategoryAttributeMapping_ReviewAttributes" Association="OceanusModel.FK_CategoryAttributeMapping_ReviewAttributes">
+      <End Role="ReviewAttributes" EntitySet="ReviewAttributes" />
+      <End Role="CategoryReviewAttributeMapping" EntitySet="CategoryReviewAttributeMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MessageResponses_Message" Association="OceanusModel.FK_MessageResponses_Message">
+      <End Role="Message" EntitySet="Messages" />
+      <End Role="MessageResponses" EntitySet="MessageResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MessageVisibility_Message" Association="OceanusModel.FK_MessageVisibility_Message">
+      <End Role="Message" EntitySet="Messages" />
+      <End Role="MessageVisibility" EntitySet="MessageVisibilities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorLocations_CityStatesLocations" Association="OceanusModel.FK_VendorLocations_CityStatesLocations">
+      <End Role="Reference_LocationStates" EntitySet="Reference_LocationStates" />
+      <End Role="PhysicalVendorLocations" EntitySet="PhysicalVendorLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorLocations_Vendors" Association="OceanusModel.FK_VendorLocations_Vendors">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="PhysicalVendorLocations" EntitySet="PhysicalVendorLocations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VirtualCitiesServed_Reference_LocationStates" Association="OceanusModel.FK_VirtualCitiesServed_Reference_LocationStates">
+      <End Role="Reference_LocationStates" EntitySet="Reference_LocationStates" />
+      <End Role="VirtualCitiesServed" EntitySet="VirtualCitiesServeds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VirtualCitiesServed_ReferenceCities" Association="OceanusModel.FK_VirtualCitiesServed_ReferenceCities">
+      <End Role="ReferenceCities" EntitySet="ReferenceCities" />
+      <End Role="VirtualCitiesServed" EntitySet="VirtualCitiesServeds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Review_Vendors" Association="OceanusModel.FK_Review_Vendors">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="Review" EntitySet="Reviews" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReviewAttributeValues_Review" Association="OceanusModel.FK_ReviewAttributeValues_Review">
+      <End Role="Review" EntitySet="Reviews" />
+      <End Role="ReviewAttributeValues" EntitySet="ReviewAttributeValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReviewAudio_Review" Association="OceanusModel.FK_ReviewAudio_Review">
+      <End Role="Review" EntitySet="Reviews" />
+      <End Role="ReviewAudio" EntitySet="ReviewAudios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReviewBulletPoints_Review" Association="OceanusModel.FK_ReviewBulletPoints_Review">
+      <End Role="Review" EntitySet="Reviews" />
+      <End Role="ReviewBulletPoints" EntitySet="ReviewBulletPoints" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserThumbsUpRatings_Review" Association="OceanusModel.FK_UserThumbsUpRatings_Review">
+      <End Role="Review" EntitySet="Reviews" />
+      <End Role="UserThumbsUpRatings" EntitySet="UserThumbsUpRatings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReviewAttributeValues_ReviewAttributes" Association="OceanusModel.FK_ReviewAttributeValues_ReviewAttributes">
+      <End Role="ReviewAttributes" EntitySet="ReviewAttributes" />
+      <End Role="ReviewAttributeValues" EntitySet="ReviewAttributeValues" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServicePackages_Services" Association="OceanusModel.FK_ServicePackages_Services">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="ServicePackages" EntitySet="ServicePackages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceVendor" Association="OceanusModel.FK_ServiceVendor">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="Services" EntitySet="Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuestionAnswer_Question" Association="OceanusModel.FK_QuestionAnswer_Question">
+      <End Role="SixAnswerQuestion" EntitySet="SixAnswerQuestions" />
+      <End Role="SixAnswerQuestionResponses" EntitySet="SixAnswerQuestionResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SixAnswerQuestionTagMapping_SixAnswerQuestion" Association="OceanusModel.FK_SixAnswerQuestionTagMapping_SixAnswerQuestion">
+      <End Role="SixAnswerQuestion" EntitySet="SixAnswerQuestions" />
+      <End Role="SixAnswerQuestionTagMapping" EntitySet="SixAnswerQuestionTagMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SixAnswersQuestionFollowerMapping_SixAnswerQuestion" Association="OceanusModel.FK_SixAnswersQuestionFollowerMapping_SixAnswerQuestion">
+      <End Role="SixAnswerQuestion" EntitySet="SixAnswerQuestions" />
+      <End Role="SixAnswersQuestionFollowerMapping" EntitySet="SixAnswersQuestionFollowerMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SixAnswersRelatedQuestionMapping_SixAnswerQuestion" Association="OceanusModel.FK_SixAnswersRelatedQuestionMapping_SixAnswerQuestion">
+      <End Role="SixAnswerQuestion" EntitySet="SixAnswerQuestions" />
+      <End Role="SixAnswersRelatedQuestionMapping" EntitySet="SixAnswersRelatedQuestionMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SixAnswersRelatedQuestionMapping_SixAnswerQuestion1" Association="OceanusModel.FK_SixAnswersRelatedQuestionMapping_SixAnswerQuestion1">
+      <End Role="SixAnswerQuestion" EntitySet="SixAnswerQuestions" />
+      <End Role="SixAnswersRelatedQuestionMapping" EntitySet="SixAnswersRelatedQuestionMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorRelatedQuestionMapping_SixAnswerQuestion" Association="OceanusModel.FK_VendorRelatedQuestionMapping_SixAnswerQuestion">
+      <End Role="SixAnswerQuestion" EntitySet="SixAnswerQuestions" />
+      <End Role="VendorRelatedQuestionMapping" EntitySet="VendorRelatedQuestionMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuestionAnswer_WikiText" Association="OceanusModel.FK_QuestionAnswer_WikiText">
+      <End Role="WikiText" EntitySet="WikiTexts" />
+      <End Role="SixAnswerQuestionResponses" EntitySet="SixAnswerQuestionResponses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserThumbsUpRatings_SixAnswerQuestionResponses" Association="OceanusModel.FK_UserThumbsUpRatings_SixAnswerQuestionResponses">
+      <End Role="SixAnswerQuestionResponses" EntitySet="SixAnswerQuestionResponses" />
+      <End Role="UserThumbsUpRatings" EntitySet="UserThumbsUpRatings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SixAnswerQuestionTagMapping_Tags" Association="OceanusModel.FK_SixAnswerQuestionTagMapping_Tags">
+      <End Role="Tags" EntitySet="Tags" />
+      <End Role="SixAnswerQuestionTagMapping" EntitySet="SixAnswerQuestionTagMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorTraitsTagMapping_Tags" Association="OceanusModel.FK_VendorTraitsTagMapping_Tags">
+      <End Role="Tags" EntitySet="Tags" />
+      <End Role="VendorTraitsTagMapping" EntitySet="VendorTraitsTagMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserProfile_UserLevel" Association="OceanusModel.FK_UserProfile_UserLevel">
+      <End Role="UserLevel" EntitySet="UserLevels" />
+      <End Role="UserProfile" EntitySet="UserProfiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorCategoryMapping_Vendors" Association="OceanusModel.FK_VendorCategoryMapping_Vendors">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="VendorCategoryMapping" EntitySet="VendorCategoryMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceImages_Services" Association="OceanusModel.FK_ServiceImages_Services">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="VendorImages" EntitySet="VendorImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorRelatedQuestionMapping_Vendors" Association="OceanusModel.FK_VendorRelatedQuestionMapping_Vendors">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="VendorRelatedQuestionMapping" EntitySet="VendorRelatedQuestionMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorTraitsTagMapping_Vendors" Association="OceanusModel.FK_VendorTraitsTagMapping_Vendors">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="VendorTraitsTagMapping" EntitySet="VendorTraitsTagMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorUserFollowerMapping_Vendors" Association="OceanusModel.FK_VendorUserFollowerMapping_Vendors">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="VendorUserFollowerMapping" EntitySet="VendorUserFollowerMappings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VendorVideos_Vendors" Association="OceanusModel.FK_VendorVideos_Vendors">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="VendorVideos" EntitySet="VendorVideos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VirtualCitiesServed_Vendors" Association="OceanusModel.FK_VirtualCitiesServed_Vendors">
+      <End Role="Vendors" EntitySet="Vendors" />
+      <End Role="VirtualCitiesServed" EntitySet="VirtualCitiesServeds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WikiTextPendingRevisions_WikiText" Association="OceanusModel.FK_WikiTextPendingRevisions_WikiText">
+      <End Role="WikiText" EntitySet="WikiTexts" />
+      <End Role="WikiTextPendingRevisions" EntitySet="WikiTextPendingRevisions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_WikiTextRevision_WikiText" Association="OceanusModel.FK_WikiTextRevision_WikiText">
+      <End Role="WikiText" EntitySet="WikiTexts" />
+      <End Role="WikiTextRevision" EntitySet="WikiTextRevisions" />
+    </AssociationSet>
+    <EntitySet Name="ReferenceRegions" EntityType="OceanusModel.ReferenceRegion" />
+  </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ContributingUserId" Type="Guid" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="CategoryReviewAttributeMappings" Relationship="OceanusModel.FK_CategoryAttributeMapping_Categories" FromRole="Categories" ToRole="CategoryReviewAttributeMapping" />
+    <NavigationProperty Name="VendorCategoryMappings" Relationship="OceanusModel.FK_VendorCategoryMapping_Categories" FromRole="Categories" ToRole="VendorCategoryMapping" />
+  </EntityType>
+  <EntityType Name="CategoryReviewAttributeMapping">
+    <Key>
+      <PropertyRef Name="CategoryAttributeMappingId" />
+    </Key>
+    <Property Name="CategoryAttributeMappingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="ReviewAttributeId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="OceanusModel.FK_CategoryAttributeMapping_Categories" FromRole="CategoryReviewAttributeMapping" ToRole="Categories" />
+    <NavigationProperty Name="ReviewAttribute" Relationship="OceanusModel.FK_CategoryAttributeMapping_ReviewAttributes" FromRole="CategoryReviewAttributeMapping" ToRole="ReviewAttributes" />
+  </EntityType>
+  <EntityType Name="FacebookFriendList">
+    <Key>
+      <PropertyRef Name="FacebookFriendListId" />
+    </Key>
+    <Property Name="FacebookFriendListId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="FacebookFriendUID" Type="Int64" Nullable="false" />
+    <Property Name="FacebookFriendName" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="FacebookFriendSixLooniesUID" Type="Guid" />
+    <Property Name="InvitedToSixLoonies" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Name="MessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Subject" Type="String" Nullable="false" MaxLength="512" Unicode="false" FixedLength="false" />
+    <Property Name="InitialSendTimestamp" Type="DateTime" Nullable="false" />
+    <Property Name="LastUpdatedOn" Type="DateTime" Nullable="false" />
+    <Property Name="IsSpam" Type="Boolean" />
+    <Property Name="InitiatingUserId" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="MessageResponses" Relationship="OceanusModel.FK_MessageResponses_Message" FromRole="Message" ToRole="MessageResponses" />
+    <NavigationProperty Name="MessageVisibilities" Relationship="OceanusModel.FK_MessageVisibility_Message" FromRole="Message" ToRole="MessageVisibility" />
+  </EntityType>
+  <EntityType Name="MessageRespons">
+    <Key>
+      <PropertyRef Name="MessageResponseId" />
+    </Key>
+    <Property Name="MessageResponseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MessageId" Type="Int32" Nullable="false" />
+    <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="ContributionDate" Type="DateTime" Nullable="false" />
+    <Property Name="ContributingUserId" Type="Guid" Nullable="false" />
+    <NavigationProperty Name="Message" Relationship="OceanusModel.FK_MessageResponses_Message" FromRole="MessageResponses" ToRole="Message" />
+  </EntityType>
+  <EntityType Name="MessageVisibility">
+    <Key>
+      <PropertyRef Name="MessageVisibilityId" />
+    </Key>
+    <Property Name="MessageVisibilityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MessageId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+    <Property Name="MessageIsUnread" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Message" Relationship="OceanusModel.FK_MessageVisibility_Message" FromRole="MessageVisibility" ToRole="Message" />
+  </EntityType>
+  <EntityType Name="PhysicalVendorLocation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VendorId" Type="Int32" Nullable="false" />
+    <Property Name="RefLocationStateId" Type="Int32" Nullable="false" />
+    <Property Name="AddressLine1" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="AddressLine2" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Phone" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Fax" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Latitude" Type="Double" />
+    <Property Name="Longitude" Type="Double" />
+    <Property Name="MapUrl" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Reference_LocationStates" Relationship="OceanusModel.FK_VendorLocations_CityStatesLocations" FromRole="PhysicalVendorLocations" ToRole="Reference_LocationStates" />
+    <NavigationProperty Name="Vendor" Relationship="OceanusModel.FK_VendorLocations_Vendors" FromRole="PhysicalVendorLocations" ToRole="Vendors" />
+  </EntityType>
+  <EntityType Name="Reference_LocationStates">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="State" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Country" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="PhysicalVendorLocations" Relationship="OceanusModel.FK_VendorLocations_CityStatesLocations" FromRole="Reference_LocationStates" ToRole="PhysicalVendorLocations" />
+    <NavigationProperty Name="VirtualCitiesServeds" Relationship="OceanusModel.FK_VirtualCitiesServed_Reference_LocationStates" FromRole="Reference_LocationStates" ToRole="VirtualCitiesServed" />
+  </EntityType>
+  <EntityType Name="ReferenceCity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Country" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="AccentCity" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Region" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="Latitude" Type="Double" />
+    <Property Name="Longitude" Type="Double" />
+    <NavigationProperty Name="VirtualCitiesServeds" Relationship="OceanusModel.FK_VirtualCitiesServed_ReferenceCities" FromRole="ReferenceCities" ToRole="VirtualCitiesServed" />
+  </EntityType>
+  <EntityType Name="Registration">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Review">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VendorId" Type="Int32" Nullable="false" />
+    <Property Name="InsideScoop" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="OtherComments" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="ContributingUserId" Type="Guid" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+    <Property Name="IsCloaked" Type="Boolean" Nullable="false" />
+    <Property Name="isInAppropriate" Type="Boolean" Nullable="false" />
+    <Property Name="IsDuplicate" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Vendor" Relationship="OceanusModel.FK_Review_Vendors" FromRole="Review" ToRole="Vendors" />
+    <NavigationProperty Name="ReviewAttributeValues" Relationship="OceanusModel.FK_ReviewAttributeValues_Review" FromRole="Review" ToRole="ReviewAttributeValues" />
+    <NavigationProperty Name="ReviewAudios" Relationship="OceanusModel.FK_ReviewAudio_Review" FromRole="Review" ToRole="ReviewAudio" />
+    <NavigationProperty Name="ReviewBulletPoints" Relationship="OceanusModel.FK_ReviewBulletPoints_Review" FromRole="Review" ToRole="ReviewBulletPoints" />
+    <NavigationProperty Name="UserThumbsUpRatings" Relationship="OceanusModel.FK_UserThumbsUpRatings_Review" FromRole="Review" ToRole="UserThumbsUpRatings" />
+  </EntityType>
+  <EntityType Name="ReviewAttribute">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AttributeName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="AttributeDesc" Type="String" MaxLength="1000" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="CategoryReviewAttributeMappings" Relationship="OceanusModel.FK_CategoryAttributeMapping_ReviewAttributes" FromRole="ReviewAttributes" ToRole="CategoryReviewAttributeMapping" />
+    <NavigationProperty Name="ReviewAttributeValues" Relationship="OceanusModel.FK_ReviewAttributeValues_ReviewAttributes" FromRole="ReviewAttributes" ToRole="ReviewAttributeValues" />
+  </EntityType>
+  <EntityType Name="ReviewAttributeValue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReviewId" Type="Int32" Nullable="false" />
+    <Property Name="ReviewAttributeId" Type="Int32" Nullable="false" />
+    <Property Name="AttributeValue" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Review" Relationship="OceanusModel.FK_ReviewAttributeValues_Review" FromRole="ReviewAttributeValues" ToRole="Review" />
+    <NavigationProperty Name="ReviewAttribute" Relationship="OceanusModel.FK_ReviewAttributeValues_ReviewAttributes" FromRole="ReviewAttributeValues" ToRole="ReviewAttributes" />
+  </EntityType>
+  <EntityType Name="ReviewAudio">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReviewId" Type="Int32" Nullable="false" />
+    <Property Name="AudioUrl" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Review" Relationship="OceanusModel.FK_ReviewAudio_Review" FromRole="ReviewAudio" ToRole="Review" />
+  </EntityType>
+  <EntityType Name="ReviewBulletPoint">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReviewId" Type="Int32" Nullable="false" />
+    <Property Name="BulletText" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
+    <Property Name="TypeWhatWasLiked" Type="Boolean" />
+    <Property Name="TypeExpectationExceeded" Type="Boolean" />
+    <Property Name="TypeCanBeBetter" Type="Boolean" />
+    <NavigationProperty Name="Review" Relationship="OceanusModel.FK_ReviewBulletPoints_Review" FromRole="ReviewBulletPoints" ToRole="Review" />
+  </EntityType>
+  <EntityType Name="ServicePackage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ServiceId" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Price" Type="Double" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Service" Relationship="OceanusModel.FK_ServicePackages_Services" FromRole="ServicePackages" ToRole="Services" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="VendorId" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="ShortDescription" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="ServicePackages" Relationship="OceanusModel.FK_ServicePackages_Services" FromRole="Services" ToRole="ServicePackages" />
+    <NavigationProperty Name="Vendor" Relationship="OceanusModel.FK_ServiceVendor" FromRole="Services" ToRole="Vendors" />
+  </EntityType>
+  <EntityType Name="SixAnswerQuestion">
+    <Key>
+      <PropertyRef Name="QuestionId" />
+    </Key>
+    <Property Name="QuestionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TitleWikiTextId" Type="Int32" Nullable="false" />
+    <Property Name="DetailWikiTextId" Type="Int32" />
+    <Property Name="AnswerSummaryWikiTextId" Type="Int32" />
+    <Property Name="ViewCount" Type="Int32" Nullable="false" />
+    <Property Name="ContributionDate" Type="DateTime" Nullable="false" />
+    <Property Name="LastUpdatedOn" Type="DateTime" Nullable="false" />
+    <Property Name="ContributingUserId" Type="Guid" Nullable="false" />
+    <Property Name="ThumbsUpCount" Type="Int32" Nullable="false" />
+    <Property Name="IsCloaked" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="SixAnswerQuestionResponses" Relationship="OceanusModel.FK_QuestionAnswer_Question" FromRole="SixAnswerQuestion" ToRole="SixAnswerQuestionResponses" />
+    <NavigationProperty Name="SixAnswerQuestionTagMappings" Relationship="OceanusModel.FK_SixAnswerQuestionTagMapping_SixAnswerQuestion" FromRole="SixAnswerQuestion" ToRole="SixAnswerQuestionTagMapping" />
+    <NavigationProperty Name="SixAnswersQuestionFollowerMappings" Relationship="OceanusModel.FK_SixAnswersQuestionFollowerMapping_SixAnswerQuestion" FromRole="SixAnswerQuestion" ToRole="SixAnswersQuestionFollowerMapping" />
+    <NavigationProperty Name="SixAnswersRelatedQuestionMappings" Relationship="OceanusModel.FK_SixAnswersRelatedQuestionMapping_SixAnswerQuestion" FromRole="SixAnswerQuestion" ToRole="SixAnswersRelatedQuestionMapping" />
+    <NavigationProperty Name="SixAnswersRelatedQuestionMappings1" Relationship="OceanusModel.FK_SixAnswersRelatedQuestionMapping_SixAnswerQuestion1" FromRole="SixAnswerQuestion" ToRole="SixAnswersRelatedQuestionMapping" />
+    <NavigationProperty Name="VendorRelatedQuestionMappings" Relationship="OceanusModel.FK_VendorRelatedQuestionMapping_SixAnswerQuestion" FromRole="SixAnswerQuestion" ToRole="VendorRelatedQuestionMapping" />
+  </EntityType>
+  <EntityType Name="SixAnswerQuestionRespons">
+    <Key>
+      <PropertyRef Name="AnswerId" />
+    </Key>
+    <Property Name="AnswerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="QuestionId" Type="Int32" Nullable="false" />
+    <Property Name="WikiTextId" Type="Int32" Nullable="false" />
+    <Property Name="InitialContributingUserId" Type="Guid" Nullable="false" />
+    <Property Name="NumAnswerUpVotes" Type="Int32" Nullable="false" />
+    <Property Name="NumAnswerDownVotes" Type="Int32" Nullable="false" />
+    <Property Name="ContributionDate" Type="DateTime" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="SixAnswerQuestion" Relationship="OceanusModel.FK_QuestionAnswer_Question" FromRole="SixAnswerQuestionResponses" ToRole="SixAnswerQuestion" />
+    <NavigationProperty Name="WikiText" Relationship="OceanusModel.FK_QuestionAnswer_WikiText" FromRole="SixAnswerQuestionResponses" ToRole="WikiText" />
+    <NavigationProperty Name="UserThumbsUpRatings" Relationship="OceanusModel.FK_UserThumbsUpRatings_SixAnswerQuestionResponses" FromRole="SixAnswerQuestionResponses" ToRole="UserThumbsUpRatings" />
+  </EntityType>
+  <EntityType Name="SixAnswerQuestionTagMapping">
+    <Key>
+      <PropertyRef Name="TagMappingId" />
+    </Key>
+    <Property Name="TagMappingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SixAnswerQuestionId" Type="Int32" Nullable="false" />
+    <Property Name="TagId" Type="Int32" Nullable="false" />
+    <Property Name="ContributingUserId" Type="Guid" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="SixAnswerQuestion" Relationship="OceanusModel.FK_SixAnswerQuestionTagMapping_SixAnswerQuestion" FromRole="SixAnswerQuestionTagMapping" ToRole="SixAnswerQuestion" />
+    <NavigationProperty Name="Tag" Relationship="OceanusModel.FK_SixAnswerQuestionTagMapping_Tags" FromRole="SixAnswerQuestionTagMapping" ToRole="Tags" />
+  </EntityType>
+  <EntityType Name="SixAnswersQuestionFollowerMapping">
+    <Key>
+      <PropertyRef Name="QuestionFollowerId" />
+    </Key>
+    <Property Name="QuestionFollowerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SixAnswerQuestionId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="SixAnswerQuestion" Relationship="OceanusModel.FK_SixAnswersQuestionFollowerMapping_SixAnswerQuestion" FromRole="SixAnswersQuestionFollowerMapping" ToRole="SixAnswerQuestion" />
+  </EntityType>
+  <EntityType Name="SixAnswersRelatedQuestionMapping">
+    <Key>
+      <PropertyRef Name="RelatedQuestionMappingId" />
+    </Key>
+    <Property Name="RelatedQuestionMappingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OriginQuestionId" Type="Int32" Nullable="false" />
+    <Property Name="RelatedQuestionId" Type="Int32" Nullable="false" />
+    <Property Name="ContributingUserId" Type="Guid" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="SixAnswerQuestion" Relationship="OceanusModel.FK_SixAnswersRelatedQuestionMapping_SixAnswerQuestion" FromRole="SixAnswersRelatedQuestionMapping" ToRole="SixAnswerQuestion" />
+    <NavigationProperty Name="SixAnswerQuestion1" Relationship="OceanusModel.FK_SixAnswersRelatedQuestionMapping_SixAnswerQuestion1" FromRole="SixAnswersRelatedQuestionMapping" ToRole="SixAnswerQuestion" />
+  </EntityType>
+  <EntityType Name="SixLooniesFriendConnection">
+    <Key>
+      <PropertyRef Name="SixLooniesFriendConnectionId" />
+    </Key>
+    <Property Name="SixLooniesFriendConnectionId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstUserId" Type="Guid" Nullable="false" />
+    <Property Name="SecondUserId" Type="Guid" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SixLooniesPendingFriendRequest">
+    <Key>
+      <PropertyRef Name="SixLooniesPendingFriendRequestId" />
+    </Key>
+    <Property Name="SixLooniesPendingFriendRequestId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InitiatingUserId" Type="Guid" Nullable="false" />
+    <Property Name="TargetFacebookUserUID" Type="Int64" />
+    <Property Name="TargetSixLooniesUserId" Type="Guid" />
+    <Property Name="InitiatedOn" Type="DateTime" Nullable="false" />
+    <Property Name="IsDeclined" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="TagId" />
+    </Key>
+    <Property Name="TagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TagName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="ContributingUserId" Type="Guid" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="SixAnswerQuestionTagMappings" Relationship="OceanusModel.FK_SixAnswerQuestionTagMapping_Tags" FromRole="Tags" ToRole="SixAnswerQuestionTagMapping" />
+    <NavigationProperty Name="VendorTraitsTagMappings" Relationship="OceanusModel.FK_VendorTraitsTagMapping_Tags" FromRole="Tags" ToRole="VendorTraitsTagMapping" />
+  </EntityType>
+  <EntityType Name="UserLevel">
+    <Key>
+      <PropertyRef Name="UserLevelId" />
+    </Key>
+    <Property Name="UserLevelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LevelName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="UserProfiles" Relationship="OceanusModel.FK_UserProfile_UserLevel" FromRole="UserLevel" ToRole="UserProfile" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserProfileId" />
+    </Key>
+    <Property Name="UserProfileId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="FullName" Type="String" Nullable="false" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="NumThumbsUp" Type="Int32" Nullable="false" />
+    <Property Name="UserLevelId" Type="Int32" Nullable="false" />
+    <Property Name="FacebookToken" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="FacebookUserUID" Type="Int64" />
+    <Property Name="PromptUserForFBFriends" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="UserLevel" Relationship="OceanusModel.FK_UserProfile_UserLevel" FromRole="UserProfile" ToRole="UserLevel" />
+  </EntityType>
+  <EntityType Name="UserThumbsUpRating">
+    <Key>
+      <PropertyRef Name="UserThumbsUpRatingId" />
+    </Key>
+    <Property Name="UserThumbsUpRatingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TargetUserId" Type="Guid" Nullable="false" />
+    <Property Name="Comments" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ContributingUserId" Type="Guid" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+    <Property Name="VendorReviewId" Type="Int32" />
+    <Property Name="QuestionResponseId" Type="Int32" />
+    <NavigationProperty Name="Review" Relationship="OceanusModel.FK_UserThumbsUpRatings_Review" FromRole="UserThumbsUpRatings" ToRole="Review" />
+    <NavigationProperty Name="SixAnswerQuestionRespons" Relationship="OceanusModel.FK_UserThumbsUpRatings_SixAnswerQuestionResponses" FromRole="UserThumbsUpRatings" ToRole="SixAnswerQuestionResponses" />
+  </EntityType>
+  <EntityType Name="UserToUserFollowingMapping">
+    <Key>
+      <PropertyRef Name="FollowerMappingId" />
+    </Key>
+    <Property Name="FollowerMappingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FollowedUserId" Type="Guid" Nullable="false" />
+    <Property Name="FollowingUserId" Type="Guid" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VendorCategoryMapping">
+    <Key>
+      <PropertyRef Name="CategoryMappingId" />
+    </Key>
+    <Property Name="CategoryMappingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="VendorId" Type="Int32" Nullable="false" />
+    <Property Name="ContributingUserId" Type="Guid" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="OceanusModel.FK_VendorCategoryMapping_Categories" FromRole="VendorCategoryMapping" ToRole="Categories" />
+    <NavigationProperty Name="Vendor" Relationship="OceanusModel.FK_VendorCategoryMapping_Vendors" FromRole="VendorCategoryMapping" ToRole="Vendors" />
+  </EntityType>
+  <EntityType Name="VendorImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vendorId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="ImageUrl" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="sourceWebsiteName" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="sourceWebsiteURL" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="copyrightAuthor" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Vendor" Relationship="OceanusModel.FK_ServiceImages_Services" FromRole="VendorImages" ToRole="Vendors" />
+  </EntityType>
+  <EntityType Name="VendorRelatedQuestionMapping">
+    <Key>
+      <PropertyRef Name="RelatedQuestionMappingId" />
+    </Key>
+    <Property Name="RelatedQuestionMappingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VendorId" Type="Int32" Nullable="false" />
+    <Property Name="QuestionId" Type="Int32" Nullable="false" />
+    <Property Name="ContributingUserId" Type="Guid" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="SixAnswerQuestion" Relationship="OceanusModel.FK_VendorRelatedQuestionMapping_SixAnswerQuestion" FromRole="VendorRelatedQuestionMapping" ToRole="SixAnswerQuestion" />
+    <NavigationProperty Name="Vendor" Relationship="OceanusModel.FK_VendorRelatedQuestionMapping_Vendors" FromRole="VendorRelatedQuestionMapping" ToRole="Vendors" />
+  </EntityType>
+  <EntityType Name="Vendor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="ShortDescription" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="WebsiteURL" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="BusinessPhone" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="Fax" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="IsPublished" Type="Boolean" Nullable="false" />
+    <Property Name="IsPendingReview" Type="Boolean" Nullable="false" />
+    <Property Name="ContributingUserId" Type="Guid" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+    <Property Name="ProfileSubmittedToReviewOn" Type="DateTime" />
+    <Property Name="PublishedOn" Type="DateTime" />
+    <NavigationProperty Name="PhysicalVendorLocations" Relationship="OceanusModel.FK_VendorLocations_Vendors" FromRole="Vendors" ToRole="PhysicalVendorLocations" />
+    <NavigationProperty Name="Reviews" Relationship="OceanusModel.FK_Review_Vendors" FromRole="Vendors" ToRole="Review" />
+    <NavigationProperty Name="Services" Relationship="OceanusModel.FK_ServiceVendor" FromRole="Vendors" ToRole="Services" />
+    <NavigationProperty Name="VendorCategoryMappings" Relationship="OceanusModel.FK_VendorCategoryMapping_Vendors" FromRole="Vendors" ToRole="VendorCategoryMapping" />
+    <NavigationProperty Name="VendorImages" Relationship="OceanusModel.FK_ServiceImages_Services" FromRole="Vendors" ToRole="VendorImages" />
+    <NavigationProperty Name="VendorRelatedQuestionMappings" Relationship="OceanusModel.FK_VendorRelatedQuestionMapping_Vendors" FromRole="Vendors" ToRole="VendorRelatedQuestionMapping" />
+    <NavigationProperty Name="VendorTraitsTagMappings" Relationship="OceanusModel.FK_VendorTraitsTagMapping_Vendors" FromRole="Vendors" ToRole="VendorTraitsTagMapping" />
+    <NavigationProperty Name="VendorUserFollowerMappings" Relationship="OceanusModel.FK_VendorUserFollowerMapping_Vendors" FromRole="Vendors" ToRole="VendorUserFollowerMapping" />
+    <NavigationProperty Name="VendorVideos" Relationship="OceanusModel.FK_VendorVideos_Vendors" FromRole="Vendors" ToRole="VendorVideos" />
+    <NavigationProperty Name="VirtualCitiesServeds" Relationship="OceanusModel.FK_VirtualCitiesServed_Vendors" FromRole="Vendors" ToRole="VirtualCitiesServed" />
+  </EntityType>
+  <EntityType Name="VendorTraitsTagMapping">
+    <Key>
+      <PropertyRef Name="TagMappingId" />
+    </Key>
+    <Property Name="TagMappingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VendorId" Type="Int32" Nullable="false" />
+    <Property Name="TagId" Type="Int32" Nullable="false" />
+    <Property Name="ContributingUserId" Type="Guid" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Tag" Relationship="OceanusModel.FK_VendorTraitsTagMapping_Tags" FromRole="VendorTraitsTagMapping" ToRole="Tags" />
+    <NavigationProperty Name="Vendor" Relationship="OceanusModel.FK_VendorTraitsTagMapping_Vendors" FromRole="VendorTraitsTagMapping" ToRole="Vendors" />
+  </EntityType>
+  <EntityType Name="VendorUserFollowerMapping">
+    <Key>
+      <PropertyRef Name="VendorFollowerId" />
+    </Key>
+    <Property Name="VendorFollowerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VendorId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="AddedOn" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Vendor" Relationship="OceanusModel.FK_VendorUserFollowerMapping_Vendors" FromRole="VendorUserFollowerMapping" ToRole="Vendors" />
+  </EntityType>
+  <EntityType Name="VendorVideo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="VendorId" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="1024" Unicode="true" FixedLength="false" />
+    <Property Name="VideoIdentfier" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="IsYouTube" Type="Boolean" Nullable="false" />
+    <Property Name="IsVimeo" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Vendor" Relationship="OceanusModel.FK_VendorVideos_Vendors" FromRole="VendorVideos" ToRole="Vendors" />
+  </EntityType>
+  <EntityType Name="VirtualCitiesServed">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vendorId" Type="Int32" Nullable="false" />
+    <Property Name="City" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="LocationStatesId" Type="Int32" Nullable="false" />
+    <Property Name="ReferenceCityId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Reference_LocationStates" Relationship="OceanusModel.FK_VirtualCitiesServed_Reference_LocationStates" FromRole="VirtualCitiesServed" ToRole="Reference_LocationStates" />
+    <NavigationProperty Name="ReferenceCity" Relationship="OceanusModel.FK_VirtualCitiesServed_ReferenceCities" FromRole="VirtualCitiesServed" ToRole="ReferenceCities" />
+    <NavigationProperty Name="Vendor" Relationship="OceanusModel.FK_VirtualCitiesServed_Vendors" FromRole="VirtualCitiesServed" ToRole="Vendors" />
+  </EntityType>
+  <EntityType Name="WikiText">
+    <Key>
+      <PropertyRef Name="WikiTextId" />
+    </Key>
+    <Property Name="WikiTextId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="IsCloaked" Type="Boolean" Nullable="false" />
+    <Property Name="IsInAppropriate" Type="Boolean" Nullable="false" />
+    <Property Name="IsIrrelevantToQuestion" Type="Boolean" Nullable="false" />
+    <Property Name="IsDuplicate" Type="Boolean" Nullable="false" />
+    <Property Name="RequiresExplanation" Type="Boolean" Nullable="false" />
+    <Property Name="LastUpdatedOn" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="SixAnswerQuestionResponses" Relationship="OceanusModel.FK_QuestionAnswer_WikiText" FromRole="WikiText" ToRole="SixAnswerQuestionResponses" />
+    <NavigationProperty Name="WikiTextPendingRevisions" Relationship="OceanusModel.FK_WikiTextPendingRevisions_WikiText" FromRole="WikiText" ToRole="WikiTextPendingRevisions" />
+    <NavigationProperty Name="WikiTextRevisions" Relationship="OceanusModel.FK_WikiTextRevision_WikiText" FromRole="WikiText" ToRole="WikiTextRevision" />
+  </EntityType>
+  <EntityType Name="WikiTextPendingRevision">
+    <Key>
+      <PropertyRef Name="WikiTextPendingRevisionId" />
+    </Key>
+    <Property Name="WikiTextPendingRevisionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WikiTextId" Type="Int32" Nullable="false" />
+    <Property Name="RevisionNum" Type="Int32" Nullable="false" />
+    <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="RevisionDate" Type="DateTime" Nullable="false" />
+    <Property Name="IsAccepted" Type="Boolean" Nullable="false" />
+    <Property Name="IsRejected" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="WikiText" Relationship="OceanusModel.FK_WikiTextPendingRevisions_WikiText" FromRole="WikiTextPendingRevisions" ToRole="WikiText" />
+  </EntityType>
+  <EntityType Name="WikiTextRevision">
+    <Key>
+      <PropertyRef Name="WikiTextRevisionId" />
+    </Key>
+    <Property Name="WikiTextRevisionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WikiTextId" Type="Int32" Nullable="false" />
+    <Property Name="RevisionNum" Type="Int32" Nullable="false" />
+    <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="UserId" Type="Guid" Nullable="false" />
+    <Property Name="IsCloaked" Type="Boolean" Nullable="false" />
+    <Property Name="IsInAppropriate" Type="Boolean" Nullable="false" />
+    <Property Name="IsIrrelevantToQuestion" Type="Boolean" Nullable="false" />
+    <Property Name="IsDuplicate" Type="Boolean" Nullable="false" />
+    <Property Name="RequiresExplanation" Type="Boolean" Nullable="false" />
+    <Property Name="LastUpdatedOn" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="WikiText" Relationship="OceanusModel.FK_WikiTextRevision_WikiText" FromRole="WikiTextRevision" ToRole="WikiText" />
+  </EntityType>
+  <Association Name="FK_CategoryAttributeMapping_Categories">
+    <End Role="Categories" Type="OceanusModel.Category" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CategoryReviewAttributeMapping" Type="OceanusModel.CategoryReviewAttributeMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CategoryReviewAttributeMapping">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorCategoryMapping_Categories">
+    <End Role="Categories" Type="OceanusModel.Category" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="VendorCategoryMapping" Type="OceanusModel.VendorCategoryMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VendorCategoryMapping">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CategoryAttributeMapping_ReviewAttributes">
+    <End Role="ReviewAttributes" Type="OceanusModel.ReviewAttribute" Multiplicity="1" />
+    <End Role="CategoryReviewAttributeMapping" Type="OceanusModel.CategoryReviewAttributeMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReviewAttributes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CategoryReviewAttributeMapping">
+        <PropertyRef Name="ReviewAttributeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MessageResponses_Message">
+    <End Role="Message" Type="OceanusModel.Message" Multiplicity="1" />
+    <End Role="MessageResponses" Type="OceanusModel.MessageRespons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="MessageId" />
+      </Principal>
+      <Dependent Role="MessageResponses">
+        <PropertyRef Name="MessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MessageVisibility_Message">
+    <End Role="Message" Type="OceanusModel.Message" Multiplicity="1" />
+    <End Role="MessageVisibility" Type="OceanusModel.MessageVisibility" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="MessageId" />
+      </Principal>
+      <Dependent Role="MessageVisibility">
+        <PropertyRef Name="MessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorLocations_CityStatesLocations">
+    <End Role="Reference_LocationStates" Type="OceanusModel.Reference_LocationStates" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PhysicalVendorLocations" Type="OceanusModel.PhysicalVendorLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reference_LocationStates">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicalVendorLocations">
+        <PropertyRef Name="RefLocationStateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorLocations_Vendors">
+    <End Role="Vendors" Type="OceanusModel.Vendor" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="PhysicalVendorLocations" Type="OceanusModel.PhysicalVendorLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PhysicalVendorLocations">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VirtualCitiesServed_Reference_LocationStates">
+    <End Role="Reference_LocationStates" Type="OceanusModel.Reference_LocationStates" Multiplicity="1" />
+    <End Role="VirtualCitiesServed" Type="OceanusModel.VirtualCitiesServed" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reference_LocationStates">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VirtualCitiesServed">
+        <PropertyRef Name="LocationStatesId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VirtualCitiesServed_ReferenceCities">
+    <End Role="ReferenceCities" Type="OceanusModel.ReferenceCity" Multiplicity="1" />
+    <End Role="VirtualCitiesServed" Type="OceanusModel.VirtualCitiesServed" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReferenceCities">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VirtualCitiesServed">
+        <PropertyRef Name="ReferenceCityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Review_Vendors">
+    <End Role="Vendors" Type="OceanusModel.Vendor" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Review" Type="OceanusModel.Review" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Review">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReviewAttributeValues_Review">
+    <End Role="Review" Type="OceanusModel.Review" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ReviewAttributeValues" Type="OceanusModel.ReviewAttributeValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Review">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReviewAttributeValues">
+        <PropertyRef Name="ReviewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReviewAudio_Review">
+    <End Role="Review" Type="OceanusModel.Review" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ReviewAudio" Type="OceanusModel.ReviewAudio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Review">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReviewAudio">
+        <PropertyRef Name="ReviewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReviewBulletPoints_Review">
+    <End Role="Review" Type="OceanusModel.Review" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ReviewBulletPoints" Type="OceanusModel.ReviewBulletPoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Review">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReviewBulletPoints">
+        <PropertyRef Name="ReviewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserThumbsUpRatings_Review">
+    <End Role="Review" Type="OceanusModel.Review" Multiplicity="0..1" />
+    <End Role="UserThumbsUpRatings" Type="OceanusModel.UserThumbsUpRating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Review">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserThumbsUpRatings">
+        <PropertyRef Name="VendorReviewId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReviewAttributeValues_ReviewAttributes">
+    <End Role="ReviewAttributes" Type="OceanusModel.ReviewAttribute" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ReviewAttributeValues" Type="OceanusModel.ReviewAttributeValue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ReviewAttributes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ReviewAttributeValues">
+        <PropertyRef Name="ReviewAttributeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServicePackages_Services">
+    <End Role="Services" Type="OceanusModel.Service" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ServicePackages" Type="OceanusModel.ServicePackage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ServicePackages">
+        <PropertyRef Name="ServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceVendor">
+    <End Role="Vendors" Type="OceanusModel.Vendor" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Services" Type="OceanusModel.Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Services">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuestionAnswer_Question">
+    <End Role="SixAnswerQuestion" Type="OceanusModel.SixAnswerQuestion" Multiplicity="1" />
+    <End Role="SixAnswerQuestionResponses" Type="OceanusModel.SixAnswerQuestionRespons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SixAnswerQuestion">
+        <PropertyRef Name="QuestionId" />
+      </Principal>
+      <Dependent Role="SixAnswerQuestionResponses">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SixAnswerQuestionTagMapping_SixAnswerQuestion">
+    <End Role="SixAnswerQuestion" Type="OceanusModel.SixAnswerQuestion" Multiplicity="1" />
+    <End Role="SixAnswerQuestionTagMapping" Type="OceanusModel.SixAnswerQuestionTagMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SixAnswerQuestion">
+        <PropertyRef Name="QuestionId" />
+      </Principal>
+      <Dependent Role="SixAnswerQuestionTagMapping">
+        <PropertyRef Name="SixAnswerQuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SixAnswersQuestionFollowerMapping_SixAnswerQuestion">
+    <End Role="SixAnswerQuestion" Type="OceanusModel.SixAnswerQuestion" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SixAnswersQuestionFollowerMapping" Type="OceanusModel.SixAnswersQuestionFollowerMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SixAnswerQuestion">
+        <PropertyRef Name="QuestionId" />
+      </Principal>
+      <Dependent Role="SixAnswersQuestionFollowerMapping">
+        <PropertyRef Name="SixAnswerQuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SixAnswersRelatedQuestionMapping_SixAnswerQuestion">
+    <End Role="SixAnswerQuestion" Type="OceanusModel.SixAnswerQuestion" Multiplicity="1" />
+    <End Role="SixAnswersRelatedQuestionMapping" Type="OceanusModel.SixAnswersRelatedQuestionMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SixAnswerQuestion">
+        <PropertyRef Name="QuestionId" />
+      </Principal>
+      <Dependent Role="SixAnswersRelatedQuestionMapping">
+        <PropertyRef Name="OriginQuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SixAnswersRelatedQuestionMapping_SixAnswerQuestion1">
+    <End Role="SixAnswerQuestion" Type="OceanusModel.SixAnswerQuestion" Multiplicity="1" />
+    <End Role="SixAnswersRelatedQuestionMapping" Type="OceanusModel.SixAnswersRelatedQuestionMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SixAnswerQuestion">
+        <PropertyRef Name="QuestionId" />
+      </Principal>
+      <Dependent Role="SixAnswersRelatedQuestionMapping">
+        <PropertyRef Name="RelatedQuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorRelatedQuestionMapping_SixAnswerQuestion">
+    <End Role="SixAnswerQuestion" Type="OceanusModel.SixAnswerQuestion" Multiplicity="1" />
+    <End Role="VendorRelatedQuestionMapping" Type="OceanusModel.VendorRelatedQuestionMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SixAnswerQuestion">
+        <PropertyRef Name="QuestionId" />
+      </Principal>
+      <Dependent Role="VendorRelatedQuestionMapping">
+        <PropertyRef Name="QuestionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuestionAnswer_WikiText">
+    <End Role="WikiText" Type="OceanusModel.WikiText" Multiplicity="1" />
+    <End Role="SixAnswerQuestionResponses" Type="OceanusModel.SixAnswerQuestionRespons" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WikiText">
+        <PropertyRef Name="WikiTextId" />
+      </Principal>
+      <Dependent Role="SixAnswerQuestionResponses">
+        <PropertyRef Name="WikiTextId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserThumbsUpRatings_SixAnswerQuestionResponses">
+    <End Role="SixAnswerQuestionResponses" Type="OceanusModel.SixAnswerQuestionRespons" Multiplicity="0..1" />
+    <End Role="UserThumbsUpRatings" Type="OceanusModel.UserThumbsUpRating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SixAnswerQuestionResponses">
+        <PropertyRef Name="AnswerId" />
+      </Principal>
+      <Dependent Role="UserThumbsUpRatings">
+        <PropertyRef Name="QuestionResponseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SixAnswerQuestionTagMapping_Tags">
+    <End Role="Tags" Type="OceanusModel.Tag" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SixAnswerQuestionTagMapping" Type="OceanusModel.SixAnswerQuestionTagMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tags">
+        <PropertyRef Name="TagId" />
+      </Principal>
+      <Dependent Role="SixAnswerQuestionTagMapping">
+        <PropertyRef Name="TagId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorTraitsTagMapping_Tags">
+    <End Role="Tags" Type="OceanusModel.Tag" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="VendorTraitsTagMapping" Type="OceanusModel.VendorTraitsTagMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tags">
+        <PropertyRef Name="TagId" />
+      </Principal>
+      <Dependent Role="VendorTraitsTagMapping">
+        <PropertyRef Name="TagId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserProfile_UserLevel">
+    <End Role="UserLevel" Type="OceanusModel.UserLevel" Multiplicity="1" />
+    <End Role="UserProfile" Type="OceanusModel.UserProfile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserLevel">
+        <PropertyRef Name="UserLevelId" />
+      </Principal>
+      <Dependent Role="UserProfile">
+        <PropertyRef Name="UserLevelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorCategoryMapping_Vendors">
+    <End Role="Vendors" Type="OceanusModel.Vendor" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="VendorCategoryMapping" Type="OceanusModel.VendorCategoryMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VendorCategoryMapping">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceImages_Services">
+    <End Role="Vendors" Type="OceanusModel.Vendor" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="VendorImages" Type="OceanusModel.VendorImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VendorImages">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorRelatedQuestionMapping_Vendors">
+    <End Role="Vendors" Type="OceanusModel.Vendor" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="VendorRelatedQuestionMapping" Type="OceanusModel.VendorRelatedQuestionMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VendorRelatedQuestionMapping">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorTraitsTagMapping_Vendors">
+    <End Role="Vendors" Type="OceanusModel.Vendor" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="VendorTraitsTagMapping" Type="OceanusModel.VendorTraitsTagMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VendorTraitsTagMapping">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorUserFollowerMapping_Vendors">
+    <End Role="Vendors" Type="OceanusModel.Vendor" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="VendorUserFollowerMapping" Type="OceanusModel.VendorUserFollowerMapping" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VendorUserFollowerMapping">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VendorVideos_Vendors">
+    <End Role="Vendors" Type="OceanusModel.Vendor" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="VendorVideos" Type="OceanusModel.VendorVideo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VendorVideos">
+        <PropertyRef Name="VendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VirtualCitiesServed_Vendors">
+    <End Role="Vendors" Type="OceanusModel.Vendor" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="VirtualCitiesServed" Type="OceanusModel.VirtualCitiesServed" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VirtualCitiesServed">
+        <PropertyRef Name="vendorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WikiTextPendingRevisions_WikiText">
+    <End Role="WikiText" Type="OceanusModel.WikiText" Multiplicity="1" />
+    <End Role="WikiTextPendingRevisions" Type="OceanusModel.WikiTextPendingRevision" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WikiText">
+        <PropertyRef Name="WikiTextId" />
+      </Principal>
+      <Dependent Role="WikiTextPendingRevisions">
+        <PropertyRef Name="WikiTextId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_WikiTextRevision_WikiText">
+    <End Role="WikiText" Type="OceanusModel.WikiText" Multiplicity="1" />
+    <End Role="WikiTextRevision" Type="OceanusModel.WikiTextRevision" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WikiText">
+        <PropertyRef Name="WikiTextId" />
+      </Principal>
+      <Dependent Role="WikiTextRevision">
+        <PropertyRef Name="WikiTextId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ReferenceRegion">
+    <Key>
+      <PropertyRef Name="SubdivisionCode" />
+    </Key>
+    <Property Type="String" Name="SubdivisionCode" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="CountryCode" MaxLength="2" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Name" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

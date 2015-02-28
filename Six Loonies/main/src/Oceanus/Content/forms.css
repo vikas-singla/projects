@@ -1,0 +1,145 @@
+﻿/* FORM LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+.formlblfootnote
+{
+    clear: both;
+    color: #a0a0a0;
+    font-weight: normal;
+    padding: 2px 0px 2px 0px;
+    font-size: 9px;
+}
+
+fieldset
+{
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+legend
+{
+    border: none;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+input
+{
+    border: 1px solid #C0C0C0;
+    -webkit-box-shadow: inset 0 1px 2px #d9d9d9;
+    -moz-box-shadow: 1px 1px 2px 1px #f2f2f2 inset;
+    box-shadow: inset 0 1px 2px #d9d9d9;
+}
+
+input:disabled
+{
+    background:#fff;
+}
+
+input[type="checkbox"]
+{
+    border: none;
+}
+
+label
+{
+    cursor: hand;
+    cursor: pointer;
+}
+
+input[type="text"]
+{
+    width: 200px;
+    border: 1px solid #C0C0C0;
+}
+
+textarea
+{
+    min-height: 20px;
+    background-color: transparent;
+    border: 1px solid #C0C0C0;
+    margin: 0;
+    padding: 2px;
+    resize: none;
+    outline: none;
+    -webkit-box-shadow: inset 0 1px 2px #d9d9d9;
+    -moz-box-shadow: 1px 1px 2px 1px #f2f2f2 inset;
+    box-shadow: inset 0 1px 2px #d9d9d9;
+}
+
+input[type="password"]
+{
+    width: 200px;
+    border: 1px solid #C0C0C0;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+input[type=^"checkbox"]
+{
+    border: 1px solid #C0C0C0;
+    margin: 0;
+    outline: none;
+    padding: 2px;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+/* Styles for editor and display helpers
+----------------------------------------------------------*/
+.hiddenfield
+{
+    visibility: hidden;
+}
+
+.display-label, .editor-label
+{
+    padding-top: 10px;
+}
+
+.display-field, .editor-field
+{
+    text-align: left;
+}
+
+.text-box
+{
+    width: 30em;
+}
+
+.text-box.multi-line
+{
+    height: 6.5em;
+}
+
+.tri-state
+{
+    width: 6em;
+}
+

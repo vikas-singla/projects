@@ -1,0 +1,617 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DADFB920F1FC513005CA3A7 /* SoundEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DADFB910F1FC513005CA3A7 /* SoundEffect.m */; };
+		1DADFBCF0F1FC6EF005CA3A7 /* 0.aif in Resources */ = {isa = PBXBuildFile; fileRef = 1DADFBC50F1FC6EF005CA3A7 /* 0.aif */; };
+		1DADFBD00F1FC6EF005CA3A7 /* 1.aif in Resources */ = {isa = PBXBuildFile; fileRef = 1DADFBC60F1FC6EF005CA3A7 /* 1.aif */; };
+		1DADFBD10F1FC6EF005CA3A7 /* 2.aif in Resources */ = {isa = PBXBuildFile; fileRef = 1DADFBC70F1FC6EF005CA3A7 /* 2.aif */; };
+		1DADFBD20F1FC6EF005CA3A7 /* 3.aif in Resources */ = {isa = PBXBuildFile; fileRef = 1DADFBC80F1FC6EF005CA3A7 /* 3.aif */; };
+		1DADFBD30F1FC6EF005CA3A7 /* 4.aif in Resources */ = {isa = PBXBuildFile; fileRef = 1DADFBC90F1FC6EF005CA3A7 /* 4.aif */; };
+		1DADFBD40F1FC6EF005CA3A7 /* 5.aif in Resources */ = {isa = PBXBuildFile; fileRef = 1DADFBCA0F1FC6EF005CA3A7 /* 5.aif */; };
+		1DADFBD50F1FC6EF005CA3A7 /* 6.aif in Resources */ = {isa = PBXBuildFile; fileRef = 1DADFBCB0F1FC6EF005CA3A7 /* 6.aif */; };
+		1DADFBD60F1FC6EF005CA3A7 /* 7.aif in Resources */ = {isa = PBXBuildFile; fileRef = 1DADFBCC0F1FC6EF005CA3A7 /* 7.aif */; };
+		1DADFBD70F1FC6EF005CA3A7 /* 8.aif in Resources */ = {isa = PBXBuildFile; fileRef = 1DADFBCD0F1FC6EF005CA3A7 /* 8.aif */; };
+		1DADFBD80F1FC6EF005CA3A7 /* 9.aif in Resources */ = {isa = PBXBuildFile; fileRef = 1DADFBCE0F1FC6EF005CA3A7 /* 9.aif */; };
+		1DADFBE80F1FC93B005CA3A7 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DADFBE70F1FC93B005CA3A7 /* AudioToolbox.framework */; };
+		1DB04B3E0F904B4B00800F4D /* DialPadImagePlus.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DB04B3C0F904B4B00800F4D /* DialPadImagePlus.png */; };
+		1DB04B3F0F904B4B00800F4D /* DialPadImagePlusHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DB04B3D0F904B4B00800F4D /* DialPadImagePlusHighlighted.png */; };
+		1DB04B600F904C8E00800F4D /* ActivityIndicatorBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DB04B5D0F904C8E00800F4D /* ActivityIndicatorBackground.png */; };
+		1DB04B610F904C8E00800F4D /* building_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DB04B5E0F904C8E00800F4D /* building_icon.png */; };
+		1DB04B620F904C8E00800F4D /* contact_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DB04B5F0F904C8E00800F4D /* contact_icon.png */; };
+		1DB691D80F140EB000702FBB /* RecentCalls.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DB691D70F140EB000702FBB /* RecentCalls.png */; };
+		1DCF519C0F02ACED00225087 /* ContactListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51990F02ACED00225087 /* ContactListView.xib */; };
+		1DCF519D0F02ACED00225087 /* KeypadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF519A0F02ACED00225087 /* KeypadView.xib */; };
+		1DCF519E0F02ACED00225087 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF519B0F02ACED00225087 /* MainWindow.xib */; };
+		1DCF51BC0F02ACFB00225087 /* AppSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF51A00F02ACFB00225087 /* AppSettingsViewController.m */; };
+		1DCF51BD0F02ACFB00225087 /* CallLogsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF51A20F02ACFB00225087 /* CallLogsView.m */; };
+		1DCF51BE0F02ACFB00225087 /* CallMechanism.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF51A40F02ACFB00225087 /* CallMechanism.m */; };
+		1DCF51BF0F02ACFB00225087 /* ContactInformationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF51A60F02ACFB00225087 /* ContactInformationController.m */; };
+		1DCF51C00F02ACFB00225087 /* ContactInformationWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF51A80F02ACFB00225087 /* ContactInformationWrapper.m */; };
+		1DCF51C10F02ACFB00225087 /* ContactsNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF51AA0F02ACFB00225087 /* ContactsNavigationController.m */; };
+		1DCF51C20F02ACFB00225087 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF51AC0F02ACFB00225087 /* ContactsViewController.m */; };
+		1DCF51C30F02ACFB00225087 /* ContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF51AE0F02ACFB00225087 /* ContactTableViewCell.m */; };
+		1DCF51C40F02ACFB00225087 /* CustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF51B00F02ACFB00225087 /* CustomTabBarController.m */; };
+		1DCF51C50F02ACFB00225087 /* DialContactsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF51B20F02ACFB00225087 /* DialContactsView.m */; };
+		1DCF51C60F02ACFB00225087 /* Fast_DialAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF51B40F02ACFB00225087 /* Fast_DialAppDelegate.m */; };
+		1DCF51C70F02ACFB00225087 /* KeyboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF51B60F02ACFB00225087 /* KeyboardViewController.m */; };
+		1DCF51C80F02ACFB00225087 /* KeypadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF51B80F02ACFB00225087 /* KeypadViewController.m */; };
+		1DCF51C90F02ACFB00225087 /* RecentCallController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCF51BA0F02ACFB00225087 /* RecentCallController.m */; };
+		1DCF51F30F02AD1000225087 /* BluePhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51CB0F02AD1000225087 /* BluePhone.png */; };
+		1DCF51F40F02AD1000225087 /* DialPadBackspaceButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51CC0F02AD1000225087 /* DialPadBackspaceButton.png */; };
+		1DCF51F50F02AD1000225087 /* DialPadBackspaceButtonHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51CD0F02AD1000225087 /* DialPadBackspaceButtonHighlighted.png */; };
+		1DCF51F60F02AD1000225087 /* DialPadCall.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51CE0F02AD1000225087 /* DialPadCall.png */; };
+		1DCF51F70F02AD1000225087 /* DialPadCallHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51CF0F02AD1000225087 /* DialPadCallHighlighted.png */; };
+		1DCF51F80F02AD1000225087 /* DialPadDelete.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51D00F02AD1000225087 /* DialPadDelete.png */; };
+		1DCF51F90F02AD1000225087 /* DialPadDigit0.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51D10F02AD1000225087 /* DialPadDigit0.png */; };
+		1DCF51FA0F02AD1000225087 /* DialPadDigit0Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51D20F02AD1000225087 /* DialPadDigit0Highlighted.png */; };
+		1DCF51FB0F02AD1000225087 /* DialPadDigit1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51D30F02AD1000225087 /* DialPadDigit1.png */; };
+		1DCF51FC0F02AD1000225087 /* DialPadDigit1Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51D40F02AD1000225087 /* DialPadDigit1Highlighted.png */; };
+		1DCF51FD0F02AD1000225087 /* DialPadDigit2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51D50F02AD1000225087 /* DialPadDigit2.png */; };
+		1DCF51FE0F02AD1000225087 /* DialPadDigit2Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51D60F02AD1000225087 /* DialPadDigit2Highlighted.png */; };
+		1DCF51FF0F02AD1000225087 /* DialPadDigit3.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51D70F02AD1000225087 /* DialPadDigit3.png */; };
+		1DCF52000F02AD1000225087 /* DialPadDigit3Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51D80F02AD1000225087 /* DialPadDigit3Highlighted.png */; };
+		1DCF52010F02AD1000225087 /* DialPadDigit4.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51D90F02AD1000225087 /* DialPadDigit4.png */; };
+		1DCF52020F02AD1000225087 /* DialPadDigit4Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51DA0F02AD1000225087 /* DialPadDigit4Highlighted.png */; };
+		1DCF52030F02AD1000225087 /* DialPadDigit5.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51DB0F02AD1000225087 /* DialPadDigit5.png */; };
+		1DCF52040F02AD1000225087 /* DialPadDigit5Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51DC0F02AD1000225087 /* DialPadDigit5Highlighted.png */; };
+		1DCF52050F02AD1000225087 /* DialPadDigit6.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51DD0F02AD1000225087 /* DialPadDigit6.png */; };
+		1DCF52060F02AD1000225087 /* DialPadDigit6Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51DE0F02AD1000225087 /* DialPadDigit6Highlighted.png */; };
+		1DCF52070F02AD1000225087 /* DialPadDigit7.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51DF0F02AD1000225087 /* DialPadDigit7.png */; };
+		1DCF52080F02AD1000225087 /* DialPadDigit7Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51E00F02AD1000225087 /* DialPadDigit7Highlighted.png */; };
+		1DCF52090F02AD1000225087 /* DialPadDigit8.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51E10F02AD1000225087 /* DialPadDigit8.png */; };
+		1DCF520A0F02AD1000225087 /* DialPadDigit8Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51E20F02AD1000225087 /* DialPadDigit8Highlighted.png */; };
+		1DCF520B0F02AD1000225087 /* DialPadDigit9.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51E30F02AD1000225087 /* DialPadDigit9.png */; };
+		1DCF520C0F02AD1000225087 /* DialPadDigit9Highlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51E40F02AD1000225087 /* DialPadDigit9Highlighted.png */; };
+		1DCF520D0F02AD1000225087 /* DialPadDigitPound.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51E50F02AD1000225087 /* DialPadDigitPound.png */; };
+		1DCF520E0F02AD1000225087 /* DialPadDigitPoundHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51E60F02AD1000225087 /* DialPadDigitPoundHighlighted.png */; };
+		1DCF520F0F02AD1000225087 /* DialPadDigitStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51E70F02AD1000225087 /* DialPadDigitStar.png */; };
+		1DCF52100F02AD1000225087 /* DialPadDigitStarHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51E80F02AD1000225087 /* DialPadDigitStarHighlighted.png */; };
+		1DCF52110F02AD1000225087 /* DialPadHideKeypad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51E90F02AD1000225087 /* DialPadHideKeypad.png */; };
+		1DCF52120F02AD1000225087 /* DialPadHideKeypadHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51EA0F02AD1000225087 /* DialPadHideKeypadHighlighted.png */; };
+		1DCF52130F02AD1000225087 /* DialPadImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51EB0F02AD1000225087 /* DialPadImage.png */; };
+		1DCF52140F02AD1000225087 /* DialPadImageHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51EC0F02AD1000225087 /* DialPadImageHighlighted.png */; };
+		1DCF52150F02AD1000225087 /* DialPadShowKeypad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51ED0F02AD1000225087 /* DialPadShowKeypad.png */; };
+		1DCF52160F02AD1000225087 /* DialPadShowKeypadHighlighted.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51EE0F02AD1000225087 /* DialPadShowKeypadHighlighted.png */; };
+		1DCF52170F02AD1000225087 /* keypad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51EF0F02AD1000225087 /* keypad.png */; };
+		1DCF52180F02AD1000225087 /* ListCallImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51F00F02AD1000225087 /* ListCallImage.png */; };
+		1DCF52190F02AD1000225087 /* QWERY.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51F10F02AD1000225087 /* QWERY.png */; };
+		1DCF521A0F02AD1000225087 /* Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DCF51F20F02AD1000225087 /* Settings.png */; };
+		1DCF52220F02AD5D00225087 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DCF52210F02AD5D00225087 /* AddressBook.framework */; };
+		1DCF52260F02AD6300225087 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DCF52250F02AD6300225087 /* AddressBookUI.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D6058910D05DD3D006BFB54 /* iDial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDial.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DADFB900F1FC513005CA3A7 /* SoundEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEffect.h; sourceTree = "<group>"; };
+		1DADFB910F1FC513005CA3A7 /* SoundEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundEffect.m; sourceTree = "<group>"; };
+		1DADFBC50F1FC6EF005CA3A7 /* 0.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = 0.aif; path = Sounds/0.aif; sourceTree = "<group>"; };
+		1DADFBC60F1FC6EF005CA3A7 /* 1.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = 1.aif; path = Sounds/1.aif; sourceTree = "<group>"; };
+		1DADFBC70F1FC6EF005CA3A7 /* 2.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = 2.aif; path = Sounds/2.aif; sourceTree = "<group>"; };
+		1DADFBC80F1FC6EF005CA3A7 /* 3.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = 3.aif; path = Sounds/3.aif; sourceTree = "<group>"; };
+		1DADFBC90F1FC6EF005CA3A7 /* 4.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = 4.aif; path = Sounds/4.aif; sourceTree = "<group>"; };
+		1DADFBCA0F1FC6EF005CA3A7 /* 5.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = 5.aif; path = Sounds/5.aif; sourceTree = "<group>"; };
+		1DADFBCB0F1FC6EF005CA3A7 /* 6.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = 6.aif; path = Sounds/6.aif; sourceTree = "<group>"; };
+		1DADFBCC0F1FC6EF005CA3A7 /* 7.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = 7.aif; path = Sounds/7.aif; sourceTree = "<group>"; };
+		1DADFBCD0F1FC6EF005CA3A7 /* 8.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = 8.aif; path = Sounds/8.aif; sourceTree = "<group>"; };
+		1DADFBCE0F1FC6EF005CA3A7 /* 9.aif */ = {isa = PBXFileReference; lastKnownFileType = file; name = 9.aif; path = Sounds/9.aif; sourceTree = "<group>"; };
+		1DADFBE70F1FC93B005CA3A7 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		1DB04B3C0F904B4B00800F4D /* DialPadImagePlus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadImagePlus.png; path = Images/DialPadImagePlus.png; sourceTree = "<group>"; };
+		1DB04B3D0F904B4B00800F4D /* DialPadImagePlusHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadImagePlusHighlighted.png; path = Images/DialPadImagePlusHighlighted.png; sourceTree = "<group>"; };
+		1DB04B5D0F904C8E00800F4D /* ActivityIndicatorBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ActivityIndicatorBackground.png; path = Images/ActivityIndicatorBackground.png; sourceTree = "<group>"; };
+		1DB04B5E0F904C8E00800F4D /* building_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = building_icon.png; path = Images/building_icon.png; sourceTree = "<group>"; };
+		1DB04B5F0F904C8E00800F4D /* contact_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = contact_icon.png; path = Images/contact_icon.png; sourceTree = "<group>"; };
+		1DB691D70F140EB000702FBB /* RecentCalls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RecentCalls.png; path = Images/RecentCalls.png; sourceTree = "<group>"; };
+		1DCF51990F02ACED00225087 /* ContactListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactListView.xib; sourceTree = "<group>"; };
+		1DCF519A0F02ACED00225087 /* KeypadView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KeypadView.xib; sourceTree = "<group>"; };
+		1DCF519B0F02ACED00225087 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		1DCF519F0F02ACFB00225087 /* AppSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppSettingsViewController.h; sourceTree = "<group>"; };
+		1DCF51A00F02ACFB00225087 /* AppSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppSettingsViewController.m; sourceTree = "<group>"; };
+		1DCF51A10F02ACFB00225087 /* CallLogsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallLogsView.h; sourceTree = "<group>"; };
+		1DCF51A20F02ACFB00225087 /* CallLogsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallLogsView.m; sourceTree = "<group>"; };
+		1DCF51A30F02ACFB00225087 /* CallMechanism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CallMechanism.h; sourceTree = "<group>"; };
+		1DCF51A40F02ACFB00225087 /* CallMechanism.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CallMechanism.m; sourceTree = "<group>"; };
+		1DCF51A50F02ACFB00225087 /* ContactInformationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactInformationController.h; sourceTree = "<group>"; };
+		1DCF51A60F02ACFB00225087 /* ContactInformationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactInformationController.m; sourceTree = "<group>"; };
+		1DCF51A70F02ACFB00225087 /* ContactInformationWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactInformationWrapper.h; sourceTree = "<group>"; };
+		1DCF51A80F02ACFB00225087 /* ContactInformationWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactInformationWrapper.m; sourceTree = "<group>"; };
+		1DCF51A90F02ACFB00225087 /* ContactsNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsNavigationController.h; sourceTree = "<group>"; };
+		1DCF51AA0F02ACFB00225087 /* ContactsNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsNavigationController.m; sourceTree = "<group>"; };
+		1DCF51AB0F02ACFB00225087 /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
+		1DCF51AC0F02ACFB00225087 /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
+		1DCF51AD0F02ACFB00225087 /* ContactTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactTableViewCell.h; sourceTree = "<group>"; };
+		1DCF51AE0F02ACFB00225087 /* ContactTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTableViewCell.m; sourceTree = "<group>"; };
+		1DCF51AF0F02ACFB00225087 /* CustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarController.h; sourceTree = "<group>"; };
+		1DCF51B00F02ACFB00225087 /* CustomTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarController.m; sourceTree = "<group>"; };
+		1DCF51B10F02ACFB00225087 /* DialContactsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialContactsView.h; sourceTree = "<group>"; };
+		1DCF51B20F02ACFB00225087 /* DialContactsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialContactsView.m; sourceTree = "<group>"; };
+		1DCF51B30F02ACFB00225087 /* Fast_DialAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fast_DialAppDelegate.h; sourceTree = "<group>"; };
+		1DCF51B40F02ACFB00225087 /* Fast_DialAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fast_DialAppDelegate.m; sourceTree = "<group>"; };
+		1DCF51B50F02ACFB00225087 /* KeyboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardViewController.h; sourceTree = "<group>"; };
+		1DCF51B60F02ACFB00225087 /* KeyboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardViewController.m; sourceTree = "<group>"; };
+		1DCF51B70F02ACFB00225087 /* KeypadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeypadViewController.h; sourceTree = "<group>"; };
+		1DCF51B80F02ACFB00225087 /* KeypadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeypadViewController.m; sourceTree = "<group>"; };
+		1DCF51B90F02ACFB00225087 /* RecentCallController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentCallController.h; sourceTree = "<group>"; };
+		1DCF51BA0F02ACFB00225087 /* RecentCallController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentCallController.m; sourceTree = "<group>"; };
+		1DCF51BB0F02ACFB00225087 /* SettingsConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsConstants.h; sourceTree = "<group>"; };
+		1DCF51CB0F02AD1000225087 /* BluePhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BluePhone.png; path = Images/BluePhone.png; sourceTree = "<group>"; };
+		1DCF51CC0F02AD1000225087 /* DialPadBackspaceButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadBackspaceButton.png; path = Images/DialPadBackspaceButton.png; sourceTree = "<group>"; };
+		1DCF51CD0F02AD1000225087 /* DialPadBackspaceButtonHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadBackspaceButtonHighlighted.png; path = Images/DialPadBackspaceButtonHighlighted.png; sourceTree = "<group>"; };
+		1DCF51CE0F02AD1000225087 /* DialPadCall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadCall.png; path = Images/DialPadCall.png; sourceTree = "<group>"; };
+		1DCF51CF0F02AD1000225087 /* DialPadCallHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadCallHighlighted.png; path = Images/DialPadCallHighlighted.png; sourceTree = "<group>"; };
+		1DCF51D00F02AD1000225087 /* DialPadDelete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDelete.png; path = Images/DialPadDelete.png; sourceTree = "<group>"; };
+		1DCF51D10F02AD1000225087 /* DialPadDigit0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit0.png; path = Images/DialPadDigit0.png; sourceTree = "<group>"; };
+		1DCF51D20F02AD1000225087 /* DialPadDigit0Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit0Highlighted.png; path = Images/DialPadDigit0Highlighted.png; sourceTree = "<group>"; };
+		1DCF51D30F02AD1000225087 /* DialPadDigit1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit1.png; path = Images/DialPadDigit1.png; sourceTree = "<group>"; };
+		1DCF51D40F02AD1000225087 /* DialPadDigit1Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit1Highlighted.png; path = Images/DialPadDigit1Highlighted.png; sourceTree = "<group>"; };
+		1DCF51D50F02AD1000225087 /* DialPadDigit2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit2.png; path = Images/DialPadDigit2.png; sourceTree = "<group>"; };
+		1DCF51D60F02AD1000225087 /* DialPadDigit2Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit2Highlighted.png; path = Images/DialPadDigit2Highlighted.png; sourceTree = "<group>"; };
+		1DCF51D70F02AD1000225087 /* DialPadDigit3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit3.png; path = Images/DialPadDigit3.png; sourceTree = "<group>"; };
+		1DCF51D80F02AD1000225087 /* DialPadDigit3Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit3Highlighted.png; path = Images/DialPadDigit3Highlighted.png; sourceTree = "<group>"; };
+		1DCF51D90F02AD1000225087 /* DialPadDigit4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit4.png; path = Images/DialPadDigit4.png; sourceTree = "<group>"; };
+		1DCF51DA0F02AD1000225087 /* DialPadDigit4Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit4Highlighted.png; path = Images/DialPadDigit4Highlighted.png; sourceTree = "<group>"; };
+		1DCF51DB0F02AD1000225087 /* DialPadDigit5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit5.png; path = Images/DialPadDigit5.png; sourceTree = "<group>"; };
+		1DCF51DC0F02AD1000225087 /* DialPadDigit5Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit5Highlighted.png; path = Images/DialPadDigit5Highlighted.png; sourceTree = "<group>"; };
+		1DCF51DD0F02AD1000225087 /* DialPadDigit6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit6.png; path = Images/DialPadDigit6.png; sourceTree = "<group>"; };
+		1DCF51DE0F02AD1000225087 /* DialPadDigit6Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit6Highlighted.png; path = Images/DialPadDigit6Highlighted.png; sourceTree = "<group>"; };
+		1DCF51DF0F02AD1000225087 /* DialPadDigit7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit7.png; path = Images/DialPadDigit7.png; sourceTree = "<group>"; };
+		1DCF51E00F02AD1000225087 /* DialPadDigit7Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit7Highlighted.png; path = Images/DialPadDigit7Highlighted.png; sourceTree = "<group>"; };
+		1DCF51E10F02AD1000225087 /* DialPadDigit8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit8.png; path = Images/DialPadDigit8.png; sourceTree = "<group>"; };
+		1DCF51E20F02AD1000225087 /* DialPadDigit8Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit8Highlighted.png; path = Images/DialPadDigit8Highlighted.png; sourceTree = "<group>"; };
+		1DCF51E30F02AD1000225087 /* DialPadDigit9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit9.png; path = Images/DialPadDigit9.png; sourceTree = "<group>"; };
+		1DCF51E40F02AD1000225087 /* DialPadDigit9Highlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigit9Highlighted.png; path = Images/DialPadDigit9Highlighted.png; sourceTree = "<group>"; };
+		1DCF51E50F02AD1000225087 /* DialPadDigitPound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigitPound.png; path = Images/DialPadDigitPound.png; sourceTree = "<group>"; };
+		1DCF51E60F02AD1000225087 /* DialPadDigitPoundHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigitPoundHighlighted.png; path = Images/DialPadDigitPoundHighlighted.png; sourceTree = "<group>"; };
+		1DCF51E70F02AD1000225087 /* DialPadDigitStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigitStar.png; path = Images/DialPadDigitStar.png; sourceTree = "<group>"; };
+		1DCF51E80F02AD1000225087 /* DialPadDigitStarHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadDigitStarHighlighted.png; path = Images/DialPadDigitStarHighlighted.png; sourceTree = "<group>"; };
+		1DCF51E90F02AD1000225087 /* DialPadHideKeypad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadHideKeypad.png; path = Images/DialPadHideKeypad.png; sourceTree = "<group>"; };
+		1DCF51EA0F02AD1000225087 /* DialPadHideKeypadHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadHideKeypadHighlighted.png; path = Images/DialPadHideKeypadHighlighted.png; sourceTree = "<group>"; };
+		1DCF51EB0F02AD1000225087 /* DialPadImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadImage.png; path = Images/DialPadImage.png; sourceTree = "<group>"; };
+		1DCF51EC0F02AD1000225087 /* DialPadImageHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadImageHighlighted.png; path = Images/DialPadImageHighlighted.png; sourceTree = "<group>"; };
+		1DCF51ED0F02AD1000225087 /* DialPadShowKeypad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadShowKeypad.png; path = Images/DialPadShowKeypad.png; sourceTree = "<group>"; };
+		1DCF51EE0F02AD1000225087 /* DialPadShowKeypadHighlighted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DialPadShowKeypadHighlighted.png; path = Images/DialPadShowKeypadHighlighted.png; sourceTree = "<group>"; };
+		1DCF51EF0F02AD1000225087 /* keypad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = keypad.png; path = Images/keypad.png; sourceTree = "<group>"; };
+		1DCF51F00F02AD1000225087 /* ListCallImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ListCallImage.png; path = Images/ListCallImage.png; sourceTree = "<group>"; };
+		1DCF51F10F02AD1000225087 /* QWERY.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = QWERY.png; path = Images/QWERY.png; sourceTree = "<group>"; };
+		1DCF51F20F02AD1000225087 /* Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Settings.png; path = Images/Settings.png; sourceTree = "<group>"; };
+		1DCF52210F02AD5D00225087 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		1DCF52250F02AD6300225087 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		288765070DF74369002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28A0AB4B0D9B1048005BE974 /* iDial_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iDial_Prefix.pch; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */,
+				1DCF52220F02AD5D00225087 /* AddressBook.framework in Frameworks */,
+				1DCF52260F02AD6300225087 /* AddressBookUI.framework in Frameworks */,
+				1DADFBE80F1FC93B005CA3A7 /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				1DADFB900F1FC513005CA3A7 /* SoundEffect.h */,
+				1DADFB910F1FC513005CA3A7 /* SoundEffect.m */,
+				1DCF519F0F02ACFB00225087 /* AppSettingsViewController.h */,
+				1DCF51A00F02ACFB00225087 /* AppSettingsViewController.m */,
+				1DCF51A10F02ACFB00225087 /* CallLogsView.h */,
+				1DCF51A20F02ACFB00225087 /* CallLogsView.m */,
+				1DCF51A30F02ACFB00225087 /* CallMechanism.h */,
+				1DCF51A40F02ACFB00225087 /* CallMechanism.m */,
+				1DCF51A50F02ACFB00225087 /* ContactInformationController.h */,
+				1DCF51A60F02ACFB00225087 /* ContactInformationController.m */,
+				1DCF51A70F02ACFB00225087 /* ContactInformationWrapper.h */,
+				1DCF51A80F02ACFB00225087 /* ContactInformationWrapper.m */,
+				1DCF51A90F02ACFB00225087 /* ContactsNavigationController.h */,
+				1DCF51AA0F02ACFB00225087 /* ContactsNavigationController.m */,
+				1DCF51AB0F02ACFB00225087 /* ContactsViewController.h */,
+				1DCF51AC0F02ACFB00225087 /* ContactsViewController.m */,
+				1DCF51AD0F02ACFB00225087 /* ContactTableViewCell.h */,
+				1DCF51AE0F02ACFB00225087 /* ContactTableViewCell.m */,
+				1DCF51AF0F02ACFB00225087 /* CustomTabBarController.h */,
+				1DCF51B00F02ACFB00225087 /* CustomTabBarController.m */,
+				1DCF51B10F02ACFB00225087 /* DialContactsView.h */,
+				1DCF51B20F02ACFB00225087 /* DialContactsView.m */,
+				1DCF51B30F02ACFB00225087 /* Fast_DialAppDelegate.h */,
+				1DCF51B40F02ACFB00225087 /* Fast_DialAppDelegate.m */,
+				1DCF51B50F02ACFB00225087 /* KeyboardViewController.h */,
+				1DCF51B60F02ACFB00225087 /* KeyboardViewController.m */,
+				1DCF51B70F02ACFB00225087 /* KeypadViewController.h */,
+				1DCF51B80F02ACFB00225087 /* KeypadViewController.m */,
+				1DCF51B90F02ACFB00225087 /* RecentCallController.h */,
+				1DCF51BA0F02ACFB00225087 /* RecentCallController.m */,
+				1DCF51BB0F02ACFB00225087 /* SettingsConstants.h */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* iDial.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1DADFBC40F1FC6DD005CA3A7 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				1DADFBC50F1FC6EF005CA3A7 /* 0.aif */,
+				1DADFBC60F1FC6EF005CA3A7 /* 1.aif */,
+				1DADFBC70F1FC6EF005CA3A7 /* 2.aif */,
+				1DADFBC80F1FC6EF005CA3A7 /* 3.aif */,
+				1DADFBC90F1FC6EF005CA3A7 /* 4.aif */,
+				1DADFBCA0F1FC6EF005CA3A7 /* 5.aif */,
+				1DADFBCB0F1FC6EF005CA3A7 /* 6.aif */,
+				1DADFBCC0F1FC6EF005CA3A7 /* 7.aif */,
+				1DADFBCD0F1FC6EF005CA3A7 /* 8.aif */,
+				1DADFBCE0F1FC6EF005CA3A7 /* 9.aif */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
+		1DCF51CA0F02AD0200225087 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				1DB04B5D0F904C8E00800F4D /* ActivityIndicatorBackground.png */,
+				1DB04B5E0F904C8E00800F4D /* building_icon.png */,
+				1DB04B5F0F904C8E00800F4D /* contact_icon.png */,
+				1DB04B3C0F904B4B00800F4D /* DialPadImagePlus.png */,
+				1DB04B3D0F904B4B00800F4D /* DialPadImagePlusHighlighted.png */,
+				1DB691D70F140EB000702FBB /* RecentCalls.png */,
+				1DCF51CB0F02AD1000225087 /* BluePhone.png */,
+				1DCF51CC0F02AD1000225087 /* DialPadBackspaceButton.png */,
+				1DCF51CD0F02AD1000225087 /* DialPadBackspaceButtonHighlighted.png */,
+				1DCF51CE0F02AD1000225087 /* DialPadCall.png */,
+				1DCF51CF0F02AD1000225087 /* DialPadCallHighlighted.png */,
+				1DCF51D00F02AD1000225087 /* DialPadDelete.png */,
+				1DCF51D10F02AD1000225087 /* DialPadDigit0.png */,
+				1DCF51D20F02AD1000225087 /* DialPadDigit0Highlighted.png */,
+				1DCF51D30F02AD1000225087 /* DialPadDigit1.png */,
+				1DCF51D40F02AD1000225087 /* DialPadDigit1Highlighted.png */,
+				1DCF51D50F02AD1000225087 /* DialPadDigit2.png */,
+				1DCF51D60F02AD1000225087 /* DialPadDigit2Highlighted.png */,
+				1DCF51D70F02AD1000225087 /* DialPadDigit3.png */,
+				1DCF51D80F02AD1000225087 /* DialPadDigit3Highlighted.png */,
+				1DCF51D90F02AD1000225087 /* DialPadDigit4.png */,
+				1DCF51DA0F02AD1000225087 /* DialPadDigit4Highlighted.png */,
+				1DCF51DB0F02AD1000225087 /* DialPadDigit5.png */,
+				1DCF51DC0F02AD1000225087 /* DialPadDigit5Highlighted.png */,
+				1DCF51DD0F02AD1000225087 /* DialPadDigit6.png */,
+				1DCF51DE0F02AD1000225087 /* DialPadDigit6Highlighted.png */,
+				1DCF51DF0F02AD1000225087 /* DialPadDigit7.png */,
+				1DCF51E00F02AD1000225087 /* DialPadDigit7Highlighted.png */,
+				1DCF51E10F02AD1000225087 /* DialPadDigit8.png */,
+				1DCF51E20F02AD1000225087 /* DialPadDigit8Highlighted.png */,
+				1DCF51E30F02AD1000225087 /* DialPadDigit9.png */,
+				1DCF51E40F02AD1000225087 /* DialPadDigit9Highlighted.png */,
+				1DCF51E50F02AD1000225087 /* DialPadDigitPound.png */,
+				1DCF51E60F02AD1000225087 /* DialPadDigitPoundHighlighted.png */,
+				1DCF51E70F02AD1000225087 /* DialPadDigitStar.png */,
+				1DCF51E80F02AD1000225087 /* DialPadDigitStarHighlighted.png */,
+				1DCF51E90F02AD1000225087 /* DialPadHideKeypad.png */,
+				1DCF51EA0F02AD1000225087 /* DialPadHideKeypadHighlighted.png */,
+				1DCF51EB0F02AD1000225087 /* DialPadImage.png */,
+				1DCF51EC0F02AD1000225087 /* DialPadImageHighlighted.png */,
+				1DCF51ED0F02AD1000225087 /* DialPadShowKeypad.png */,
+				1DCF51EE0F02AD1000225087 /* DialPadShowKeypadHighlighted.png */,
+				1DCF51EF0F02AD1000225087 /* keypad.png */,
+				1DCF51F00F02AD1000225087 /* ListCallImage.png */,
+				1DCF51F10F02AD1000225087 /* QWERY.png */,
+				1DCF51F20F02AD1000225087 /* Settings.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* iDial */ = {
+			isa = PBXGroup;
+			children = (
+				1DCF51CA0F02AD0200225087 /* Images */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = iDial;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				28A0AB4B0D9B1048005BE974 /* iDial_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1DADFBC40F1FC6DD005CA3A7 /* Sounds */,
+				1DCF51990F02ACED00225087 /* ContactListView.xib */,
+				1DCF519A0F02ACED00225087 /* KeypadView.xib */,
+				1DCF519B0F02ACED00225087 /* MainWindow.xib */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DADFBE70F1FC93B005CA3A7 /* AudioToolbox.framework */,
+				1DCF52250F02AD6300225087 /* AddressBookUI.framework */,
+				1DCF52210F02AD5D00225087 /* AddressBook.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765070DF74369002DB57D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* iDial */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "iDial" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iDial;
+			productName = iDial;
+			productReference = 1D6058910D05DD3D006BFB54 /* iDial.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "iDial" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* iDial */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* iDial */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DCF519C0F02ACED00225087 /* ContactListView.xib in Resources */,
+				1DCF519D0F02ACED00225087 /* KeypadView.xib in Resources */,
+				1DCF519E0F02ACED00225087 /* MainWindow.xib in Resources */,
+				1DCF51F30F02AD1000225087 /* BluePhone.png in Resources */,
+				1DCF51F40F02AD1000225087 /* DialPadBackspaceButton.png in Resources */,
+				1DCF51F50F02AD1000225087 /* DialPadBackspaceButtonHighlighted.png in Resources */,
+				1DCF51F60F02AD1000225087 /* DialPadCall.png in Resources */,
+				1DCF51F70F02AD1000225087 /* DialPadCallHighlighted.png in Resources */,
+				1DCF51F80F02AD1000225087 /* DialPadDelete.png in Resources */,
+				1DCF51F90F02AD1000225087 /* DialPadDigit0.png in Resources */,
+				1DCF51FA0F02AD1000225087 /* DialPadDigit0Highlighted.png in Resources */,
+				1DCF51FB0F02AD1000225087 /* DialPadDigit1.png in Resources */,
+				1DCF51FC0F02AD1000225087 /* DialPadDigit1Highlighted.png in Resources */,
+				1DCF51FD0F02AD1000225087 /* DialPadDigit2.png in Resources */,
+				1DCF51FE0F02AD1000225087 /* DialPadDigit2Highlighted.png in Resources */,
+				1DCF51FF0F02AD1000225087 /* DialPadDigit3.png in Resources */,
+				1DCF52000F02AD1000225087 /* DialPadDigit3Highlighted.png in Resources */,
+				1DCF52010F02AD1000225087 /* DialPadDigit4.png in Resources */,
+				1DCF52020F02AD1000225087 /* DialPadDigit4Highlighted.png in Resources */,
+				1DCF52030F02AD1000225087 /* DialPadDigit5.png in Resources */,
+				1DCF52040F02AD1000225087 /* DialPadDigit5Highlighted.png in Resources */,
+				1DCF52050F02AD1000225087 /* DialPadDigit6.png in Resources */,
+				1DCF52060F02AD1000225087 /* DialPadDigit6Highlighted.png in Resources */,
+				1DCF52070F02AD1000225087 /* DialPadDigit7.png in Resources */,
+				1DCF52080F02AD1000225087 /* DialPadDigit7Highlighted.png in Resources */,
+				1DCF52090F02AD1000225087 /* DialPadDigit8.png in Resources */,
+				1DCF520A0F02AD1000225087 /* DialPadDigit8Highlighted.png in Resources */,
+				1DCF520B0F02AD1000225087 /* DialPadDigit9.png in Resources */,
+				1DCF520C0F02AD1000225087 /* DialPadDigit9Highlighted.png in Resources */,
+				1DCF520D0F02AD1000225087 /* DialPadDigitPound.png in Resources */,
+				1DCF520E0F02AD1000225087 /* DialPadDigitPoundHighlighted.png in Resources */,
+				1DCF520F0F02AD1000225087 /* DialPadDigitStar.png in Resources */,
+				1DCF52100F02AD1000225087 /* DialPadDigitStarHighlighted.png in Resources */,
+				1DCF52110F02AD1000225087 /* DialPadHideKeypad.png in Resources */,
+				1DCF52120F02AD1000225087 /* DialPadHideKeypadHighlighted.png in Resources */,
+				1DCF52130F02AD1000225087 /* DialPadImage.png in Resources */,
+				1DCF52140F02AD1000225087 /* DialPadImageHighlighted.png in Resources */,
+				1DCF52150F02AD1000225087 /* DialPadShowKeypad.png in Resources */,
+				1DCF52160F02AD1000225087 /* DialPadShowKeypadHighlighted.png in Resources */,
+				1DCF52170F02AD1000225087 /* keypad.png in Resources */,
+				1DCF52180F02AD1000225087 /* ListCallImage.png in Resources */,
+				1DCF52190F02AD1000225087 /* QWERY.png in Resources */,
+				1DCF521A0F02AD1000225087 /* Settings.png in Resources */,
+				1DB691D80F140EB000702FBB /* RecentCalls.png in Resources */,
+				1DADFBCF0F1FC6EF005CA3A7 /* 0.aif in Resources */,
+				1DADFBD00F1FC6EF005CA3A7 /* 1.aif in Resources */,
+				1DADFBD10F1FC6EF005CA3A7 /* 2.aif in Resources */,
+				1DADFBD20F1FC6EF005CA3A7 /* 3.aif in Resources */,
+				1DADFBD30F1FC6EF005CA3A7 /* 4.aif in Resources */,
+				1DADFBD40F1FC6EF005CA3A7 /* 5.aif in Resources */,
+				1DADFBD50F1FC6EF005CA3A7 /* 6.aif in Resources */,
+				1DADFBD60F1FC6EF005CA3A7 /* 7.aif in Resources */,
+				1DADFBD70F1FC6EF005CA3A7 /* 8.aif in Resources */,
+				1DADFBD80F1FC6EF005CA3A7 /* 9.aif in Resources */,
+				1DB04B3E0F904B4B00800F4D /* DialPadImagePlus.png in Resources */,
+				1DB04B3F0F904B4B00800F4D /* DialPadImagePlusHighlighted.png in Resources */,
+				1DB04B600F904C8E00800F4D /* ActivityIndicatorBackground.png in Resources */,
+				1DB04B610F904C8E00800F4D /* building_icon.png in Resources */,
+				1DB04B620F904C8E00800F4D /* contact_icon.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1DCF51BC0F02ACFB00225087 /* AppSettingsViewController.m in Sources */,
+				1DCF51BD0F02ACFB00225087 /* CallLogsView.m in Sources */,
+				1DCF51BE0F02ACFB00225087 /* CallMechanism.m in Sources */,
+				1DCF51BF0F02ACFB00225087 /* ContactInformationController.m in Sources */,
+				1DCF51C00F02ACFB00225087 /* ContactInformationWrapper.m in Sources */,
+				1DCF51C10F02ACFB00225087 /* ContactsNavigationController.m in Sources */,
+				1DCF51C20F02ACFB00225087 /* ContactsViewController.m in Sources */,
+				1DCF51C30F02ACFB00225087 /* ContactTableViewCell.m in Sources */,
+				1DCF51C40F02ACFB00225087 /* CustomTabBarController.m in Sources */,
+				1DCF51C50F02ACFB00225087 /* DialContactsView.m in Sources */,
+				1DCF51C60F02ACFB00225087 /* Fast_DialAppDelegate.m in Sources */,
+				1DCF51C70F02ACFB00225087 /* KeyboardViewController.m in Sources */,
+				1DCF51C80F02ACFB00225087 /* KeypadViewController.m in Sources */,
+				1DCF51C90F02ACFB00225087 /* RecentCallController.m in Sources */,
+				1DADFB920F1FC513005CA3A7 /* SoundEffect.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vikas Singla";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = iDial_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = iDial;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4A276DC1-CB01-472A-887D-9BBC9F8F1E89";
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = iDial_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = iDial;
+			};
+			name = Release;
+		};
+		1DD7EF7C0F0BD9DE00D92E63 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos2.2;
+			};
+			name = Distribution;
+		};
+		1DD7EF7D0F0BD9DE00D92E63 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Vikas Singla";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = iDial_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = iDial;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8A29E5CE-F972-4E37-A21A-EAD6BC69EC4F";
+			};
+			name = Distribution;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos2.2;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos2.2;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "iDial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+				1DD7EF7D0F0BD9DE00D92E63 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "iDial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+				1DD7EF7C0F0BD9DE00D92E63 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

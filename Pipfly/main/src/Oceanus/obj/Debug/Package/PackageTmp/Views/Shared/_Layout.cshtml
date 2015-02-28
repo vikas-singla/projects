@@ -1,0 +1,226 @@
+﻿@using Oceanus.Controllers
+@using SquishIt.Framework
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+    <title>Pipfly</title>
+    <meta http-equiv="Page-Enter" content="blendTrans(Duration=0.05)">
+    <meta http-equiv="Page-Exit" content="blendTrans(Duration=0.05)">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    @{
+        @MvcHtmlString.Create(
+            Bundle.Css()
+                .Add("~/Content/main.css")
+                .Add("~/Content/overlay/sixloonies.expandnetwork.overlay.css")
+                .Add("~/Content/Plugins/jquery.tiptip.css")
+                .Add("~/Content/Plugins/jquery.fancybox-1.3.4.css")
+                .Add("~/Content/Plugins/jquery.fancybox-buttons.css")
+                .Add("~/Content/Plugins/validationEngine.jquery.css")
+                .Add("~/Content/Plugins/jquery.tokeninput.css")
+                .Add("~/Content/Plugins/jquery.notify.css")
+                .ForceRelease()
+                .Render("~/cache/sixloonies.main.shared.#.css")
+            );
+    }
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Rancho' rel='stylesheet' type='text/css'>
+    @{
+        @MvcHtmlString.Create(
+                Bundle.JavaScript()
+                .Add("~/Scripts/Plugins/jquery-1.7.1.min.js")
+                .Add("~/Scripts/Plugins/jquery.validate.min.js")
+                .Add("~/Scripts/Plugins/jquery.validate.unobtrusive.min.js")
+                .Add("~/Scripts/Plugins/jquery.easing.min.js")
+                .Add("~/Scripts/Plugins/jquery.easing.compatibility.js")
+                .Add("~/Scripts/Plugins/jquery.unobtrusive-ajax.min.js")
+                .Add("~/Scripts/Plugins/MVCControlToolkit.Controls-0.9.0.min.js")
+                .Add("~/scripts/Plugins/jquery.fancybox-1.3.4.pack.js")
+                .Add("~/Scripts/Plugins/jquery.isotope.min.js")
+                .Add("~/Scripts/Plugins/jquery.elastic.js")
+                .Add("~/Scripts/Plugins/jquery.tinyscrollbar.min.js")
+                .Render("~/cache/sixloonies.tools.#.js")
+            );
+    }
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/pipfly.unlimitedscroll.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.validationEngine-en.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.validationEngine.js")"></script>
+    @{
+        @MvcHtmlString.Create(
+                Bundle.JavaScript()
+                .Add("~/Scripts/Plugins/jquery.tipTip.minified.js")
+                .Add("~/Scripts/sixloonies.utils.js")
+                .Add("~/Scripts/pipfly.helper.js")
+                .Add("~/Scripts/pipfly.emptytext.js")
+                .Add("~/Scripts/Plugins/jquery.tokeninput.js")
+                .Add("~/Scripts/Plugins/jquery.notify-min.js")
+                .ForceRelease()
+                .Render("~/cache/pipfly.main.shared.#.js")
+            );
+    }
+    <script type="text/javascript">
+        $(function () {
+            $('a[title]').tipTip();
+            $('img[title]').tipTip();
+            $('div[title]').tipTip();
+            $('span[title]').tipTip();
+            $('input[title]').tipTip();
+            $('textarea[title]').tipTip();
+            $('li[title]').tipTip();
+        });
+
+        $(document).ready(function () {
+            document.useJQueryNotify = true;
+            $('textarea').elastic();
+        });
+
+        var loggedin = @User.Identity.IsAuthenticated.ToString().ToLower();
+    </script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-27307727-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+</head>
+<body>
+    <div id="bodycontainer">
+        <div id="header">
+            <div class="hcontainer">
+                <a href="/" class="logolink">
+                    <img src="/Images/sitetheme/Pipfly_logo_sm.png" alt="" height="45px" />
+                </a>
+                <div id="searchdisplay">
+                    <span class="searchbtnstyle" id="searchsitebtn">
+                        <img src="/Images/sitetheme/search_btn.png" alt class="adjimg" />
+                    </span>
+                    <input id="searchsiteinput" class="searchinputstyle" style="color: #555; border: none;" />
+                </div>
+                <div class="navcontainer">
+                    <div class="navlink">
+                        <a href="/">
+                            @if (Request.IsAuthenticated)
+                            {
+                                <text>Spotlight</text>
+                            }
+                            else
+                            {
+                                <text>Home</text>
+                            }
+                        </a>
+                    </div>
+                    <div class="navlink">
+                        <a href="/trending/">Popular Tags</a>
+                    </div>
+                    @if (Request.IsAuthenticated)
+                    {
+                        string profileId = null;
+                        if (System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_USER_ID] != null)
+                        {
+                            HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_USER_ID];
+                            profileId = cookie.Value;
+                        }
+                        
+                        <div class="navlink">
+                            <a href="@("/u/" + profileId)">My Profile</a>
+                        </div>
+                    }
+                </div>
+                <div class="session">
+                    @if (!Request.IsAuthenticated)
+                    {
+                        <a href="#" id="facebooksigninbtn" style="height:auto;max-height:30px;position:relative;overflow:auto;padding:12px 0;display:block;"><img alt src="/images/facebook_login_button.png" height="30px" style="float:none;display:block;" /></a>
+                    }
+                    else
+                    {
+                        string profileImageUrl = null;
+                        string profileFullName = null;
+                        string profileId = null;
+
+                        if (System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_USER_ID] != null)
+                        {
+                            HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_USER_ID];
+                            profileId = cookie.Value;
+                        }
+                        if (System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_USER_PROFILE_IMG_KEY] != null)
+                        {
+                            HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_USER_PROFILE_IMG_KEY];
+                            profileImageUrl = cookie.Value;
+                        }
+                        if (System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_USER_PROFILE_FULLNAME_KEY] != null)
+                        {
+                            HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_USER_PROFILE_FULLNAME_KEY];
+                            profileFullName = cookie.Value;
+                        }
+                        
+                        <a id="userlogged">
+                            <img src="@((profileImageUrl == null || profileImageUrl.Trim().Equals(string.Empty)) ? "/Images/user_white.png" : profileImageUrl)" alt height="20px" class="profileimg" /><span
+                                class="screenname">@(profileFullName)
+                            </span>
+                            <img src="/Images/scrollarrow_down.gif" alt width="12px" height="12px" />
+                        </a>
+                        <div id="usersessiondropdown" style="display: none">
+                            <div class="menulink">
+                                <a href="@("/u/" + profileId)">My Profile</a>
+                            </div>
+                            <div class="menulink">
+                                <a href="/account/changepassword">Change My Password</a>
+                            </div>
+                            <div class="menulink">
+                                <a href="/account/logoff">Log Off</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+                @if (Request.IsAuthenticated)
+                {
+                    <div class="inviteheader">
+                        <a id="hdrinvitefriends" href="/account/invitefriends" class="btnredstyle invitefriends">
+                            Invite Friends</a>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="page">
+            <div id="fb-root">
+            </div>
+            <script type="text/javascript" src="@Url.Content("/scripts/sixloonies.facebook.js")"></script>
+            <div class="fullsect" id="notification">
+            </div>
+            <a href="#promptlogin" class="btnbluestyle" id="loginbtn" style="display: none">
+            </a>
+            <div style="display: none;">
+                <div class="generaloverlay" id="promptlogin">
+                    <text>@{Html.RenderPartial("_LoginForm");}</text>
+                </div>
+            </div>
+            @RenderBody()
+            <div id="loading_overlay" style="clear: both;">
+                <div id="loading_img">
+                    <img src="/images/transparent_loader.gif" alt />
+                </div>
+                <div id="loading_text">
+                    Loading...</div>
+            </div>
+        </div>
+        <div id="footer">
+            <a class="FooterLinkStyle" href="/button" style="color: #CD2990; font-weight: bold;">
+                Bookmarklet</a> &nbsp; <span class="FooterPipeStyle">|</span> &nbsp;<a id="scrollToTopLink"
+                    href="#notification" style="display: none;"> </a><a class="FooterLinkStyle" href="#">
+                        About</a> &nbsp; <span class="FooterPipeStyle">|</span> &nbsp; <a class="FooterLinkStyle"
+                            href="/contact">Contact</a> &nbsp; <span class="FooterPipeStyle">|</span>
+            &nbsp; <a class="FooterLinkStyle" href="/guidelines">Decorum</a> &nbsp; <span class="FooterPipeStyle">
+                |</span> &nbsp; <a class="FooterLinkStyle" href="/terms">Terms</a> &nbsp; <span class="FooterPipeStyle">
+                    |</span> &nbsp; <a class="FooterLinkStyle" href="/privacy">Privacy Policy</a> &nbsp;<span
+                        class="FooterPipeStyle"> |</span> &nbsp; <span class="FooterCopyrightStyle">© Six Loonies
+                            Inc.</span>
+        </div>
+    </div>
+</body>
+</html>

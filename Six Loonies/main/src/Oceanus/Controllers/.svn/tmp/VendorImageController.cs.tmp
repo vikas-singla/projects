@@ -1,0 +1,287 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Oceanus.Utilities;
+using Oceanus.Attributes;
+
+namespace Oceanus.Controllers
+{
+    [BrowserCache(PreventBrowserCaching = true)]
+    public class VendorImageController : UploadControllerBase
+    {
+
+        #region constants
+
+        private const string ConfirmedImageSuffix = ".final";
+
+        #endregion
+
+
+        #region class variables
+
+        private static readonly Dictionary<string, Size> ThumbSizes = new Dictionary<string, Size>()
+        {
+            {"profile", new Size(80, 54)},
+            {"listing", new Size(200, 135)},
+            {"home", new Size(470, 317)}
+        };
+
+        #endregion
+
+
+        #region ajax manipulation
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AjaxImageDelete(int VendorId, int photoId)
+        {
+            string dbMessage = string.Empty;
+            bool success = false;
+
+            var oldImage = Database.VendorImages.Where(i => i.vendorId == VendorId && i.Id == photoId).FirstOrDefault();
+            if (oldImage != null)
+            {
+                Database.VendorImages.DeleteObject(oldImage);
+                Database.SaveChanges();
+
+                dbMessage = "Vendor Image Deleted";
+                success = true;
+            }
+
+            return Json(
+                new
+                {
+                    result = success.ToString(),
+                    message = dbMessage
+                }
+            );
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AjaxImageUpdate(int VendorId, int photoId, string title, string description)
+        {
+            string dbMessage = string.Empty;
+            bool success = false;
+
+            var oldImage = Database.VendorImages.Where(i => i.vendorId == VendorId && i.Id == photoId).FirstOrDefault();
+            if (oldImage != null)
+            {
+                oldImage.Title = title;
+                oldImage.Description = description;
+
+                Database.SaveChanges();
+
+                dbMessage = "Vendor Image Saved";
+                success = true;
+            }
+
+            return Json(
+                new
+                {
+                    result = success.ToString(),
+                    message = dbMessage
+                }
+            );
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AjaxCreatePartial(int VendorId, string Title, string Description, List<string> Files)
+        {
+            string dbMessage = string.Empty;
+            bool success = false;
+
+            foreach (var file in Files)
+            {
+                var oldImage = Database.VendorImages.Where(i => i.vendorId == VendorId && i.ImageUrl.Contains(file)).FirstOrDefault();
+                if (oldImage != null)
+                {
+                    Database.VendorImages.DeleteObject(oldImage);
+                }
+
+                var newName = Confirm(ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS, VendorId, file, null, ConfirmedImageSuffix);
+                newName = EnsureOriginalFileIsJpeg(VendorId, ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS, newName);
+                GenerateThumbnails(newName, ThumbSizes);
+
+                string imageFileName = Path.GetFileNameWithoutExtension(newName);
+
+                var fileModel = new Data.VendorImage()
+                {
+                    ImageUrl = imageFileName,
+                    vendorId = VendorId,
+                    Title = Title,
+                    Description = Description
+                };
+
+                Database.VendorImages.AddObject(fileModel);
+            }
+
+            Database.SaveChanges();
+
+            dbMessage = "Vendor Image Saved";
+            success = true;
+
+            Sweep(ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS, VendorId, ConfirmedImageSuffix);
+
+            return Json(
+                new
+                {
+                    result = success.ToString(),
+                    message = dbMessage
+                }
+            );
+        }
+
+        //[RequiresAuthentication]
+        //public ActionResult AjaxDelete(int id)
+        //{
+        //    var dbMessage = string.Empty;
+        //    var model = Database.VendorImages.Where(v => v.Id == id).FirstOrDefault();
+
+        //    if (model == null)
+        //    {
+        //        dbMessage = "Can't delete non-existent Vendor Image!";
+        //    }
+        //    else
+        //    {
+        //        string fullPath;
+        //        if (CheckFileExists(model.vendorId, model.ImageUrl, out fullPath))
+        //        {
+        //            System.IO.File.Delete(fullPath);
+        //            Database.DeleteObject(model);
+        //            Database.SaveChanges();
+        //        }
+
+        //        dbMessage = "Image deleted";
+        //    }
+
+        //    return Json(new { message = dbMessage });
+        //}
+
+        #endregion
+
+
+        #region standard actions
+
+        //public ActionResult Index()
+        //{
+        //    var vendorImages = Database.VendorImages.AsEnumerable().Select(v => v.ToVendorImageViewModel());
+
+        //    // TODO: change to admin users
+        //    if (User.Identity.IsAuthenticated)
+        //    {
+        //        return View("IndexAdmin", vendorImages);
+        //    }
+
+        //    return View(vendorImages);
+        //}
+
+        //[RequiresAuthentication]
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
+
+
+        //[HttpPost]
+        //[RequiresAuthentication]
+        //public ActionResult Create(VendorImageViewModel viewModel)
+        //{
+        //    if (Database.VendorImages.Any(v => v.Id.Equals(viewModel.Id)))
+        //    {
+        //        throw new Exception("Vendor Image already exists!");
+        //    }
+
+        //    Database.VendorImages.AddObject(viewModel.ToVendorImageModel());
+
+        //    Database.SaveChanges();
+
+        //    return RedirectToAction("Index");
+        //}
+
+        //[RequiresAuthentication]
+        //public ActionResult Edit(int id)
+        //{
+        //    var model = Database.VendorImages.Where(v => v.Id == id).FirstOrDefault();
+
+        //    if (model == null)
+        //    {
+        //        throw new Exception("Vendor Image not found, id: " + id);
+        //    }
+
+        //    return View(model.ToVendorImageViewModel());
+        //}
+
+        //[HttpPost]
+        //[RequiresAuthentication]
+        //public ActionResult Edit(int id, FormCollection collection)
+        //{
+        //    var model = Database.VendorImages.Where(v => v.Id == id).FirstOrDefault();
+
+        //    if (model == null)
+        //    {
+        //        throw new Exception("Vendor Image not found, id: " + id);
+        //    }
+
+        //    TryUpdateModel(model);
+        //    Database.SaveChanges();
+
+        //    // return to view)
+        //    return RedirectToAction("Index");
+        //}
+
+        //[HttpPost]
+        //[RequiresAuthentication]
+        //public ActionResult Delete(int id)
+        //{
+        //    var model = Database.VendorImages.Where(v => v.Id == id).FirstOrDefault();
+
+        //    if (model == null)
+        //    {
+        //        throw new Exception("Can't delete non-existent Vendor Image!");
+        //    }
+
+        //    Database.DeleteObject(model);
+        //    Database.SaveChanges();
+
+        //    return RedirectToAction("Index");
+        //}
+
+        #endregion
+
+
+        #region helper methods
+
+
+        #endregion
+
+
+        #region overrides
+
+        [TokenizedAuthorize]
+        [RequiresAuthentication]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ContentResult CheckExisting(int vendorId, string filename)
+        {
+            return base.CheckExisting(vendorId, filename, ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS);
+        }
+
+        public ContentResult Upload(int vendorId, HttpPostedFileBase fileData)
+        {
+            if (!ImageUtilities.IsAspectRatioValid(fileData.InputStream))
+            {
+                throw new InvalidDataException(string.Format("Aspect ratio for file being uploaded ({0}, for vendor {1}) is out of range", fileData.FileName, vendorId));
+            }
+
+            return base.Upload(vendorId, fileData, ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS);
+        }
+
+        #endregion
+
+    }
+}

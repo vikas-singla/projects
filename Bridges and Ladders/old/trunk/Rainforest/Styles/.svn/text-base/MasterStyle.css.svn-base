@@ -1,0 +1,222 @@
+﻿body
+{
+    background: #030303 url('/Assets/Images/gray_site_bg.png') repeat-x;
+    font-family: "lucida grande" ,tahoma,verdana,arial,sans-serif;
+}
+
+.mastersitestyle
+{
+    background-image: url(/Assets/Images/bg_body_shadow.png);
+    background-position: center;
+    background-repeat: repeat-y;
+    width: 974px;
+    margin: 0 auto 0 auto;
+}
+
+a
+{
+    color: #106fb8;
+    padding: 0px;
+    border-width: 0px;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+a:visited
+{
+    color: #106fb8;
+    padding: 0px;
+    border-width: 0px;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+a:active
+{
+    color: #106fb8;
+    padding: 0px;
+    border-width: 0px;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: #106fb8;
+    padding: 0px;
+    border-width: 0px;
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.FooterLinkStyle, .FooterLinkStyle:active, .FooterLinkStyle:hover, .FooterLinkStyle:visited
+{
+    font-style: normal;
+    font-size: 10px;
+    color: #004A7F;
+}
+
+.FooterCopyrightStyle
+{
+    font-style: normal;
+    font-size: 10px;
+    color: #808080;
+}
+
+.FooterPipeStyle
+{
+    color: #d0d0d0;
+}
+
+.ContentPanelStyle
+{
+    border-top-style: none;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-bottom-color: #d4d4d4;
+    border-bottom-width: 1px;
+    border-left-color: #d4d4d4;
+    border-left-width: 1px;
+    border-right-color: #d4d4d4;
+    border-right-width: 1px;
+    background-color: #ffffff;
+}
+
+.big_shadow_container
+{
+}
+
+.container
+{
+    margin: 0 auto;
+    width: 934px;
+    padding-top: 5px;
+    text-align: center;
+}
+
+.maincontent_style
+{
+    background-color: #ffffff;
+}
+
+.ContentTableStyle
+{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.contenttablemenurowstyle
+{
+    padding: 10px 0px 0px 0px;
+    border: none;
+}
+
+table tr
+{
+    padding: 0px 0px 0px 0px;
+    border: none;
+}
+
+.ContentTableMainPlaceholderStyle
+{
+    padding: 10px 0px 0px 0px;
+}
+
+.containerheader .headertablestyle
+{
+    padding: 0px 0px 5px 0px;
+    width: 100%;
+    text-align: left;
+    vertical-align: middle;
+}
+.containerheader .headertablestyle .headerlabelstyle
+{
+    color: #505050;
+    border: none;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: left;
+    vertical-align: middle;
+    padding: 1px;
+}
+.containerheader
+{
+    background-color: #fff;
+    vertical-align: middle;
+    width: 100%;
+    border-bottom: 1px solid #d0d0d0;
+}
+.containerbody
+{
+    background-color: #fff;
+    width: 100%;
+    text-align: left;
+    font-size: 12px;
+    color: #505050;
+    line-height: 1.4em;
+    padding-top: 10px;
+}
+.containerfooter
+{
+    background-color: #fff;
+    min-height: 18px;
+    width: 100%;
+    text-align: right;
+}
+
+.PageTitleTable
+{
+    width: 100%;
+    margin-top: 5px;
+    border: none;
+}
+
+.PageTitleTable .PageHeader
+{
+    font-style: normal;
+    font-size: 16px;
+    font-weight: bold;
+    color: #004A7F;
+    text-align: left;
+    width: 50%;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.PageTitleTable .ShareItColumnStyle
+{
+    border-bottom: 1px solid #d0d0d0;
+    width: 50%;
+    text-align: right;
+}
+
+.PageNavTable
+{
+    width: 100%;
+    vertical-align: top;
+    background-color: #fff;
+    padding-top: 5px;
+}
+
+.PageNavTable .NavColumnStyle
+{
+    text-align: left;
+}
+
+.link_hierarchyNav, .link_hierarchyNav:visited
+{
+    color: #106fb8;
+    padding: 0px;
+    border-width: 0px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.lbl_hierarchyPageNavName
+{
+    color: #505050;
+    text-align: right;
+    font-size: 12px;
+    font-weight: bold;
+}

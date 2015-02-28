@@ -1,0 +1,127 @@
+﻿using Oceanus.ViewModels;
+using System.Linq;
+using System.Diagnostics;
+using Oceanus.ViewModels.Shared;
+using System;
+using System.Collections.Generic;
+
+namespace Oceanus.Data
+{
+    internal static class UserViewModelExtension
+    {
+        internal static UserStatsViewModel ToUserStatsViewModel(this Data.UserProfile model, OceanusEntities database)
+        {
+            return new UserStatsViewModel()
+            {
+                UserId = model.UserId,
+                NumThumbsUp = model.NumThumbsUp,
+                NumReviews = model.aspnet_Users.Reviews.Count,
+                NumFollowed = database.UserToUserFollowingMappings.Where(f => f.FollowingUserId == model.UserId).Count(),
+                NumFollowers = database.UserToUserFollowingMappings.Where(f => f.FollowedUserId == model.UserId).Count(),
+                NumVendorsFollowed = model.aspnet_Users.VendorUserFollowerMappings.Count,
+                NumFriendsOnSixLoonies = database.SixLooniesFriendConnections.Where(c => c.FirstUserId == model.UserId || c.SecondUserId == model.UserId).Count()
+            };
+        }
+
+        internal static BaseUserViewModel ToBaseUserViewModel(this Data.UserProfile model)
+        {
+            return new BaseUserViewModel()
+            {
+                Id = model.UserProfileId,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                FullName = model.FullName,
+                UserId = model.UserId
+            };
+        }
+
+        internal static UserProfileViewModel ToUserProfileViewModel(this Data.UserProfile model)
+        {
+            return new UserProfileViewModel()
+            {
+                Id = model.UserProfileId,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                FullName = model.FullName,
+                UserId = model.UserId,
+                FacebookToken = model.FacebookToken,
+                PromptUserForFBFriends = model.PromptUserForFBFriends,
+                FacebookUserUID = model.FacebookUserUID,
+                UserLevelId = model.UserLevelId,
+                UserLevel = model.UserLevel.LevelName,
+                NumThumbsUp = model.NumThumbsUp,
+                NumReviews = model.aspnet_Users.Reviews.Count,
+                IsConfirmed = model.IsConfirmed,
+                UserProfileImageUrl = model.UserProfileImageUrl
+            };
+        }
+
+        internal static UserProfile ToUserProfile(this UserProfileViewModel viewModel)
+        {
+            return new UserProfile()
+            {
+                UserProfileId = viewModel.Id == null ? 0 : (int)viewModel.Id,
+                UserId = viewModel.UserId,
+                FirstName = viewModel.FirstName,
+                LastName = viewModel.LastName,
+                FacebookToken = viewModel.FacebookToken,
+                FacebookUserUID = viewModel.FacebookUserUID,
+                PromptUserForFBFriends = viewModel.PromptUserForFBFriends,
+                FullName = viewModel.FullName,
+                NumThumbsUp = viewModel.NumThumbsUp,
+                UserLevelId = viewModel.UserLevelId,
+                IsConfirmed = viewModel.IsConfirmed
+            };
+        }
+
+        internal static UserThumbsUpRatingsViewModel ToUserThumbsUpViewModel(this Data.UserThumbsUpRating model)
+        {
+            return new UserThumbsUpRatingsViewModel()
+            {
+                UserThumbsUpRatingId = model.UserThumbsUpRatingId,
+                TargetUserId = model.TargetUserId,
+                Comments = model.Comments,
+                ContributingUserId = model.ContributingUserId,
+                AddedOn = model.AddedOn,
+                VendorReviewId = model.VendorReviewId,
+                SixAnswerQuestionResponseId = model.QuestionResponseId
+            };
+        }
+
+        internal static UserThumbsUpRating ToUserThumbsUpModel(this UserThumbsUpRatingsViewModel viewModel)
+        {
+            return new UserThumbsUpRating()
+            {
+                UserThumbsUpRatingId = viewModel.UserThumbsUpRatingId == null ? 0 : (int)viewModel.UserThumbsUpRatingId,
+                TargetUserId = viewModel.TargetUserId,
+                Comments = viewModel.Comments,
+                ContributingUserId = viewModel.ContributingUserId,
+                AddedOn = viewModel.AddedOn,
+                VendorReviewId = viewModel.VendorReviewId,
+                QuestionResponseId = viewModel.SixAnswerQuestionResponseId
+            };
+        }
+
+        internal static UserToUserFollowingMapping ToUserToUserFollowingMapping(this UserToUserFollowerMappingViewModel viewModel)
+        {
+            return new UserToUserFollowingMapping()
+            {
+                FollowerMappingId = viewModel.Id == null ? 0 : (int)viewModel.Id,
+                FollowedUserId = viewModel.FollowedUserId,
+                FollowingUserId = viewModel.FollowingUserId,
+                AddedOn = viewModel.AddedOn
+            };
+        }
+
+        internal static UserToUserFollowerMappingViewModel ToUserToUserFollowingMappingViewModel(this Data.UserToUserFollowingMapping model)
+        {
+            return new UserToUserFollowerMappingViewModel()
+            {
+                Id = model.FollowerMappingId,
+                FollowingUserId = model.FollowingUserId,
+                FollowedUserId = model.FollowedUserId,
+                AddedOn = model.AddedOn
+            };
+        }
+    }
+}

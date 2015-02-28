@@ -1,0 +1,150 @@
+﻿
+
+.DiscussionDetailsPageRepliesHeader
+{
+    font-style: normal;
+    font-size: 14px;
+    font-weight: bold;
+    color: #505050;
+    text-align: left;    
+    padding-left:5px;
+    height:22px;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.discussiondetailreplytablestyle
+{
+    width:100%;
+    padding:5px 0px 5px 0px;
+}
+
+.MainDiscussionThreadColumnStyle
+{
+    border-bottom:1px dotted #d0d0d0;
+}
+
+.discussiondetailreplytablestyle .replycolumn
+{
+    width:45px;
+}
+
+.discussiondetailreplytablestyle .contentcolumn
+{
+    width:855px;
+    font-size: 12px;
+    color: #505050;
+    text-align:left;
+}
+
+.discussiondetailreplybottomborderstyle
+{
+    border-bottom:1px dotted #d0d0d0;
+}
+
+.DiscusionDetailsUserInfoColumnStyle
+{
+    width: 220px;
+    vertical-align: top;
+}
+
+.DiscusionDetailsUserInfoStyle
+{
+    background:url('/Assets/Images/discussion_user_bg.png') no-repeat;
+    width: 220px;
+    height: 90px;
+    text-align: left;
+    font-size: 12px;
+    color: #505050;
+    line-height: 1.4em;
+    padding: 5px 5px 5px 5px;
+    vertical-align:middle;
+}
+
+.DiscusionDetailsContentColumnStyle
+{
+    width: 663px;
+    vertical-align: top;
+}
+
+.DiscusionDetailsContentStyle
+{
+    width: 663px;
+    font-size: 12px;
+    color: #505050;
+    line-height: 1.4em;
+    border-top: 1px solid #d0d0d0;
+    border-left: 1px solid #d0d0d0;
+    border-right: 1px solid #d0d0d0;
+    border-bottom: 1px dotted #d0d0d0;
+    background:url('/Assets/Images/bg_content_shadow.gif') no-repeat;
+    min-height: 120px;
+    text-align: left;
+    padding: 5px 5px 5px 5px;
+}
+
+.DiscussionDetailUserNameLinkStyle, .DiscussionDetailUserNameLinkStyle:active, .DiscussionDetailUserNameLinkStyle:hover, .DiscussionDetailUserNameLinkStyle:visited
+{
+    font-weight: bold;
+}
+
+.DiscussionDetailLinkStyle, .DiscussionDetailLinkStyle:active, .DiscussionDetailLinkStyle:hover, .DiscussionDetailLinkStyle:visited
+{
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.DiscussionDetailTopicLabelStyle
+{
+    color: #505050;
+    padding: 0px 0px 10px 0px;
+    border-width: 0px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.DiscussionDetailsActionsBarStyle
+{
+    border-bottom: 1px solid #d0d0d0;
+    border-left: 1px solid #d0d0d0;
+    border-right: 1px solid #d0d0d0;
+    height: 21px;
+    vertical-align: middle;
+    text-align: right;
+    padding: 3px 9px 3px 3px;
+}
+
+.DiscussionRepliesActionsBarStyle
+{
+    text-align:right;
+}
+
+.DiscussionThreadActionLinkStyle, .DiscussionThreadActionLinkStyle:active, .DiscussionThreadActionLinkStyle:hover, .DiscussionThreadActionLinkStyle:visited
+{    
+    color: #5DAE21;
+    margin:0px;
+    font-size:11px;
+}
+
+.Tbl_DiscussionThreadActionBar
+{
+    width:300px;
+    text-align:left;
+}
+
+.lbl_discussionfieldvaluestyle
+{
+    color: #505050;
+    padding: 0px;
+    margin:0px;
+    text-align: right;
+    font-size: 11px;
+    font-weight: normal;
+}
+
+.img_discussionthreadactionbar
+{
+    width:12px;
+    height:12px;        
+    position:relative;
+    top:2px;
+}

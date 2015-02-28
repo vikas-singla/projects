@@ -1,0 +1,101 @@
+﻿var serviceinputemptytext = "What are you looking for? (e.g. Photography)";
+var vendornameinputtext = "Enter name of professional or business (Optional)";
+var locationinputtext = "Where are you located?";
+
+$(document).ready(function () {
+    $("#servicenameinput").emptyText(serviceinputemptytext, "emptytextstyle");
+    $("#searchvendornameinput").emptyText(vendornameinputtext, "emptytextstyle");
+    $("#locationinput").emptyText(locationinputtext, "emptytextstyle");
+
+
+    $("#searchvendornameinput").autocomplete({
+        minLength: 1,
+        source: function (request, response) {
+            $.ajax({
+                url: "/home/SearchVendorNameAutoComplete", type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.Name, value: item.Name, id: item.Id }
+                    }))
+                }
+            })
+        },
+        open: function (e, ui) {
+            var acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        }
+    });
+
+    $('#servicenameinput').keypress(function (e) {
+        code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) {
+            submitSearchForm();
+        }
+    });
+
+    $('#searchvendornameinput').keypress(function (e) {
+        code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) {
+            submitSearchForm();
+        }
+    });
+
+    $('#homepagebuyservices').click(function () {
+        hide('#vendorreasons');
+        show('#userreasons');
+        show('#consumertagline');
+        hide('#vendortagline');
+        $('#homepagesellservices').attr("class", "");
+        $('#homepagebuyservices').attr("class", "selbtn");
+
+        return false;
+    });
+
+    $('#homepagesellservices').click(function () {
+        hide('#userreasons');
+        show('#vendorreasons');
+        hide('#consumertagline');
+        show('#vendortagline');
+        $('#homepagebuyservices').attr("class", "");
+        $('#homepagesellservices').attr("class", "selbtn");
+
+        return false;
+    });
+
+    $('.calltoaction').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+    });
+
+    $(".calltoaction").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade'
+    });
+});
+
+function submitSearchForm() {
+    clearDefaultIfEmpty("servicenameinput", serviceinputemptytext);
+    clearDefaultIfEmpty("searchvendornameinput", vendornameinputtext);
+
+    var form = $("#searchForm");
+    DisableEmptyFormFieldsForSubmission(form);
+    form.submit();
+}

@@ -1,0 +1,144 @@
+﻿.searchresults
+{
+    width: 960px;
+    clear: both;
+    margin: 20px auto;
+    padding: 14px;
+    background: white;
+    -webkit-box-shadow: 0 0 5px 1px rgba(100,100,100,.1);
+    -moz-box-shadow: 0 0 5px 1px rgba(100,100,100,.1);
+    box-shadow: 0 0 5px 1px rgba(100,100,100,.1);
+    border: 1px solid #DADADA;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    overflow:auto;
+}
+
+.searchresults .searchresultscontainer
+{
+    padding: 10px;
+    width: 680px;
+    float: left;
+    margin: 0 0 0 30px;
+}
+
+.searchresults .searchresultscontainer .noresults
+{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.searchresults .result
+{
+    overflow: auto;
+    border-bottom: 1px solid #E9E9E9;
+    padding: 10px 0;
+}
+
+.searchresults .result .searchuserimg
+{
+    float: left;
+    width: 40px;
+    margin-right: 20px;
+}
+
+.searchresults .result .username
+{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.searchresults .result .searchuserdetails
+{
+    float: left;
+    width: 620px;
+}
+
+.searchresults .result .searchuserdetails div
+{
+    clear: both;
+}
+
+.searchresults .result .userstats
+{
+    padding: 5px 0 2px 0;
+    color: #808080;
+}
+
+.searchresults .result .topicimg
+{
+    float: left;
+    width: 40px;
+    margin-right: 20px;
+}
+
+.searchresults .result .topicdetails
+{
+    float: left;
+    width: 620px;
+}
+
+.searchresults .result .topicdetails div
+{
+    clear: both;
+}
+
+.searchresults .result .tagname
+{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.searchresults .result .topicstats
+{
+    padding: 5px 0 2px 0;
+    color: #808080;
+}
+
+.searchresults .searchresultsmenu
+{
+    float: left;
+    padding: 10px 0 10px 10px;
+    width: 220px;
+    display: block;
+    overflow: auto;
+}
+
+.searchresultsmenu .searchmenuitem, .searchresultsmenu .searchmenuitem:visited
+{
+    padding: 10px 30px 10px 20px;
+    margin: 10px 0px;
+    width: 170px;
+    text-decoration: none;
+    display: block;
+    font-size: 18px;
+    color: #666;
+    text-align: right;
+}
+
+.searchresultsmenu .searchmenuitem:hover
+{
+    background: url(/images/sitetheme/AboutNav.png) 0 -36px no-repeat;
+    padding: 10px 30px 10px 20px;
+    margin: 10px 0px;
+    width: 170px;
+    text-decoration: none;
+    display: block;
+    font-size: 18px;
+    color: #666;
+    text-align: right;
+}
+
+.searchresultsmenu .selsearchmenuitem
+{
+    background: url(/images/sitetheme/AboutNav.png) 0 0 no-repeat;
+    padding: 10px 30px 10px 20px;
+    margin: 10px 0px;
+    width: 170px;
+    text-decoration: none;
+    display: block;
+    font-size: 18px;
+    color: #666;
+    text-align: right;
+}

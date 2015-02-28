@@ -1,0 +1,9 @@
+﻿$(document).ready(function () {
+    $('.globalSearchFilterPanel .globalsearchcategory').live('click', function () {
+        var selrevattr = $(".globalSearchFilterPanel .catsel");
+        if (selrevattr != null) {
+            selrevattr.attr("class", "globalsearchcategory");
+            $(this).attr("class", "globalsearchcategory catsel");
+        }
+    });
+});

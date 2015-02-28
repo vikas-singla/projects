@@ -1,0 +1,281 @@
+﻿var whatWasLiked = new Array();
+var whatCanImprove = new Array();
+var expectExceeded = new Array();
+
+$(document).ready(function () {
+
+    $('#textreview').click(function () {
+        hide('#reviewformats');
+        show('#textreviewform');
+        hide('#audioreviewform');
+        $.fancybox.resize();
+
+        return false;
+    });
+    $('#audioreview').click(function () {
+        hide('#reviewformats');
+        show('#audioreviewform');
+        hide('#textreviewform');
+        $.fancybox.resize();
+
+        return false;
+    });
+    $('.close').click(function () {
+        whatWasLiked = new Array();
+        whatCanImprove = new Array();
+        expectExceeded = new Array();
+        $('#likedlist').html("");
+        $('#improvelist').html("");
+        $('#expecationslist').html("");
+        show('#reviewformats');
+        hide('#audioreviewform');
+        hide('#textreviewform');
+
+        return false;
+    });
+    $('#addLike').click(function () {
+        if ($.trim($('#likeinput').val()) != "") {
+            addToList(whatWasLiked, $.trim($('#likeinput').val()));
+            refreshLikedList();
+            $('#likeinput').val("");
+        }
+
+        return false;
+    });
+
+    $('#likeinput').keypress(function (e) {
+        code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) {
+            addToList(whatWasLiked, $.trim($('#likeinput').val()));
+            refreshLikedList();
+            $('#likeinput').val("");
+            e.preventDefault();
+        }
+    });
+
+    $('#addImprove').click(function () {
+        if ($.trim($('#improveinput').val()) != "") {
+            addToList(whatCanImprove, $.trim($('#improveinput').val()));
+            refreshImproveList();
+            $('#improveinput').val("");
+        }
+
+        return false;
+    });
+
+    $('#improveinput').keypress(function (e) {
+        code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) {
+            addToList(whatCanImprove, $.trim($('#improveinput').val()));
+            refreshImproveList();
+            $('#improveinput').val("");
+            e.preventDefault();
+        }
+    });
+
+    $('#addExp').click(function () {
+        if ($.trim($('#expinput').val()) != "") {
+            addToList(expectExceeded, $.trim($('#expinput').val()));
+            refreshExpectationsList();
+            $('#expinput').val("");
+        }
+
+        return false;
+    });
+
+    $('#expinput').keypress(function (e) {
+        code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13) {
+            addToList(expectExceeded, $.trim($('#expinput').val()));
+            refreshExpectationsList();
+            $('#expinput').val("");
+            e.preventDefault();
+        }
+    });
+
+    $('.tageditbtn').live('click', function () {
+        var func = $(this).attr("data-func") + "";
+
+        if (func != null && $.trim(func) != "") {
+            func = $.trim(func);
+            var aid = $(this).attr("data-aid") + "";
+
+            if (func == "remlike") {
+                whatWasLiked.splice(aid, 1);
+                refreshLikedList();
+                return false;
+            }
+            else if (func == "rembetter") {
+                whatCanImprove.splice(aid, 1);
+                refreshImproveList();
+                return false;
+            }
+            else if (func == "remexp") {
+                expectExceeded.splice(aid, 1);
+                refreshExpectationsList();
+                return false;
+            }
+        }
+    });
+    $('#askTextReviewBtnSubmit').click(function () {
+        var vendorId = $(this).attr("data-vid") + "";
+        addTextReview(vendorId);
+
+        return false;
+    });
+    $('#askAudioReviewBtnSubmit').click(function () {
+        var vendorId = $(this).attr("data-vid") + "";
+        addAudioReview(vendorId);
+
+        return false;
+    });
+});
+
+function refreshLikedList() {
+    $('#likedlist').html("");
+    if (whatWasLiked != null) {
+        for (i = 0; i < whatWasLiked.length; ++i) {
+            var htmlstr = "<div class='editentry'><div class='main'><span class='editlisttext'><span class=''>&#149; </span>" +
+                whatWasLiked[i] + "<a href='#' class='tageditbtn' data-func='remlike' data-aid='" + i + "'></a></span></div></div>";
+            $('#likedlist').append(htmlstr);
+        }
+    }
+}
+
+function refreshImproveList() {
+    $('#improvelist').html("");
+    if (whatCanImprove != null) {
+        for (i = 0; i < whatCanImprove.length; ++i) {
+            var htmlstr = "<div class='editentry'><div class='main'><span class='editlisttext'><span class=''>&#149; </span>" +
+                whatCanImprove[i] + "<a href='#' class='tageditbtn' data-func='rembetter' data-aid='" + i + "'></a></span></div></div>";
+            $('#improvelist').append(htmlstr);
+        }
+    }
+}
+
+function refreshExpectationsList() {
+    $('#expecationslist').html("");
+    if (expectExceeded != null) {
+        for (i = 0; i < expectExceeded.length; ++i) {
+            var htmlstr = "<div class='editentry'><div class='main'><span class='editlisttext'><span class=''>&#149; </span>" +
+                expectExceeded[i] + "<a href='#' class='tageditbtn' data-func='remexp' data-aid='" + i + "'></a></span></div></div>";
+            $('#expecationslist').append(htmlstr);
+        }
+    }
+}
+
+function addToList(list, item) {
+    if (list == null) {
+        list = new Array();
+    }
+    if (item != null && item != "") {
+        item = $.trim(item);
+        if ($.inArray(item, list) == -1) {
+            list.push(item);
+        }
+    }
+}
+function validateRatings(form) {
+    var result = true;
+    $(form + ' .dimenstext').each(function () {
+        var rid = $(this).attr("data-rid") + "";
+
+        if ($.trim(rid) != null && $.trim(rid) != "") {
+            var ridVal = $(form + " #rval_" + rid).rateit('value') + "";
+
+            if (ridVal == null || ridVal == "" || ridVal == 0) {
+                result = false;
+            }
+        }
+    });
+    return result;
+}
+
+function getRatings(form) {
+    var ratings = null;
+    $(form + ' .dimenstext').each(function () {
+        var rid = $(this).attr("data-rid") + "";
+
+        if ($.trim(rid) != null && $.trim(rid) != "") {
+            var ridVal = $(form + " #rval_" + rid).rateit('value') + "";
+
+            if (ridVal != null && ridVal != "") {
+                if (ratings != null) {
+                    ratings = ratings + ",";
+                }
+                else {
+                    ratings = "";
+                }
+                ratings = ratings + rid + ":" + ridVal;
+            }
+        }
+    });
+    return ratings;
+}
+function addTextReview(vendorId) {
+    if (!validateRatings("#textreviewform")) {
+        alert("Please provide valid review ratings.");
+        return;
+    }
+    addToList(whatWasLiked, $.trim($('#likeinput').val()));
+    addToList(expectExceeded, $.trim($('#expinput').val()));
+    addToList(whatCanImprove, $.trim($('#improveinput').val()));
+    
+    var ratings = getRatings("#textreviewform");
+    var scoop = $.trim($("#textreviewform #insidescoopinput").val());
+
+    $.ajax(
+    {
+        type: "POST",
+        traditional: true,
+        url: "/Vendor/AddTextReview",
+        data: {
+            vendorId: vendorId,
+            starRatings: ratings,
+            liked: whatWasLiked,
+            better: whatCanImprove,
+            exceedexp: expectExceeded,
+            insidescoop: scoop
+        },
+        async: false,
+        success: function (result) {
+            $.fancybox.close();
+            showSuccessNotification('Thank you for your input. Your review has successfully been added.');
+            $('#vendorstatssect').load("/vendor/GetVendorStats?vendorId=" + vendorId);
+            $('#vreviews').load("/vendor/AllReviews?vendorId=" + vendorId);
+            $('#vendorreviewsummarysect').load("/vendor/GetReviewSummaryAttributes?vendorId=" + vendorId);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your review could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+function addAudioReview(vendorId) {
+    if (!validateRatings("#audioreviewform")) {
+        alert("Please provide valid review ratings.");
+        return;
+    }
+
+    var ratings = getRatings("#audioreviewform");
+    var comments = $.trim($("#audioreviewform #commentsinput").val());
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/AddAudioReview",
+        data: {
+            vendorId: vendorId,
+            starRatings: ratings,
+            comments: comments
+        },
+        async: false,
+        success: function (result) {
+            $.fancybox.close();
+            showSuccessNotification('Thank you for your input. Your review has successfully been added.');
+            $('#vreviews').load("/vendor/AllReviews?vendorId=" + vendorId);
+            $('#vendorreviewsummarysect').load("/vendor/GetReviewSummaryAttributes?vendorId=" + vendorId);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your review could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}

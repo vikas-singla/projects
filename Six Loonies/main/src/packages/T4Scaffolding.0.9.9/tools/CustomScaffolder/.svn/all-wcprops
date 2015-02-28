@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/CustomScaffolder
+END
+DefaultT4Template.cs.t4
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/CustomScaffolder/DefaultT4Template.cs.t4
+END
+DefaultT4Template.vb.t4
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/CustomScaffolder/DefaultT4Template.vb.t4
+END
+DefaultPs1Script.ps1.t4
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/CustomScaffolder/DefaultPs1Script.ps1.t4
+END
+T4Scaffolding.CustomScaffolder.ps1
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/CustomScaffolder/T4Scaffolding.CustomScaffolder.ps1
+END

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/projects/!svn/ver/579/main/src/Oceanus/ViewModels/Message
+END
+BaseMessageViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/projects/!svn/ver/518/main/src/Oceanus/ViewModels/Message/BaseMessageViewModel.cs
+END
+GetVendorQuoteMessageViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/projects/!svn/ver/575/main/src/Oceanus/ViewModels/Message/GetVendorQuoteMessageViewModel.cs
+END
+GetVendorQuoteMessageResponsesViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/projects/!svn/ver/577/main/src/Oceanus/ViewModels/Message/GetVendorQuoteMessageResponsesViewModel.cs
+END
+MessageViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/projects/!svn/ver/333/main/src/Oceanus/ViewModels/Message/MessageViewModel.cs
+END
+MessageResponsesViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/projects/!svn/ver/331/main/src/Oceanus/ViewModels/Message/MessageResponsesViewModel.cs
+END
+GetVendorQuoteMessageVisibilityViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/projects/!svn/ver/575/main/src/Oceanus/ViewModels/Message/GetVendorQuoteMessageVisibilityViewModel.cs
+END
+BaseGetVendorQuoteMessageViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/projects/!svn/ver/579/main/src/Oceanus/ViewModels/Message/BaseGetVendorQuoteMessageViewModel.cs
+END
+MessageVisibilityViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/projects/!svn/ver/431/main/src/Oceanus/ViewModels/Message/MessageVisibilityViewModel.cs
+END

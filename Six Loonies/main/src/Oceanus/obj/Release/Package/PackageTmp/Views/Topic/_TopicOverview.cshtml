@@ -1,0 +1,10 @@
+﻿<div class="mainsect">
+    <div class="topicfeedcontainer">
+        @{Html.RenderPartial("_TopicFeed");}
+        <div class="rightpane">
+            <div id="topicfollowerpanel">
+                @{Html.RenderAction("GetTopicFollowers", new { topicId = ViewBag.TopicId });}
+            </div>
+        </div>
+    </div>
+</div>

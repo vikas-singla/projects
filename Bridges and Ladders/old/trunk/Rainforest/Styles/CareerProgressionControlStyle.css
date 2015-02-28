@@ -1,0 +1,115 @@
+﻿.Tbl_MultipleCareerProgressionPathsStyle
+{
+    width: 100%;
+    text-align: center;
+}
+
+.Tbl_MultipleCareerProgressionPathsStyle tr td
+{
+    vertical-align: bottom;
+    margin: 0 auto 0 auto;
+}
+
+.Tbl_CareerProgressionPathStyle
+{
+    width: 100%;
+    text-align: center;
+}
+
+.CareerTrackPanelStyle
+{
+    background: url('/Assets/Images/CareerTracksBackground.png') no-repeat;
+    width: 140px;
+    display: table-cell;
+    height: 30px;
+    color: #5DAE21;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.CarProgBoxEncapLinkStyle
+{
+    width: 100px;
+    color: #505050;
+    text-align: center;
+    display: table-cell;
+}
+
+.CarProgBoxEncapLinkStyle:visited
+{
+    width: 100px;
+    color: #505050;
+    text-align: center;
+    display: table-cell;
+}
+
+.CarProgBoxEncapLinkStyle:hover
+{
+    width: 100px;
+    color: #cc0000;
+    text-align: center;
+    text-decoration: none;
+    display: table-cell;
+}
+
+.CarProgBoxTopStyle
+{
+    background: url('/Assets/Images/CareerProgressionBoxTop.png') no-repeat scroll left bottom;
+    width: 100px;
+    height: 5px;
+    max-height: 5px;
+    font-size: 5px;
+}
+.CarProgBoxMiddleStyle
+{
+    width: 100px;
+    min-height: 19px;
+    vertical-align: middle;
+    text-align: center;
+    background: url('/Assets/Images/CareerProgressionBoxMiddle.png') scroll bottom left;
+    background-repeat: repeat-y;
+    padding: 2px 3px 3px 3px;
+    display: table-cell;
+    word-wrap: break-word;
+}
+
+.CarProgBoxBottomStyle
+{
+    background: url('/Assets/Images/CareerProgressionBoxBottom.png') no-repeat;
+    width: 100px;
+    max-height: 5px;
+    font-size: 5px;
+    height: 5px;
+}
+
+.CarProgBoxLblStyle
+{
+    font-size: 12px;
+    text-align: center;
+    line-height: 1em;
+    position: relative;
+    margin: 1px 1px 1px 1px;
+}
+
+.CareerPathLinkPanelStyle
+{
+    display: block;
+    width: 100px;
+    text-align: center;
+}
+
+.CareerPathDividerCellContentStyle
+{
+    background: url('/Assets/Images/Up_gray_arrow.png') no-repeat;
+    width: 18px;
+    height: 18px;
+    display: block;
+}
+
+.CareerTrackEncapsulatingPanelStyle
+{
+    display: block;
+    width: 142px;
+}

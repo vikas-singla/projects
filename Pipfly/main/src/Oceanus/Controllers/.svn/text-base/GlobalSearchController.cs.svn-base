@@ -1,0 +1,134 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web.Mvc;
+using MVCControlsToolkit.Linq;
+using Oceanus.Data;
+using Oceanus.ViewModels;
+using Oceanus.ViewModels.Shared;
+using System.Web.Security;
+using System;
+
+namespace Oceanus.Controllers
+{
+    [BrowserCache(PreventBrowserCaching = true)]
+    public class GlobalSearchController : ControllerBase
+    {
+        // available order fields
+        private static readonly FilterOrderMapping<Data.Vendor> VendorOrderByMapping =
+            new FilterOrderMapping<Data.Vendor>()
+                {
+                    { "Name", v => v.Name },
+                };
+
+        private static readonly FilterOrderMapping<Data.SixAnswerQuestion> AnswerOrderByMapping =
+            new FilterOrderMapping<Data.SixAnswerQuestion>()
+                {
+                    { "Title", a => a.WikiText1.Text },
+                };
+
+        private static readonly FilterOrderMapping<Data.Tag> TagOrderByMapping =
+            new FilterOrderMapping<Data.Tag>()
+                {
+                    { "Name", t => t.TagName },
+                };
+
+        public ActionResult Vendors(string section, string Term, int Page = 1, int ResultsPerPage = 15)
+        {
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid? loggedInUserGuid = (user != null) ? ((Guid)user.ProviderUserKey) : ((Guid?)null);
+
+            var viewModel = new FilterableViewModel<Data.Vendor, ListItemViewModel>();
+            IEnumerable<Guid> userFriendIDs = null;
+            IEnumerable<Guid?> userFriendOfFriendIDs = null;
+            if (loggedInUserGuid != null)
+            {
+                userFriendIDs = Database.SixLooniesFriendConnections.Where(con => con.FirstUserId == loggedInUserGuid || con.SecondUserId == loggedInUserGuid).Select(con => (con.FirstUserId == loggedInUserGuid ? con.SecondUserId : con.FirstUserId)).AsEnumerable();
+                userFriendOfFriendIDs = Database.GetFriendsOfFriendIDs((Guid)loggedInUserGuid).AsEnumerable();
+            }
+
+            viewModel.Transform = v => v.ToListingViewModel(Database, loggedInUserGuid, userFriendIDs, userFriendOfFriendIDs);
+
+            // add order
+            viewModel.OrderByExpressions.Add(new KeyValuePair<LambdaExpression, OrderType>(VendorOrderByMapping["Name"], OrderType.Ascending));
+
+            if (!string.IsNullOrEmpty(Term))
+            {
+                // set filter delegate to be called by paging code
+                viewModel.FilterAction =
+                    delegate
+                        {
+                            var results = Database.Vendors.AsQueryable();
+                            results = results.Where(v => v.IsPublished && !v.IsPendingReview && v.Name.ToLower().Contains(Term.ToLower()));
+                            return results;
+                        };
+
+                // apply page and filter to view model
+                viewModel.Filter(ResultsPerPage, Page);
+            }
+
+            ViewBag.Term = Term;
+            ViewBag.ResultScope = "_VendorResults";
+            
+            return View("Index", viewModel);
+        }
+
+        public ActionResult Answers(string Term, int Page = 1, int ResultsPerPage = 15)
+        {
+            var viewModel = new FilterableViewModel<Data.SixAnswerQuestion, SixAnswersQuestionViewModel>();
+            viewModel.Transform = v => v.ToQuestionViewModel();
+
+            // add order
+            viewModel.OrderByExpressions.Add(new KeyValuePair<LambdaExpression, OrderType>(AnswerOrderByMapping["Title"], OrderType.Ascending));
+
+            if (!string.IsNullOrEmpty(Term))
+            {
+                // set filter delegate to be called by paging code
+                viewModel.FilterAction =
+                    delegate
+                    {
+                        var results = Database.SixAnswerQuestions.AsQueryable();
+                        results = results.Where(a => a.WikiText1.Text.ToLower().Contains(Term.ToLower()));
+                        return results;
+                    };
+
+                // apply page and filter to view model
+                viewModel.Filter(ResultsPerPage, Page);
+            }
+
+            ViewBag.Term = Term;
+            ViewBag.ResultScope = "_AnswerResults";
+
+            return View("Index", viewModel);
+        }
+
+        public ActionResult Tags(string Term, int Page = 1, int ResultsPerPage = 15)
+        {
+            var viewModel = new FilterableViewModel<Data.Tag, TagViewModel>();
+            viewModel.Transform = v => v.ToTagViewModel();
+
+            // add order
+            viewModel.OrderByExpressions.Add(new KeyValuePair<LambdaExpression, OrderType>(TagOrderByMapping["Name"], OrderType.Ascending));
+
+            if (!string.IsNullOrEmpty(Term))
+            {
+                // set filter delegate to be called by paging code
+                viewModel.FilterAction =
+                    delegate
+                    {
+                        var results = Database.Tags.AsQueryable();
+                        results = results.Where(a => a.TagName.ToLower().Contains(Term.ToLower()));
+                        return results;
+                    };
+
+                // apply page and filter to view model
+                viewModel.Filter(ResultsPerPage, Page);
+            }
+
+            ViewBag.Term = Term;
+            ViewBag.ResultScope = "_TagResults";
+
+            return View("Index", viewModel);
+        }
+    }
+}

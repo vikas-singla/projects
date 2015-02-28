@@ -1,0 +1,75 @@
+﻿.contactus
+{
+    width:680px;
+    float:left;
+    font-size:14px;
+    display:block;
+    margin:0 20px 10px 40px;
+    text-align:left;
+}
+
+.contactus .heading
+{
+    font-size:23px;
+    color:#666;
+    font-weight:bold;
+    padding:30px 0 30px 0;
+    text-align:left;
+}
+
+.contactus .leftsect
+{
+    width:700px;
+    padding:5px 00px 5px 0px;
+    float:left;
+}
+
+.contactus .leftsect .formfields .btns
+{
+    clear:both;
+    width:425px;
+    padding-right:5px;
+    text-align:right;
+    padding-top:15px;
+    overflow:auto;
+}
+
+.contactus .leftsect .formfields
+{
+    width:500px;
+    margin:0 auto;
+}
+
+.contactus .leftsect .formfields .formfield
+{
+    width:450px;
+    clear:both;
+    display:block;
+    padding-top:10px;
+}
+
+.contactus .leftsect .formfields .label
+{
+    width:80px;    
+    float:left;
+    padding-top:5px;
+    padding-bottom:5px;
+    font-size:14px;
+    margin-right:10px;
+}
+
+.contactus .leftsect .formfields .input
+{
+    width:360px;
+    float:left;
+    overflow:visible;
+}
+
+.contactus .leftsect .formfields .input input, .contactus .leftsect .formfields .input textarea
+{
+    resize:none;
+    width:326px;
+    font-size:14px;
+    padding-top:5px;
+    padding-bottom:5px;
+}

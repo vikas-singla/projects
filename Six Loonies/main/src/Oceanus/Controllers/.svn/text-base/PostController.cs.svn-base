@@ -1,0 +1,216 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web.Mvc;
+using Oceanus.Data;
+using Oceanus.ViewModels;
+using System.Web.Security;
+using System.Web;
+using Oceanus.Attributes;
+
+namespace Oceanus.Controllers
+{
+    [BrowserCache(PreventBrowserCaching = true)]
+    public class PostController : UploadControllerBase
+    {
+        private const string ConfirmedImageSuffix = ".final";
+
+        public ActionResult GetVendorPosts(int vendorId)
+        {
+            var vendorPosts = Database.Posts.Where(p => p.VendorId == vendorId).AsEnumerable();
+            IEnumerable<PostsViewModel> postsViewModels = vendorPosts.Select(p => p.ToPostViewModel());
+
+            var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+
+            if (user != null && user.ProviderUserKey != null && vendor != null)
+            {
+                Guid loggedInUserGuid = (Guid)user.ProviderUserKey;
+
+                if (loggedInUserGuid == vendor.ContributingUserId)
+                {
+                    ViewBag.ShowAddPostUI = true;
+                    ViewBag.ShowPostDeleteOption = true;
+                }
+                else
+                {
+                    ViewBag.ShowAddPostUI = false;
+                    ViewBag.ShowPostDeleteOption = false;
+                }
+            }
+            else
+            {
+                ViewBag.ShowAddPostUI = false;
+                ViewBag.ShowPostDeleteOption = false;
+            }
+
+            ViewBag.VendorId = vendorId;
+
+            return PartialView("_VendorPosts", postsViewModels);
+        }
+
+        [Authorize]
+        public ActionResult DeletePost(int postId)
+        {
+            string dbMessage = string.Empty;
+            bool success = false;
+
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid loggedInUserGuid = (Guid)user.ProviderUserKey;
+
+            var post = Database.Posts.Where(p => p.PostId == postId).FirstOrDefault();
+
+            if (post != null && loggedInUserGuid == post.ContributingUser)
+            {
+                if (post.IsYouTube != null && !post.IsYouTube.Value && 
+                    post.IsVimeo != null && !post.IsVimeo.Value && 
+                    !string.IsNullOrEmpty(post.ImageUrl))
+                {
+                    base.Delete(ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS, post.VendorId, post.ImageUrl);
+                }
+
+                Database.DeleteObject(post);
+                Database.SaveChanges();
+            }
+
+            return Json(
+                new
+                {
+                    result = success.ToString(),
+                    message = dbMessage
+                }
+            );
+        }
+
+        [Authorize]
+        public ActionResult AddTextPost(string captionText, int vendorId)
+        {
+            string dbMessage = string.Empty;
+            bool success = false;
+            bool isYouTube = false;
+            bool isVimeo = false;
+
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid loggedInUserGuid = (Guid)user.ProviderUserKey;
+
+            PostsViewModel postViewModel = new PostsViewModel(null, vendorId, captionText, null, null, isYouTube, isVimeo, DateTime.Now, loggedInUserGuid);
+            Post postModel = postViewModel.ToPostModel();
+
+            Database.Posts.AddObject(postModel);
+            Database.SaveChanges();
+
+            return Json(
+                new
+                {
+                    result = success.ToString(),
+                    message = dbMessage
+                }
+            );
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult AddImagePost(string captionText, int vendorId, string imageUrl)
+        {
+            string dbMessage = string.Empty;
+            bool success = false;
+            bool isYouTube = false;
+            bool isVimeo = false;
+
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid loggedInUserGuid = (Guid)user.ProviderUserKey;
+
+            try
+            {
+                string tempName = Guid.NewGuid().ToString();
+
+                PostsViewModel postViewModel = new PostsViewModel(null, vendorId, captionText, tempName, null, isYouTube, isVimeo, DateTime.Now, loggedInUserGuid);
+                Post postModel = postViewModel.ToPostModel();
+
+                Database.Posts.AddObject(postModel);
+                Database.SaveChanges();
+
+                // get the post's ID that was just inserted
+                var newName = base.Confirm(ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS, vendorId, imageUrl, string.Concat("post.", postModel.PostId), ConfirmedImageSuffix);
+                newName = EnsureOriginalFileIsJpeg(vendorId, ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS, newName);
+                string imageFileName = Path.GetFileName(newName);
+
+                postModel.ImageUrl = imageFileName;
+                Database.SaveChanges();
+
+                dbMessage = "Post Image Saved";
+                success = true;
+            }
+            catch (Exception ex)
+            {
+                dbMessage = string.Format("Error saving post image: {0}", ex.Message);
+                success = false;
+            }
+
+            Sweep(ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS, vendorId, ConfirmedImageSuffix);
+
+            return Json(
+                new
+                {
+                    result = success.ToString(),
+                    message = dbMessage
+                }
+            );
+        }
+
+        [Authorize]
+        [ValidateInput(false)]
+        public ActionResult AddVideoPost(string captionText, int vendorId, string videoURL)
+        {
+            string dbMessage = string.Empty;
+            bool success = false;
+            bool isYouTube = false;
+            bool isVimeo = false;
+            string videoId = string.Empty;
+
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid loggedInUserGuid = (Guid)user.ProviderUserKey;
+
+            if (videoURL != null && !videoURL.Trim().Equals(string.Empty))
+            {
+                videoURL = videoURL.Trim();
+
+                VideoHelper.RetrieveVideoId(videoURL, out isYouTube, out isVimeo, out videoId);
+            }
+
+            PostsViewModel postViewModel = new PostsViewModel(null, vendorId, captionText, null, videoId, isYouTube, isVimeo, DateTime.Now, loggedInUserGuid);
+            Post postModel = postViewModel.ToPostModel();
+
+            Database.Posts.AddObject(postModel);
+            Database.SaveChanges();
+
+            return Json(
+                new
+                {
+                    result = success.ToString(),
+                    message = dbMessage
+                }
+            );
+        }
+
+        #region overrides
+
+        [TokenizedAuthorize]
+        [RequiresAuthentication]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ContentResult CheckExisting(int contentId, string filename)
+        {
+            return base.CheckExisting(contentId, filename, ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS);
+        }
+
+        public ContentResult Upload(int vendorId, HttpPostedFileBase fileData)
+        {
+            return base.Upload(vendorId, fileData, ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS);
+        }
+
+        #endregion
+    }
+}

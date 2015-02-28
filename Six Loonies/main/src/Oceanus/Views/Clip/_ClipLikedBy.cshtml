@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Oceanus.ViewModels.BaseUserViewModel>
+<div class="photovideoclippers">
+    @if (Model != null && Model.Count() > 0)
+    {
+        <div class="section" style="margin-top:0;">
+            <div class="cliptitletext">
+                Liked by</div>
+            <div class="photovideoclippersect">
+                @*int count = Model.Count();
+                <text>Clipped by <b>@(count)</b> @(count > 1 ? "people" : "person")</text>*@
+                <div class="photovideoclippercollage">
+                    @foreach (var clipper in Model)
+                    {
+                        <div class="photovideoclippersuserimg">
+                            <a href="/u/@(clipper.Id)" title="@(clipper.FullName)">
+                                <img src="/images/user.jpg" alt width="40px" height="40px" /></a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="section" style="margin-top:0;">
+            <div class="cliptitletext">
+                Liked by</div>
+            <div class="photovideoclippersect">
+                Be the first to like this photo!
+            </div>
+        </div>
+    }
+</div>

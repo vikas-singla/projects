@@ -1,0 +1,31 @@
+﻿@{
+    var domain = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);                
+}
+<div style="width: 100%; clear: both">
+    <div style="width: 100%">
+        <div style="padding-bottom: 10px; margin-bottom: 20px; border-bottom: 3px solid #d9d9d9;
+            overflow: auto;">
+            <img src="@(domain + "/images/sitetheme/SixLooniesLogo_lg_comb.png")" width="150px" alt />
+        </div>
+    </div>
+    <br />
+    @if (ViewData["echoSenderNameAndSubject"] != null && ((bool)ViewData["echoSenderNameAndSubject"]) == true)
+    {
+        <div style="width: 100%; overflow: auto; padding-bottom: 15px;">
+            <b>@(ViewData["senderName"])</b> sent you a message<br />
+            Subject:&nbsp;@(ViewData["subject"])<br />
+        </div>
+    }
+    @foreach (var bodyLine in (((string)ViewData["messageBody"]).Split('\n')))
+    {
+        @bodyLine
+        <br />
+    }
+    <br />
+    <a href="www.sixloonies.com/message/@(ViewData["messageId"])" style="display:block; padding:10px; background-color:#f0f0f0;">
+        Reply to this message</a>
+    <br />
+    <br />
+    <div style="color: #777; padding: 10px 0px; border-top: 3px solid #d9d9d9;">
+        © Six Loonies Inc. 2011</div>
+</div>

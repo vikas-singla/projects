@@ -1,0 +1,52 @@
+﻿@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.JavaScript()
+        .Add("~/Scripts/sixloonies.marklet.sharelink.js")
+        .Render("~/cache/sixloonies.marklet.shared.#.js")
+    );
+}
+<div class="fullsect maincontentsect">
+    <div class="formcontainer">
+        <form id="sl_frmWriteMsg">
+        <div class="writemessagetitle">
+            Share Link
+        </div>
+        <div class="formfields">
+            <div class="formfield">
+                <div class="lbl">
+                    To:</div>
+                <div class="field">
+                    <input id="writeMessageToInput" />
+                </div>
+            </div>
+            <br />
+            <div class="formfield">
+                <div class="lbl">
+                    Message:
+                </div>
+                <div class="field">
+                    <textarea id="writeMessageBodyInput" class="validate[required]" rows="3" cols="1">Check out "@(ViewBag.PageTitle)" (@(ViewBag.PageUrl))</textarea>
+                    <input id="messagePageTitle" type="hidden" value="@(ViewBag.PageTitle)" />
+                    <input id="messagePageUrl" type="hidden" value="@(ViewBag.PageUrl)" />
+                </div>
+            </div>
+            <br />
+            <div class="options">
+                <div class="btns">
+                    <a href="#" class="btnbluestyle" id="sl_sharelinkbtn">Send</a>&nbsp; 
+                    <a href="@("/webpage/BoomarkletDashboard?pageUrl=" + Html.Encode(ViewBag.PageUrl) + "&pageTitle=" + Html.Encode(ViewBag.PageTitle) + "&pageDescription=" + Html.Encode(ViewBag.PageDescription))"
+                        class="btnstyle close">Cancel</a>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+<style type="text/css">
+    li.token-input-token
+    {
+        margin: 5px 3px;
+        padding: 3px 4px;
+    }
+</style>

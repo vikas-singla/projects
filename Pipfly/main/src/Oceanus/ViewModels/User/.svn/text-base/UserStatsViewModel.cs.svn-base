@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace Oceanus.ViewModels
+{
+    public class UserStatsViewModel
+    {
+        /// <summary>
+        /// User identifier
+        /// </summary>
+        public Guid UserId { get; set; }
+        /// <summary>
+        /// Number of reviews the user has added
+        /// </summary>
+        public int NumReviews { get; set; }
+        /// <summary>
+        /// Number of professionals or businesses followed
+        /// </summary>
+        public int NumVendorsFollowed { get; set; }
+        /// <summary>
+        /// Number of thumbs up by others
+        /// </summary>
+        public int NumThumbsUp { get; set; }
+        /// <summary>
+        /// Number of friends on Six Loonies
+        /// </summary>
+        public int NumFriendsOnSixLoonies { get; set; }
+        /// <summary>
+        /// Number of other users that are following this user
+        /// </summary>
+        public int NumFollowers { get; set; }
+        /// <summary>
+        /// Number of other users that the user is following
+        /// </summary>
+        public int NumFollowed { get; set; }
+    }
+}

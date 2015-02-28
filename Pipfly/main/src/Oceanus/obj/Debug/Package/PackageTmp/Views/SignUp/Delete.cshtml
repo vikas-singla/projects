@@ -1,0 +1,28 @@
+﻿@model Oceanus.ViewModels.SignUpViewModel
+
+@{
+    ViewBag.Title = "Resign";
+}
+
+<h2>Remove</h2>
+
+<h3>Are you sure you want to be removed?</h3>
+<fieldset>
+    @*<legend>SignUpModel</legend>*@
+
+    <div class="display-label">FirstName</div>
+    <div class="display-field">@Model.FirstName</div>
+
+    <div class="display-label">LastName</div>
+    <div class="display-field">@Model.LastName</div>
+
+    <div class="display-label">EmailAddress</div>
+    <div class="display-field">@Model.EmailAddress</div>
+</fieldset>
+
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Remove" /> |
+        @Html.ActionLink("Back to Sign Up", "Create")
+    </p>
+}

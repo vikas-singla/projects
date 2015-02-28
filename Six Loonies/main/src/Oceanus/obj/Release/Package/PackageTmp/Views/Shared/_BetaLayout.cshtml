@@ -1,0 +1,144 @@
+﻿@using Oceanus.Controllers
+@using SquishIt.Framework
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
+<head>
+    <title>Pipfly</title>
+    <meta http-equiv="Page-Enter" content="blendTrans(Duration=0.05)">
+    <meta http-equiv="Page-Exit" content="blendTrans(Duration=0.05)">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    @{
+        @MvcHtmlString.Create(
+            Bundle.Css()
+                .Add("~/Content/main.css")
+                .Add("~/Content/betasignin.css")
+                .Add("~/Content/user/sixloonies.login.css")
+                .Add("~/Content/Plugins/jquery.tiptip.css")
+                .Add("~/Content/Plugins/validationEngine.jquery.css")
+                .ForceRelease()
+                .Render("~/cache/sixloonies.shared.#.css")
+            );
+    }
+    @{
+        @MvcHtmlString.Create(
+                Bundle.JavaScript()
+                .Add("~/Scripts/Plugins/jquery-1.7.1.min.js")
+                .Add("~/Scripts/Plugins/jquery.validate.min.js")
+                .Add("~/Scripts/Plugins/jquery.validate.unobtrusive.min.js")
+                .Add("~/Scripts/Plugins/jquery.easing.min.js")
+                .Add("~/Scripts/Plugins/jquery.easing.compatibility.js")
+                .Add("~/Scripts/Plugins/jquery.unobtrusive-ajax.min.js")
+                .Add("~/Scripts/Plugins/MVCControlToolkit.Controls-0.9.0.min.js")
+                .Render("~/cache/sixloonies.beta.tools.#.js")
+            );
+    }
+    <script type="text/javascript" src="@Url.Content("~/Scripts/uploadify/jquery.uploadify.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.NobleCount.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.elastic.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/Plugins/jquery.fancybox-1.3.4.pack.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.validationEngine-en.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.validationEngine.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.scrollto.js")"></script>
+    @{
+        @MvcHtmlString.Create(
+                Bundle.JavaScript()
+                .Add("~/Scripts/Plugins/jquery.tipTip.minified.js")
+                .Add("~/Scripts/sixloonies.utils.js")
+                .Add("~/Scripts/pipfly.helper.js")
+                .Add("~/Scripts/pipfly.emptytext.js")
+                .Render("~/cache/pipfly.shared.#.js")
+            );
+    }
+    <script type="text/javascript">
+        $(function () {
+            $('a[title]').tipTip();
+            $('div[title]').tipTip();
+            $('span[title]').tipTip();
+            $('input[title]').tipTip();
+            $('textarea[title]').tipTip();
+            $('li[title]').tipTip();
+        });
+
+        $(document).ready(function () {
+            $('textarea').elastic();
+        });
+
+        var loggedin = @User.Identity.IsAuthenticated.ToString().ToLower();
+    </script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-27307727-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</head>
+<body>
+    <div id="bodycontainer">
+        <div class="page">
+            <div class="parentcontainer">
+                <div class="bcontainer">
+                    <div class="welcome">
+                        <div class="logo">
+                            <img src="/images/sitetheme/Pipfly_logo_lg.png" alt /></div>
+                    </div>
+                    <div class="fullsect" id="notification">
+                    </div>
+                    <div class="btnshowcasecontainer">
+                        <a href="javascript:void((function(){if(!document.sl_number){document.sl_number=Math.random()*99999999;var e=document.createElement('script');e.setAttribute('type','text/javascript');e.setAttribute('charset','UTF-8');e.setAttribute('src','http://www.pipfly.com/scripts/pipfly.marklet.js?r='+document.sl_number);document.body.appendChild(e)}})());"
+                            class="btnyellowstyle" style="padding: 10px 20px; font-size: 22px; font-weight: bold;">
+                            Open pipfly</a>
+                        <br />
+                        <br />
+                        Drag the above button to your bookmarks toolbar in your browser to begin using pipfly.
+                    </div>
+                    <br />
+                    <br />
+                    <div class="registercontainer">
+                        @if (Request.IsAuthenticated)
+                        {
+                            ;
+                            string profileFullName = null;
+                            if (System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_USER_PROFILE_FULLNAME_KEY] != null)
+                            {
+                                HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_USER_PROFILE_FULLNAME_KEY];
+                                profileFullName = cookie.Value;
+                            }
+                            
+                            <text>@(profileFullName), you're now logged in.<br />
+                            <br />
+                            (If you were redirected to login from the bookmarklet, click on the 'Refresh' button
+                            on that page to re-load pipfly.)</text>
+                            <br />
+                            <br />
+                            <a href="/account/logoff" class="btnstyle">Log Off</a>
+                        }
+                        else
+                        {
+                            <text>@{Html.RenderPartial("_BetaLoginForm");}</text>
+                        }
+                    </div>
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <a class="FooterLinkStyle" href="/button" style="color: #CD2990; font-weight: bold;">
+                Bookmarklet</a> &nbsp; <span class="FooterPipeStyle">|</span> &nbsp;<a id="scrollToTopLink"
+                    href="#notification" style="display: none;"> </a><a class="FooterLinkStyle" href="#">
+                        About</a> &nbsp; <span class="FooterPipeStyle">|</span> &nbsp; <a class="FooterLinkStyle"
+                            href="/contact">Contact</a> &nbsp; <span class="FooterPipeStyle">|</span>
+            &nbsp; <a class="FooterLinkStyle" href="/guidelines">Decorum</a> &nbsp; <span class="FooterPipeStyle">
+                |</span> &nbsp; <a class="FooterLinkStyle" href="/terms">Terms</a> &nbsp; <span class="FooterPipeStyle">
+                    |</span> &nbsp; <a class="FooterLinkStyle" href="/privacy">Privacy Policy</a> &nbsp;<span
+                        class="FooterPipeStyle"> |</span> &nbsp; <span class="FooterCopyrightStyle">© Six Loonies
+                            Inc.</span>
+        </div>
+    </div>
+</body>
+</html>

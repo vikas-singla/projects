@@ -1,0 +1,243 @@
+﻿/* FORM LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+.formlblfootnote
+{
+    clear: both;
+    color: #a0a0a0;
+    font-weight: normal;
+    padding: 2px 0px 2px 0px;
+    font-size: 9px;
+}
+
+fieldset
+{
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+legend
+{
+    border: none;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+input
+{
+    border: 1px solid #C0C0C0;
+    -webkit-box-shadow: inset 0 1px 2px #d9d9d9;
+    -moz-box-shadow: 1px 1px 2px 1px #f2f2f2 inset;
+    box-shadow: inset 0 1px 2px #d9d9d9;
+}
+
+input:disabled
+{
+    background:#fff;
+}
+
+input[type="checkbox"]
+{
+    border: none;
+}
+
+input[type="radio"]
+{
+    border: none;
+}
+
+label
+{
+    cursor: hand;
+    cursor: pointer;
+}
+
+label input[type="checkbox"], label input[type="radio"], label input[type="checkbox"] + span, label input[type="radio"] + span, label input[type="checkbox"] + span::before, label input[type="radio"] + span::before
+{
+    vertical-align: middle;
+}
+
+label input[type="checkbox"], label input[type="radio"]
+{
+    position: absolute;
+    filter: alpha(opacity=0);
+    -moz-opacity: 0;
+    -webkit-opacity: 0;
+    opacity: 0;
+}
+
+label input[type="checkbox"] + span, label input[type="radio"] + span, label input[type="checkbox"] + span::before, label input[type="radio"] + span::before
+{
+    display: inline-block;
+}
+
+label input[type="checkbox"] + span, label input[type="radio"] + span
+{
+    font: normal 13px/14px "Segoe UI" , Sans-serif;
+}
+
+label input[type="checkbox"] + span::before
+{
+    content: "\2714";
+}
+
+label input[type="checkbox"] + span::before, label input[type="radio"] + span::before
+{
+    text-indent: -9999px;
+    width: 12px;
+    height: 12px;
+    font: bold 12px/12px Garamond, "Segoe UI" , Sans-serif;
+    text-transform: uppercase;
+    border: solid 1px #e0e0e0;
+    border-radius: 3px;
+    box-shadow: 0 0 1px 1px #ccc;
+    background: #f0f0f0;
+    background: -moz-linear-gradient(-45deg, #fefefe, #f0f0f0);
+    background: -webkit-linear-gradient(-45deg, #fefefe, #f0f0f0);
+    background: -o-linear-gradient(-45deg, #fefefe, #f0f0f0);
+    background: -ms-linear-gradient(-45deg, #fefefe, #f0f0f0);
+    background: linear-gradient(-45deg, #fefefe, #f0f0f0);
+    margin: 0 4px 0 0;
+}
+
+label:hover input[type="checkbox"]:not(:disabled) + span::before, label:hover input[type="radio"]:not(:disabled) + span::before
+{
+    background: #f0f0f0;
+    background: -moz-linear-gradient(45deg, #fefefe, #f0f0f0);
+    background: -webkit-linear-gradient(45deg, #fefefe, #f0f0f0);
+    background: -o-linear-gradient(45deg, #fefefe, #f0f0f0);
+    background: -ms-linear-gradient(45deg, #fefefe, #f0f0f0);
+    background: linear-gradient(45deg, #fefefe, #f0f0f0);
+    box-shadow: 0 0 1px 2px #ccc;
+}
+
+label input[type="checkbox"]:checked + span::before, label input[type="radio"]:checked + span::before
+{
+    text-indent: 2px;
+    color: #606060;
+    text-shadow: 0 0 2px #f0f0f0;
+}
+
+label input[type="radio"] + span::before
+{
+    content: "\2022";
+    font-size: 22px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
+}
+
+label input[type="radio"]:checked + span::before
+{
+    text-indent: 2px;
+}
+
+label input[type="checkbox"]:disabled + span::before, label input[type="radio"]:disabled + span::before
+{
+    filter: alpha(opacity=50);
+    -moz-opacity: .5;
+    -webkit-opacity: .5;
+    opacity: .5;
+}
+
+label input[type="checkbox"]:disabled + span, label input[type="radio"]:disabled + span, label input[type="checkbox"]:disabled + span::before, label input[type="radio"]:disabled + span::before
+{
+    cursor: default;
+}
+
+input[type="text"]
+{
+    width: 200px;
+    border: 1px solid #C0C0C0;
+}
+
+textarea
+{
+    min-height: 20px;
+    background-color: transparent;
+    border: 1px solid #C0C0C0;
+    margin: 0;
+    padding: 2px;
+    resize: none;
+    outline: none;
+    -webkit-box-shadow: inset 0 1px 2px #d9d9d9;
+    -moz-box-shadow: 1px 1px 2px 1px #f2f2f2 inset;
+    box-shadow: inset 0 1px 2px #d9d9d9;
+}
+
+input[type="password"]
+{
+    width: 200px;
+    border: 1px solid #C0C0C0;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+input[type=^"checkbox"]
+{
+    border: 1px solid #C0C0C0;
+    margin: 0;
+    outline: none;
+    padding: 2px;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+/* Styles for editor and display helpers
+----------------------------------------------------------*/
+.hiddenfield
+{
+    visibility: hidden;
+}
+
+.display-label, .editor-label
+{
+    padding-top: 10px;
+}
+
+.display-field, .editor-field
+{
+    text-align: left;
+}
+
+.text-box
+{
+    width: 30em;
+}
+
+.text-box.multi-line
+{
+    height: 6.5em;
+}
+
+.tri-state
+{
+    width: 6em;
+}
+

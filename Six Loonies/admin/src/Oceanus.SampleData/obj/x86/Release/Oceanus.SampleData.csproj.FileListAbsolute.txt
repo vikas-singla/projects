@@ -1,0 +1,11 @@
+D:\sixloonies\projects\admin\src\Oceanus.SampleData\bin\Release\Images\delete.png
+D:\sixloonies\projects\admin\src\Oceanus.SampleData\bin\Release\Oceanus.SampleData.exe.config
+D:\sixloonies\projects\admin\src\Oceanus.SampleData\bin\Release\Oceanus.SampleData.exe
+D:\sixloonies\projects\admin\src\Oceanus.SampleData\bin\Release\Oceanus.SampleData.pdb
+D:\sixloonies\projects\admin\src\Oceanus.SampleData\bin\Release\Oceanus.dll
+D:\sixloonies\projects\admin\src\Oceanus.SampleData\bin\Release\MVCControlsToolkit.dll
+D:\sixloonies\projects\admin\src\Oceanus.SampleData\bin\Release\Oceanus.pdb
+D:\sixloonies\projects\admin\src\Oceanus.SampleData\bin\Release\MVCControlsToolkit.pdb
+D:\sixloonies\projects\admin\src\Oceanus.SampleData\obj\x86\Release\ResolveAssemblyReference.cache
+D:\sixloonies\projects\admin\src\Oceanus.SampleData\obj\x86\Release\Oceanus.SampleData.exe
+D:\sixloonies\projects\admin\src\Oceanus.SampleData\obj\x86\Release\Oceanus.SampleData.pdb

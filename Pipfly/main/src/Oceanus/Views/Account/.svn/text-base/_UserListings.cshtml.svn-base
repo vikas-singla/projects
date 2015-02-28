@@ -1,0 +1,134 @@
+﻿@model IEnumerable<Oceanus.ViewModels.ListItemViewModel>
+<link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/user/sixloonies.user.listings.css")"/>
+<link href="@Url.Content("~/Content/Plugins/jquery.rateit.css")" rel="stylesheet" type="text/css" />
+@{ 
+    Guid guidOfUserProfile = ViewBag.UserId;
+    MembershipUser currUserMembership = Membership.GetUser(User.Identity.Name);
+    Guid? currUserGuid = null;
+    if (currUserMembership != null)
+    {
+        currUserGuid = (Guid)currUserMembership.ProviderUserKey;
+    }
+}
+<div class="fullsect">
+    <div class="section">
+        <div class="sectiontitle">
+            <div class="titletext">
+                @if (currUserGuid != null && currUserGuid == guidOfUserProfile)
+                {
+                    <text>My Services Listings</text>
+                }
+                else
+                {
+                    <text>@(ViewBag.UserFirstName)'s Services Listings</text>
+                }
+            </div>
+        </div>
+        <div class="userlistings">
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var listing in @Model)
+                { 
+                <div class="vendor">
+                    @if (listing.VendorPortfolioImage != null)
+                    {
+                        <div class="portfolioimagesect">
+                            <a href="/Vendor/@(listing.VendorId)">
+                                <img src="/uploads/@(Oceanus.Controllers.ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS)/@(listing.VendorId)/@(listing.VendorPortfolioImage).thumb.listing.jpg" width="200px" alt />
+                            </a>
+                        </div>
+                    }
+                    else if (listing.SampleVendorVideo != null)
+                    {
+                        <div class="portfolioimagesect">
+                            @if (listing.SampleVendorVideo.IsVimeo)
+                            {
+                                <a href="/Vendor/@(listing.VendorId)">
+                                    <img id="vimeo-@(listing.SampleVendorVideo.VideoIdentifier)" src="" width="200px" alt />
+                                    <span class="play"></span></a>
+                            
+                                <script type="text/javascript">
+                        $(function () {
+                            loadVimeoThumb(@(listing.SampleVendorVideo.VideoIdentifier));
+                        });
+                                </script>
+                            }
+                            else if (listing.SampleVendorVideo.IsYouTube)
+                            { 
+                    
+                                <a href="/Vendor/@(listing.VendorId)">
+                                    <img src="http://img.youtube.com/vi/@(listing.SampleVendorVideo.VideoIdentifier)/0.jpg" width="200px" alt />
+                                    <span class="play"></span></a>
+                            }
+                        </div>
+                    }
+                    <div class="vendordetails" style="@((listing.SampleVendorVideo == null && listing.VendorPortfolioImage == null) ? "width:100%;" : "")">
+                        <div class="header">
+                            <a class="vendorTitle" href="/Vendor/@(listing.VendorId)">
+                                @listing.VendorName</a>
+                            @if (listing.OverallRating != null)
+                            {
+                                <div class="stars bigstars alignright">
+                                    <div class="rateit" data-rateit-starwidth="16" data-rateit-starheight="16" data-rateit-step="0.5"
+                        data-rateit-resetable="false" data-rateit-value="@(listing.OverallRating.AttributeValue)" data-rateit-readonly="true">
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                        <div class="sdesc">
+                            @listing.VendorShortDescription
+                        </div>
+                        <div class="details">
+                            @if (listing.PopularServicesOffered.Count > 0)
+                            {
+                                <div class="services">
+                                    <div class="title">
+                                        Services offered:
+                                    </div>
+                                    @foreach (var serviceName in listing.PopularServicesOffered)
+                                    { 
+                                        <a href="#" class="taglink" id="lnkService_@(serviceName)" data-service="@(serviceName)">@serviceName</a>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="vstats">
+                        <div class="vstat grayrightborder">
+                            <div class="val">@(listing.NumberOfReviews)</div>
+                            <div class="desc">
+                                total reviews</div>
+                        </div>
+                        <div class="vstat grayrightborder">
+                            <div class="val">
+                                @(listing.NumberOfReviewsByFriends)</div>
+                            <div class="desc">
+                                reviews by friends</div>
+                        </div>
+                        <div class="vstat">
+                            <div class="val">
+                                0</div>
+                            <div class="desc">
+                                popularity score</div>
+                        </div>
+                    </div>
+                </div>
+                }
+            }
+            else
+            {
+                if (currUserGuid != null && currUserGuid == guidOfUserProfile)
+                {
+                <p>
+                    You do not currently have any services listings on Six Loonies.</p>
+                }
+                else
+                {
+                <p>
+                    There are currently no services listings by @(ViewBag.UserFirstName).</p>
+                }
+            }
+        </div>
+    </div>
+</div>
+<script src="@Url.Content("~/Scripts/Plugins/jquery.rateit.min.js")" type="text/javascript"></script>

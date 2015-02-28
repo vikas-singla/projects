@@ -1,0 +1,1160 @@
+﻿var addTraitEmptyText = "Type to add or search traits";
+var relQuestEmptyText = "Enter question you want to link to here";
+var relQuestSearchEmptyText = "Have a question? Search or ask it here";
+var qRelQAddTitleEmptyText = "Input your question here (e.g. Why is the sky blue?)";
+var qRelQAddDetailEmptyText = "Enter any additional details about your question";
+var addwebsiteEmptyText = "Type to add a website";
+var addemailEmptyText = "Type to add an email";
+var addStoryEmptyText = "Type to add your story here";
+var addcategoryEmptyText = "Type to add or search categories";
+var relQuestId = -1;
+var asktoreviewloaded = false;
+var tellfriendloaded = false;
+
+$(function () {
+    $("#editWebsiteInput").emptyText(addwebsiteEmptyText, "emptytextstyle");
+    $("#addcatinput").emptyText(addcategoryEmptyText, "emptytextstyle");
+    $("#editEmailInput").emptyText(addemailEmptyText, "emptytextstyle");
+    $("#storytextinput").emptyText(addStoryEmptyText, "emptytextstyle");
+    $("#addtraitinput").emptyText(addTraitEmptyText, "emptytextstyle");
+    $("#relquestinput").emptyText(relQuestEmptyText, "emptytextstyle");
+    $("#relquestsearch").emptyText(relQuestSearchEmptyText, "emptytextstyle");
+    $("#vreladdquestiontitle").emptyText(qRelQAddTitleEmptyText, "emptytextstyle");
+    $("#vreladdquestiondetail").emptyText(qRelQAddDetailEmptyText, "emptytextstyle");
+    $("#rejectProfileCommentsInput").emptyText("Enter your comments here", "emptytextstyle");
+});
+
+function escape_regexp(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
+
+$.expr[':'].textEquals = function (a, i, m) {
+    return $(a).text().match("^" + escape_regexp(m[3]) + "$");
+};
+
+$(document).ready(function () {
+    $("#frmVendorProfileAskQuestion").validationEngine({ promptPosition: "topRight", scroll: false });
+
+    $("#relquestsearch").autocomplete({
+        minLength: 1,
+        source: function (request, response) {
+            $.ajax({
+                url: "/vendor/SearchQuestionsAutoComplete", type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.QuestionTitle, value: item.QuestionTitle, id: item.Id }
+                    }))
+                }
+            });
+        },
+        select: function (event, ui) {
+            relQuestId = ui.item.id;
+        },
+        open: function (e, ui) {
+            var 
+            acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        }
+    });
+
+    $("#addtraitinput").autocomplete({
+        minLength: 0,
+        source: function (request, response) {
+            $.ajax({
+                url: "/vendor/GetVendorTraitsAutoComplete", type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.TagName, value: item.TagName, id: item.Id }
+                    }))
+                }
+            })
+        },
+        open: function (e, ui) {
+            var 
+            acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        }
+    });
+
+    $("#relquestinput").autocomplete({
+        minLength: 0,
+        source: function (request, response) {
+            $.ajax({
+                url: "/vendor/GetRelatedQuestionsAutoComplete", type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item.QuestionTitle, value: item.QuestionTitle, id: item.Id }
+                    }))
+                }
+            })
+        },
+        select: function (event, ui) {
+            relQuestId = ui.item.id;
+        },
+        open: function (e, ui) {
+            var 
+            acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        },
+        change: function (event, ui) {
+            if (!ui.item) {
+                if ($(".ui-autocomplete li:textEquals('" + $(this).val() + "')").size() == 0 && $(this).val() != $(this).attr("emptytext")) {
+                    // remove invalid value, as it didn't match anything
+                    relQuestId = -1;
+                    $(this).val("");
+                    $(this).data("autocomplete").term = "";
+                    $(this).blur();
+                    return false;
+                }
+            }
+        }
+    });
+
+    $('#acceptvprofile').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        var vid = $(this).attr("data-vid") + "";
+        acceptVendorProfile(vid);
+
+        return false;
+    });
+
+    $('#vRelQuestionAskBtnSubmit').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        clearDefaultIfEmpty('vreladdquestiontitle', qRelQAddTitleEmptyText);
+
+        if ($('#frmVendorProfileAskQuestion').validationEngine('validate')) {
+            $('#frmVendorProfileAskQuestion').validationEngine('hideAll');
+            createQuestion();
+        }
+
+        return false;
+    });
+
+    $('#vrelquestask').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        if ($('#relquestsearch').val() != relQuestSearchEmptyText) {
+            $('#vreladdquestiontitle').val($('#relquestsearch').val());
+        }
+
+        return false;
+    });
+
+    $('#editrelquest').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        show('.addrelquestion');
+        hide('#editrelquest');
+
+        return false;
+    });
+
+    $('#addRelQuestDone').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        hide('.addrelquestion');
+        show('#editrelquest');
+
+        return false;
+    });
+
+    $('#followvendor').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        var vid = $(this).attr("data-vid") + "";
+        followVendor(vid);
+
+        return false;
+    });
+
+    $('#followvendor2').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        var vid = $(this).attr("data-vid") + "";
+        followVendor(vid);
+
+        return false;
+    });
+
+    $('#unfollowvendor').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        var vid = $(this).attr("data-vid") + "";
+        unfollowVendor(vid);
+
+        return false;
+    });
+
+    $('#unfollowvendor2').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        var vid = $(this).attr("data-vid") + "";
+        unfollowVendor(vid);
+
+        return false;
+    });
+
+    $('#edittraitslink').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        hide('#readonlytraits');
+        hide('#edittraitslink');
+        show('#edittraits');
+
+        return false;
+    });
+
+    $('#edittraitdone').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        show('#readonlytraits');
+        show('#edittraitslink');
+        hide('#edittraits');
+
+        return false;
+    });
+
+    $('.traitdelbtn').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        var vid = $(this).attr("data-vid") + "";
+        var tid = $(this).attr("data-tid") + "";
+        deleteTrait(vid, tid);
+
+        return false;
+    });
+
+    $('#addreviewbtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+    });
+
+    $('#askreviewbtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        var vid = $(this).attr("data-vid") + "";
+
+        if (!asktoreviewloaded) {
+            asktoreviewloaded = true;
+            $('#askreviewformcontent').load("/vendor/GetAskToReviewForm?vendorId=" + vid);
+        }
+    });
+
+    $('#tellfriendbtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        var vid = $(this).attr("data-vid") + "";
+
+        if (!tellfriendloaded) {
+            tellfriendloaded = true;
+            $('#tellfriendformpanel').load("/vendor/GetTellAFriendForm?vendorId=" + vid);
+        }
+    });
+
+    $('#askreviewbtn2').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        var vid = $(this).attr("data-vid") + "";
+
+        if (!asktoreviewloaded) {
+            asktoreviewloaded = true;
+            $('#askreviewformcontent').load("/vendor/GetAskToReviewForm?vendorId=" + vid);
+        }
+    });
+
+    $('#addreviewhdrlink').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+    });
+
+    $('#vendorGetQuoteBtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+    });
+
+    $('#addreviewhdrlink2').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+    });
+
+    $('.btnundo').click(function () {
+        var sid = $(this).attr("data-sid") + "";
+
+        if (sid == "unfollowUser") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+
+            var uid = $(this).attr("data-uid") + "";
+            if (uid != null) {
+                unfollowUser(uid);
+            }
+        }
+
+        return false;
+    });
+
+    $('.reviewthumbsuplink').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        return false;
+    });
+
+    $('#addVendorLocationBtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        return false;
+    });
+
+    $('.btnstyle').live('click', function () {
+        var sid = $(this).attr("data-sid") + "";
+
+        if (sid == "followUser") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+
+            var uid = $(this).attr("data-uid") + "";
+            if (uid != null) {
+                followUser(uid);
+            }
+            return false;
+        }
+    });
+
+    $('#editvemail').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        hide('#readonlyemail');
+        show('#editvendoremail');
+
+        return false;
+    });
+
+    $('#editvemaildone').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        $('#editvendoremailform').validationEngine('hideAll');
+        show('#readonlyemail');
+        hide('#editvendoremail');
+
+        return false;
+    });
+
+    $('#editvcat').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        hide('#readonlycategory');
+        show('#editcategory');
+
+        return false;
+    });
+
+    $('#editvcatdone').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        $('#editcategoryform').validationEngine('hideAll');
+        show('#readonlycategory');
+        hide('#editcategory');
+
+        return false;
+    });
+
+    $('#addVenderEmailBtn').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        clearDefaultIfEmpty('editEmailInput', addemailEmptyText);
+
+        if ($('#editvendoremailform').validationEngine('validate')) {
+            $('#editvendoremailform').validationEngine('hideAll');
+
+            show('#readonlyemail');
+            hide('#editvendoremail');
+
+            var vid = $(this).attr("data-vid") + "";
+            var email = $('#editEmailInput').val();
+
+            addVendorEmail(vid, email);
+        }
+
+        return false;
+    });
+
+    $('#editvwebsite').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        hide('#readonlywebsite');
+        show('#editwebsite');
+
+        return false;
+    });
+
+    $('#editvwebsitedone').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        $('#editwebsiteform').validationEngine('hideAll');
+        show('#readonlywebsite');
+        hide('#editwebsite');
+
+        return false;
+    });
+
+    $('.categorydelbtn').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        var vid = $(this).attr("data-vid") + "";
+        var cid = $(this).attr("data-cid") + "";
+        deleteCategory(vid, cid);
+
+        return false;
+    });
+
+    $('#addVenderWebsiteBtn').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        clearDefaultIfEmpty('editWebsiteInput', addwebsiteEmptyText);
+
+        if ($('#editwebsiteform').validationEngine('validate')) {
+            $('#editwebsiteform').validationEngine('hideAll');
+
+            var vid = $(this).attr("data-vid") + "";
+            var website = $('#editWebsiteInput').val();
+
+            addVendorWebsite(vid, website);
+
+            show('#readonlywebsite');
+            hide('#editwebsite');
+        }
+
+        return false;
+    });
+
+    $('#addvendorstory').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        hide('#vendorstoryeditsectbtn');
+        hide('#vendorstorynotfoundsect');
+        hide('#readonlystory');
+        show('#editstorytext');
+
+        $('#storytextinput').elastic();
+
+        return false;
+    });
+
+    $('#cancelvendorstorybtn').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        if ($('#vendorstoryeditsectbtn') != null) {
+            $('#vendorstoryeditsectbtn').show();
+        }
+        show('#readonlystory');
+        show('#vendorstorynotfoundsect');
+        hide('#editstorytext');
+    });
+
+    $('#savevendorstorybtn').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        $('#vendorstoryeditsectbtn').show();
+
+        var vid = $(this).attr("data-vid") + "";
+        var story = $('#storytextinput').val();
+
+        addVendorStory(vid, story);
+
+        return false;
+    });
+
+    $('#addvendorstorybigbtn').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+        hide('#vendorstoryeditsectbtn');
+        hide('#vendorstorynotfoundsect');
+        hide('#readonlystory');
+        show('#editstorytext');
+
+        return false;
+    });
+
+    $('.btnbluestyle').live('click', function () {
+        var sid = $(this).attr("data-sid") + "";
+        if (sid == "addCategory") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+
+            clearDefaultIfEmpty('addcatinput', addcategoryEmptyText);
+
+            if ($('#editcategoryform').validationEngine('validate')) {
+                $('#editcategoryform').validationEngine('hideAll');
+
+                var vid = $(this).attr("data-vid") + "";
+                var category = $('#addcatinput').val();
+
+                if (category != null && category != addcategoryEmptyText) {
+                    addCategory(vid, category);
+                }
+            }
+            return false;
+        }
+        else if (sid == "addTrait") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+            var vid = $(this).attr("data-vid") + "";
+            var trait = $('#addtraitinput').val();
+
+            if (trait != null && trait != addTraitEmptyText) {
+                addTrait(vid, trait);
+            }
+            return false;
+        }
+        else if (sid == "submitReviewThumbsUp") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+
+            var index = $(this).attr("data-index") + "";
+            var targetUserRef = $(this).attr("data-tuser") + "";
+            var reviewid = $(this).attr("data-rid") + "";
+            var commentsStr = $("#questiondetail" + index).val();
+
+            addReviewThumbsUp(targetUserRef, commentsStr, reviewid);
+            return false;
+        }
+        else if (sid == "addRelQuest") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+            if ($(".ui-autocomplete li:textEquals('" + $('#relquestinput').val() + "')").size() == 0) {
+                relQuestId = -1;
+                $('#relquestinput').val('');
+                showErrorNotification("Please select a valid related question that should be associated with the current question.");
+                return false;
+            }
+            else {
+                var vid = $(this).attr("data-vid") + "";
+                addRelQuest(relQuestId, vid);
+            }
+            return false;
+        }
+
+        if ($(this).attr('type') == "submit") {
+            return true;
+        }
+
+    });
+
+    $('#vprofiletabs li a').click(function () {
+        $('#vprofiletabs li a').each(function () {
+            $(this).parent().attr("class", "");
+            var relToHide = $(this).attr("rel") + "";
+            hide(relToHide);
+        });
+
+        var rel = $(this).attr("rel") + "";
+        $(this).parent().attr("class", "selected");
+        show(rel);
+
+        return false;
+    });
+
+    $('.degreeddlink').click(function () {
+        var id = $(this).attr("id") + "";
+        id = id.replace("degreelink_", "");
+
+        hide('.clickvmenunarrow');
+        hide('.clickvmenu');
+        $('.flaglinkgray').attr("class", "flaglink");
+        $('.degreeddlinkgray').attr("class", "degreeddlink");
+
+        show('#clickvmenu_' + id);
+
+        $(this).attr("class", "degreeddlinkgray");
+
+        return false;
+    });
+
+
+    $('#summaryrevdimens .dimens').live('click', function () {
+        var selrevattr = $(".reviewdimens .dimenssel");
+        if (selrevattr != null) {
+            selrevattr.attr("class", "dimens");
+            $(this).attr("class", "dimenssel");
+
+            var vid = $(this).attr("data-vid") + "";
+            var attrid = $(this).attr("data-rid") + "";
+            loadReviewDistChart(vid, attrid);
+        }
+    });
+
+    $(document.body).click(function (e) {
+        if (!$(e.target).is('.degreeddlink')) {
+            hide('.clickvmenunarrow');
+            $('.degreeddlinkgray').attr("class", "degreeddlink");
+        }
+    });
+
+    $(".vendorrejectprofilemsgbtn").fancybox({
+        'autoscale': 'true',
+        'modal': false,
+        'showCloseButton': false,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#vrelquestask").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $(".reviewthumbsuplink").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#addVendorLocationBtn").fancybox({
+        'autoscale': 'true',
+        'modal': false,
+        'showCloseButton': false,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#addVendorLocationSectBtn").fancybox({
+        'autoscale': 'true',
+        'modal': false,
+        'showCloseButton': false,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#askreviewbtn").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#askreviewbtn2").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#addreviewbtn").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#addreviewhdrlink").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#addreviewhdrlink2").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#vendorGetQuoteBtn").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#tellfriendbtn").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no',
+        'onComplete': function () {
+            try {
+                var oScrollbar = $('.tellfriendscrollpanel');
+                if (oScrollbar != null) {
+                    oScrollbar.tinyscrollbar_update();
+                }
+            }
+            catch (err) {
+            }
+        }
+    });
+});
+
+function acceptVendorProfile(vendorId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/AcceptVendorProfile",
+        data: {
+            vendorId: vendorId
+        },
+        async: false,
+        success: function (result) {
+            window.location.href = "/vendor/" + vendorId;
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Profile could not be accepted. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function addReviewThumbsUp(targetUserRef, commentsStr, reviewid) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/AddReviewUserThumbsUp",
+        data: {
+            targetUser: targetUserRef,
+            comments: commentsStr,
+            reviewId: reviewid
+        },
+        async: false,
+        success: function (result) {
+            $.fancybox.close();
+            showSuccessNotification('Thank you for your input. Your thumbs up message has been sent.');
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your rating could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function followUser(userToFollowId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/FollowUser",
+        data: {
+            userToFollowId: userToFollowId
+        },
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: You could not be added as a follower. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function unfollowUser(userToFollowId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/UnfollowUser",
+        data: {
+            followedUserId: userToFollowId
+        },
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: You could not be removed as a follower. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function addRelQuest(quesId, vid) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/AddRelatedQuestion",
+        data: {
+            questionId: quesId,
+            vendorId: vid
+        },
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Question could not be marked as related. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function followVendor(vendorId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/Follow",
+        data: {
+            vid: vendorId
+        },
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: You could not be added as a follower. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function unfollowVendor(vendorId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/Unfollow",
+        data: {
+            vid: vendorId
+        },
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: You could not be removed as a follower. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function loadReviewDistChart(vid, attrid) {
+    $("#revchartsect").html("");
+    $('#revchartsect').load("/vendor/GetReviewDistribution?vendorId=" + vid + "&reviewAttributeId=" + attrid);
+}
+
+function deleteCategory(vendorId, cid) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/DeleteCategory",
+        data: {
+            vid: vendorId,
+            cid: cid
+        },
+        async: false,
+        success: function (result) {
+            $('#vendorcategorysect').load("/vendor/GetVendorCategories?vendorId=" + vendorId);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Vendor category could not be deleted. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function deleteTrait(vendorId, tagId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/DeleteTrait",
+        data: {
+            vid: vendorId,
+            tid: tagId
+        },
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Vendor trait could not be deleted. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function addTrait(vendorId, tag) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/AddTrait",
+        data: {
+            vid: vendorId,
+            trait: tag
+        },
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Vendor trait could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function drawChart(chartId, data) {
+    $.jqplot.config.enablePlugins = true;
+    plot3 = jQuery.jqplot(chartId, [data],
+    {
+        dataRenderer: $.jqplot.ciParser,
+        seriesDefaults: {
+            renderer: jQuery.jqplot.PieRenderer,
+            rendererOptions: {
+                // Turn off filling of slices.
+                fill: false,
+                showDataLabels: true,
+                // Add a margin to seperate the slices.
+                sliceMargin: 4,
+                // stroke the slices with a little thicker line.
+                lineWidth: 3,
+                shadowDepth: 3,
+                padding: 10
+            }
+        },
+        legend: { show: true, location: 'e', yoffset: 0 },
+        grid: { shadow: false, borderWidth: 0 },
+        gridPadding: { top: 5, right: 0, bottom: 0, left: 0 }
+    }
+    );
+}
+
+function createQuestion() {
+    // serialize input fields in form with name attributes where name attribute is key
+    var dataObject = $("#frmVendorProfileAskQuestion").serializeJSON();
+
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/CreateRelatedQuestion",
+        data: dataObject,
+        success: function (result) {
+            $.fancybox.close();
+            window.location = "/answers/details/" + result.qid;
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Question could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function addVendorStory(vendorId, story) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/AddVendorStory",
+        data: {
+            vendorId: vendorId,
+            story: $.trim(story)
+        },
+        async: false,
+        success: function (result) {
+            showSuccessNotification('Your story has been added.');
+            $('#vendorstorysect').load("/vendor/GetVendorStory?vendorId=" + vendorId);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your story could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function addVendorWebsite(vendorId, website) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/AddWebsite",
+        data: {
+            vendorId: vendorId,
+            websiteURL: website
+        },
+        async: false,
+        success: function (result) {
+            $('#vendorwebsitesect').load("/vendor/GetVendorWebsite?vendorId=" + vendorId);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your website could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function addVendorEmail(vendorId, email) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/AddEmail",
+        data: {
+            vendorId: vendorId,
+            email: email
+        },
+        async: false,
+        success: function (result) {
+            $('#vendoremailsect').load("/vendor/GetVendorEmail?vendorId=" + vendorId);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your email could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function addCategory(vendorId, category) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/AddCategory",
+        data: {
+            vid: vendorId,
+            category: category
+        },
+        async: false,
+        success: function (result) {
+            $('#vendorcategorysect').load("/vendor/GetVendorCategories?vendorId=" + vendorId);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Vendor category could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}

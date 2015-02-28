@@ -1,0 +1,23 @@
+﻿.video-thumb
+{
+	overflow: hidden;
+	width: 134px;
+}
+
+.video-thumb img
+{
+	outline: none;
+	display: block;
+	width: 128px;
+	overflow:hidden;
+    border: 4px double #999;
+}
+
+.video-description
+{
+	margin-top: 5px;
+	max-height: 51px;
+	overflow: hidden;
+	width: 280px;
+}
+

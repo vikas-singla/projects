@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Oceanus.ViewModels.BaseUserViewModel>
+<div class="section">
+    <div class="sectiontitle">
+        <div class="titletext">
+            Liked By</div>
+    </div>
+    @if (Model != null && Model.Count() > 0)
+    {
+        <div class="fullsect">
+            <div class="normaltext">
+                There are currently <span class="bold">@(Model.Count())</span> likes this article.</div>
+            <br />
+            <div class="imagecollage">
+                @foreach (var follower in Model)
+                {
+                    <div class="userimg">
+                        <a href="/u/@(follower.Id)" title="@(follower.FullName)">
+                            <img src="/images/user.jpg" alt width="40px" height="40px" /></a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else
+    {    
+        <div class="normaltext">
+            There are currently no likes for this article.
+        </div>
+    }
+</div>

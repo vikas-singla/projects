@@ -1,0 +1,150 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Web.Mvc;
+using System.Net;
+using Oceanus.Data;
+using Oceanus.ViewModels;
+using System.Web.Security;
+using Oceanus.Models;
+
+namespace Oceanus.Controllers
+{
+    [BrowserCache(PreventBrowserCaching = true)]
+    public class LocationsController : ControllerBase
+    {
+        private class PoiResult
+        {
+            public string Name { get; set; }
+            public double Lat { get; set; }
+            public double Lng { get; set; }
+        }
+
+        [Authorize]
+        public ActionResult DeleteVendorLocation(int addressId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid userGuid = (Guid)user.ProviderUserKey;
+
+            var location = Database.VendorLocations.Where(loc => loc.Id == addressId && loc.Vendor.ContributingUserId == userGuid).FirstOrDefault();
+
+            if (location != null)
+            {
+                Database.VendorLocations.DeleteObject(location);
+                Database.SaveChanges();
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult AddVendorLocation(int vendorId, string addressLine1, string addressLine2, int cityRefId, string phone)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+            int physicalLocationId = -1;
+            double? latitude = null;
+            double? longitude = null;
+
+            addressLine1 = (addressLine1.Trim().Equals(string.Empty) ? null : addressLine1.Trim());
+            addressLine2 = (addressLine2.Trim().Equals(string.Empty) ? null : addressLine2.Trim());
+            phone = (phone.Trim().Equals(string.Empty) ? null : phone.Trim());
+
+            if (addressLine1 == null)
+            {//adding a region ... determine lat/long from city references
+                var referenceCity = Database.ReferenceCities.Where(r => r.Id == cityRefId).FirstOrDefault();
+
+                if (referenceCity != null)
+                {
+                    latitude = referenceCity.Latitude;
+                    longitude = referenceCity.Longitude;
+                }
+            }
+
+            if (Database.VendorLocations.Any(loc => loc.VendorId == vendorId && loc.AddressLine1 == addressLine1 && loc.AddressLine2 == addressLine2 && loc.ReferenceCitiesId == cityRefId))
+            {
+                dbMessage = "Error: Location already exists.";
+            }
+            else
+            {
+                VendorLocationViewModel viewModel = new VendorLocationViewModel(null, vendorId, addressLine1, addressLine2, null, null, cityRefId, phone, latitude, longitude);
+
+                Database.VendorLocations.AddObject(viewModel.ToLocationModel());
+
+                Database.SaveChanges();
+
+                dbMessage = "Successfully saved location.";
+                successful = true;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage, plid = physicalLocationId });
+        }
+
+        public ActionResult VendorLocations(int vendorId)
+        {
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid? loggedInUserGuid = (user != null) ? ((Guid)user.ProviderUserKey) : ((Guid?)null);
+            var locationsByCategory = new Dictionary<string, IEnumerable<PoiResult>>();
+
+            var vendor = Database.Vendors.Where(v => v.Id == vendorId).FirstOrDefault();
+
+            if (vendor != null)
+            {
+                var locationsToGeocode = vendor.VendorLocations
+                    .Where(pl =>
+                           pl.Latitude == null
+                           || pl.Longitude == null
+                           || pl.Latitude == 0d
+                           || pl.Longitude == 0d);
+
+                bool locationModified = false;
+
+                foreach (var location in locationsToGeocode)
+                {
+                    locationModified = locationModified || MapHelper.GeocodeLocation(location);
+                }
+
+                if (locationModified)
+                {
+                    // should not call save unless we're sure a modification happened (ie atleast one geocode was required and succeeded).
+                    Database.SaveChanges();
+                }
+
+                IEnumerable<Oceanus.ViewModels.VendorLocationViewModel> locations = from loc in vendor.VendorLocations
+                                                                                    where
+                                                                                        loc.Latitude != null
+                                                                                        && loc.Longitude != null
+                                                                                    select
+                                                                                        loc.ToLocationViewModel();
+
+                List<Oceanus.ViewModels.VendorLocationViewModel> sortedLocations = new List<VendorLocationViewModel>(locations.Where(loc => loc.AddressLine1 != null));
+                sortedLocations.AddRange(locations.Where(loc => loc.AddressLine1 == null && loc.AddressLine2 == null));
+
+                if (VendorHelper.IsUserVendorProfileAuthor(vendorId, Database, user) || Roles.IsUserInRole(SixLooniesMembership.UserRoles.Moderator.ToString()) || Roles.IsUserInRole(SixLooniesMembership.UserRoles.SuperAdmin.ToString()))
+                {
+                    ViewBag.ShowEditCapability = true;
+                }
+                else
+                {
+                    ViewBag.ShowEditCapability = false;
+                }
+
+                ViewBag.VendorId = vendorId;
+
+                return PartialView("_VendorLocations", sortedLocations);
+            }
+
+            return View("Error");
+        }
+
+    }
+}

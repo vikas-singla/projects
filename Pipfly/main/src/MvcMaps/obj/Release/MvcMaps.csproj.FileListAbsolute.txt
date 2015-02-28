@@ -1,0 +1,5 @@
+D:\sixloonies\projects\main\src\MvcMaps\bin\Release\MvcMaps.dll
+D:\sixloonies\projects\main\src\MvcMaps\bin\Release\MvcMaps.pdb
+D:\sixloonies\projects\main\src\MvcMaps\obj\Release\ResolveAssemblyReference.cache
+D:\sixloonies\projects\main\src\MvcMaps\obj\Release\MvcMaps.dll
+D:\sixloonies\projects\main\src\MvcMaps\obj\Release\MvcMaps.pdb

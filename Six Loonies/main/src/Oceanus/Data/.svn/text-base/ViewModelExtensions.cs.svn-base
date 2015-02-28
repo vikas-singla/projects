@@ -1,0 +1,89 @@
+﻿using Oceanus.ViewModels;
+using System.Linq;
+using System.Diagnostics;
+using Oceanus.ViewModels.Shared;
+using System;
+using System.Collections.Generic;
+
+namespace Oceanus.Data
+{
+    internal static class ViewModelExtensions
+    {
+        internal static TagViewModel ToTagViewModel(this Data.Tag model)
+        {
+            return new TagViewModel(model.TagId, model.TagName, model.ContributingUserId, model.AddedOn);
+        }
+
+        internal static Tag ToTag(this TagViewModel viewModel)
+        {
+            return new Tag
+            {
+                TagId = viewModel.Id != null? (int) viewModel.Id : 0,
+                TagName = viewModel.TagName,
+                ContributingUserId = viewModel.ContributingUserId,
+                AddedOn = viewModel.AddedOn
+            };
+        }
+
+        internal static SixAnswerQuestionTagMappingViewModel ToTagMappingViewModel(this Data.SixAnswerQuestionTagMapping model)
+        {
+            return new SixAnswerQuestionTagMappingViewModel(model.TagMappingId, model.SixAnswerQuestionId, model.TagId, model.ContributingUserId, model.AddedOn);
+        }
+
+        internal static SixAnswerQuestionTagMapping ToTagMapping(this SixAnswerQuestionTagMappingViewModel viewModel)
+        {
+            return new SixAnswerQuestionTagMapping()
+            {
+                TagMappingId = viewModel.Id != null ? (int) viewModel.Id : 0,
+                SixAnswerQuestionId = viewModel.QuestionId, 
+                TagId = viewModel.TagId,
+                ContributingUserId = viewModel.ContributingUserId,
+                AddedOn = viewModel.AddedOn
+            };
+        }
+
+        internal static VendorTraitsTagMappingViewModel ToTagMappingViewModel(this Data.VendorTraitsTagMapping model)
+        {
+            return new VendorTraitsTagMappingViewModel(model.TagMappingId, model.VendorId, model.TagId, model.ContributingUserId, model.AddedOn);
+        }
+
+        internal static VendorTraitsTagMapping ToTagMapping(this VendorTraitsTagMappingViewModel viewModel)
+        {
+            return new VendorTraitsTagMapping()
+            {
+                TagMappingId = viewModel.Id != null ? (int)viewModel.Id : 0,
+                VendorId = viewModel.VendorId,
+                TagId = viewModel.TagId,
+                ContributingUserId = viewModel.ContributingUserId,
+                AddedOn = viewModel.AddedOn
+            };
+        }   
+
+        internal static CategoryViewModel ToCategoryViewModel(this Data.Category category)
+        {
+            var viewModel =
+                new CategoryViewModel()
+                    {
+                        Id = category.Id,
+                        Name = category.Name,
+                        ContributingUserId = category.ContributingUserId,
+                        AddedOn = category.AddedOn,
+                        IsVisibleOnListingPg = category.IsVisibleOnListingPg
+                    };
+
+            return viewModel;
+        }
+
+        internal static Category ToCategoryModel(this CategoryViewModel viewModel)
+        {
+            return new Category()
+            {
+                Id = viewModel.Id == null? 0 : (int) viewModel.Id,
+                Name = viewModel.Name,
+                ContributingUserId = viewModel.ContributingUserId,
+                AddedOn = viewModel.AddedOn,
+                IsVisibleOnListingPg = viewModel.IsVisibleOnListingPg
+            };
+        }
+    }
+}

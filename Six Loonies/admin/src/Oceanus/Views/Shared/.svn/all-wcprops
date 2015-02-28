@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Views/Shared
+END
+Error.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Views/Shared/Error.cshtml
+END
+_LogOnPartial.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Views/Shared/_LogOnPartial.cshtml
+END
+_Layout.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Views/Shared/_Layout.cshtml
+END

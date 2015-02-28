@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Oceanus.ViewModels.FacebookFriendListViewModel>
+<link href="@Url.Content("~/Content/user/sixloonies.expand.network.friends.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+    $(document).ready(function () {
+        var oScrollbar = $('.expandnetworkscrollpanel');
+        if (oScrollbar != null) {
+            oScrollbar.tinyscrollbar();
+        }
+    });
+</script>
+<div id="expandnetworksect">
+    @if (Model != null && Model.Count() > 0)
+    {
+        int friendCount = 0;
+        foreach (var friend in Model)
+        {
+            if (!friend.FacebookFriendIsConnectedOnSixLoonies)
+            {
+                ++friendCount;
+                string friendFirstName = (friend.FacebookFriendName.IndexOf(' ') > 0) ? (friend.FacebookFriendName.Substring(0, friend.FacebookFriendName.IndexOf(' '))) : friend.FacebookFriendName;
+
+                
+                if(friendCount > 3)
+                {
+                   <div style='clear:both;'></div>
+                    friendCount = 1;
+                }
+        <div class="friend">
+            <div class="details">
+                <div class="leftalign">
+                    <div class="photo">
+                        <img src="@(friend.FriendProfilePhotoUrl == null ? "/images/user.jpg" : friend.FriendProfilePhotoUrl)" width="50px" alt title="@(friend.FacebookFriendName)" />
+                    </div>
+                    <div style="float: left;width:142px;">
+                        <div class="name">
+                            @(friend.FacebookFriendName)
+                        </div>
+                        <div class="btnsect">
+                            @if (friend.FriendRequestSentOnSixLoonies)
+                            {
+                                <span class="smalltext">Friend request sent</span>
+                            }
+                            else if (friend.InvitedToSixLoonies)
+                            {
+                                <span class="smalltext">Invite sent to @(friendFirstName)</span>
+                            }
+                            else
+                            {
+                                if (friend.FacebookFriendSixLooniesUID != null)
+                                {
+                                <a href="#" class="btnbluestyle" data-sid="addfbslfriend" data-uid="@(friend.FacebookFriendSixLooniesUID)" title="Add @(friend.FacebookFriendName) as your friend on Pipfly">
+                                    Add as Friend</a>
+                                }
+                                else
+                                {
+                                <a href="#" class="btnbluestyle" data-sid="invitefbuser" data-fbuid="@(friend.FacebookFriendUID)">
+                                    Invite</a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+            }
+
+        }
+    }
+    else
+    {
+        if (ViewBag.CurrUserIsLinkedToFacebook != null && ViewBag.CurrUserIsLinkedToFacebook)
+        {            
+        <p>
+            You currently have 0 facebook friends available to send a Pipfly invite to.</p>
+        }
+        else
+        {   
+        <div class="graypromptsect">
+            Invite your friends and share content on your favorite topics from around
+            the web. Link your Facebook account by clicking on the button below.<br />
+            <br />
+            <div class="center">
+                <a href="#" class="btnstyle" id="facebooksigninbtn3">
+                    <img alt src="/images/facebook.gif" style="position:relative;top:3px;" />
+                    Connect with Facebook</a>
+            </div>
+        </div>
+        }
+    }
+</div>

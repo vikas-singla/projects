@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Oceanus.ViewModels.BaseSixAnswersQuestionViewModel>
+<link href="@Url.Content("~/Content/user/sixloonies.user.profile.questions.css")" rel="stylesheet" type="text/css" />
+<div class="fullsect">
+    <div class="section">
+        <div class="sectiontitle">
+            <div class="titletext">
+                My Question and Answers
+            </div>
+        </div>
+        <div class="questionlist">
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var question in Model)
+                {
+                <div class="question">
+                    <div class="title">
+                        <a href="/answers/details/@(question.Id)">@(question.QuestionTitleText)</a></div>
+                    <div class="text">
+                        @(question.QuestionDetailText)
+                    </div>
+                    <div class="links">
+                        <a href="/answers/details/@(question.Id)" class="linklightbluenormal">@(question.NumQuestionResponses) answers</a> &nbsp;&#149;&nbsp; 
+                        <a href="#" class="linklightbluenormal">@(question.ThumbsUpCount) thumbs up</a> &nbsp;&#149;&nbsp; 
+                        <a href="#" class="linklightbluenormal">@(question.NumQuestionAssociatedTopics) topics</a>
+                    </div>
+                </div>
+                }
+            }
+            else
+            {
+                Guid guidOfUserProfile = ViewBag.UserId;
+                MembershipUser currUserMembership = Membership.GetUser(User.Identity.Name);
+                if (currUserMembership != null)
+                {
+                    Guid currUserGuid = (Guid)currUserMembership.ProviderUserKey;
+                    if (currUserGuid == guidOfUserProfile)
+                    {
+                        <p>There are currently 0 questions authored or answered by you.</p>
+                    }
+                    else
+                    {
+                        <p>There are currently no questions authored or answered by @(ViewBag.UserFirstName).</p>
+                    }
+                }
+                else
+                {
+                    <p>There are currently no questions authored or answered by @(ViewBag.UserFirstName).</p>
+                }
+            }
+        </div>
+    </div>
+</div>

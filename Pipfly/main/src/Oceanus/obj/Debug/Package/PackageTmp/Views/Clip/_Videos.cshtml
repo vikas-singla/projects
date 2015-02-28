@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Oceanus.ViewModels.PhotoVideoClipViewModel>
+@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/clips/pipfly.clips.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.clips.#.css")
+        );
+}
+<div class="photocollage">
+    @if (@Model != null && @Model.Count() > 0)
+    {
+        foreach (var topicVideo in @Model)
+        { 
+        <div class="collagephoto">
+            <div class="image">
+                <span>
+                    <img src="@(topicVideo.ImageUrl != null ? ("/uploads/scrapbook/" + topicVideo.ImageUrl) : topicVideo.SourceUrl)" alt style="width:@(topicVideo.ImageWidth)px;height:@(topicVideo.ImageHeight)px;display:block;margin:0 auto;" />            
+                </span>
+                <a href="/clip/viewfancybox/?id=@(topicVideo.ClipId)" class="play cliplink"></a>
+            </div>
+            <div class="caption">
+                @(topicVideo.AssociatedDescriptions.Count() > 0 ? topicVideo.AssociatedDescriptions.ElementAt(0).DescriptionText : "")
+            </div>
+            @*<div class="commentsect">
+                <a href="#" class="btnstyle"><img src="/images/heart_empty_sm.png" alt height="10px" />Like</a>
+                <a href="/clip/view/?id=@(topicVideo.ClipId)" class="btnstyle cliplink"><img src="/images/open_new_window_sm.png" alt height="10px" />View</a>
+                <a href="#" class="btnstyle"><img src="/images/reclip_sm.png" alt height="10px" />Reclip</a>
+            </div>*@
+        </div>
+        }
+    }
+</div>
+@if (Model == null || Model.Count() == 0)
+{      
+    
+    <div class="pipflynoresults">
+            No videos found.
+    </div>
+}
+

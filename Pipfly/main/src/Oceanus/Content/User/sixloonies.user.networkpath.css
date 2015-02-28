@@ -1,0 +1,45 @@
+﻿.networkpath
+{
+    display: block;
+    width: 100%;
+}
+
+.networkpath .fromuser
+{
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.networkpath .connectionarrow
+{
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 5px 0px 5px 0px;
+}
+
+.networkpath .connectingusers
+{
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.networkpath .targetuser
+{
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.networkpath .degree
+{
+    padding:2px 8px;
+    border: 2px solid #505050;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background-color: #f4f4f4;
+    font-size:10px;
+}

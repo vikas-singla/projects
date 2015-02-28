@@ -1,0 +1,166 @@
+﻿@model IEnumerable<Oceanus.ViewModels.PhotoVideoClipViewModel>
+@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/articles/pipfly.articles.css")
+            .Add("~/Content/clips/pipfly.clips.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.collage.#.css")
+        );
+}
+<div class="photocollage">
+    @if (@Model != null && @Model.Count() > 0)
+    {
+        Random randomGen = (new Random(DateTime.Now.Millisecond * (new Random()).Next()));
+        foreach (var topicPhoto in @Model)
+        {
+            double photoRatio = (double)((topicPhoto.ImageWidth * 1.0) / topicPhoto.ImageHeight);
+            int? targetWidth = null;
+            int? targetHeight = null;
+            string parentCSSclass = "collagephotossquare";
+
+            if (topicPhoto.ImageWidth < 150 || topicPhoto.ImageHeight < 150)
+            {
+                parentCSSclass = " collagephotossquare";
+
+                if (topicPhoto.ImageWidth > topicPhoto.ImageHeight)
+                {
+                    targetHeight = 158;
+                }
+                else
+                {
+                    targetWidth = 158;
+                }
+            }
+            else if (photoRatio >= 0.75 && photoRatio <= 1.34)
+            {
+                if (topicPhoto.ImageWidth > 310 && topicPhoto.ImageHeight > 310)
+                {
+                    if (randomGen.Next(3) % 2 == 1)
+                    {
+                        parentCSSclass = " collagephotosbigsquare";
+
+                        int adjHeight = (int)(((318 * 1.0) / topicPhoto.ImageWidth) * topicPhoto.ImageHeight);
+                        if (adjHeight < 318)
+                        {
+                            targetHeight = 318;
+                        }
+                        else
+                        {
+                            targetWidth = 318;
+                        }
+                    }
+                    else
+                    {
+                        parentCSSclass = " collagephotossquare";
+
+                        int adjHeight = (int)(((158 * 1.0) / topicPhoto.ImageWidth) * topicPhoto.ImageHeight);
+                        if (adjHeight < 158)
+                        {
+                            targetHeight = 158;
+                        }
+                        else
+                        {
+                            targetWidth = 158;
+                        }
+                    }
+                }
+                else
+                {
+                    parentCSSclass = " collagephotossquare";
+
+                    if (topicPhoto.ImageWidth > topicPhoto.ImageHeight)
+                    {
+                        targetHeight = 158;
+                    }
+                    else
+                    {
+                        targetWidth = 158;
+                    }
+                }
+            }
+            else if (photoRatio < 0.75)
+            {
+                parentCSSclass = " collagephotosheightrect";
+
+                if (randomGen.Next(3) % 2 == 1)
+                {
+                    int adjWidth = (int)(((318 * 1.0) / topicPhoto.ImageHeight) * topicPhoto.ImageWidth);
+
+                    if (adjWidth < 158)
+                    {
+                        targetWidth = 158;
+                    }
+                    else
+                    {
+                        targetHeight = 318;
+                    }
+                }
+                else
+                {
+                    parentCSSclass = " collagephotossquare";
+
+                    if (topicPhoto.ImageWidth > topicPhoto.ImageHeight)
+                    {
+                        targetHeight = 158;
+                    }
+                    else
+                    {
+                        targetWidth = 158;
+                    }
+                }
+            }
+            else
+            {
+                parentCSSclass = " collagephotoswidthrect";
+
+                if (randomGen.Next(3) % 2 == 1)
+                {
+                    int adjHeight = (int)(((318 * 1.0) / topicPhoto.ImageWidth) * topicPhoto.ImageHeight);
+
+                    if (adjHeight < 158)
+                    {
+                        targetHeight = 158;
+                    }
+                    else
+                    {
+                        targetWidth = 318;
+                    }
+                }
+                else
+                {
+                    parentCSSclass = " collagephotossquare";
+
+                    if (topicPhoto.ImageWidth > topicPhoto.ImageHeight)
+                    {
+                        targetHeight = 158;
+                    }
+                    else
+                    {
+                        targetWidth = 158;
+                    }
+                }
+            }
+        <div class="@("collagephoto" + parentCSSclass)">
+            <div class="image">
+                <a href="/clip/viewfancybox/?id=@(topicPhoto.ClipId)" data-clip-id="@(topicPhoto.ClipId)" rel="photocollage" class="cliplink">
+                    <img src="@(topicPhoto.ImageUrl != null ? ("/uploads/scrapbook/" + topicPhoto.ImageUrl) : topicPhoto.SourceUrl)" alt style="@(targetWidth == null ? "" : ("width:" + targetWidth + "px"));@(targetHeight == null ? "" : ("height:" + targetHeight + "px"));display:block;margin:0 auto;" />
+                </a>
+            </div>
+            @if (topicPhoto.AssociatedDescriptions != null && topicPhoto.AssociatedDescriptions.Count() > 0)
+            {
+                <div class="photocaption">
+                    @(topicPhoto.AssociatedDescriptions.ElementAt(0).DescriptionText.Length > 25 ? (topicPhoto.AssociatedDescriptions.ElementAt(0).DescriptionText.Substring(0, 20) + "...") : topicPhoto.AssociatedDescriptions.ElementAt(0).DescriptionText)
+                </div>
+            }
+        </div>
+        }
+    }
+</div>
+@if (Model == null || Model.Count() == 0)
+{      
+    <div class="pipflynoresults">
+            No photos found.
+    </div>
+}

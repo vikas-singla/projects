@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Oceanus.ViewModels.VendorImageViewModel>
+<script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery-1.6.1.min.js")"></script>
+<script type='text/javascript' src="@Url.Content("~/Scripts/Plugins/jquery.validate.min.js")"></script>
+<script type='text/javascript' src="@Url.Content("~/Scripts/Plugins/jquery.validate.unobtrusive.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.easing.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.easing.compatibility.js")"></script>
+<script type="text/javascript" src="/scripts/plugins/galleria.min.js"></script>
+<script type="text/javascript" src="/content/galleria/themes/galleriaclassic/galleria.classic.min.js"></script>
+<link href="@Url.Content("~/Content/Listings/sixloonies.listings.css")" rel="stylesheet" type="text/css" />
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="generaloverlay">
+        <div class="fullsect">
+            <div class="vportfolio">
+                <div id="galleria">
+                    @foreach (var photo in Model)
+                    {
+                        <a href="/uploads/@(photo.VendorId)/@(photo.ImageUrl)">
+                            <img title="@(photo.Title)" alt="@(photo.Description)" src="/uploads/@(photo.VendorId)/@(photo.ImageUrl)" /></a>
+                    }
+                </div>
+                <div class="closebtn"><a href="#" onclick="javascript:parent.$.fancybox.close();"><img src="/images/sitetheme/closelabel.gif" /></a></div>
+            </div>
+        </div>
+    </div>
+    if (Request.Browser.IsMobileDevice == true)
+    {
+    <script type="text/javascript">
+        // Initialize Galleria
+        Galleria.loadTheme('/content/galleria/themes/galleriaclassic/galleria.classic.min.js');
+        $('#galleria').galleria({ imageCrop: false, showImagenav: true, transition: 'fade', transitionSpeed: 100, idleTime: 99999999999 });
+    </script>
+    }
+    else
+    {
+    <script type="text/javascript">
+        // Initialize Galleria
+        Galleria.loadTheme('/content/galleria/themes/galleriaclassic/galleria.classic.min.js');
+        $('#galleria').galleria({ imageCrop: 'width', imagePan: true, transition: 'fade', transitionSpeed: 100, imagePosition: '0% 0%', clicknext: true, showImagenav: true, idleTime: 99999999999 });
+    </script>
+    }
+}

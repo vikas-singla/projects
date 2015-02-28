@@ -1,0 +1,107 @@
+﻿$(document).ready(function () {
+
+    $("#frmAskForIntroMsg").validationEngine({ promptPosition: "topRight", scroll: false });
+
+    $('.networkconnectionmenuitem').click(function () {
+        var rel = $(this).attr("rel") + "";
+
+        if (rel != null && rel != "") {
+            $('.networkconnectionmenuitem').attr("class", "networkconnectionmenuitem");
+            hide('#directfriendsview');
+            hide('#friendsoffriendsview');
+            $(this).attr("class", "selbtn networkconnectionmenuitem");
+            $(rel).show();
+        }
+
+        return false;
+    });
+
+    $('.btnstyle').click(function () {
+        var sid = $(this).attr("data-sid") + "";
+
+        if (sid == "vendorfirstdegmsg") {
+            var recipientId = $(this).attr("data-uid") + "";
+
+            $('#vendorfirstdegsendmsgformcontent').load("/message/GetPredefinedWriteMessageUI?recipientUID=" + htmlEncode(recipientId));
+
+            return false;
+        }
+
+        if (sid == "vendorseconddegmsg") {
+            var firstDegreeUID = $(this).attr("data-firstdeguid") + "";
+            var secondDegreeUID = $(this).attr("data-seconddeguid") + "";
+
+            $('#vendorseconddegintromsg').load("/message/GetAskForIntroductionUI?firstDegUID=" + htmlEncode(firstDegreeUID) + "&secondDegUID=" + htmlEncode(secondDegreeUID));
+
+            return false;
+        }
+    });
+
+    $('.btnbluestyle').live('click', function () {
+        var sid = $(this).attr("data-sid") + "";
+
+        if (sid == "sendFriendIntroRequest") {
+
+            if ($('#frmAskForIntroMsg').validationEngine('validate')) {
+                $('#frmAskForIntroMsg').validationEngine('hideAll');
+
+                var fuid = $(this).attr("data-fuid") + "";
+                var tuid = $(this).attr("data-tuid") + "";
+                var initUserName = $(this).attr("initUserName") + "";
+
+                sendFriendIntroRequest(fuid, tuid, initUserName);
+            }
+
+            return false;
+        }
+    });
+
+    $(".vendorfirstdegmsgbtn").fancybox({
+        'autoscale': 'true',
+        'modal': false,
+        'showCloseButton': false,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $(".vendorseconddegmsgbtn").fancybox({
+        'autoscale': 'true',
+        'modal': false,
+        'showCloseButton': false,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+});
+
+function sendFriendIntroRequest(firstDegUID, secondDegUID, initUserName) {
+    var messageSubject = initUserName + " sent you an introduction request";
+    var messageToConnectingFriend = $.trim($("#friendIntroConnectingUserMsgInput").val());
+    var messageToTargetFriend = $.trim($("#friendIntroTargetUserMsgInput").val());
+
+    $.ajax(
+    {
+        type: "POST",
+        dataType: 'json',
+        traditional: true,
+        url: "/Message/SendFriendIntroductionMessage",
+        data: {
+            firstDegUID: firstDegUID,
+            secondDegUID: secondDegUID,
+            subject: messageSubject,
+            messageToFirstDegUser: messageToConnectingFriend,
+            messageToSecondDegUser: messageToTargetFriend
+        },
+        async: false,
+        success: function (result) {
+            showSuccessNotification('Your friend introduction request has been sent. You will see corresponding updates in your dashboard.');
+            $.fancybox.close();
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your request could not be sent. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}

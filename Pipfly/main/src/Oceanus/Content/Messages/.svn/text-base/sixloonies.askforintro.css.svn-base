@@ -1,0 +1,373 @@
+﻿.askintroppl
+{
+    overflow:auto;
+    width: 350px;
+    margin: 0 auto 0 auto;
+    padding: 10px 10px 0px 10px;
+}
+
+.askintroppl .askintrouser
+{
+    width:75px;
+    float:left;
+}
+
+.askintroppl .askintrouser .photo
+{
+    width:70px;
+    height:70px;
+    border:1px solid #d9d9d9;
+    clear:both;
+}
+
+.askintroppl .askintrouser .name
+{
+    width:70px;
+    text-align:center;
+    word-wrap:break-word;
+    word-break:hyphenate;
+}
+
+.askintroppl .askintroarrow
+{
+    width:60px;
+    float:left;
+    text-align:center;
+    position:relative;
+}
+
+.askintroppl .askintroarrow img
+{
+    position:relative;
+    top:25px;
+}
+
+.askintrodetailppl 
+{
+    overflow:auto;
+    width: 230px;
+    display:block;
+    float:left;
+    margin: 0 auto 0 auto;
+    padding: 10px 10px 0px 10px;
+}
+
+.askintrodetailppl .askintrouser
+{
+    width:75px;
+    float:left;
+}
+
+.askintrodetailppl .askintrouser .photo
+{
+    width:70px;
+    height:70px;
+    border:1px solid #d9d9d9;
+    clear:both;
+}
+
+.askintrodetailppl .askintrouser .name
+{
+    width:70px;
+    text-align:center;
+    word-wrap:break-word;
+    word-break:hyphenate;
+}
+
+.askintrodetailppl .askintroarrow
+{
+    width:60px;
+    height:70px;
+    float:left;
+    text-align:center;
+    position:relative;
+}
+
+.askintrodetailppl .askintroarrow img
+{
+    position:relative;
+    top:25px;
+}
+
+.friendIntroComments
+{
+    clear:both;
+    padding-top:25px;
+    width:430px;
+    margin:0 auto;
+}
+
+.friendIntroComments textarea
+{
+    width:424px;
+    resize:none;
+    outline:none;
+    margin:0 auto;
+}
+
+.initiatingUserComments
+{
+    clear:both;
+    padding:25px 0px 10px 0px;
+    width:670px;
+    margin:0px auto 0px auto;
+}
+
+.initiatingUserComments .bold
+{
+    padding-bottom:10px;
+}
+
+.initUserCommentsToTarget
+{
+    width:298px;
+    background-color:#EDEFF3;
+    border:1px solid #E6E6E6;
+    float:left;
+    padding:10px;
+    margin:0px 0px 0px 00px;
+}
+
+.initUserCommentsToTarget .bold
+{
+    padding-bottom:5px;
+}
+
+.initUserCommentsToTarget textarea
+{
+    width:292px;
+    resize:none;
+    outline:none;
+    margin:0 auto;
+}
+
+.targetUserCommentsToInitUser
+{
+    width:100%;
+    display:block;
+    overflow:auto;
+    margin:20px 0px;
+}
+
+.targetUserCommentsToInitUser .bold
+{
+    padding-bottom:5px;
+}
+
+.targetUserCommentsToInitUser textarea
+{
+    width:564px;
+    resize:none;
+    outline:none;
+    margin:0 auto;
+}
+
+.friendIntroDetailsComments
+{
+    width:280px;
+    float:left;
+    margin:0px 0px 0px 40px;
+}
+
+.friendIntroDetailsComments .bold
+{
+    padding-bottom:5px;
+}
+
+.friendIntroDetailsComments textarea
+{
+    width:274px;
+    resize:none;
+    outline:none;
+    margin:0 auto;
+}
+
+.askintrobtn
+{
+    position:relative;
+    clear:both;
+    width:450px;
+    text-align:right;
+    padding-top:25px;
+    padding-bottom:12px;
+    float:left;
+}
+
+.introrequestlisting
+{
+    width: 100%;
+    display: block;
+}
+
+.introrequestlisting .introrequest
+{
+    width: 100%;
+    margin-bottom: 15px;
+    height: 50px;
+    display: block;
+    overflow: hidden;
+}
+
+.introrequestlisting .introrequestunreadbg
+{
+    background-color:#f4f4f4;
+}
+
+.introrequestlisting .introrequest .userpic
+{
+    display: block;
+    width: 50px;
+    float: left;
+    height: 50px;
+    padding-right: 20px;
+}
+
+.introrequestlisting .introrequest .introrequestdetails .unreadmarker
+{
+    position:absolute;
+    top:15px;
+    left:-15px;
+    cursor:default;
+    font-weight:bold;
+    color:#106fb8;
+}
+
+.introrequestlisting .introrequest .introrequestdetails
+{
+    float: left;
+    display: block;
+    width: 600px;
+    position: relative;
+}
+
+.introrequestlisting .introrequest .introrequestdetails .sendername:hover
+{
+    color: #444;
+    text-decoration: none;
+    border-bottom: 1px dashed #999999;
+}
+
+.introrequestlisting .introrequest .introrequestdetails .sendername
+{
+    color: #444;
+}
+
+.introrequestlisting .introrequest .introrequestdetails .datestamp
+{
+    color:#909090;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+}
+
+.introrequestlisting .introrequest .introrequestdetails .subject
+{
+    width: 450px;
+    display: block;
+    clear: both;
+}
+
+.friendintrorequestdetails
+{
+    width:940px;
+    display:block;
+    overflow:auto;
+    padding:0px 10px 25px 10px;
+}
+
+.friendintrorequestdetails .detailspanel
+{
+    width: 670px;
+    padding: 5px 0px 0px 0px;
+    clear: both;
+    float: left;
+    text-align: left;
+}
+
+.friendintrorequestdetails .detailspanel .connectingfriendmsgtotargetuser
+{
+    padding-bottom:30px;
+    width:570px;
+    overflow:auto;
+    border-bottom:1px solid #e9e9e9;
+}
+
+.friendintrorequestdetails .detailspanel .initusermsgtotargetuser
+{
+    padding-top:30px;
+    padding-bottom:10px;
+    width:570px;
+    overflow:auto;
+    border-bottom:1px solid #e9e9e9;
+}
+
+.friendintrorequestdetails .detailspanel .introtargetpanel
+{
+    border-top:2px solid #d9d9d9;
+    padding:10px 0px;
+    margin:15px auto;
+    font-weight:bold;
+    width:570px;
+}
+
+.friendintrorequestdetails .detailspanel .subject
+{
+    clear: both;
+    width: 100%;
+    font-size:20px;
+    line-height:20px;
+    font-weight: bold;
+    margin-top:10px;
+    padding: 5px 2px 5px 2px;
+    border-top:2px solid #d9d9d9;
+}
+
+.friendintrorequestdetails .detailspanel .links
+{
+    margin-top:20px;
+    width:100%;
+    clear:both;
+    text-align:right;
+}
+
+.friendintrorequestdetails .friendintrorequestsidepanel
+{
+    width: 230px;
+    padding: 0px 0px 10px 10px;
+    margin-left: 30px;
+    margin-top:-10px;
+    float: left;
+    text-align: left;
+    overflow: hidden;
+}
+
+.friendintrorequestdetails .friendintrorequestsidepanel .participant
+{
+    clear:both;
+    display:block;
+    width:100%;
+    height:40px;
+    overflow:hidden;
+    padding:2px 0px;
+    border-bottom:1px solid #e9e9e9;
+}
+
+.friendintrorequestdetails .friendintrorequestsidepanel .participant .photo
+{
+    float:left;
+    display:block;
+    width:30px;
+    height:30px;
+    margin:5px 10px 5px 5px;
+    overflow:hidden;   
+}
+
+.friendintrorequestdetails .friendintrorequestsidepanel .participant .name
+{
+    width:175px;
+    float:left;
+    display:block;
+    height:30px;
+    padding:5px;
+    font-weight:bold;
+}

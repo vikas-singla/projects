@@ -1,0 +1,14 @@
+﻿<div class="content">
+    <div class="title">
+        please login or register to do that
+    </div>
+    <div class="registerleft">
+        @{Html.RenderAction("RegisterForm", "Account");}
+    </div>
+    <div class="signinright">
+        @{Html.RenderAction("SignInForm", "Account");}
+    </div>
+    <div class="loginclose">
+        <a href="#" onclick="javascript:$.fancybox.close();">close this window</a>
+    </div>
+</div>

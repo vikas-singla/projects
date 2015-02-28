@@ -1,0 +1,52 @@
+﻿@model Oceanus.ViewModels.ArticleViewModel
+@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/articles/pipfly.article.full.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.articlelayout.#.css")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+            Bundle.JavaScript()
+            .Add("~/Scripts/pipfly.articles.helper.js")
+            .Add("~/Scripts/pipfly.article.page.js")
+            .Render("~/cache/pipfly.article.page_#.js")
+        );
+}
+<div class="fullsect article articlecontainer">
+    <div class="btnsect">
+        @if (ViewBag.CurrUserLikes != null && ViewBag.CurrUserLikes)
+        {
+            <a href="#" class="action unlikeaction" data-article-id="@(Model.ArticleId)">
+                <img class="actionbtnimg" src="/images/heart_filled_sm.png" alt /><span>Liked</span></a>
+        }
+        else
+        {
+            <a href="#" class="action likeaction" data-article-id="@(Model.ArticleId)">
+                <img class="actionbtnimg" src="/images/heart_empty_sm.png" alt /><span>Like</span></a>
+        }
+        <a href="/article/sharearticleoverlay/?id=@(Model.ArticleId)" class="action shareaction">
+            <img class="actionbtnimg" src="/images/reclip_sm.png" alt /><span>Share</span></a>
+        <a href="@(Model.WebPage.PageUrl)" target="_blank" class="action">
+            <img class="actionbtnimg" src="/images/open_new_window_sm.png" alt /><span>View Full Article</span></a>
+    </div>
+    <div id="articlemarkup" data-web-id="@(Model.WebPage.PageUrl)">
+        @Html.Raw(Model.ArticleMarkup)
+    </div>
+    <div class="articlebtmbtn">
+       <a href="@(Model.WebPage.PageUrl)" target="_blank" class="btnstyle"><img class="actionbtnimg" src="/images/open_new_window_sm.png" alt />View Full Article</a>
+    </div>
+    <div class="articlemeta">
+        <div class="leftpanel" style="margin-top: 25px;">
+            @{Html.RenderAction("GetArticleComments", new { articleId = Model.ArticleId });}
+        </div>
+        <div class="rightpanel">
+            <div id="articlelikes">
+                @{Html.RenderAction("GetArticleLikes", new { articleId = Model.ArticleId });}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+﻿@using Oceanus.Data
+@using Oceanus.ViewModels
+@using Oceanus.ViewModels.Shared
+@model FilterableViewModel<Tag, TagViewModel>
+<link href="@Url.Content("~/Content/topic/pipfly.top.topics.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="@Url.Content("~/Scripts/Plugins/jquery.ticker.js")"></script>
+<script type="text/javascript">
+    $(function () {
+        $("ul#topicticker").liScroll();
+        $("ul#topictickersecdeg").liScroll();
+        $("ul#topictickerthirddeg").liScroll();
+    });
+</script>
+<div class="section" style="margin-top: 0">
+    <div class="title">
+        Popular Tags
+    </div>
+    <div class="topictickercontainer">
+        @if (Model != null && Model.Results.Count > 0)
+        {
+            int numTopics = Model.Results.Count / 3;
+            <ul id="topicticker">
+                @for (int i = 0; i < numTopics; ++i)
+                {
+                    <li><a href="/t/@(Model.Results.ElementAt(i).LowerTagName)" class="tagname">@(Model.Results.ElementAt(i).TagName)</a>
+                    </li>
+                }
+            </ul>
+            <ul id="topictickersecdeg">
+                @for (int i = numTopics; i < (numTopics * 2); ++i)
+                {
+                    <li><a href="/t/@(Model.Results.ElementAt(i).LowerTagName)" class="tagname">@(Model.Results.ElementAt(i).TagName)</a>
+                    </li>
+                }
+            </ul>
+            <ul id="topictickerthirddeg">
+                @for (int i = (numTopics * 2); i < Model.Results.Count; ++i)
+                {
+                    <li><a href="/t/@(Model.Results.ElementAt(i).LowerTagName)" class="tagname">@(Model.Results.ElementAt(i).TagName)</a>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <div class="pipflynoresults">
+                There are currently no topics in the system.</div>
+        }
+    </div>
+</div>

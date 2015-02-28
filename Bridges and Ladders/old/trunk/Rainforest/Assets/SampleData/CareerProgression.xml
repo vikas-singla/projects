@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CareerPaths>
+	<Path>
+		<Career Title="Analyst" Level="0">
+			<JobObjectives></JobObjectives>
+			<Responsibilities></Responsibilities>
+			<JobReqs>Reqs</JobReqs>
+			<Competencies>Competencies </Competencies>
+		</Career>
+		<Career Title="Consultant" Level="1">
+			<JobObjectives></JobObjectives>
+			<Responsibilities></Responsibilities>
+			<JobReqs>Reqs</JobReqs>
+			<Competencies>Competencies </Competencies>
+		</Career>
+		<Career Title="Senior Consultant" Level="2">
+			<JobObjectives></JobObjectives>
+			<Responsibilities></Responsibilities>
+			<JobReqs>Reqs</JobReqs>
+			<Competencies>Competencies </Competencies>
+		</Career>
+		<Career Title="Manager" Level="3">
+			<JobObjectives></JobObjectives>
+			<Responsibilities></Responsibilities>
+			<JobReqs>Reqs</JobReqs>
+			<Competencies>Competencies </Competencies>
+		</Career>
+		<Career Title="Senior Manager" Level="4">
+			<JobObjectives></JobObjectives>
+			<Responsibilities></Responsibilities>
+			<JobReqs>Reqs</JobReqs>
+			<Competencies>Competencies </Competencies>
+		</Career>
+		<Career Title="Partner/Director" Level="5">
+			<JobObjectives></JobObjectives>
+			<Responsibilities></Responsibilities>
+			<JobReqs>Reqs</JobReqs>
+			<Competencies>Competencies </Competencies>
+		</Career>
+		<Career Title="Experienced Partner/Director" Level="6">
+			<JobObjectives></JobObjectives>
+			<Responsibilities></Responsibilities>
+			<JobReqs>Reqs</JobReqs>
+			<Competencies>Competencies </Competencies>
+		</Career>
+	</Path>
+	<Path>
+		<Career Title="Specialist Leader" Level="0">
+			<JobObjectives></JobObjectives>
+			<Responsibilities></Responsibilities>
+			<JobReqs>Reqs</JobReqs>
+			<Competencies>Competencies </Competencies>
+		</Career>
+		<Career Title="Specialist Master" Level="1">
+			<JobObjectives></JobObjectives>
+			<Responsibilities></Responsibilities>
+			<JobReqs>Reqs</JobReqs>
+			<Competencies>Competencies </Competencies>
+		</Career>
+		<Career Title="Specialist Senior" Level="2">
+			<JobObjectives></JobObjectives>
+			<Responsibilities></Responsibilities>
+			<JobReqs>Reqs</JobReqs>
+			<Competencies>Competencies </Competencies>
+		</Career>
+	</Path>
+</CareerPaths>

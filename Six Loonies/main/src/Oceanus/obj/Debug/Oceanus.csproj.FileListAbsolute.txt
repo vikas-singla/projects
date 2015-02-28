@@ -1,0 +1,54 @@
+D:\oceanus-mvc\projects\main\src\Oceanus\bin\Images\delete.png
+D:\oceanus-mvc\projects\main\src\Oceanus\bin\Oceanus.dll
+D:\oceanus-mvc\projects\main\src\Oceanus\bin\Oceanus.pdb
+D:\oceanus-mvc\projects\main\src\Oceanus\bin\MVCControlsToolkit.dll
+D:\oceanus-mvc\projects\main\src\Oceanus\bin\RouteDebug.dll
+D:\oceanus-mvc\projects\main\src\Oceanus\bin\MVCControlsToolkit.pdb
+D:\oceanus-mvc\projects\main\src\Oceanus\bin\RouteDebug.pdb
+D:\oceanus-mvc\projects\main\src\Oceanus\obj\Debug\ResolveAssemblyReference.cache
+D:\oceanus-mvc\projects\main\src\Oceanus\obj\Debug\Oceanus.dll
+D:\oceanus-mvc\projects\main\src\Oceanus\obj\Debug\Oceanus.pdb
+D:\oceanus-mvc\projects\main\src\Oceanus\bin\MvcMaps.dll
+D:\oceanus-mvc\projects\main\src\Oceanus\bin\MvcMaps.pdb
+D:\sixloonies\projects\main\src\Oceanus\bin\Images\delete.png
+D:\sixloonies\projects\main\src\Oceanus\bin\Oceanus.dll
+D:\sixloonies\projects\main\src\Oceanus\bin\Oceanus.pdb
+D:\sixloonies\projects\main\src\Oceanus\bin\MVCControlsToolkit.dll
+D:\sixloonies\projects\main\src\Oceanus\bin\MvcMaps.dll
+D:\sixloonies\projects\main\src\Oceanus\bin\RouteDebug.dll
+D:\sixloonies\projects\main\src\Oceanus\bin\MvcMaps.pdb
+D:\sixloonies\projects\main\src\Oceanus\bin\MVCControlsToolkit.pdb
+D:\sixloonies\projects\main\src\Oceanus\bin\RouteDebug.pdb
+D:\sixloonies\projects\main\src\Oceanus\obj\Debug\ResolveAssemblyReference.cache
+D:\sixloonies\projects\main\src\Oceanus\obj\Debug\Oceanus.dll
+D:\sixloonies\projects\main\src\Oceanus\obj\Debug\Oceanus.pdb
+D:\sixloonies\projects\main\src\Oceanus\bin\FacebookAPI.dll
+D:\sixloonies\projects\main\src\Oceanus\bin\FacebookAPI.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\Images\delete.png
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\Oceanus.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\Oceanus.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\EntityFramework.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\FacebookAPI.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\log4net.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\Mvc.Mailer.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\MVCControlsToolkit.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\RouteDebug.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\SquishIt.Framework.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\AjaxMin.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\Yahoo.Yui.Compressor.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\dotless.Core.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\EcmaScript.NET.modified.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\FacebookAPI.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\EntityFramework.xml
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\log4net.xml
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\MVCControlsToolkit.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\RouteDebug.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\SquishIt.Framework.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\dotless.Core.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\obj\Debug\ResolveAssemblyReference.cache
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\obj\Debug\Oceanus.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\obj\Debug\Oceanus.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\AWSSDK.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\HtmlAgilityPack.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\HtmlAgilityPack.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus\bin\HtmlAgilityPack.xml

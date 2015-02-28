@@ -1,0 +1,10 @@
+D:\sixloonies\projects\admin\src\Oceanus\bin\Images\delete.png
+D:\sixloonies\projects\admin\src\Oceanus\bin\Oceanus.dll
+D:\sixloonies\projects\admin\src\Oceanus\bin\Oceanus.pdb
+D:\sixloonies\projects\admin\src\Oceanus\bin\MVCControlsToolkit.dll
+D:\sixloonies\projects\admin\src\Oceanus\bin\RouteDebug.dll
+D:\sixloonies\projects\admin\src\Oceanus\bin\MVCControlsToolkit.pdb
+D:\sixloonies\projects\admin\src\Oceanus\bin\RouteDebug.pdb
+D:\sixloonies\projects\admin\src\Oceanus\obj\Debug\ResolveAssemblyReference.cache
+D:\sixloonies\projects\admin\src\Oceanus\obj\Debug\Oceanus.dll
+D:\sixloonies\projects\admin\src\Oceanus\obj\Debug\Oceanus.pdb

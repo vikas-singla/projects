@@ -1,0 +1,41 @@
+﻿@using Oceanus.Data
+@using Oceanus.ViewModels
+@using Oceanus.ViewModels.Shared
+@model FilterableViewModel<Tag, TagViewModel>
+<link href="@Url.Content("~/Content/topic/pipfly.top.topics.css")" rel="stylesheet" type="text/css" />
+<div class="toptopics">
+    <div class="section" style="margin-top: 0">
+        <div class="sectiontitle">
+            <div class="titletext" style="padding:10px">
+                Popular Tags</div>
+        </div>
+        <div class="toptopicscontainer">
+            @if (Model != null && Model.Results.Count > 0)
+            {
+                for(int i = 0; i < Model.Results.Count; ++i)
+                {
+                <div class="result @(i == (Model.Results.Count - 1) ? "" : "lightbtmborder")">
+                    <div class="topicimg">
+                        <img src="/images/topic_icon.png" />
+                    </div>
+                    <div class="topicdetails">
+                        <div>
+                            <a href="/t/@(Model.Results.ElementAt(i).LowerTagName)" class="tagname">@(Model.Results.ElementAt(i).TagName)</a></div>
+                        <div class="topicstats">
+                            @(Model.Results.ElementAt(i).NumFollowers)
+                            followers&nbsp;&#149;&nbsp;@(Model.Results.ElementAt(i).NumTopicPosts)
+                            posts&nbsp;&#149;&nbsp;@(Model.Results.ElementAt(i).NumClips)
+                            photos and videos
+                        </div>
+                    </div>
+                </div>
+                }
+            }
+            else
+            {
+                <div class="noresults">Sorry, an error occured in the system.</div>
+            }
+        </div>
+    </div>
+</div>
+

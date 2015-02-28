@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Oceanus.ViewModels.SixLooniesPendingFriendRequestViewModel>
+<link href="@Url.Content("~/Content/user/sixloonies.expand.network.friends.css")" rel="stylesheet" type="text/css" />
+<div class="fullsect">
+    <div class="section" style="margin-top:0px;">
+        <div class="sectiontitle">
+            <div class="titletext">
+                Friend Requests (@(Model != null ? Model.Count() : 0))
+            </div>
+        </div>
+        <div class="fullsect">
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var friendrequest in Model)
+                {
+                    string friendFullName = friendrequest.InitiatingUser.FullName;
+                    
+                    <div class="friend">
+                        <div class="details">
+                            <div class="leftalign">
+                                <div class="photo">
+                                    <a href="/account/profile?userid=@(friendrequest.InitiatingUserId)"><img src="/images/user.jpg" width="50px" height="50px" alt title="@(friendFullName)" /></a>
+                                </div>
+                                <div class="name">
+                                    <a href="/account/profile?userid=@(friendrequest.InitiatingUserId)">@(friendFullName)</a>
+                                </div>
+                                <div class="btns">
+                                    <a href="#" class="btnbluestyle" title="Accept Friend Request" data-uid="@(friendrequest.InitiatingUserId)" id="acceptfriendrequestbtn">Accept</a> <a href="#"
+                                        class="btnstyle" title="Reject Friend Request" data-uid="@(friendrequest.InitiatingUserId)" id="rejectfriendrequestbtn">Reject</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="centertext">There are currently no pending friend requests for you.</div>
+            }
+        </div>
+    </div>
+</div>

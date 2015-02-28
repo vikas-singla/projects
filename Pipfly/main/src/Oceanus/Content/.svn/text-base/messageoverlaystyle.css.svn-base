@@ -1,0 +1,96 @@
+﻿.messageoverlay {
+	z-index:10000;
+	background-color:#fff;
+	width:475px;
+	padding:0;
+	margin:0;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.messageoverlay .content
+{
+    padding:10px;
+    width:455px;
+    min-height:200px;
+    overflow:hidden;
+    margin:0 auto;
+}
+
+.messageoverlay .overlaytitle, .messageoverlay .title
+{
+    width:430px;
+    margin:0 auto 0 auto;
+    font-variant:small-caps;
+    font-size:16px;
+    color:#505050;
+    text-align:left;
+    padding:5px 2px 5px 2px;
+    font-weight:bold;
+}
+
+.messageoverlay .title
+{
+    text-align:center;
+    font-size:18px;
+    color:#F26502;
+}
+
+.messageoverlay .overlaytitle
+{
+    border-bottom:2px solid #F26502;
+}
+
+.messageoverlay .formfields
+{
+    width:430px;
+    margin:0 auto 0 auto;
+    padding:10px 10px 10px 10px;
+}
+
+.messageoverlay .formfields .formfield
+{
+    width:100%;
+    padding:3px 0px 0px 0px;
+    display:block;
+    overflow:auto;
+    clear:both;
+}
+
+.messageoverlay .formfields .formfield .lbl
+{
+    width:60px;
+    display:block;
+    text-align:right;
+    float:left;
+}
+
+.messageoverlay .formfields .formfield .field
+{
+    display:block;
+    width:340px;
+    float:left;
+    margin-left:10px;
+}
+
+.messageoverlay .formfields .formfield .field input, .messageoverlay .formfields .formfield .field textarea
+{
+    resize:none;
+    width:100%;
+}
+
+.messageoverlay .formfields .btns
+{
+    width:405px;
+    clear:both;
+    display:block;
+    text-align:right;
+    margin:2px auto;
+}
+
+.messageoverlay .formfields .fieldctrlfullwidth textarea, .messageoverlay .formfields .fieldctrlfullwidth input
+{    
+    resize: none;
+    width:100%;
+}

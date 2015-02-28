@@ -1,0 +1,31 @@
+﻿<link href="@Url.Content("~/Content/Messages/sixloonies.getquote.css")" rel="stylesheet" type="text/css" />
+<div class="fullsect">
+    <div class="vendorquote">
+        <form id="frmGetVendorQuote">
+            <input name="vendorId" type="hidden" value="@(ViewBag.VendorId)" />
+            <div class="quotetitle">
+                What are you looking for?
+            </div>
+            <div class="input">
+                <input id="vendorQuoteWhatInput" name="messageSubject" class="validate[required]" />
+            </div>
+            <div class="quotetitle margintop25">
+                Describe your Need
+            </div>
+            <div class="input">
+                <textarea id="vendorQuoteMsgBody" name="messageBody" class="validate[required]" cols="1" rows="1"></textarea>
+            </div>
+            <div class="quotetitle margintop25">
+                What is your budget? <span class="smalltext normaltext">(Optional)</span>
+            </div>
+            <div class="quotebudgetinput">
+                $<input id="vendorQuoteBudget" name="budget" class="validate[custom[onlyNumber]]" /><span class="cents">.00</span>
+            </div>
+            <div class="btns">
+                <a href="#" class="btnbluestyle" id="sendVQuoteMsgBtn">
+                    Ask for Quote</a>&nbsp; <a href="#" class="btnstyle close" onclick="javascript: $.fancybox.close();$('#frmGetVendorQuote').validationEngine('hideAll');return false;">
+                        Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

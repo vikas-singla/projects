@@ -1,0 +1,145 @@
+﻿@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/topic/pipfly.topic.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.topic.#.css")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/articles/pipfly.articles.css")
+            .Add("~/Content/clips/pipfly.clips.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.collage.#.css")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+            Bundle.JavaScript()
+            .Add("~/Scripts/pipfly.layout.helper.js")
+            .ForceRelease()
+            .Render("~/cache/pipfly.layout.helper_#.js")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+            Bundle.JavaScript()
+            .Add("~/Scripts/pipfly.articles.helper.js")
+            .Add("~/Scripts/pipfly.search.js")
+            .Render("~/cache/pipfly.search.scripts_#.js")
+        );
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#searchsiteinput').val('@(ViewBag.SearchTerm)');
+
+        @if (ViewBag.ArticleType != Oceanus.Controllers.ArticleController.ArticleTypes.All)
+        {
+            <text>
+                $('.topicsectiontabs .articletab').click();
+            </text>
+        }
+        else
+        {
+            <text>
+                $('#ddmenuallarticles').click(function () {
+                    $('.topicsectiontabs .articletab').click();
+                    return false;
+                });
+            </text>
+        }
+    });
+    var filterByFriendsParam = @ViewBag.FilterByFriends.ToString().ToLower();
+</script>
+<div class="fullsect topic" id="maintopiccontainer">
+    <div class="theader">
+        <div class="theadertext">
+            Search results for - @(ViewBag.SearchTerm)
+        </div>
+    </div>
+    <div class="tcontent">
+        <div class="optionbar" style="margin:14px 14px 5px 14px;">
+            <ul class="topicsectiontabs" id="topicsectiontabs" style="@(ViewBag.ArticleType == Oceanus.Controllers.ArticleController.ArticleTypes.All ? "width:525px;" : "width:650px;")">
+                <li class="selected"><a href="#" class="topicsectionlink" rel="#tagsect">
+                    <img src="/images/sitetheme/tab_tag_icon.png" alt /><span class="text">TAGS</span></a></li>
+                <li><a href="#photos" class="topicsectionlink" rel="#topicphotosect" title="Click here to only view photos contributed on the topic">
+                    <img src="/images/sitetheme/photo_icon.png" alt /><span class="text">PHOTOS</span></a></li>
+                <li><a href="#videos" class="topicsectionlink" rel="#topicvideosect" title="Click here to only view videos contributed on the topic">
+                    <img src="/images/sitetheme/video_icon.png" alt /><span class="text">VIDEOS</span></a></li>
+                <li><a href="#photos" class="topicsectionlink articletab" rel="#topicarticlessect">
+                    <img src="/images/sitetheme/story_icon.png" alt /><span class="text">ARTICLES@(ViewBag.ArticleType == Oceanus.Controllers.ArticleController.ArticleTypes.All ? "" : (": " + ViewBag.ArticleType))</span><img
+                        src="/Images/scrollarrow_down.gif" class="topicsectbarimg" alt="" width="12px"
+                        height="12px" /></a>
+                    <div class="ddmenu" style="left: -1px; min-width: 100px;">
+                        <div class="menulink">
+                            <a id="ddmenuallarticles" href="/s/@(Html.Encode(ViewBag.SearchTerm))/@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                All</a>
+                        </div>
+                        <div class="menulink">
+                            <a href="/s/@(Html.Encode(ViewBag.SearchTerm))/news/@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                News</a>
+                        </div>
+                        <div class="menulink">
+                            <a href="/s/@(Html.Encode(ViewBag.SearchTerm))/facts/@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                Facts</a>
+                        </div>
+                        <div class="menulink">
+                            <a href="/s/@(Html.Encode(ViewBag.SearchTerm))/opinion/@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                Opinion</a>
+                        </div>
+                        <div class="menulink">
+                            <a href="/s/@(Html.Encode(ViewBag.SearchTerm))/howto/@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                How To</a>
+                        </div>
+                        <div class="menulink">
+                            <a href="/s/@(Html.Encode(ViewBag.SearchTerm))/other/@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                Other</a>
+                        </div>
+                    </div>
+                </li>
+                @*<li><a href="#" class="topicsectionlink" rel="#peoplesect">
+                    <img src="/images/user_white.png" alt /><span class="text">PEOPLE</span></a></li>*@
+            </ul>            
+            <div class="contentfilterbtns" style="left:auto;right:0;">
+                <ul>
+                    <li class="@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? "selected" : "")">Sort By: @(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? "Recent" : "Popular")
+                        <img src="/Images/scrollarrow_down.gif" alt="" width="12px" height="12px" />
+                        <div class="ddmenu" style="right: -1px; min-width: 120px;">
+                            <div class="menulink">
+                                <a href="/s/@(Html.Encode(ViewBag.SearchTerm))/@(ViewBag.ArticleType == Oceanus.Controllers.ArticleController.ArticleTypes.All ? "" : ViewBag.ArticleType.ToString().ToLower())">
+                                    Most Popular</a>
+                            </div>
+                            <div class="menulink">
+                                <a href="/s/@(Html.Encode(ViewBag.SearchTerm))@(ViewBag.ArticleType == Oceanus.Controllers.ArticleController.ArticleTypes.All ? "" : ("/" + ViewBag.ArticleType.ToString().ToLower()))/?sortBy=@((int)Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded)">
+                                    Recently Added</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>       
+        <div id="tagsect" class="contents">
+            @{Html.RenderAction("Search", "Topic", new { q = ViewBag.SearchTerm });}
+            <a class="paginationlink" href="/topic/Search?q=@(Html.Encode(ViewBag.SearchTerm))&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="2" style="display:none;">
+            </a>
+        </div>
+        @*<div id="peoplesect" class="contents" style="display:none;">
+            <a class="paginationlink" href="/account/Search?q=@(Html.Encode(ViewBag.SearchTerm))&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="1" style="display:none;">
+        </div>*@
+        <div id="topicarticlessect" class="contents" style="display:none;">
+            <a class="paginationlink" href="/article/Search?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")q=@(Html.Encode(ViewBag.SearchTerm))&articleType=@(ViewBag.ArticleType)&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="1" style="display:none;">
+            </a>
+        </div>
+        <div id="topicphotosect" class="contents" style="display:none;">
+            <a class="paginationlink" href="/clip/Search?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")q=@(Html.Encode(ViewBag.SearchTerm))&type=@((int)Oceanus.Controllers.ClipController.ClipType.Photo)&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="1" style="display:none;">
+            </a>
+        </div>
+        <div id="topicvideosect" class="contents" style="display:none;">
+            <a class="paginationlink" href="/clip/Search?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")q=@(Html.Encode(ViewBag.SearchTerm))&type=@((int)Oceanus.Controllers.ClipController.ClipType.Video)&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="1" style="display:none;">
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+﻿@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/guidelines/sixloonies.guidelines.css")
+            .Add("~/Content/sixloonies.aboutus.menu.css")
+            .ForceRelease()
+            .Render("~/cache/sixloonies.guidelines.#.css")
+        );
+}
+<div style="width: 960px; margin: 0 auto;">
+    <div class="breadcomb">
+        <div class="breadcombtext">
+            <a href="/">Home</a>&nbsp;&raquo;&nbsp;<span>Decorum</span>
+        </div>
+    </div>
+    <div class="fullsect">
+        <div class="aboutmenu">
+            <a href="/about" class="aboutitem">What is Pipfly?</a> <a href="/how" class="aboutitem">
+                How it Works</a> <a href="/contact" class="aboutitem">Contact Us</a> <a href="/guidelines"
+                    class="selaboutitem">Decorum</a> <a href="/terms" class="aboutitem">Terms</a>
+            <a href="/privacy" class="aboutitem">Privacy</a>
+        </div>
+        <div class="guidelinesect">
+            <div class="heading">
+                Decorum</div>
+            <div class="fullsect">
+                <div class="contentguidelinetitle">
+                    General
+                </div>
+                <p>
+                    Pipfly allows you to contribute different kinds of content, which includes comments,
+                    photos, videos, articles, private messages, and more. Hence, the quality and relevance
+                    of our site depends on you. Please read the guidelines below for specific types
+                    of content that you can contribute to the site.</p>
+                <ul>
+                    <li><b>Inappropriate content:&nbsp;</b>Threats, harassment, lewdness, hate speech, and
+                        other displays of bigotry is not permitted.</li>
+                    <li><b>Conflicts of interest:&nbsp;</b>Your contributions should be unbiased and objective.
+                        For example, businesses and their employees shouldn't write reviews about themselves
+                        or their competitors.</li>
+                    <li><b>Promotional content:&nbsp;</b>We do not encourage promotional content. Our intent
+                        is to keep the content on the site useful for everyone.</li>
+                    <li><b>Relevance:&nbsp;</b>Please make sure your contributions are relevant and appropriate
+                        to the forum. For example, your comments should not be used to air your personal
+                        grievances or your political ideologies, or other matters that are not related to
+                        an end user experience.</li>
+                    <li><b>Privacy:&nbsp;</b>Don't publicize other people's private information. While some
+                        businesses may be identified by the people behind them, you should generally avoid
+                        posting other people's full names, personal phone numbers and email addresses —
+                        and avoid uploading close-ups of other people without their permission.</li>
+                    <li><b>Intellectual property:&nbsp;</b>You can curate and share content from any website
+                        that allows the use of sharing content while abiding by the laws and terms and conditions
+                        of the site you are curating and sharing content from. PipFly will not be responsible
+                        for the content shared by you with others. PipFly does not support plagiarism of
+                        any kind and will not allow users to plagiarize in any way, shape or form. Pipfly
+                        will not stake any claim on the intellectual property of the content curated and
+                        shared and you and will embed the source from where the content was taken and shared.
+                        We will also display only a part of the content originated by third parties (such
+                        as news websites etc.) that you share, and will link back to the original source.</li>
+                </ul>
+            </div>
+            <div class="fullsect">
+                <div class="contentguidelinetitle">
+                    Comments
+                </div>
+                <p>
+                    The best comments present their opinions objectively so that they are relevant and
+                    offer an appropriate level of detail. In addition, make sure your comments are factually
+                    correct. It should include your opinions, but it should not exaggerate. We don't
+                    take sides when it comes to factual disputes, so we expect you to stand behind your
+                    comments</p>
+            </div>
+        </div>
+    </div>
+</div>

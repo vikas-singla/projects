@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Oceanus.ViewModels.WebPostViewModel>
+<div class="fullsect">
+    <div class="section" style="margin-top: 0px;">
+        <div class="userwall">
+            <div class="walltitle">
+                <div class="walltitletext">
+                    Share something interesting on Cars...
+                </div>
+            </div>
+            <div id="topicnewtextpost" class="newtopicwallpost">
+                <textarea id="newtopicpostinput" rows="1" cols="1"></textarea>
+                <div class="topicposttextareaarrow">
+                </div>
+                <div class="topicpostbtns">
+                    <a href="#" id="addnewuserpostbtn" class="btnbluestyle" data-uid="@(Membership.GetUser() == null? "" : Membership.GetUser().ProviderUserKey)">
+                        Post</a>
+                </div>
+            </div>
+            <div id="userwallposts">
+                @{Html.RenderPartial("_TopicWallPosts", Model);}
+            </div>
+        </div>
+    </div>
+</div> 

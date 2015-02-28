@@ -1,0 +1,32 @@
+﻿@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/aboutus/sixloonies.aboutus.css")
+            .Add("~/Content/sixloonies.aboutus.menu.css")
+            .ForceRelease()
+            .Render("~/cache/sixloonies.aboutus.#.css")
+        );
+}
+<div style="width: 960px; margin: 0 auto;">
+    <div class="breadcomb">
+        <div class="breadcombtext">
+            <a href="/">Home</a>&nbsp;&raquo;&nbsp;<span>What is Pipfly?</span>
+        </div>
+    </div>
+    <div class="fullsect">
+        <div class="aboutmenu">
+            <a href="/about" class="selaboutitem">What is Pipfly?</a><a href="/how" class="aboutitem">How
+                it Works</a> <a href="/contact" class="aboutitem">Contact Us</a> <a href="/guidelines"
+                    class="aboutitem">Decorum</a> <a href="/terms" class="aboutitem">Terms</a>
+            <a href="/privacy" class="aboutitem">Privacy</a>
+        </div>
+        <div class="aboutus">
+            <div class="heading">
+                What is Pipfly?
+            </div>
+            Coming Soon!
+            <br />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+﻿<div class="fullsect" id="ufriends" style="display: none;">
+    <div class="friendlistsect">
+        <div class="section" style="margin-top: 0px;">
+            <div class="sectiontitle">
+                <div class="titletext">
+                    My Friends on Pipfly
+                </div>
+            </div>
+            @{Html.RenderAction("UserProfileFriendsOnPipfly", "Account");}
+        </div>
+    </div>
+    <div class="expandnetworksect" style="margin-top: 30px;">
+        <div class="section" style="margin-top: 0px;">
+            <div class="sectiontitle">
+                <div class="titletext">
+                    Expand Your Network
+                </div>
+            </div>
+            @{Html.RenderAction("UserProfileExpandNetwork", "Account");}
+        </div>
+    </div>
+</div>

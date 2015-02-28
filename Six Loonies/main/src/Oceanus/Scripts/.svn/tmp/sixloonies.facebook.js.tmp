@@ -1,0 +1,132 @@
+﻿$(document).ready(function () {
+    $('#facebooksigninbtn').click(function () {
+        fblogin();
+        return false;
+    });
+
+    $('#facebooksigninbtn2').click(function () {
+        fblogin();
+        return false;
+    });
+
+    $('#facebooksigninbtn3').click(function () {
+        fblogin();
+        return false;
+    });
+
+    $('#facebooksigninbtn4').click(function () {
+        fblogin();
+        return false;
+    });
+
+    $('.btnbluestyle').click(function () {
+        var sid = $(this).attr("data-sid") + "";
+
+        if (sid == "invitefbuser") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+
+            var fbUID = $(this).attr("data-fbuid") + "";
+            inviteFacebookUser(fbUID);
+        }
+    });
+});
+
+window.fbAsyncInit = function () {
+    FB.init({ appId: '148764831866950', status: true, cookie: true,
+        xfbml: true,
+        channelURL: '/channel.html', // channel.html file
+        oauth: true // enable OAuth 2.0
+    });
+    FB.getLoginStatus(function (response) {
+        if (response.authResponse) {
+            if (!loggedin) {
+                var uid = response.authResponse.userID;
+                var accessToken = response.authResponse.accessToken;
+                alert('uid: ' + uid);
+                alert('token: ' + accessToken);
+
+                registerFacebookUser(uid, accessToken);
+            }
+        } else {
+            //not logged in facebook
+        }
+    });
+};
+
+$(function () {
+    var e = document.createElement('script'); e.async = true;
+    e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+    $('#fb-root').append(e);
+});
+
+function fblogin() {
+    FB.login(function (response) {
+<<<<<<< .mine
+        if (response.session) {
+            if (response.perms) {
+                // user is logged in and granted some permissions.
+                // perms is a comma separated list of granted permissions
+                var uid = response.session.uid;
+                var accessToken = response.session.access_token;
+                registerFacebookUser(uid, accessToken);
+                window.location.reload(true);
+            } else {
+                // user is logged in, but did not grant any permissions
+                alert('user is logged in but did not grant any permissions');
+            }
+=======
+        if (response.authResponse) {
+            // user is logged in and granted some permissions.
+            // perms is a comma separated list of granted permissions
+            var uid = response.authResponse.userID;
+            var accessToken = response.authResponse.accessToken;
+            alert('uid2: ' + uid);
+            alert('token2: ' + accessToken);
+            registerFacebookUser(uid, accessToken);
+            //window.location.reload(true);
+>>>>>>> .r813
+        } else {
+            // user is not logged in
+        }
+    }, { scope: 'user_about_me,email,user_location,publish_stream' });
+}
+
+function registerFacebookUser(uid, accessToken) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Account/FacebookUserRegister",
+        data: {
+            uid: uid,
+            token: accessToken
+        },
+        async: false,
+        success: function (result) {
+            window.location.href = "/";
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your profile could not be processed. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function inviteFacebookUser(fbUID) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Account/SendInviteToFacebookUser",
+        data: {
+            friendFBUID: fbUID
+        },
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your friend could not be invited. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}

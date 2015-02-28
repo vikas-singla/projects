@@ -1,0 +1,738 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{54A05D95-AF6C-4F86-AA12-9162D98A0280}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Oceanus</RootNamespace>
+    <AssemblyName>Oceanus</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AWSSDK, Version=1.3.13.1, Culture=neutral, PublicKeyToken=cd2d24cd2bace800, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Amazon\AWSSDK.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.4.1.10715.0\lib\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\lib\HTMLAgility\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\lib\log4net\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mvc.Mailer">
+      <HintPath>..\packages\MvcMailer.1.1\lib\40\Mvc.Mailer.dll</HintPath>
+    </Reference>
+    <Reference Include="MVCControlsToolkit">
+      <HintPath>..\..\lib\MVC_CT\MVCControlsToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="RouteDebug">
+      <HintPath>..\..\lib\RouteDebugger\RouteDebug.dll</HintPath>
+    </Reference>
+    <Reference Include="SquishIt.Framework">
+      <HintPath>..\..\lib\SquishIt_0.7.0\SquishIt.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages" />
+    <Reference Include="System.Web.Helpers" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\RequiresAuthenticationAttribute.cs" />
+    <Compile Include="Attributes\RequiresRoleAttribute.cs" />
+    <Compile Include="Attributes\TokenizedAuthorizeAttribute.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActivityController.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
+    <Compile Include="Controllers\ButtonController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FAQController.cs" />
+    <Compile Include="Controllers\GuidelinesController.cs" />
+    <Compile Include="Controllers\Helper\BrowserCacheAttribute.cs" />
+    <Compile Include="Controllers\Helper\ClipHelper.cs" />
+    <Compile Include="Controllers\Helper\CookieDefinitions.cs" />
+    <Compile Include="Controllers\Helper\EmailHelper.cs" />
+    <Compile Include="Controllers\Helper\FacebookHelper.cs" />
+    <Compile Include="Controllers\Helper\HtmlHelper.cs" />
+    <Compile Include="Controllers\Helper\ImageFolderDefinitions.cs" />
+    <Compile Include="Controllers\Helper\JsonpFilterAttribute.cs" />
+    <Compile Include="Controllers\Helper\JsonpResult.cs" />
+    <Compile Include="Controllers\Helper\MessageHelper.cs" />
+    <Compile Include="Controllers\Helper\UserHelper.cs" />
+    <Compile Include="Controllers\Helper\VideoHelper.cs" />
+    <Compile Include="Controllers\Helper\WebPageHelper.cs" />
+    <Compile Include="Controllers\HowController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\PrivacyController.cs" />
+    <Compile Include="Controllers\ClipController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SignUpController.cs" />
+    <Compile Include="Controllers\TermsController.cs" />
+    <Compile Include="Controllers\TopicController.cs" />
+    <Compile Include="Controllers\UploadControllerBase.cs" />
+    <Compile Include="Controllers\WebPageController.cs" />
+    <Compile Include="Controllers\WelcomeController.cs" />
+    <Compile Include="Data\Activity\ActivityViewModelExtension.cs" />
+    <Compile Include="Data\Article\ArticleViewModelExtension.cs" />
+    <Compile Include="Data\Bookmark\BookmarkViewModelExtension.cs" />
+    <Compile Include="Data\Listing\ListingViewModelExtension.cs" />
+    <Compile Include="Data\Messages\MessageViewModelExtension.cs" />
+    <Compile Include="Data\Oceanus.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Oceanus.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Clip\ClipViewModelExtension.cs" />
+    <Compile Include="Data\ReferenceData.cs" />
+    <Compile Include="Data\Scrapbook\ScrapbookModelExtension.cs" />
+    <Compile Include="Data\SocialNetwork\SocialNetworkViewModelExtension.cs" />
+    <Compile Include="Data\User\UserViewModelExtension.cs" />
+    <Compile Include="Data\Validation\EmailValidationAttribute.cs" />
+    <Compile Include="Data\WebPage\WebPageModelExtension.cs" />
+    <Compile Include="Filters\ListingNameStartsWithFilter.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\Log4NetLogger.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Data\ViewModelExtensions.cs" />
+    <Compile Include="Models\SixLooniesMembership.cs" />
+    <Compile Include="Utilities\AmazonSESWrapper.cs" />
+    <Compile Include="Utilities\ImageUtilities.cs" />
+    <Compile Include="ViewModels\Clips\ClipCommentViewModel.cs" />
+    <Compile Include="ViewModels\Activity\TopicWallPostViewModel.cs" />
+    <Compile Include="ViewModels\Activity\UserWallPostCommentViewModel.cs" />
+    <Compile Include="ViewModels\Activity\BasePostViewModel.cs" />
+    <Compile Include="ViewModels\Article\ArticleCommentViewModel.cs" />
+    <Compile Include="ViewModels\Article\ArticleViewModel.cs" />
+    <Compile Include="ViewModels\Bookmark\BookmarkMappingsViewModel.cs" />
+    <Compile Include="ViewModels\Clips\BasePhotoVideoClipViewModel.cs" />
+    <Compile Include="ViewModels\Clips\ClipDescriptionViewModel.cs" />
+    <Compile Include="ViewModels\Clips\DetailedPhotoVideoClipViewModel.cs" />
+    <Compile Include="ViewModels\Clips\PhotoVideoClipViewModel.cs" />
+    <Compile Include="ViewModels\Error\ErrorMessageViewModel.cs" />
+    <Compile Include="ViewModels\HomePage\HomeViewModel.cs" />
+    <Compile Include="ViewModels\HomePage\VendorImageShowcaseViewModel.cs" />
+    <Compile Include="ViewModels\Listing\BaseListItemViewModel.cs" />
+    <Compile Include="ViewModels\Message\BaseGetVendorQuoteMessageViewModel.cs" />
+    <Compile Include="ViewModels\Message\GetVendorQuoteMessageResponsesViewModel.cs" />
+    <Compile Include="ViewModels\Message\GetVendorQuoteMessageVisibilityViewModel.cs" />
+    <Compile Include="ViewModels\Message\MessageResponsesViewModel.cs" />
+    <Compile Include="ViewModels\Message\BaseMessageViewModel.cs" />
+    <Compile Include="ViewModels\Message\MessageViewModel.cs" />
+    <Compile Include="ViewModels\Message\MessageVisibilityViewModel.cs" />
+    <Compile Include="ViewModels\Message\GetVendorQuoteMessageViewModel.cs" />
+    <Compile Include="ViewModels\Scrapbook\JsonScrapbookSection.cs" />
+    <Compile Include="ViewModels\Scrapbook\ScrapbookItemViewModel.cs" />
+    <Compile Include="ViewModels\Scrapbook\ScrapbookSectionViewModel.cs" />
+    <Compile Include="ViewModels\Shared\BaseClipAndArticleViewModel.cs" />
+    <Compile Include="ViewModels\Shared\TagViewModel.cs" />
+    <Compile Include="ViewModels\SocialNetwork\BaseFriendIntroRequestViewModel.cs" />
+    <Compile Include="ViewModels\SocialNetwork\FriendIntroRequestViewModel.cs" />
+    <Compile Include="ViewModels\Token\TokenListTopicsViewModel.cs" />
+    <Compile Include="ViewModels\User\AllFriendConnectionsViewModel.cs" />
+    <Compile Include="ViewModels\User\FacebookFriendListViewModel.cs" />
+    <Compile Include="ViewModels\User\BaseUserViewModel.cs" />
+    <Compile Include="ViewModels\User\SearchUserViewModel.cs" />
+    <Compile Include="ViewModels\User\SixLooniesFriendConnectionViewModel.cs" />
+    <Compile Include="ViewModels\User\SixLooniesPendingFriendRequestViewModel.cs" />
+    <Compile Include="ViewModels\User\UserStatsViewModel.cs" />
+    <Compile Include="ViewModels\User\UserWebPageLikesViewModel.cs" />
+    <Compile Include="ViewModels\User\UserToTagFollowerMappingViewModel.cs" />
+    <Compile Include="ViewModels\User\UserToUserFollowerMappingViewModel.cs" />
+    <Compile Include="ViewModels\Listing\ListItemViewModel.cs" />
+    <Compile Include="ViewModels\Shared\BaseTagViewModel.cs" />
+    <Compile Include="ViewModels\User\UserProfileViewModel.cs" />
+    <Compile Include="ViewModels\Shared\ViewModelBase.cs" />
+    <Compile Include="ViewModels\Listing\ListingViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\SignUpViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\SocialNetwork\NetworkConnectionPathViewModel.cs" />
+    <Compile Include="ViewModels\WebPage\BaseWebPageViewModel.cs" />
+    <Compile Include="ViewModels\WebPage\ShareLinkRecipientViewModel.cs" />
+    <Compile Include="ViewModels\WebPage\WebPageTagMappingViewModel.cs" />
+    <Compile Include="ViewModels\WebPage\WebPageViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="channel.html" />
+    <Content Include="Content\AboutUs\sixloonies.aboutus.css" />
+    <Content Include="Content\Activity\sixloonies.activity.feed.css" />
+    <Content Include="Content\Articles\pipfly.article.full.css" />
+    <Content Include="Content\Articles\pipfly.articles.css" />
+    <Content Include="Content\BetaSignIn.css" />
+    <Content Include="Content\Bookmarklet\sixloonies.bookmarklet.css" />
+    <Content Include="Content\Bookmarklet\sixloonies.bookmarklet.iframe.css" />
+    <Content Include="Content\Bookmarklet\sixloonies.bookmarklet.topics.css" />
+    <Content Include="Content\Button\pipfly.button.css" />
+    <Content Include="Content\Clips\pipfly.clips.css" />
+    <Content Include="Content\Clips\pipfly.clips.view.css" />
+    <Content Include="Content\Clips\pipfly.clips.view.page.css" />
+    <Content Include="Content\Contact\sixloonies.contactus.css" />
+    <Content Include="Content\Discuss\pipfly.discuss.css" />
+    <Content Include="Content\How\sixloonies.howitworks.css" />
+    <Content Include="Content\Overlay\sixloonies.overlay.size.small.css" />
+    <Content Include="Content\Plugins\jquery.fancybox-buttons.css" />
+    <Content Include="Content\Plugins\jquery.notify.css" />
+    <Content Include="Content\Plugins\jquery.tokeninput.css" />
+    <Content Include="Content\Plugins\validationEngine.jquery.css" />
+    <Content Include="Content\GlobalSearch\sixloonies.globalsearch.css" />
+    <Content Include="Content\FAQ\sixloonies.faq.css" />
+    <Content Include="Content\Guidelines\sixloonies.guidelines.css" />
+    <Content Include="Content\Messages\sixloonies.askforintro.css" />
+    <Content Include="Content\Messages\sixloonies.getquote.css" />
+    <Content Include="Content\Overlay\sixloonies.expandnetwork.overlay.css" />
+    <Content Include="Content\Plugins\jquery.jscrollpane.css" />
+    <Content Include="Content\Posts\sixloonies.posts.css" />
+    <Content Include="Content\Privacy\sixloonies.privacy.css" />
+    <Content Include="Content\Search\pipfly.search.css" />
+    <Content Include="Content\Shared\pipfly.getstarted.css" />
+    <Content Include="Content\Shared\pipfly.shareitems.overlay.css" />
+    <Content Include="Content\sixloonies.aboutus.menu.css" />
+    <Content Include="Content\sixloonies.error.css" />
+    <Content Include="Content\Spotlight\pipfly.spotlight.css" />
+    <Content Include="Content\Tag\pipfly.tag.collage.css" />
+    <Content Include="Content\Topic\pipfly.top.topics.css" />
+    <Content Include="Content\Topic\pipfly.topic.css" />
+    <Content Include="Content\Topic\pipfly.topic.recommendations.css" />
+    <Content Include="Content\Tag\pipfly.tag.trending.css" />
+    <Content Include="Content\User\pipfly.invite.friends.css" />
+    <Content Include="Content\User\pipfly.user.bookmarks.css" />
+    <Content Include="Content\User\pipfly.user.collage.css" />
+    <Content Include="Content\User\sixloonies.user.changepwd.css" />
+    <Content Include="Content\Terms\sixloonies.terms.css" />
+    <Content Include="Content\User\sixloonies.expand.network.friends.css" />
+    <Content Include="Content\Follow\sixloonies.followers.css" />
+    <Content Include="Content\forms.css" />
+    <Content Include="Content\general.css" />
+    <Content Include="Content\HomePage.css" />
+    <Content Include="Content\Plugins\jquery.accordian.css" />
+    <Content Include="Content\Locations\sixloonies.location.edit.css" />
+    <Content Include="Content\Messages\sixloonies.messages.css" />
+    <Content Include="Content\Shared\sixloonies.paging.css" />
+    <Content Include="Content\Plugins\jquery.carousel.css" />
+    <Content Include="Content\Shared\sixloonies.questions.related.css" />
+    <Content Include="Content\Plugins\sixloonies.jplayer.css" />
+    <Content Include="Content\Plugins\jquery.fancybox-1.3.4.css" />
+    <Content Include="Content\Plugins\jquery.jqplot.css" />
+    <Content Include="Content\Plugins\sixloonies.lavalamp.css" />
+    <Content Include="Content\Listings\sixloonies.listings.css" />
+    <Content Include="Content\User\sixloonies.login.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\menu.css" />
+    <Content Include="Content\modal.css" />
+    <Content Include="Content\Overlay\sixloonies.general.overlay.css" />
+    <Content Include="Content\Plugins\jquery.rateit.css" />
+    <Content Include="Content\Overlay\sixloonies.overlay.size.medium.css" />
+    <Content Include="Content\User\sixloonies.user.networkpath.css" />
+    <Content Include="Content\User\sixloonies.user.signin.css" />
+    <Content Include="Content\User\sixloonies.user.upload.photo.css" />
+    <Content Include="Content\Shared\sixloonies.profile.tabs.css" />
+    <Content Include="Content\Plugins\jquery.tiptip.css" />
+    <Content Include="Content\User\sixloonies.user.profile.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\arrow_down.png" />
+    <Content Include="Images\arrow_up.png" />
+    <Content Include="Images\back.png" />
+    <Content Include="Images\black_arrow_down.png" />
+    <Content Include="Images\Black_Star_sm.png" />
+    <Content Include="Images\BluerBubbles.jpg" />
+    <Content Include="Images\Bookmarklet\close.png" />
+    <Content Include="Images\Bookmarklet\Dashboard.png" />
+    <Content Include="Images\Bookmarklet\email.png" />
+    <Content Include="Images\Bookmarklet\favorite_add.png" />
+    <Content Include="Images\Bookmarklet\favorite_remove.png" />
+    <Content Include="Images\Bookmarklet\photo.png" />
+    <Content Include="Images\Bookmarklet\recommend.png" />
+    <Content Include="Images\Bookmarklet\scissors.png" />
+    <Content Include="Images\Bookmarklet\selectpoint.png" />
+    <Content Include="Images\Bookmarklet\story.png" />
+    <Content Include="Images\Bookmarklet\Thumbs-up.png" />
+    <Content Include="Images\Bookmarklet\video.png" />
+    <Content Include="Images\butterflies.jpg" />
+    <Content Include="Images\Camera.png" />
+    <Content Include="Images\cancel.png" />
+    <Content Include="Images\carousel\nav_arrows.png" />
+    <Content Include="Images\chipmunk_looking.jpg" />
+    <Content Include="Images\close-lg.png" />
+    <Content Include="Images\close.gif" />
+    <Content Include="Images\comingsoon.jpg" />
+    <Content Include="Images\curious_dog.jpg" />
+    <Content Include="Images\darkplus.png" />
+    <Content Include="Images\delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\discuss.png" />
+    <Content Include="Images\dog_looking.jpg" />
+    <Content Include="Images\down_gray_arrow.png" />
+    <Content Include="Images\edit.png" />
+    <Content Include="Images\Error.png" />
+    <Content Include="Images\facebook.gif" />
+    <Content Include="Images\facebook_login_button.png" />
+    <Content Include="Images\fancybox\blank.gif" />
+    <Content Include="Images\fancybox\fancybox_buttons.png" />
+    <Content Include="Images\fancybox\fancybox_sprite.png" />
+    <Content Include="Images\green_arrow_right.png" />
+    <Content Include="Images\heart_empty.png" />
+    <Content Include="Images\heart_empty_sm.png" />
+    <Content Include="Images\heart_filled.png" />
+    <Content Include="Images\heart_filled_sm.png" />
+    <Content Include="Images\jplayer.png" />
+    <Content Include="Images\loader.gif" />
+    <Content Include="Images\mic.png" />
+    <Content Include="Images\next.png" />
+    <Content Include="Images\notify\corners.png" />
+    <Content Include="Images\notify\sides.png" />
+    <Content Include="Images\numbers\number_1.png" />
+    <Content Include="Images\numbers\number_10.png" />
+    <Content Include="Images\numbers\number_2.png" />
+    <Content Include="Images\numbers\number_3.png" />
+    <Content Include="Images\numbers\number_4.png" />
+    <Content Include="Images\numbers\number_5.png" />
+    <Content Include="Images\numbers\number_6.png" />
+    <Content Include="Images\numbers\number_7.png" />
+    <Content Include="Images\numbers\number_8.png" />
+    <Content Include="Images\numbers\number_9.png" />
+    <Content Include="Images\open_new_window.png" />
+    <Content Include="Images\open_new_window_sm.png" />
+    <Content Include="Images\plus.gif" />
+    <Content Include="Images\progressbar.gif" />
+    <Content Include="Images\rabbit_looking.jpg" />
+    <Content Include="Images\reclip_sm.png" />
+    <Content Include="Images\scrollarrow_down.gif" />
+    <Content Include="Images\scrollarrow_down_white.gif" />
+    <Content Include="Images\scrollarrow_right_white.png" />
+    <Content Include="Images\scrollarrow_up.gif" />
+    <Content Include="Images\share.png" />
+    <Content Include="Images\sitetheme\AboutNav.png" />
+    <Content Include="Images\sitetheme\background.png" />
+    <Content Include="Images\sitetheme\btn_gray_background.png" />
+    <Content Include="Images\sitetheme\btn_green_background.png" />
+    <Content Include="Images\sitetheme\cake.png" />
+    <Content Include="Images\sitetheme\closelabel.gif" />
+    <Content Include="Images\sitetheme\discover.png" />
+    <Content Include="Images\sitetheme\discuss_icon.png" />
+    <Content Include="Images\sitetheme\findanswers.png" />
+    <Content Include="Images\sitetheme\home_icon.png" />
+    <Content Include="Images\sitetheme\InviteFriendsNav.png" />
+    <Content Include="Images\sitetheme\magglass.png" />
+    <Content Include="Images\sitetheme\nav_header.jpg" />
+    <Content Include="Images\sitetheme\no_image.png" />
+    <Content Include="Images\sitetheme\photo_icon.png" />
+    <Content Include="Images\sitetheme\Pipfly_logo_lg.png" />
+    <Content Include="Images\sitetheme\Pipfly_logo_sm.png" />
+    <Content Include="Images\sitetheme\redx.png" />
+    <Content Include="Images\sitetheme\scrollbar-thumb-y.png" />
+    <Content Include="Images\sitetheme\scrollbar-track-y.png" />
+    <Content Include="Images\sitetheme\scrollbar-trackend-y.png" />
+    <Content Include="Images\sitetheme\search_btn.png" />
+    <Content Include="Images\sitetheme\section-top.png" />
+    <Content Include="Images\sitetheme\sharetagline.png" />
+    <Content Include="Images\sitetheme\story_icon.png" />
+    <Content Include="Images\sitetheme\tab_tag_icon.png" />
+    <Content Include="Images\sitetheme\textarea_arrow.png" />
+    <Content Include="Images\sitetheme\textarea_arrow_shaded.png" />
+    <Content Include="Images\sitetheme\thumbsdown.png" />
+    <Content Include="Images\sitetheme\thumbsup-small.jpg" />
+    <Content Include="Images\sitetheme\thumbsup.png" />
+    <Content Include="Images\sitetheme\tip_icon.png" />
+    <Content Include="Images\sitetheme\video_icon.png" />
+    <Content Include="Images\sitetheme\whitemagglass.png" />
+    <Content Include="Images\slideshow.png" />
+    <Content Include="Images\slideshow\ad_next.png" />
+    <Content Include="Images\slideshow\ad_prev.png" />
+    <Content Include="Images\slideshow\ad_scroll_back.png" />
+    <Content Include="Images\slideshow\ad_scroll_forward.png" />
+    <Content Include="Images\slideshow\opa75.png" />
+    <Content Include="Images\talk_icon.png" />
+    <Content Include="Images\text.png" />
+    <Content Include="Images\tick.png" />
+    <Content Include="Images\scroll_round_light.png" />
+    <Content Include="Images\topic_icon.png" />
+    <Content Include="Images\transparent_loader.gif" />
+    <Content Include="Images\tri_left.jpg" />
+    <Content Include="Images\tri_right.png" />
+    <Content Include="Images\user.jpg" />
+    <Content Include="Images\user_white.png" />
+    <Content Include="Images\videothumbnail.gif" />
+    <Content Include="Images\video_camera.png" />
+    <Content Include="Images\video_play.png" />
+    <Content Include="Images\web_icon.png" />
+    <Content Include="Scripts\editor\plugins\autoresize\editor_plugin.js" />
+    <Content Include="Scripts\pipfly.activity.feed.js" />
+    <Content Include="Scripts\pipfly.article.page.js" />
+    <Content Include="Scripts\pipfly.articles.helper.js" />
+    <Content Include="Scripts\pipfly.bookmarklet.login.facebook.js" />
+    <Content Include="Scripts\pipfly.clip.share.js" />
+    <Content Include="Scripts\pipfly.clip.view.js" />
+    <Content Include="Scripts\pipfly.install.marklet.js" />
+    <Content Include="Scripts\pipfly.layout.helper.js" />
+    <Content Include="Scripts\pipfly.search.js" />
+    <Content Include="Scripts\pipfly.spotlight.js" />
+    <Content Include="Scripts\pipfly.tags.trending.page.js" />
+    <Content Include="Scripts\pipfly.topic.add.js" />
+    <Content Include="Scripts\pipfly.topics.js" />
+    <Content Include="Scripts\pipfly.user.invite.friends.js" />
+    <Content Include="Scripts\Plugins\galleria.min.js" />
+    <Content Include="Scripts\graph\excanvas.min.js" />
+    <Content Include="Scripts\graph\jqplot.pieRenderer.min.js" />
+    <Content Include="Scripts\graph\jquery.jqplot.min.js" />
+    <Content Include="Scripts\jplayer\Jplayer.swf" />
+    <Content Include="Scripts\jplayer\jquery.jplayer.min.js" />
+    <Content Include="Scripts\Plugins\html2canvas.min.js" />
+    <Content Include="Scripts\Plugins\jquery.easing.compatibility.js" />
+    <Content Include="Scripts\Plugins\jquery.isotope.min.js" />
+    <Content Include="Scripts\Plugins\jquery.jscrollpane.min.js" />
+    <Content Include="Scripts\Plugins\jquery.livequery.min.js" />
+    <Content Include="Scripts\Plugins\jquery.mousewheel.js" />
+    <Content Include="Scripts\Plugins\jquery.NobleCount.min.js" />
+    <Content Include="Scripts\Plugins\jquery.notify-min.js" />
+    <Content Include="Scripts\Plugins\jquery.postmessages.js" />
+    <Content Include="Scripts\Plugins\jquery.scrollto.js" />
+    <Content Include="Scripts\Plugins\jquery.ticker.js" />
+    <Content Include="Scripts\Plugins\jquery.tinyscrollbar.min.js" />
+    <Content Include="Scripts\Plugins\jquery.tipTip.minified.js" />
+    <Content Include="Scripts\Plugins\jquery.tokeninput.js" />
+    <Content Include="Scripts\Plugins\jquery.ui.custom.min.js" />
+    <Content Include="Scripts\Plugins\jquery.jcarousel.min.js" />
+    <Content Include="Scripts\Plugins\jquery.validationEngine-en.js" />
+    <Content Include="Scripts\Plugins\jquery.validationEngine.js" />
+    <Content Include="Scripts\Plugins\pipfly.unlimitedscroll.js" />
+    <Content Include="Scripts\sixloonies.aboutus.js" />
+    <Content Include="Scripts\sixloonies.facebook.js" />
+    <Content Include="Scripts\sixloonies.marklet.clipitem.js" />
+    <Content Include="Scripts\pipfly.marklet.js" />
+    <Content Include="Scripts\sixloonies.marklet.sharelink.js" />
+    <Content Include="Scripts\sixloonies.marklet.topics.js" />
+    <Content Include="Scripts\pipfly.marklet.activity.feed.js" />
+    <Content Include="Scripts\editor\langs\en.js" />
+    <Content Include="Scripts\editor\themes\advanced\about.htm" />
+    <Content Include="Scripts\editor\themes\advanced\anchor.htm" />
+    <Content Include="Scripts\editor\themes\advanced\charmap.htm" />
+    <Content Include="Scripts\editor\themes\advanced\color_picker.htm" />
+    <Content Include="Scripts\editor\themes\advanced\editor_template.js" />
+    <Content Include="Scripts\editor\themes\advanced\editor_template_src.js" />
+    <Content Include="Scripts\editor\themes\advanced\image.htm" />
+    <Content Include="Scripts\editor\themes\advanced\img\colorpicker.jpg" />
+    <Content Include="Scripts\editor\themes\advanced\img\flash.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\icons.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\iframe.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\pagebreak.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\quicktime.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\realmedia.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\shockwave.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\trans.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\video.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\windowsmedia.gif" />
+    <Content Include="Scripts\editor\themes\advanced\js\about.js" />
+    <Content Include="Scripts\editor\themes\advanced\js\anchor.js" />
+    <Content Include="Scripts\editor\themes\advanced\js\charmap.js" />
+    <Content Include="Scripts\editor\themes\advanced\js\color_picker.js" />
+    <Content Include="Scripts\editor\themes\advanced\js\image.js" />
+    <Content Include="Scripts\editor\themes\advanced\js\link.js" />
+    <Content Include="Scripts\editor\themes\advanced\js\source_editor.js" />
+    <Content Include="Scripts\editor\themes\advanced\langs\en.js" />
+    <Content Include="Scripts\editor\themes\advanced\langs\en_dlg.js" />
+    <Content Include="Scripts\editor\themes\advanced\link.htm" />
+    <Content Include="Scripts\editor\themes\advanced\shortcuts.htm" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\content.css" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\dialog.css" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\img\buttons.png" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\img\items.gif" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\img\menu_arrow.gif" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\img\menu_check.gif" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\img\progress.gif" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\img\tabs.gif" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\ui.css" />
+    <Content Include="Scripts\editor\themes\advanced\source_editor.htm" />
+    <Content Include="Scripts\editor\tiny_mce.js" />
+    <Content Include="Scripts\editor\tiny_mce_gzip.js" />
+    <Content Include="Scripts\editor\utils\editable_selects.js" />
+    <Content Include="Scripts\editor\utils\form_utils.js" />
+    <Content Include="Scripts\editor\utils\mctabs.js" />
+    <Content Include="Scripts\editor\utils\validate.js" />
+    <Content Include="Scripts\pipfly.emptytext.js" />
+    <Content Include="Scripts\Plugins\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\Plugins\jquery.easing.min.js" />
+    <Content Include="Scripts\Plugins\jquery.elastic.js" />
+    <Content Include="Scripts\Plugins\jquery.fancybox-1.3.4.pack.js" />
+    <Content Include="Scripts\Plugins\jquery.lavalamp.min.js" />
+    <Content Include="Scripts\Plugins\jquery.rateit.min.js" />
+    <Content Include="Scripts\Plugins\MVCControlToolkit.Controls-0.9.0.min.js" />
+    <Content Include="Scripts\pipfly.helper.js" />
+    <Content Include="Scripts\sixloonies.user.profile.js" />
+    <Content Include="Scripts\sixloonies.utils.js" />
+    <Content Include="Scripts\editor\tiny_mce_gzip.ashx" />
+    <Content Include="Scripts\uploadify\botao_150x30.png" />
+    <Content Include="Scripts\uploadify\botao_150x30_over.png" />
+    <Content Include="Scripts\uploadify\flash_detect.1.0.4.js" />
+    <Content Include="Scripts\uploadify\flash_detect.1.0.4.min.js" />
+    <Content Include="Scripts\uploadify\jquery.uploadify.js" />
+    <Content Include="Scripts\uploadify\jquery.uploadify.min.js" />
+    <Content Include="Scripts\uploadify\uploadify-cancel.png" />
+    <Content Include="Scripts\uploadify\uploadify.css" />
+    <Content Include="Scripts\uploadify\uploadify.swf" />
+    <Content Include="Scripts\uploadify\uploadifyLang_en.js" />
+    <Content Include="Scripts\uploadify\uploadifyLang_hu.js" />
+    <Content Include="Scripts\uploadify\uploadifyLang_pt-br.js" />
+    <Content Include="Scripts\uploadify\_changes.txt" />
+    <Content Include="Scripts\uploadify\_help.txt" />
+    <Content Include="Scripts\_pipfly.marklet.dev.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Plugins\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\Plugins\jquery.validate.min.js" />
+    <Content Include="Scripts\Plugins\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
+    <Content Include="Views\Account\_SignInHeaderForm.cshtml" />
+    <Content Include="Views\Account\_RegisterHeaderForm.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_SignInHeader.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SignUp\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SignUp\Created.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SignUp\Delete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SignUp\Deleted.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Data\Oceanus.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Oceanus.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\facebook\FacebookAPI.csproj">
+      <Project>{1F538275-4C0C-4983-8D92-BFF2AA0E5FC1}</Project>
+      <Name>FacebookAPI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_JoinNowHeader.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\_SignInForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\_RegisterForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_LoginForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\_UserProfile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\_UserStats.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Message\_WriteMessage.cshtml" />
+    <Content Include="Views\Message\_MessageListing.cshtml" />
+    <Content Include="Views\Message\_MessageDetails.cshtml" />
+    <Content Include="Views\Message\_MessageParticipants.cshtml" />
+    <Content Include="Views\Account\_UserFriends.cshtml" />
+    <Content Include="Views\Account\_UserExpandNetwork.cshtml" />
+    <Content Include="Views\Account\_UserFriendsOnPipfly.cshtml" />
+    <Content Include="Views\Account\_PendingFriendRequests.cshtml" />
+    <Content Include="Views\Shared\_FacebookExpandNetworkPrompt.cshtml" />
+    <Content Include="Views\Message\_WriteMessagePredefinedRecipient.cshtml" />
+    <Content Include="Views\Message\_AskForIntroduction.cshtml" />
+    <Content Include="Views\Message\_FriendIntroductionRequestListing.cshtml" />
+    <Content Include="Views\Message\_FriendIntroductionRequestDetails.cshtml" />
+    <Content Include="Views\Error\FriendlyError.cshtml" />
+    <Content Include="Views\Shared\_FilterableViewModelPager.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\FAQ\Index.cshtml" />
+    <Content Include="Views\Guidelines\Index.cshtml" />
+    <Content Include="Views\Terms\Index.cshtml" />
+    <Content Include="Views\Account\_UserFollowers.cshtml" />
+    <Content Include="Views\Shared\_HomePageLayout.cshtml" />
+    <Content Include="Views\Privacy\Index.cshtml" />
+    <Content Include="Views\Account\SignIn.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\uploadify\uploadify-check-exists.php" />
+    <None Include="Scripts\uploadify\uploadify.php" />
+    <Content Include="Views\Account\_PendingRegistrationEmail.cshtml" />
+    <Content Include="Views\Account\_AddUserPhoto.cshtml" />
+    <Content Include="Views\Account\ConfirmRegistration.cshtml" />
+    <Content Include="Views\Shared\_EmailLayout.cshtml" />
+    <Content Include="Views\How\Index.cshtml" />
+    <Content Include="Views\Shared\MessageEchoToEmail.cshtml" />
+    <Content Include="Views\Activity\_UserWebPosts.cshtml" />
+    <Content Include="Views\Activity\_WallPostComments.cshtml" />
+    <Content Include="Views\Shared\_BookmarkletLayout.cshtml" />
+    <Content Include="Views\WebPage\_BookmarkletPage.cshtml" />
+    <Content Include="Views\Activity\_BookmarkletPostsContainer.cshtml" />
+    <Content Include="Views\Clip\_BookmarkletClipPhotoForm.cshtml" />
+    <Content Include="Views\WebPage\_ShareLink.cshtml" />
+    <Content Include="Views\Clip\_BookmarkletClipVideoForm.cshtml" />
+    <Content Include="Views\WebPage\_WebPageTopics.cshtml" />
+    <Content Include="Views\Shared\_BetaLayout.cshtml" />
+    <Content Include="Views\Shared\_BetaLoginForm.cshtml" />
+    <Content Include="Views\Topic\Index.cshtml" />
+    <Content Include="Views\Clip\_Photos.cshtml" />
+    <Content Include="Views\Topic\_TopicOverview.cshtml" />
+    <Content Include="Views\Topic\_TopicFeed.cshtml" />
+    <Content Include="Views\Topic\_TopicFollowers.cshtml" />
+    <Content Include="Views\Activity\_TopicPostsContainer.cshtml" />
+    <Content Include="Views\Activity\_TopicWallPosts.cshtml" />
+    <Content Include="Views\Activity\_UserProfileWebPostContainer.cshtml" />
+    <Content Include="Views\Activity\_BookmarkletPosts.cshtml" />
+    <Content Include="Views\Clip\_Videos.cshtml" />
+    <Content Include="Views\Shared\_PeopleCollage.cshtml" />
+    <Content Include="Views\Shared\_InviteFriends.cshtml" />
+    <Content Include="Views\Topic\_UserProfileTopicRecommendations.cshtml" />
+    <Content Include="Views\Topic\_TopTopicsForHomePage.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Clip\_ViewClipFancybox.cshtml" />
+    <Content Include="Views\Clip\_ClipCommentsContainer.cshtml" />
+    <Content Include="Views\Clip\_ClipComments.cshtml" />
+    <Content Include="Views\Article\_ArticlesCollage.cshtml" />
+    <Content Include="Views\Article\_BookmarkletClipArticleForm.cshtml" />
+    <Content Include="Views\Topic\_AddTopicContent.cshtml" />
+    <Content Include="Views\Article\Index.cshtml" />
+    <Content Include="Views\Article\_ShareArticle.cshtml" />
+    <Content Include="Views\Article\_ArticleLikes.cshtml" />
+    <Content Include="Views\Article\_ArticleCommentsContainer.cshtml" />
+    <Content Include="Views\Article\_ArticleCommentPosts.cshtml" />
+    <Content Include="Views\Topic\_TopicSearch.cshtml" />
+    <Content Include="Views\Topic\_TrendingTagCollage.cshtml" />
+    <Content Include="Views\Clip\_ShareClip.cshtml" />
+    <Content Include="Views\Shared\_InstallButton.cshtml" />
+    <Content Include="Views\Clip\_EmailClipTemplate.cshtml" />
+    <Content Include="Views\Article\_EmailArticleTemplate.cshtml" />
+    <Content Include="Views\WebPage\_BookmarkletWebPageStats.cshtml" />
+    <Content Include="Views\Home\_Blank.cshtml" />
+    <Content Include="Views\Clip\_ClipLikedBy.cshtml" />
+    <Content Include="Views\Welcome\_GetStarted.cshtml" />
+    <Content Include="Views\Shared\_WelcomeLayout.cshtml" />
+    <Content Include="Views\Welcome\_WelcomeInviteFriends.cshtml" />
+    <Content Include="Views\Shared\_TagCollage.cshtml" />
+    <Content Include="Views\Clip\_ViewClipCaptions.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Account\_InviteFriendEmailTemplate.cshtml" />
+    <Content Include="Views\Home\Spotlight.cshtml" />
+    <Content Include="Views\Topic\TrendingTags.cshtml" />
+    <Content Include="Views\Account\_WelcomeEmailTemplate.cshtml" />
+    <Content Include="Views\Shared\_BookmarkletLogin.cshtml" />
+    <Content Include="Views\Shared\_BookmarkletLoginLayout.cshtml" />
+    <Content Include="Views\Clip\ViewClip.cshtml" />
+    <Content Include="Views\Home\_ViewBookmarkletHowTo.cshtml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>2011</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>http://sixloonies.dyndns.org:32000</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

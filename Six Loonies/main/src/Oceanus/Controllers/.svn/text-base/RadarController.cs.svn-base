@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Oceanus.Controllers
+{
+    public class RadarController : ControllerBase
+    {
+        public ActionResult GetRadarReviews(Guid userId)
+        {
+            string dbMessage = string.Empty;
+            bool success = false;
+
+            var userToUserFollowerMappings = Database.UserToUserFollowingMappings.Where(f => f.FollowingUserId == userId).AsEnumerable();
+            var followedUsers = userToUserFollowerMappings.Select(f => f.FollowedUserId);
+            var radarReviewsFromUserFollowerMappings = Database.Reviews.Where(r => followedUsers.Contains(r.ContributingUserId)).AsEnumerable();
+
+            return Json(
+                new
+                {
+                    result = success.ToString(),
+                    message = dbMessage
+                }
+            );
+        }
+    }
+}

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Oceanus.ViewModels.BaseGetVendorQuoteMessageViewModel>
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="fullsect">
+        <div class="section">
+            <div class="sectiontitle">
+                <div class="titletext">
+                    Service Price Quote Messages (@(Model != null ? Model.Count() : 0))
+                </div>
+            </div>
+            <div class="messagelisting">
+                @foreach (var message in Model)
+                {          
+                    <div class="message @(message.MessageIsUnreadForCurrentUser ? "messageunreadbg" : "")">
+                        <div class="userpic">
+                            <img src="/images/user.jpg" width="50px" height="50px" alt />
+                        </div>
+                        <div class="messagedetails">
+                            @if (message.MessageIsUnreadForCurrentUser)
+                            {
+                                <div class="unreadmarker" title="Unread Message">
+                                    &#149;</div>
+                            }
+                            <a class="sendername" href="/account/profile?userid=@(message.InitiatingUserId)">@(message.InitiatingUser.FullName)
+                            </a>
+                            <div class="quotesubject">
+                                <a href="/message/quote/@(message.VendorQuoteMessageId)" class="@(message.MessageIsUnreadForCurrentUser ? "bold " : "")">@(message.Subject)</a>
+                            </div>
+                            <div class="datestamp">@(message.LastUpdatedOn.ToString("MMMM d, yyyy"))
+                            </div>
+                            @if (message.LastStatedPriceInMessage != null && message.LastStatedPriceInMessage > 0)
+                            {
+                                <div class="quote">@("$" + message.LastStatedPriceInMessage + ".00")<br />
+                                    <span class="smalltext">(@(ViewBag.QuoteLabel))</span></div> 
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

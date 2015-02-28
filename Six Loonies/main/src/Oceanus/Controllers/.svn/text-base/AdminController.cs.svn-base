@@ -1,0 +1,272 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Oceanus.ViewModels;
+using Oceanus.Data;
+using System.Web.Security;
+using Oceanus.Models;
+using Oceanus.ViewModels.Shared;
+
+namespace Oceanus.Controllers
+{
+    [BrowserCache(PreventBrowserCaching = true)]
+    public class AdminController : ControllerBase
+    {
+        [Authorize]
+        public ActionResult Index()
+        {
+            if (Roles.IsUserInRole(SixLooniesMembership.UserRoles.Moderator.ToString()) || Roles.IsUserInRole(SixLooniesMembership.UserRoles.SuperAdmin.ToString()))
+            {
+                return View();
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize]
+        public ActionResult GetAdminConfigUI()
+        {
+            return PartialView("_AdminConfiguration");
+        }
+
+        [Authorize]
+        public ActionResult UpdateCategoryVisibilityForListingPage(string SelectedCategories)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                //update visibility of categories specified
+                if (SelectedCategories != null)
+                {
+                    string[] categories = SelectedCategories.Split(',');
+                    IEnumerable<int> catIds = categories.Select(c => int.Parse(c));
+
+                    var categoryModels = Database.Categories;
+
+                    foreach (var categoryModel in categoryModels)
+                    {
+                        if (catIds.Contains(categoryModel.Id))
+                        {
+                            categoryModel.IsVisibleOnListingPg = true;
+                        }
+                        else
+                        {
+                            categoryModel.IsVisibleOnListingPg = false;
+                        }
+                    }
+
+                    Database.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                //TO DO: Add logging
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult GetVendorProfileAttributesConfiguration()
+        {
+            return PartialView("_VendorProfileAttributesConfiguration");
+        }
+
+        [Authorize]
+        public ActionResult GetCategoryVisibilityConfiguration()
+        {
+            var categories = Database.Categories.AsEnumerable();
+
+            IEnumerable<CategoryViewModel> categoryViewModels = categories.Select(c => c.ToCategoryViewModel());
+
+            return PartialView("_CategoryVisibilityConfiguration", categoryViewModels);
+        }
+
+        [Authorize]
+        public ActionResult GetCategoryReviewAttributeMappings()
+        {
+            Dictionary<CategoryViewModel, IEnumerable<ReviewAttributeViewModel>> categoryReviewAttrMappings = new Dictionary<CategoryViewModel, IEnumerable<ReviewAttributeViewModel>>();
+            var categories = Database.Categories.AsEnumerable();
+
+            foreach (var category in categories)
+            {
+                IEnumerable<ReviewAttributeViewModel> categoryReviewAttributes = category.CategoryReviewAttributeMappings.Select(map => map.ReviewAttribute.ToReviewAttributeViewModel()).AsEnumerable();
+                categoryReviewAttrMappings.Add(category.ToCategoryViewModel(), categoryReviewAttributes);
+            }
+
+            return PartialView("_ReviewDimensionConfiguration", categoryReviewAttrMappings);
+        }
+
+        [Authorize]
+        public ActionResult AdminStats()
+        {
+            int totalNumOfProfiles = Database.Vendors.Count();
+            int profilesPendingReview = Database.Vendors.Where(v => v.IsPublished && v.IsPendingReview).Count();
+            int profilesPublished = Database.Vendors.Where(v => v.IsPublished && !v.IsPendingReview).Count();
+            int profilesRejected = Database.Vendors.Where(v => v.IsFlaggedAsDeleted).Count();
+            int totalUsers = Database.UserProfiles.Count();
+            int totalReviews = Database.Reviews.Count();
+            int totalQuestions = Database.SixAnswerQuestions.Count();
+
+            AdminStatsViewModel stats = new AdminStatsViewModel()
+            {
+                NumProfessionalProfiles = totalNumOfProfiles,
+                NumProfessionalProfilesPublished = profilesPublished,
+                NumProfessionalProfilesRejected = profilesRejected,
+                NumProfessionalProfilesPendingReview = profilesPendingReview,
+                TotalNumUsers = totalUsers,
+                NumReviews = totalReviews,
+                NumQuestions = totalQuestions
+            };
+
+            return PartialView("_AdminStats", stats);
+        }
+
+        [Authorize]
+        public ActionResult GetSummaryViewPendingReviewProfessionalProfiles()
+        {
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid? loggedInUserGuid = (user != null) ? ((Guid)user.ProviderUserKey) : ((Guid?)null);
+
+            int pendingReviewVendorsCount = Database.Vendors.Where(v => v.IsPublished && v.IsPendingReview).Count();
+            IEnumerable<Guid> userFriendIDs = null;
+            IEnumerable<Guid?> userFriendOfFriendIDs = null;
+            if (loggedInUserGuid != null)
+            {
+                userFriendIDs = Database.SixLooniesFriendConnections.Where(con => con.FirstUserId == loggedInUserGuid || con.SecondUserId == loggedInUserGuid).Select(con => (con.FirstUserId == loggedInUserGuid ? con.SecondUserId : con.FirstUserId)).AsEnumerable();
+                userFriendOfFriendIDs = Database.GetFriendsOfFriendIDs((Guid)loggedInUserGuid).AsEnumerable();
+            }
+
+            IEnumerable<Vendor> pendingReviewVendors = Database.Vendors.Where(v => v.IsPublished && v.IsPendingReview).Take(5).AsEnumerable();
+            IEnumerable<ListItemViewModel> vendorViewModels = (pendingReviewVendors != null ? pendingReviewVendors.Select(v => v.ToListingViewModel(Database, loggedInUserGuid, userFriendIDs, userFriendOfFriendIDs)) : null);
+
+            ViewBag.PendingReviewVendorCount = pendingReviewVendorsCount;
+
+            return PartialView("_SummaryPendingReviewProfessionalProfiles", vendorViewModels);
+        }
+
+        [Authorize]
+        public ActionResult ReviewProfiles()
+        {
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid? loggedInUserGuid = (user != null) ? ((Guid)user.ProviderUserKey) : ((Guid?)null);
+            int pendingReviewVendorsCount = Database.Vendors.Where(v => v.IsPublished && v.IsPendingReview).Count();
+            IEnumerable<Vendor> pendingReviewVendors = Database.Vendors.Where(v => v.IsPublished && v.IsPendingReview).AsEnumerable();
+            IEnumerable<Guid> userFriendIDs = null;
+            IEnumerable<Guid?> userFriendOfFriendIDs = null;
+            if (loggedInUserGuid != null)
+            {
+                userFriendIDs = Database.SixLooniesFriendConnections.Where(con => con.FirstUserId == loggedInUserGuid || con.SecondUserId == loggedInUserGuid).Select(con => (con.FirstUserId == loggedInUserGuid ? con.SecondUserId : con.FirstUserId)).AsEnumerable();
+                userFriendOfFriendIDs = Database.GetFriendsOfFriendIDs((Guid)loggedInUserGuid).AsEnumerable();
+            }
+
+            IEnumerable<ListItemViewModel> vendorViewModels = (pendingReviewVendors != null ? pendingReviewVendors.Select(v => v.ToListingViewModel(Database, loggedInUserGuid, userFriendIDs, userFriendOfFriendIDs)) : null);
+
+            ViewBag.PendingReviewVendorCount = pendingReviewVendorsCount;
+
+            return View("AllPendingReviewProfessionalProfiles", vendorViewModels);
+        }
+
+        public ActionResult GetEditReviewAttributeConfigUI(int categoryId)
+        {
+            var category = Database.Categories.Where(cat => cat.Id == categoryId).FirstOrDefault();
+            ReviewAttributesConfigViewModel configViewModel = null;
+
+            ViewBag.CategoryId = categoryId;
+            
+            if (category != null)
+            {
+                configViewModel = category.ToReviewAttributesConfiguration();
+            }
+
+            return PartialView("_EditReviewDimension", configViewModel);
+        }
+
+        [Authorize]
+        public ActionResult AddReviewAttributeDimension(int categoryId, string attributeName, string attributeDesc)
+        {            
+            string dbMessage = string.Empty;
+            bool successful = false;
+            attributeName = (attributeName == null ? null : attributeName.Trim());
+
+            if (Roles.IsUserInRole(SixLooniesMembership.UserRoles.Moderator.ToString()) || Roles.IsUserInRole(SixLooniesMembership.UserRoles.SuperAdmin.ToString()))
+            {
+                ReviewAttribute existingAttr = Database.ReviewAttributes.Where(attr => attr.AttributeName.Trim().Equals(attributeName)).FirstOrDefault();
+
+                if (existingAttr == null) //only add a new attribute if it doesn't exist already
+                {
+                    ReviewAttributeViewModel attribute = new ReviewAttributeViewModel(null, attributeName, attributeDesc);
+                    ReviewAttribute attributeModel = attribute.ToReviewAttributeModel();
+
+                    Database.ReviewAttributes.AddObject(attributeModel);
+                    Database.SaveChanges();
+
+                    CategoryReviewAttributeMappingViewModel mappingViewModel = new CategoryReviewAttributeMappingViewModel(null, categoryId, attributeModel.Id);
+
+                    Database.CategoryReviewAttributeMappings.AddObject(mappingViewModel.ToCategoryReviewAttributeMappingModel());
+                    Database.SaveChanges();
+
+                    successful = true;
+                }
+                else
+                {
+                    //make sure the attribute is mapped to teh category specified
+
+                    if (existingAttr.CategoryReviewAttributeMappings.Where(map => map.CategoryId == categoryId).Count() < 1)
+                    {
+                        //attribute is not mapped to the category and so map it
+                        CategoryReviewAttributeMappingViewModel mappingViewModel = new CategoryReviewAttributeMappingViewModel(null, categoryId, existingAttr.Id);
+
+                        Database.CategoryReviewAttributeMappings.AddObject(mappingViewModel.ToCategoryReviewAttributeMappingModel());
+                        Database.SaveChanges();
+
+                        successful = true;
+                    }
+                    else
+                    {
+                        dbMessage = "Review attribute already exists";
+                    }
+                }
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult DeleteReviewAttribute(int attr)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            if (Roles.IsUserInRole(SixLooniesMembership.UserRoles.Moderator.ToString()) || Roles.IsUserInRole(SixLooniesMembership.UserRoles.SuperAdmin.ToString()))
+            {
+                //check if the attribute has been used already
+                var reviewAttributeValues = Database.ReviewAttributeValues.Where(ra => ra.ReviewAttributeId == attr);
+
+                //only delete attribute if it hasn't been used
+                if (!(reviewAttributeValues != null && reviewAttributeValues.Count() > 0))
+                {
+                    var reviewAttr = Database.ReviewAttributes.Where(r => r.Id == attr).FirstOrDefault();
+
+                    if (reviewAttr != null)
+                    {
+                        Database.ReviewAttributes.DeleteObject(reviewAttr);
+                        Database.SaveChanges();
+
+                        successful = true;
+                    }
+                }
+                else
+                {
+                    dbMessage = "Cannot delete a review attribute that has been used by the user";
+                }
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+    }
+}

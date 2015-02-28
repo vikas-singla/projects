@@ -1,0 +1,31 @@
+﻿@model Oceanus.ViewModels.ArticleViewModel
+@{
+    var domain = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);               
+}
+<div style="width: 720px; margin: 0 auto; border: 1px solid #d9d9d9; clear: both;
+    padding: 10px;">
+    <div style="padding-bottom:5px; margin-bottom: 10px; border-bottom: 1px solid #d9d9d9;
+        overflow: auto;">
+        <img src="@(domain + "/images/sitetheme/Pipfly_logo_sm.png")" width="78px" alt="Pipfly" />
+    </div>
+    <div style="padding: 15px 0;font-family: 'Helvetica Neue',Arial,Helvetica,sans-serif;font-size:12px;">
+        <a href="www.pipfly.com/u/@(ViewBag.UserId)">@(ViewBag.UserFullName)</a> shared
+        a article with you (via Pipfly):
+    </div>
+    <div style="clear: both; overflow: auto; background: #f5f5f5; border: 1px solid #d9d9d9;
+        padding: 5px;">
+        @Html.Raw(Oceanus.Controllers.HtmlHelper.formatArticleMarkupForEmail(Model.ShareArticleMarkup))
+        <div style="clear: both;margin:25px 0 10px 0;text-align:right;">
+            <a href="@(Model.WebPage.PageUrl)" target="_blank" style="background:#fff;font-weight:bold;border:1px solid #d9d9d9;padding:5px 10px;color:#555;text-decoration:none;">
+                <img src="http://www.pipfly.com/images/open_new_window_sm.png" style="width:14px;position:relative;top:3px;margin-right:5px;" alt />View Original</a>
+            &nbsp;
+            <a href="www.pipfly.com/a/@(Model.ArticleId)" target="_blank" style="background:#fff;font-weight:bold;border:1px solid #d9d9d9;padding:5px 10px;color:#555;text-decoration:none;">
+                <img src="http://www.pipfly.com/images/open_new_window_sm.png" style="width:14px;position:relative;top:3px;margin-right:5px;" alt />View on Pipfly</a>
+        </div>
+    </div>
+</div>
+<br />
+<div style="width:740px;color: #777;margin: 0 auto;padding: 10px 0px; font-size: 10px;border-top:3px double #d9d9d9;font-family: 'Helvetica Neue',Arial,Helvetica,sans-serif;">
+    <a href="www.pipfly.com" target="_blank" style="color: #106fb8; font-size: 12px;text-decoration:none;font-family: 'Helvetica Neue',Arial,Helvetica,sans-serif;">www.pipfly.com</a><br />
+    © Six Loonies Inc. 2012
+</div>

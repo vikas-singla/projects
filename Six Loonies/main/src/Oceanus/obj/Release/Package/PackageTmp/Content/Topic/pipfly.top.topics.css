@@ -1,0 +1,93 @@
+﻿.toptopics
+{
+    clear: both;
+    margin: 0 auto;
+    padding: 0;
+    background: transparent;
+    overflow: auto;
+}
+
+.toptopics .topictickercontainer
+{
+    padding: 0;
+}
+
+.toptopics .topictickercontainer ul
+{
+    position: relative;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toptopics .topictickercontainer ul li
+{
+    float: left; /* important: display inline gives incorrect results when you check for elem's width */
+    margin: 0;
+    padding: 5px;
+    border:1px solid #fafafa;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.toptopics .topictickercontainer ul li:hover
+{
+    border:1px solid #333;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+}
+
+.toptopics .topictickercontainer #topicticker li a, .toptopics .topictickercontainer #topicticker li a:hover, .toptopics .topictickercontainer #topicticker li a:visited, .toptopics .topictickercontainer #topicticker li a:active
+{
+    white-space: nowrap;
+    padding: 0;
+    margin: 0 20px;
+    font-size:22px;
+    color:#333;
+    font-weight:normal;
+    text-decoration:none;
+}
+
+.toptopics .topictickercontainer #topictickersecdeg li a, .toptopics .topictickercontainer #topictickersecdeg li a:hover, .toptopics .topictickercontainer #topictickersecdeg li a:visited, .toptopics .topictickercontainer #topictickersecdeg li a:active
+{
+    white-space: nowrap;
+    padding: 0;
+    margin: 0 18px;
+    font-size:19px;
+    color:#333;
+    font-weight:normal;
+    text-decoration:none;
+}
+
+.toptopics .topictickercontainer #topictickerthirddeg li a, .toptopics .topictickercontainer #topictickerthirddeg li a:hover, .toptopics .topictickercontainer #topictickerthirddeg li a:visited, .toptopics .topictickercontainer #topictickerthirddeg li a:active
+{
+    white-space: nowrap;
+    padding: 0;
+    margin: 0 15px;
+    font-size:15px;
+    color:#333;
+    font-weight:normal;
+    text-decoration:none;
+}
+
+.toptopics .topictickercontainer .noresults
+{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.tickercontainer
+{
+    margin:10px 10px;
+    width: 950px;
+}
+
+.tickercontainer .mask
+{
+    /* that serves as a mask. so you get a sort of padding both left and right */
+    position: relative;
+    width: 950px;
+    overflow: hidden;
+}

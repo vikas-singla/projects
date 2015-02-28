@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/projects/!svn/ver/70/admin/src/Oceanus.SampleData
+END
+App.config
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/projects/!svn/ver/4/admin/src/Oceanus.SampleData/App.config
+END
+Oceanus.SampleData.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/projects/!svn/ver/4/admin/src/Oceanus.SampleData/Oceanus.SampleData.csproj
+END
+Program.cs
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/projects/!svn/ver/4/admin/src/Oceanus.SampleData/Program.cs
+END

@@ -1,0 +1,81 @@
+﻿.interviewpanelstyle
+{
+    padding-top: 6px;
+}
+
+.tipsHeaderPanel
+{
+    width: 100%;
+    min-height: 34px;
+    margin: 0 auto;
+}
+
+.tipsHeaderTbl
+{
+    min-height: 34px;
+    margin:0 auto;
+}
+
+.tipsHeaderSectionImgCell
+{
+    width:40px;
+    float:left;
+}
+
+.tipsHeaderSectionPanel
+{
+    padding: 3px 5px 3px 5px;
+    background-repeat: no-repeat;
+    background-position: right;
+    display:table-cell;
+    vertical-align:middle;
+    text-align:left;
+    float:left;
+}
+
+.tipsHeaderSectionCell
+{    
+    border-bottom:3px solid #fff;
+}
+
+.tipsHeaderSectionCell:hover, .tipsHeaderSectionCellSel
+{    
+    border-bottom:3px solid #d9d9d9;
+}
+
+.tipsHeaderSectionLink, .tipsHeaderSectionLink:active, .tipsHeaderSectionLink:visited
+{
+    width: 100%;
+    height: 100%;
+    display: table-cell;
+    padding:0px 0px 3px 0px;
+}
+
+.tipsHeaderSectionLink:hover
+{
+    text-decoration:none;
+    padding:0px 0px 3px 0px;
+    width: 100%;
+    height: 100%;
+    display: table-cell;
+}
+
+.interviewHeaderStepLbl, .interviewHeaderStepLbl:hover
+{
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration:none;
+}
+
+.interviewHeaderTitleLbl, .interviewHeaderTitleLbl:hover
+{
+    color: #505050;
+    font-size: 12px;
+    white-space:pre-line;
+    text-decoration:none;
+}
+
+.interviewTipSubsectionStyle
+{
+    width:100%;
+}

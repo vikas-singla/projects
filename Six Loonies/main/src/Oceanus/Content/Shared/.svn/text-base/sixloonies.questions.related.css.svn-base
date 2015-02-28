@@ -1,0 +1,48 @@
+﻿.questionlist
+{
+    clear:both;
+    width:615px;
+    padding-top:0px;
+    padding-bottom:10px;
+}
+
+.questionlist .question
+{
+    width:615px;
+    padding-top:10px;
+    padding-bottom:2px;
+    border-bottom:1px solid #e9e9e9;
+}
+
+.questionlist .question .title a, .questionlist .question .title a:visited, .questionlist .question .title a:hover, .questionlist .question .title a:active
+{
+    font-weight:bold;
+    font-size:13px;
+}
+
+.questionlist .question .text
+{
+    text-align:left;
+    line-height:16px;
+    padding-top:2px;
+}
+
+.questionlist .question .links
+{
+    padding:3px 0px 5px 0px;
+    color:#a0a0a0;
+}
+
+.addrelquestion
+{
+    clear:both;
+    width:420px;
+    overflow:hidden;
+    margin:0 auto 15px auto;
+    display:none;
+}
+
+.addrelquestion #relquestinput
+{
+    width:300px;
+}

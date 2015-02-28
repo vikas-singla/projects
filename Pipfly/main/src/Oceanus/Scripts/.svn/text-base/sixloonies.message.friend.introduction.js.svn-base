@@ -1,0 +1,70 @@
+﻿$(document).ready(function () {
+
+    $('#msgforwardfriendintrobtn').click(function () {
+        var friendIntroRequestId = $(this).attr("data-reqid") + "";
+
+        forwardFriendIntroRequest(friendIntroRequestId);
+
+        return false;
+    });
+
+    $('#acceptfriendintrobtn').click(function () {
+        var friendIntroRequestId = $(this).attr("data-reqid") + "";
+
+        acceptFriendIntroRequest(friendIntroRequestId);
+
+        return false;
+    });
+});
+
+function forwardFriendIntroRequest(friendIntroRequestId) {
+    var msgToTargetFriend = $.trim($("#msgToTargetUserInput").val());
+
+    $.ajax(
+    {
+        type: "POST",
+        dataType: 'json',
+        traditional: true,
+        url: "/Message/ForwardFriendIntroductionMessage",
+        data: {
+            messageToTargetUser: msgToTargetFriend,
+            friendIntroRequestId: friendIntroRequestId
+        },
+        async: false,
+        success: function (result) {
+            showSuccessNotification('Your Friend introduction message has been forwarded.');
+            $(".introtargetpanel .links").html("");
+            $(".introtargetpanel .links").html("<span class='disabledbtn'>Introduction Forwarded</span>");
+            $.fancybox.close();
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your message could not be forwarded. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function acceptFriendIntroRequest(friendIntroRequestId) {
+    var msgToInitUser = $.trim($("#targetUserMsgToInitUserInput").val());
+
+    $.ajax(
+    {
+        type: "POST",
+        dataType: 'json',
+        traditional: true,
+        url: "/Message/AcceptFriendIntroductionMessage",
+        data: {
+            messageToInitUser: msgToInitUser,
+            friendIntroRequestId: friendIntroRequestId
+        },
+        async: false,
+        success: function (result) {
+            showSuccessNotification('Friend introduction request has been accepted.');
+            $(".introtargetpanel .links").html("");
+            $(".introtargetpanel .links").html("<span class='disabledbtn'>Introduction Accepted</span>");
+            $.fancybox.close();
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your request could not be completed. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}

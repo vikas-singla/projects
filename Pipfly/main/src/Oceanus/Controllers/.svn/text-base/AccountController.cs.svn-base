@@ -1,0 +1,1195 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Security.Principal;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+using System.Web.Security;
+using Facebook;
+using Mvc.Mailer;
+using Oceanus.Models;
+using Oceanus.Attributes;
+using Oceanus.Data;
+using Oceanus.ViewModels;
+using System.Collections.Specialized;
+using System.Net;
+using System.IO;
+using Oceanus.Utilities;
+using System.Drawing;
+using AmazonSES;
+
+namespace Oceanus.Controllers
+{
+    [BrowserCache(PreventBrowserCaching = true)]
+    public class AccountController : UploadControllerBase
+    {
+        #region constants
+
+        private const string ConfirmedImageSuffix = ".final";
+
+        #endregion
+
+        private static readonly Dictionary<string, int> ThumbSizes = new Dictionary<string, int>()
+        {
+            {"photo", 470}
+        };
+
+        public IFormsAuthenticationService FormsService { get; set; }
+        public IMembershipService MembershipService { get; set; }
+
+        protected override void Initialize(RequestContext requestContext)
+        {
+            if (FormsService == null) { FormsService = new FormsAuthenticationService(); }
+            if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
+
+            base.Initialize(requestContext);
+        }
+
+        #region User Profile Page Views / Updates
+        
+        public ActionResult GetUserListingHeaderLink()
+        {
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid? loggedInUserGuid = (user != null) ? ((Guid)user.ProviderUserKey) : ((Guid?)null);
+
+            ViewBag.LoggedInUserGuid = loggedInUserGuid;
+
+            return PartialView("_UserListingsHeaderLink");
+        }
+
+        public ActionResult GetUserProfilePhotoUploadForm(int userProfileId)
+        {
+            ViewBag.UserProfileId = userProfileId;
+
+            return PartialView("_AddUserPhoto");
+        }
+
+        #region overrides
+
+        [TokenizedAuthorize]
+        [RequiresAuthentication]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ContentResult CheckExisting(int userProfileId, string filename)
+        {
+            return base.CheckExisting(userProfileId, filename, ImageFolderDefinitions.FOLDER_USER_UPLOADS);
+        }
+
+        public ContentResult Upload(int userProfileId, HttpPostedFileBase fileData)
+        {
+            return base.Upload(userProfileId, fileData, ImageFolderDefinitions.FOLDER_USER_UPLOADS);
+        }
+
+        #endregion
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult AddUserImage(int userProfileId, string imageUrl)
+        {
+            string dbMessage = string.Empty;
+            bool success = false;
+            string imageFileName = string.Empty;
+
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid loggedInUserGuid = (Guid)user.ProviderUserKey;
+
+            try
+            {
+                string tempName = Guid.NewGuid().ToString();
+
+                UserProfile userProfile = Database.UserProfiles.Where(u => u.UserProfileId == userProfileId).FirstOrDefault();
+
+                // get the post's ID that was just inserted
+                var newName = base.Confirm(ImageFolderDefinitions.FOLDER_USER_UPLOADS, userProfileId, imageUrl, string.Concat("profile.", userProfileId), ConfirmedImageSuffix);
+                newName = EnsureOriginalFileIsJpeg(userProfileId, ImageFolderDefinitions.FOLDER_USER_UPLOADS, newName);
+                GenerateThumbnails(newName, ThumbSizes);
+
+                imageFileName = Path.GetFileNameWithoutExtension(newName);
+
+                base.Delete(ImageFolderDefinitions.FOLDER_USER_UPLOADS, userProfileId, imageFileName + ".jpg");
+
+                imageFileName = imageFileName + ".thumb" + ".photo" + ".jpg";
+
+                userProfile.UserProfileImageUrl = imageFileName;
+                Database.SaveChanges();
+
+                //update user information cookies
+                string AbsolutePathFormat = @"{0}/{1}/{2}/{3}";
+
+                if (userProfile.UserProfileImageUrl != null)
+                {
+                    UserHelper.AddUserProfileImageUrlCookie(string.Format(AbsolutePathFormat, RelativeUploadPath, ImageFolderDefinitions.FOLDER_USER_UPLOADS, userProfile.UserProfileId, userProfile.UserProfileImageUrl));
+                }
+
+                dbMessage = "User Photo Saved";
+                success = true;
+            }
+            catch (Exception ex)
+            {
+                dbMessage = string.Format("Error saving user photo: {0}", ex.Message);
+                success = false;
+            }
+
+            Sweep(ImageFolderDefinitions.FOLDER_USER_UPLOADS, userProfileId, ConfirmedImageSuffix);
+
+            return Json(
+                new
+                {
+                    result = success.ToString(),
+                    message = dbMessage,
+                    imageUrl = imageFileName
+                }
+            );
+        }
+
+
+        [Authorize]
+        public ActionResult UserProfileExpandNetwork()
+        {
+            List<FacebookFriendListViewModel> facebookfriendListViewModel = new List<FacebookFriendListViewModel>();
+
+            MembershipUser currUserMembership = Membership.GetUser(User.Identity.Name);
+            if (currUserMembership != null)
+            {
+                Guid currUserGuid = (Guid)currUserMembership.ProviderUserKey;
+
+                //check if user has connected their account to facebook
+                var userProfile = Database.UserProfiles.Where(u => u.UserId == currUserGuid).FirstOrDefault();
+
+                if (userProfile != null && userProfile.FacebookToken != null)
+                {
+                    ViewBag.CurrUserIsLinkedToFacebook = true;
+
+                    var userFacebookFriendList = Database.FacebookFriendLists.Where(f => f.UserId == currUserGuid).AsEnumerable();
+
+                    if (userFacebookFriendList != null && userFacebookFriendList.Count() > 0)
+                    {
+                        facebookfriendListViewModel.AddRange(userFacebookFriendList.Select(f => f.ToFacebookFriendListViewModel()));
+
+                        //check status of between the two users (if they are alreay friends or if a friend request already exists)
+                        foreach (var friend in facebookfriendListViewModel)
+                        {
+                            friend.FriendRequestSentOnSixLoonies = false; //default value
+                            friend.FacebookFriendIsConnectedOnSixLoonies = false; //default value
+
+                            if (friend.FacebookFriendSixLooniesUID != null)
+                            {
+                                //check if the two users are already friends
+                                var userIsFriend = Database.SixLooniesFriendConnections.Where(f => (f.FirstUserId == currUserGuid && f.SecondUserId == friend.FacebookFriendSixLooniesUID) ||
+                                                                                                   (f.FirstUserId == friend.FacebookFriendSixLooniesUID && f.SecondUserId == currUserGuid)).FirstOrDefault();
+
+                                if (userIsFriend != null)
+                                {
+                                    friend.FacebookFriendIsConnectedOnSixLoonies = true;
+                                }
+                                else
+                                {
+                                    //check if there is a pending friend request
+                                    var userHasSentFriendRequest = Database.SixLooniesPendingFriendRequests.Where(r => r.InitiatingUserId == currUserGuid && r.TargetSixLooniesUserId == friend.FacebookFriendSixLooniesUID).FirstOrDefault();
+
+                                    if (userHasSentFriendRequest != null)
+                                    {
+                                        friend.FriendRequestSentOnSixLoonies = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    ViewBag.CurrUserIsLinkedToFacebook = false;
+                }
+            }
+
+            return PartialView("_UserExpandNetwork", facebookfriendListViewModel);
+        }
+
+        public ActionResult UserProfileFriendsOnSixLoonies()
+        {
+            IEnumerable<SixLooniesFriendConnectionViewModel> friendConnectionsList = null;
+
+            MembershipUser currUserMembership = Membership.GetUser(User.Identity.Name);
+            if (currUserMembership != null)
+            {
+                Guid currUserGuid = (Guid)currUserMembership.ProviderUserKey;
+                var userSixLooniesFriendListModel = Database.SixLooniesFriendConnections.Where(f => f.FirstUserId == currUserGuid || f.SecondUserId == currUserGuid).AsEnumerable();
+                friendConnectionsList = userSixLooniesFriendListModel.Select(f => f.ToSixLooniesFriendConnectionViewModel());
+
+                ViewBag.UserId = currUserGuid;
+            }
+
+            return PartialView("_UserFriendsOnSixLoonies", friendConnectionsList);
+        }
+
+        public ActionResult UserProfileQuestions(Guid userId)
+        {
+            var userModel = Database.UserProfiles.Where(u => u.UserId == userId).FirstOrDefault();
+            var userQuestions = Database.SixAnswerQuestions.Where(q => q.ContributingUserId == userId).AsEnumerable();
+            IEnumerable<BaseSixAnswersQuestionViewModel> userProfileQuestionsViewModel = userQuestions.Select(q => q.ToBaseQuestionViewModel());
+
+            ViewBag.UserId = userId;
+            if (userModel != null)
+            {
+                ViewBag.UserFirstName = userModel.FirstName;
+            }
+
+            return PartialView("_UserProfileQuestions", userProfileQuestionsViewModel);
+        }
+
+        public ActionResult UserProfileListings(Guid userId)
+        {
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid? loggedInUserGuid = (user != null) ? ((Guid)user.ProviderUserKey) : ((Guid?)null);
+            IEnumerable<ListItemViewModel> userListings = null;
+            var userModel = Database.UserProfiles.Where(u => u.UserId == userId).FirstOrDefault();
+
+            ViewBag.UserId = userId;
+            if (userModel != null)
+            {
+                ViewBag.UserFirstName = userModel.FirstName;
+            }
+
+            IEnumerable<Guid> userFriendIDs = null;
+            IEnumerable<Guid?> userFriendOfFriendIDs = null;
+            if (loggedInUserGuid != null)
+            {
+                userFriendIDs = Database.SixLooniesFriendConnections.Where(con => con.FirstUserId == loggedInUserGuid || con.SecondUserId == loggedInUserGuid).Select(con => (con.FirstUserId == loggedInUserGuid ? con.SecondUserId : con.FirstUserId)).AsEnumerable();
+                userFriendOfFriendIDs = Database.GetFriendsOfFriendIDs((Guid)loggedInUserGuid).AsEnumerable();
+            }
+
+            var vendorProfiles = Database.Vendors.Where(v => !v.IsFlaggedAsDeleted && v.ContributingUserId == userId).AsEnumerable();
+            userListings = vendorProfiles.Select(v => v.ToListingViewModel(Database, loggedInUserGuid, userFriendIDs, userFriendOfFriendIDs));
+
+            return PartialView("_UserListings", userListings);
+        }
+
+        public ActionResult UserProfileFollowers(Guid userId)
+        {
+            IEnumerable<UserProfileViewModel> followersViewModel = null;
+            MembershipUser currUserMembership = Membership.GetUser(User.Identity.Name);
+            var userModel = Database.UserProfiles.Where(u => u.UserId == userId).FirstOrDefault();
+            Guid? currUserGuid = (currUserMembership != null ? (Guid?)currUserMembership.ProviderUserKey : null);
+            var currLoggedInUserFollowers = Database.UserToUserFollowingMappings.Where(mapping => mapping.FollowingUserId == currUserGuid).AsEnumerable();
+
+            ViewBag.UserId = userId;
+            if (userModel != null)
+            {
+                ViewBag.UserFirstName = userModel.FirstName;
+            }
+
+            var followers = Database.UserToUserFollowingMappings.Where(f => f.FollowedUserId == userId).AsEnumerable();
+            followersViewModel = followers.Select(f => f.aspnet_Users1.UserProfiles.First().ToUserProfileViewModel());
+            followersViewModel = UserHelper.FlagCurrentUserAsFollowerIfApplicable(followersViewModel, currUserMembership, currLoggedInUserFollowers);
+
+            return PartialView("_UserFollowers", followersViewModel);
+        }
+
+        public ActionResult UserProfileReviews(Guid userId)
+        {
+            IEnumerable<ReviewViewModel> reviewsViewModel = null;
+            var reviews = Database.Reviews.Where(rev => rev.ContributingUserId == userId);
+            var userModel = Database.UserProfiles.Where(u => u.UserId == userId).FirstOrDefault();
+
+            ViewBag.UserId = userId;
+            if (reviews != null && reviews.Count() > 0)
+            {
+                reviewsViewModel = reviews.AsEnumerable().Select(m => m.ToReviewViewModel());
+            }
+
+            if (userModel != null)
+            {
+                ViewBag.UserFirstName = userModel.FirstName;
+            }
+
+            return PartialView("_UserProfileReviews", reviewsViewModel);
+        }
+
+        public ActionResult Profile(Guid userId)
+        {
+            var user = Database.aspnet_Users.Where(u => u.UserId == userId).FirstOrDefault();
+            var userModel = Database.UserProfiles.Where(u => u.UserId == userId).FirstOrDefault();
+            UserProfileViewModel userProfileViewModel = null;
+
+            if (userModel != null)
+            {
+                userProfileViewModel = userModel.ToUserProfileViewModel();
+
+                //no one other than super-admin should be able to view profiles of other super-admin
+                if (user != null && Roles.IsUserInRole(user.UserName, SixLooniesMembership.UserRoles.SuperAdmin.ToString()) && !Roles.IsUserInRole(SixLooniesMembership.UserRoles.SuperAdmin.ToString()))
+                {
+                    return RedirectToAction("Index", "Error", new { message = SixLooniesMembership.NoPermissionMessage });
+                }
+
+                MembershipUser currUserMembership = Membership.GetUser(User.Identity.Name);
+                if (currUserMembership != null)
+                {
+                    Guid currUserGuid = (Guid)currUserMembership.ProviderUserKey;
+                    var userToUserMapping = Database.UserToUserFollowingMappings.Where(mapping => mapping.FollowedUserId == userId && mapping.FollowingUserId == currUserGuid).FirstOrDefault();
+
+                    userProfileViewModel.CurrentUserHasPendingFriendRequest = false;
+
+                    if (userToUserMapping != null)
+                    {
+                        userProfileViewModel.CurrentUserIsFollowing = true;
+                    }
+
+                    var userIsFriend = Database.SixLooniesFriendConnections.Where(f => (f.FirstUserId == userId && f.SecondUserId == currUserGuid) ||
+                                                                                       (f.FirstUserId == currUserGuid && f.SecondUserId == userId)).FirstOrDefault();
+
+                    if (userIsFriend != null)
+                    {
+                        userProfileViewModel.CurrentUserIsFriend = true;
+                    }
+                    else
+                    {
+                        var userHasSentFriendRequest = Database.SixLooniesPendingFriendRequests.Where(r => r.InitiatingUserId == currUserGuid && r.TargetSixLooniesUserId == userId).FirstOrDefault();
+
+                        if (userHasSentFriendRequest != null)
+                        {
+                            userProfileViewModel.CurrentUserHasPendingFriendRequest = true;
+                        }
+                    }
+
+                    //get network connection path between this user and the logged in user
+                    if (userId != currUserGuid)
+                    {
+                        IEnumerable<NetworkConnectionPath> networkConnectionModels = Database.GetFriendNetworkConnectionsPath(currUserGuid, userId).ToList();
+
+                        if (networkConnectionModels != null && networkConnectionModels.Count() > 0)
+                        {
+                            IEnumerable<NetworkConnectionPathViewModel> networkConnectionViewModels = networkConnectionModels.Select(conn => conn.ToNetworkConnectionsPathViewModel(Database));
+
+                            userProfileViewModel.UserConnectionNetworkPath = networkConnectionViewModels;
+                        }
+                    }
+                }
+            }
+
+            return View("_UserProfile", userProfileViewModel);
+        }
+
+        public ActionResult GetUserStats(Guid userId)
+        {
+            var userModel = Database.UserProfiles.Where(u => u.UserId == userId).FirstOrDefault();
+            UserStatsViewModel userStatsViewModel = null;
+
+            if (userModel != null)
+            {
+                userStatsViewModel = userModel.ToUserStatsViewModel(Database);
+            }
+
+            return PartialView("_UserStats", userStatsViewModel);
+        }
+
+        public ActionResult PendingFriendRequests(Guid userId)
+        {
+            var pendingRequests = Database.SixLooniesPendingFriendRequests.Where(r => r.TargetSixLooniesUserId == userId && r.IsDeclined == false).AsEnumerable();
+            IEnumerable<SixLooniesPendingFriendRequestViewModel> pendingRequestsViewModelList = null;
+
+            if (pendingRequests != null)
+            {
+                pendingRequestsViewModelList = pendingRequests.Select(r => r.ToSixLooniesPendingFriendRequestViewModel(Database));
+            }
+
+            return PartialView("_PendingFriendRequests", pendingRequestsViewModelList);
+        }
+
+        [Authorize]
+        public ActionResult AcceptFriendRequest(Guid friendId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //check if the user is already a friend 
+                var existingFriendConnection = Database.SixLooniesFriendConnections.Where(f => (f.FirstUserId == userGuid && f.SecondUserId == friendId) ||
+                                                                                               (f.SecondUserId == friendId && f.SecondUserId == userGuid)).FirstOrDefault();
+
+                if (existingFriendConnection == null)
+                {
+                    //retrieve the pending friend request
+                    var existingPendingFriendRequest = Database.SixLooniesPendingFriendRequests.Where(r => r.InitiatingUserId == friendId && r.TargetSixLooniesUserId == userGuid).FirstOrDefault();
+
+                    if (existingPendingFriendRequest != null)
+                    {
+                        //everything checks out... establish a friend connection between the users
+                        SixLooniesFriendConnectionViewModel friendConnectionViewModel = new SixLooniesFriendConnectionViewModel(null, friendId, userGuid, DateTime.Now);
+                        SixLooniesFriendConnection friendConnectionModel = friendConnectionViewModel.ToSixLooniesFriendConnection();
+
+                        Database.SixLooniesPendingFriendRequests.DeleteObject(existingPendingFriendRequest);
+                        Database.SixLooniesFriendConnections.AddObject(friendConnectionModel);
+                        Database.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult RejectFriendRequest(Guid friendId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //check if the user is already a friend 
+                var existingFriendConnection = Database.SixLooniesFriendConnections.Where(f => (f.FirstUserId == userGuid && f.SecondUserId == friendId) ||
+                                                                                               (f.SecondUserId == friendId && f.SecondUserId == userGuid)).FirstOrDefault();
+
+                if (existingFriendConnection == null)
+                {
+                    //retrieve the pending friend request
+                    var existingPendingFriendRequest = Database.SixLooniesPendingFriendRequests.Where(r => r.InitiatingUserId == friendId && r.TargetSixLooniesUserId == userGuid).FirstOrDefault();
+
+                    if (existingPendingFriendRequest != null)
+                    {
+                        existingPendingFriendRequest.IsDeclined = true;
+                        Database.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult SendSixLooniesFriendRequest(Guid indicatedFriend)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //check if the user is already a friend 
+                var existingFriendConnection = Database.SixLooniesFriendConnections.Where(f => (f.FirstUserId == userGuid && f.SecondUserId == indicatedFriend) ||
+                                                                                               (f.SecondUserId == indicatedFriend && f.SecondUserId == userGuid)).FirstOrDefault();
+
+                if (existingFriendConnection == null)
+                {
+                    //check if the user already has a pending friend request
+                    var existingPendingFriendRequest = Database.SixLooniesPendingFriendRequests.Where(r => r.InitiatingUserId == userGuid && r.TargetSixLooniesUserId == indicatedFriend).FirstOrDefault();
+
+                    if (existingPendingFriendRequest == null)
+                    {
+                        SixLooniesPendingFriendRequestViewModel requestViewModel = new SixLooniesPendingFriendRequestViewModel(null, userGuid, indicatedFriend, null, DateTime.Now, false);
+                        SixLooniesPendingFriendRequest requestModel = requestViewModel.ToSixLooniesPendingFriendRequest();
+
+                        Database.SixLooniesPendingFriendRequests.AddObject(requestModel);
+                        Database.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult FollowUser(Guid userToFollowId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //check if the user is already following the other user
+                var existingMapping = Database.UserToUserFollowingMappings.Where(mapping => mapping.FollowedUserId == userToFollowId && mapping.FollowingUserId == userGuid).FirstOrDefault();
+
+                if (existingMapping == null)
+                {
+                    UserToUserFollowerMappingViewModel viewModel = new UserToUserFollowerMappingViewModel(null, userToFollowId, userGuid, DateTime.Now);
+                    UserToUserFollowingMapping mappingModel = viewModel.ToUserToUserFollowingMapping();
+
+                    Database.UserToUserFollowingMappings.AddObject(mappingModel);
+                    Database.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult UnfollowUser(Guid followedUserId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //check if the user is already following the other user
+                var userToUserMapping = Database.UserToUserFollowingMappings.Where(mapping => (mapping.FollowedUserId == followedUserId && mapping.FollowingUserId == userGuid)).FirstOrDefault();
+
+                if (userToUserMapping != null)
+                {
+                    Database.UserToUserFollowingMappings.DeleteObject(userToUserMapping);
+                    Database.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        #endregion
+
+        #region Account Logon / Signup
+        // **************************************
+        // URL: /Account/LogOn
+        // **************************************
+
+
+        public ActionResult SignInForm()
+        {
+            return PartialView("_SignInForm");
+        }
+
+        public ActionResult SignInFormWithReturn(string returnUrl)
+        {
+            ViewBag.ReturnUrl = returnUrl;
+
+            return View("SignIn");
+        }
+
+        public ActionResult SignInHeaderForm()
+        {
+            return PartialView("_SignInHeaderForm");
+        }
+
+        [Authorize]
+        public ActionResult SendInviteToFacebookUser(long friendFBUID)
+        {
+            bool requestSuccessful = false;
+
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid userGuid = (Guid)user.ProviderUserKey;
+
+            //retrieve facebook friend's name
+            var fbFriend = Database.FacebookFriendLists.Where(f => f.FacebookFriendUID == friendFBUID).FirstOrDefault();
+            string friendFirstName = (fbFriend.FacebookFriendName.IndexOf(' ') > 0) ? (fbFriend.FacebookFriendName.Substring(0, fbFriend.FacebookFriendName.IndexOf(' '))) : fbFriend.FacebookFriendName;
+
+            //retrieve facebook token
+            var userProfile = Database.UserProfiles.Where(u => u.UserId == userGuid).FirstOrDefault();
+
+            if (userProfile != null)
+            {
+                string fbToken = userProfile.FacebookToken;
+
+                var domain = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+                bool querySuccessful = AccountController.PostToFacebookWall(friendFBUID, fbToken, null, "I'd like you to join my network on Six Loonies", domain,
+                    friendFirstName + " - it's networking with friends to discover businesses and professionals, who provide services, that are the best and worth your time and money.", null, "http://www.sixloonies.com/images/sitetheme/SixLooniesLogo.png", null, false);
+
+                if (querySuccessful)
+                {
+                    //make invite sent for friend
+                    var facebookFriendListRecord = Database.FacebookFriendLists.Where(f => f.UserId == userGuid && f.FacebookFriendUID == friendFBUID).FirstOrDefault();
+
+                    if (facebookFriendListRecord != null)
+                    {
+                        facebookFriendListRecord.InvitedToSixLoonies = true;
+                        Database.SaveChanges();
+                    }
+                }
+            }
+
+            return Json(new { result = requestSuccessful.ToString() });
+        }
+
+        public ActionResult FacebookUserRegister(long uid, string token)
+        {
+            var users = Membership.FindUsersByName(uid.ToString());
+            bool requestSuccessful = false;
+
+            // create account if it doesn't exist for the facebook user
+            if (users.Count == 0)
+            {
+                var fapi = new FacebookAPI(token);
+
+                // get user's facebook account info
+                JSONObject result = fapi.Get("/" + uid);
+
+                if (result.Dictionary != null && result.Dictionary.Count > 0)
+                {
+                    string firstName = result.Dictionary["first_name"].String;
+                    string lastName = result.Dictionary["last_name"].String;
+                    string email = result.Dictionary["email"] != null ? result.Dictionary["email"].String : string.Empty;
+
+                    MembershipUser loggedInUser = Membership.GetUser(User.Identity.Name);
+                    Guid? loggedInUserGuid = (loggedInUser != null) ? ((Guid)loggedInUser.ProviderUserKey) : ((Guid?)null);
+
+                    if (loggedInUserGuid != null && email != null && !email.Trim().Equals(string.Empty))
+                    {
+                        var existingUsersFound = Membership.FindUsersByEmail(email);
+
+                        foreach (MembershipUser existingUser in existingUsersFound)
+                        {
+                            var existingUserUserProfile = Database.UserProfiles.Where(u => u.UserId == ((Guid)existingUser.ProviderUserKey)).FirstOrDefault();
+
+                            if (existingUserUserProfile != null)
+                            {
+                                existingUserUserProfile.FacebookToken = token;
+                                existingUserUserProfile.FacebookUserUID = uid;
+                                Database.SaveChanges();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MembershipCreateStatus createStatus = MembershipService.CreateFacebookUser(firstName, lastName, uid, "f6lbook", email, token);
+
+                        if (createStatus == MembershipCreateStatus.Success)
+                        {
+                            FacebookSignIn(uid.ToString(), token);
+
+                            requestSuccessful = true;
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", AccountValidation.ErrorCodeToString(createStatus));
+                        }
+                    }
+                }
+            }
+            else
+            {
+                //update facebook token
+                string uidString = uid.ToString();
+                var userProfile = Database.UserProfiles.Where(u => u.aspnet_Users.UserName.Equals(uidString)).First();
+                userProfile.FacebookToken = token;
+                Database.SaveChanges();
+
+                FacebookSignIn(uid.ToString(), token);
+                requestSuccessful = true;
+            }
+
+            //retreive or refresh friend list
+            RetrieveFacebookUserFriendList(uid.ToString(), token);
+
+            MembershipUser user = Membership.GetUser(uid.ToString());
+            if (user != null)
+            {
+                //IMPORTANT: Mark the user as author for any profile he/she owns
+                VendorHelper.MarkLoggedInUserAsVendorAuthor(Database, ((Guid)user.ProviderUserKey));
+            }
+
+            performPostSignInUserActions(user, false);
+
+            return Json(new { result = requestSuccessful.ToString() }, JsonRequestBehavior.AllowGet);
+        }
+
+        private void RetrieveFacebookUserFriendList(string uid, string token)
+        {
+            //check if user is already logged in
+            MembershipUser loggedInUser = Membership.GetUser(User.Identity.Name);
+            Guid? userGuid = (loggedInUser != null) ? ((Guid)loggedInUser.ProviderUserKey) : ((Guid?)null);
+
+            if (userGuid == null) //not logged in... get user details using UID
+            {
+                MembershipUser user = Membership.GetUser(uid);
+                userGuid = (Guid)user.ProviderUserKey;
+            }
+
+            var fapi = new FacebookAPI(token);
+
+            // get user's facebook friend list
+            JSONObject result = fapi.Get("/" + uid + "/friends");
+
+            JSONObject[] friends = result.Dictionary["data"].Array;
+
+            foreach (JSONObject friend in friends)
+            {
+                long friendUID = friend.Dictionary["id"].Integer;
+                string friendName = friend.Dictionary["name"].String;
+
+                var priorFacebookFriendAssociation = Database.FacebookFriendLists.Where(f => f.UserId == userGuid && f.FacebookFriendUID == friendUID).FirstOrDefault();
+
+                if (priorFacebookFriendAssociation == null)
+                {
+                    //create a new friend association
+                    FacebookFriendListViewModel friendAssociationViewModel = new FacebookFriendListViewModel(null, (Guid)userGuid, friendUID, friendName, null, false);
+                    priorFacebookFriendAssociation = friendAssociationViewModel.ToFacebookFriendList();
+
+                    Database.FacebookFriendLists.AddObject(priorFacebookFriendAssociation);
+                }
+
+                //check if facebook friend is on six loonies
+                var facebookFriendSixLooniesUserRef = Database.UserProfiles.Where(u => u.FacebookUserUID == friendUID).FirstOrDefault();
+
+                if (facebookFriendSixLooniesUserRef != null)
+                {//friend is on six loonies :)
+                    //note that in the facebook friend list 
+                    priorFacebookFriendAssociation.FacebookFriendSixLooniesUID = facebookFriendSixLooniesUserRef.UserId;
+
+                    //create a six loonies friend connection as well for the friend if there isn't one already
+                    var sixLooniesFriendConnection = Database.SixLooniesFriendConnections.Where(c => (c.FirstUserId == userGuid && c.SecondUserId == facebookFriendSixLooniesUserRef.UserId) ||
+                        (c.FirstUserId == facebookFriendSixLooniesUserRef.UserId || c.SecondUserId == userGuid)).FirstOrDefault();
+
+                    if (sixLooniesFriendConnection == null)
+                    {
+                        SixLooniesFriendConnectionViewModel sixLooniesFriendViewModel = new SixLooniesFriendConnectionViewModel(null, (Guid)userGuid, facebookFriendSixLooniesUserRef.UserId, DateTime.Now);
+                        Database.SixLooniesFriendConnections.AddObject(sixLooniesFriendViewModel.ToSixLooniesFriendConnection());
+                    }
+                }
+            }
+
+            Database.SaveChanges();
+        }
+
+        private void FacebookSignIn(string uid, string token)
+        {
+            if (MembershipService.ValidateUser(uid, "f6lbook"))
+            {
+                FormsService.SignIn(uid, false /* createPersistentCookie */);
+
+                MembershipUser user = Membership.GetUser(uid);
+
+                if (user != null)
+                {
+                    //IMPORTANT: Mark the user as author for any profile he/she owns
+                    VendorHelper.MarkLoggedInUserAsVendorAuthor(Database, ((Guid)user.ProviderUserKey));
+                    performPostSignInUserActions(user, false);
+                }
+            }
+        }
+
+        [HttpPost]
+        public ActionResult SignIn(LogOnModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                if (MembershipService.ValidateUser(model.Email, model.Password))
+                {
+                    FormsService.SignIn(model.Email, model.RememberMe);
+
+                    MembershipUser user = Membership.GetUser(model.Email);
+
+                    if (user != null)
+                    {
+                        //IMPORTANT: Mark the user as author for any profile he/she owns
+                        VendorHelper.MarkLoggedInUserAsVendorAuthor(Database, ((Guid)user.ProviderUserKey));
+
+                        performPostSignInUserActions(user, true);
+                    }
+                    if (Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The email or password provided is incorrect.");
+                }
+            }
+
+            ViewBag.ReturnUrl = returnUrl;
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        // **************************************
+        // URL: /Account/LogOff
+        // **************************************
+
+        [Authorize]
+        public ActionResult LogOff()
+        {
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid userGuid = (Guid)user.ProviderUserKey;
+
+            string token = Database.UserProfiles.Where(u => u.UserId == userGuid).First().FacebookToken;
+            FormsService.SignOut();
+
+            if (token != null && !token.Equals(string.Empty))
+            {
+                var domain = Request.Url.Scheme + System.Uri.SchemeDelimiter + Request.Url.Host + (Request.Url.IsDefaultPort ? "" : ":" + Request.Url.Port);
+                return Redirect("https://www.facebook.com/logout.php?next=" + Server.UrlEncode(domain) + "&access_token=" + token);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        // **************************************
+        // URL: /Account/Register
+        // **************************************
+
+        public ActionResult RegisterForm()
+        {
+            ViewBag.PasswordLength = MembershipService.MinPasswordLength;
+            return PartialView("_RegisterForm");
+        }
+
+        public ActionResult RegisterHeaderForm()
+        {
+            ViewBag.PasswordLength = MembershipService.MinPasswordLength;
+            return PartialView("_RegisterHeaderForm");
+        }
+
+        private void performPostSignInUserActions(MembershipUser user, bool sendConfirmationEmail)
+        {
+            //add user information cookies
+            string userProfileAbsolutePathFormat = @"{0}/{1}/{2}/{3}";
+            UserProfile profile = Database.UserProfiles.Where(p => p.UserId == ((Guid)user.ProviderUserKey)).FirstOrDefault();
+
+            if (!profile.IsConfirmed && sendConfirmationEmail)
+            {
+                //re-send registration notice if applicable
+                //StartConfirmRegistration(MembershipCreateStatus.Success, user);
+            }
+
+            if (profile.UserProfileImageUrl != null)
+            {
+                UserHelper.AddUserProfileImageUrlCookie(string.Format(userProfileAbsolutePathFormat, RelativeUploadPath, ImageFolderDefinitions.FOLDER_USER_UPLOADS, profile.UserProfileId, profile.UserProfileImageUrl));
+            }
+            else
+            {
+                UserHelper.AddUserProfileImageUrlCookie(null);
+            }
+
+            UserHelper.AddUserProfileFullName(profile.FirstName.Length > 13 ? (profile.FirstName.Substring(0, 13) + "...") : profile.FirstName);
+        }
+
+        [HttpPost]
+        public ActionResult Register(RegisterModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                // Attempt to register the user
+                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.FirstName, model.LastName, model.Password, model.Email);
+
+                if (createStatus == MembershipCreateStatus.Success)
+                {
+                    FormsService.SignIn(model.Email, false /* createPersistentCookie */);
+
+                    MembershipUser user = Membership.GetUser(model.Email);
+
+                    //IMPORTANT: Mark the user as author for any profile he/she owns
+                    VendorHelper.MarkLoggedInUserAsVendorAuthor(Database, ((Guid)user.ProviderUserKey));
+
+                    performPostSignInUserActions(user, true);
+
+                    if (Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", AccountValidation.ErrorCodeToString(createStatus));
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            ViewBag.PasswordLength = MembershipService.MinPasswordLength;
+            return View(model);
+        }
+
+        private void StartConfirmRegistration(MembershipCreateStatus createStatus, MembershipUser user)
+        {
+            // create random key
+            var key = Guid.NewGuid();
+
+            if (createStatus == MembershipCreateStatus.Success)
+            {
+                try
+                {
+                    var existingPendingRegistration = Database.PendingRegistrations.Where(reg => reg.membershipUserId == (Guid)user.ProviderUserKey).FirstOrDefault();
+
+                    if (existingPendingRegistration == null) //send confirmation email
+                    {
+                        PendingRegistration registration = new PendingRegistration()
+                                {
+                                    membershipUserId = (Guid)user.ProviderUserKey,
+                                    confirmationKey = key,
+                                    initialRegistrationDate = DateTime.Now,
+                                    lastEmailNoticeDate = DateTime.Now,
+                                    numberOfPastNoticeAttempts = 0
+                                };
+
+                        // add pending registration record
+                        Database.PendingRegistrations.AddObject(registration);
+
+                        Database.SaveChanges();
+
+                        //send email
+                        AmazonSESWrapper emailWrapper = new AmazonSESWrapper();
+                        AmazonSentEmailResult emailSendResult = emailWrapper.SendEmail(user.Email, "noreply@sixloonies.com", "noreply@sixloonies.com",
+                            "Six Loonies Registration Confirmation", GetAccountConfirmationEmailHtmlBody(key.ToString()), "Thank you for creating your account with Six Loonies. To finish the registration process, we just need you to copy and paste the following address in your web browser:\n\nhttp://www.sixloonies.com/account/confirm?key=" +
+                            key + "\n\nOh and did we mention you are awesome? You are awesome for choosing to use Six Loonies!\n\nIf you have any questions or want to provide feedback, drop us a note at contact@sixloonies.com.\n\nCheers,\nThe Six Loonies Team\n\n(c) Six Loonies Inc. 2011");
+
+                        if (!emailSendResult.HasError)
+                        {
+                            // TO DO : redirect to page saying confirmation email has been sent.
+                        }
+                        else
+                        {
+                            Database.PendingRegistrations.DeleteObject(registration);
+                            Database.SaveChanges();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // TODO: add logging
+                    throw ex;
+                }
+            }
+        }
+
+        protected string GetAccountConfirmationEmailHtmlBody(string key)
+        {
+            string result = RenderEmailConfirmationViewToString("ConfirmRegistration", "_EmailLayout", key, null);
+
+            return result;
+        }
+
+        protected string RenderEmailConfirmationViewToString(string viewName, string masterName, string key, object model)
+        {
+            if (string.IsNullOrEmpty(viewName))
+                viewName = ControllerContext.RouteData.GetRequiredString("action");
+
+            ViewData.Model = model;
+            ViewBag.key = key;
+
+            using (StringWriter sw = new StringWriter())
+            {
+                ViewEngineResult viewResult = ViewEngines.Engines.FindView(ControllerContext, viewName, masterName);
+                ViewContext viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+
+                return sw.GetStringBuilder().ToString();
+            }
+        }
+
+        public ActionResult Confirm(string key)
+        {
+            Guid keyGuid = Guid.Empty;
+
+            if (Guid.TryParse(key, out keyGuid))
+            {
+                var userId = Database.PendingRegistrations.Where(pr => pr.confirmationKey == keyGuid).FirstOrDefault();
+                if (userId != null)
+                {
+                    var userProfile =
+                        Database.UserProfiles.Where(up => up.UserId.Equals(userId.membershipUserId)).FirstOrDefault();
+
+                    if (userProfile != null)
+                    {
+                        userProfile.IsConfirmed = true;
+                        Database.PendingRegistrations.DeleteObject(userId);
+
+                        Database.SaveChanges();
+
+                        UserHelper.AddEmailConfirmedCookie();
+                    }
+                    else
+                    {
+                        // TODO: add logging
+                        throw new Exception("User profile not found.");
+                    }
+                }
+                else
+                {
+                    // TODO: add logging
+                    throw new Exception("User not found");
+                }
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        // **************************************
+        // URL: /Account/ChangePassword
+        // **************************************
+
+        [Authorize]
+        public ActionResult ChangePassword()
+        {
+            ViewBag.PasswordLength = MembershipService.MinPasswordLength;
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult ChangePassword(ChangePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (MembershipService.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword))
+                {
+                    return RedirectToAction("ChangePasswordSuccess");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            ViewBag.PasswordLength = MembershipService.MinPasswordLength;
+            return View(model);
+        }
+
+        // **************************************
+        // URL: /Account/ChangePasswordSuccess
+        // **************************************
+
+        public ActionResult ChangePasswordSuccess()
+        {
+            return View();
+        }
+
+        #endregion
+
+        #region Helpers
+
+        /// <summary>
+        /// Publish a post on a facebook user's wall
+        /// </summary>
+        internal static bool PostToFacebookWall(long fbUID, string fbToken, string message, string linkName, string linkURL, string caption, string description, string source, string actions, bool applyPrivacy)
+        {
+            bool querySuccessful = true;
+            FacebookAPI fbAPI = new FacebookAPI(fbToken);
+
+            //create query parameters
+            Dictionary<string, string> queryParams = new Dictionary<string, string>();
+            queryParams.Add("access_token", fbToken);
+
+            if (linkURL != null && !linkURL.Equals(string.Empty))
+            {
+                queryParams.Add("link", linkURL);
+            }
+            if (linkName != null && !linkName.Equals(string.Empty))
+            {
+                queryParams.Add("name", linkName);
+            }
+            if (caption != null && !caption.Equals(string.Empty))
+            {
+                queryParams.Add("caption", caption);
+            }
+            if (description != null && !description.Equals(string.Empty))
+            {
+                queryParams.Add("description", description);
+            }
+            if (source != null && !source.Equals(string.Empty))
+            {
+                queryParams.Add("source", source);
+            }
+            if (actions != null && !actions.Equals(string.Empty))
+            {
+                queryParams.Add("actions", actions);
+            }
+            if (message != null && !message.Equals(string.Empty))
+            {
+                queryParams.Add("message", message);
+            }
+            if (applyPrivacy)
+            {
+                queryParams.Add("privacy", "{\"value\": \"EVERYONE\"}");
+            }
+
+            // Send the request to Facebook, and query the result to get the confirmation code
+            try
+            {
+                fbAPI.Post("/" + fbUID + "/feed", queryParams);
+            }
+            catch (Exception e)
+            {
+                querySuccessful = false;
+            }
+
+            return querySuccessful;
+        }
+
+        /// <summary>
+        /// Create query string based on source host and parameters
+        /// </summary>
+        /// <param name="source">Source Host URL</param>
+        /// <param name="parameters">Query string parameters</param>
+        /// <returns>Built query string</returns>
+        private string CreateQueryString(string source, NameValueCollection parameters)
+        {
+            string result = source;
+            List<String> items = new List<String>();
+            foreach (String name in parameters)
+            {
+                items.Add(String.Concat(name, "=", System.Web.HttpUtility.UrlEncode(parameters[name])));
+            }
+
+            result += "?" + String.Join("&", items.ToArray());
+
+            return result;
+        }
+
+        /// <summary>
+        /// Helper Method: Indicates if the user should be prompted to invite friends to Six Loonies when they log in
+        /// </summary>
+        /// <param name="userId">Reference to the user logged in</param>
+        /// <returns>True if user should be prompted, false otherwise</returns>
+        public static bool PromptUserForFriends(Guid userId)
+        {
+            bool result = false;
+            OceanusEntities database = new OceanusEntities();
+
+            var userProfile = database.UserProfiles.Where(u => u.UserId == userId).FirstOrDefault();
+
+            if (userProfile != null)
+            {
+                result = userProfile.PromptUserForFBFriends;
+
+                //reset flag so user is not prompted again when they login
+                userProfile.PromptUserForFBFriends = false;
+                database.SaveChanges();
+            }
+
+            return result;
+        }
+
+        #endregion
+    }
+}

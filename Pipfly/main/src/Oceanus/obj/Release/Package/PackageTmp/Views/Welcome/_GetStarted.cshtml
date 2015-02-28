@@ -1,0 +1,17 @@
+﻿@model Oceanus.ViewModels.BaseUserViewModel
+@using SquishIt.Framework
+<div class="getstartedsect">
+    @{Html.RenderPartial("_InstallButton", Model);}
+    <div class="wizardbtn">
+        <a href="/welcome/2" class="btnbluestyle" style="font-size:12px;padding:5px 9px;">&raquo;&nbsp;Continue with Signup</a>
+    </div>
+</div>
+@{
+    @MvcHtmlString.Create(
+            Bundle.Css()
+                .Add("~/Content/shared/pipfly.getstarted.css")
+                .Add("~/Content/user/pipfly.invite.friends.css")
+                .ForceRelease()
+                .Render("~/cache/pipfly.getstarted.#.css")
+            );
+}

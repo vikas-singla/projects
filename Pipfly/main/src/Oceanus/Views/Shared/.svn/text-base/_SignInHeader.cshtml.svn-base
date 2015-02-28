@@ -1,0 +1,3 @@
+﻿<a href="#" id="signindisplay" class="bold">Sign in &nbsp;<img src="/Images/scroll_round_light.png"
+    alt width="12px" height="12px" /></a>
+@{Html.RenderAction("SignInHeaderForm", "Account");}

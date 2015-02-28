@@ -1,0 +1,83 @@
+﻿@model Oceanus.ViewModels.GetVendorQuoteMessageViewModel
+<link href="@Url.Content("~/Content/Messages/sixloonies.messages.css")" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/scripts/sixloonies.messages.getquote.js"></script>
+@if (ViewBag.NotAuthorized)
+{
+    <div class="fullsect bold">
+        You are not authorized to view this message.</div>
+}
+else
+{
+    <div class="breadcomb">
+        <a href="/">Home</a>&nbsp;&raquo;&nbsp;<a href="/account/profile?userid=@(ViewBag.UserId)">Service
+            Price Quotes</a>&nbsp;&raquo;&nbsp;<span>@(Model.Subject)</span>
+    </div>
+    <div class="fullsect msgdetails">
+        <div class="detailspanel">
+            <div class="subject">@(Model.Subject)</div>
+            <div class="msglist">
+                @for (int i = 0; i < Model.VendorQuoteMessageResponses.Count(); ++i)
+                {
+                    <div class="response">
+                        <div class="userpic">
+                            <img src="/images/user.jpg" width="50px" height="50px" alt />
+                        </div>
+                        <div class="responsedetails">
+                            <a class="username" href="/account/profile?userid=@(Model.VendorQuoteMessageResponses.ElementAt(i).ContributingUserId)">@(Model.VendorQuoteMessageResponses.ElementAt(i).ContributingUser.FullName)
+                            </a>
+                            <div class="datestamp">@(Model.VendorQuoteMessageResponses.ElementAt(i).ContributionDate.ToString("MMMM d, yyyy"))
+                            </div>
+                            <div class="text">
+                                @(Model.VendorQuoteMessageResponses.ElementAt(i).Text)
+                            </div>
+                            @if (Model.VendorQuoteMessageResponses.ElementAt(i).Price != null)
+                            {
+                                <div class="quote">@("$" + Model.VendorQuoteMessageResponses.ElementAt(i).Price + ".00")<br />
+                                    <span class="smalltext">@(i == 0 ? "(Budget)" : (Model.VendorQuoteMessageResponses.ElementAt(i).ContributingUserId == Model.InitiatingUserId ? "(Offer)" : "(Last Quote)"))</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="responseinput">
+                @{
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                string replyPriceLabel = "price quote";
+
+                if (Model.InitiatingUserId == userGuid)
+                {
+                    replyPriceLabel = "price offer";
+                }
+                }
+                
+                <form id="frmMsgQuoteDetailsReply">
+                    <div class="responselbl">
+                        Add Your Reply
+                    </div>
+                    <div class="inputstyle">
+                        <textarea cols="1" rows="3" class="validate[required]" id="msgreplytextbox"></textarea>
+                    </div>
+                    <div class="price">
+                        <div class="pricelbl">
+                            Include a @(replyPriceLabel)
+                            in your reply <span class="smalltext">(Optional)</span>:
+                        </div>
+                        <div class="quotebudgetinput">
+                            $<input id="vendorReplyPrice" /><span class="cents">.00</span>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <a href="#" class="btnbluestyle" id="sendVQuoteReplyMsgBtn" data-mid="@(Model.VendorQuoteMessageId)">
+                            Add Reply</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="messagesidepanel">
+            @{Html.RenderAction("GetVendorQuoteMessageParticipants", "Message", new { vendorQuoteMessageId = Model.VendorQuoteMessageId });}
+        </div>
+    </div>
+}

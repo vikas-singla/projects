@@ -1,0 +1,105 @@
+﻿@model Oceanus.ViewModels.ListingViewModel
+<link href="@Url.Content("~/Content/Plugins/jquery.rateit.css")" rel="stylesheet" type="text/css" />
+@if (@Model.Results != null && @Model.Results.Count > 0)
+{
+    foreach (var listing in @Model.Results)
+    { 
+    <div class="vendorcollage">
+        <div class="actionbuttons">
+            <a href="#tellfriendform" class="btnstyle tellfriendbtn" data-vid="@(listing.VendorId)">
+                Tell a friend</a>
+            @if (listing.CurrentUserLikesVendor != null && !listing.CurrentUserLikesVendor)
+            {
+                <a href="#" class="btnstyle likevendorbtn" data-vid="@(listing.VendorId)">Like</a>
+            }
+            else
+            {
+                <a href="#" class="btnundo" data-vid="@(listing.VendorId)">Like</a>
+            }
+            <a href="#" class="btnstyle bookmarkbtn" data-vid="@(listing.VendorId)">Bookmark</a>
+        </div>
+        @if (listing.VendorPortfolioImage != null)
+        {
+            <div class="portfolioimagesect">
+                <a href="/Vendor/@(listing.VendorId)">
+                    <img src="/uploads/@(Oceanus.Controllers.ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS)/@(listing.VendorId)/@(listing.VendorPortfolioImage).thumb.listing.jpg" width="260px" alt />
+                </a>
+            </div>
+        }
+        else if (listing.SampleVendorVideo != null)
+        {
+            <div class="portfolioimagesect">
+                @if (listing.SampleVendorVideo.IsVimeo)
+                {
+                    <a href="/Vendor/@(listing.VendorId)">
+                        <img id="vimeo-@(listing.SampleVendorVideo.VideoIdentifier)" src="" width="260px" alt />
+                        <span class="play"></span></a>
+                            
+                    <script type="text/javascript">
+                        $(function () {
+                            loadVimeoThumb(@(listing.SampleVendorVideo.VideoIdentifier));
+                        });
+                    </script>
+                }
+                else if (listing.SampleVendorVideo.IsYouTube)
+                { 
+                    
+                    <a href="/Vendor/@(listing.VendorId)">
+                        <img src="http://img.youtube.com/vi/@(listing.SampleVendorVideo.VideoIdentifier)/0.jpg" width="260px" alt />
+                        <span class="play"></span></a>
+                }
+            </div>
+        }
+        <div class="collage">
+            <div class="vendordetails" style="@((listing.SampleVendorVideo == null && listing.VendorPortfolioImage == null) ? "width:100%;" : "")">
+                <div class="header">
+                    <a class="vendorcollageTitle" href="/Vendor/@(listing.VendorId)">
+                        @listing.VendorName</a>
+                    @if (listing.OverallRating != null)
+                    {
+                        <div class="stars bigstars">
+                            <div class="rateit" data-rateit-starwidth="16" data-rateit-starheight="16" data-rateit-step="0.5"
+                        data-rateit-resetable="false" data-rateit-value="@(listing.OverallRating.AttributeValue)" data-rateit-readonly="true">
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="sdesc">
+                    @listing.VendorShortDescription
+                </div>
+                <div class="plainstats">
+                    @(listing.NumberOfLikes)
+                    total likes&nbsp;&#149;&nbsp;@(listing.NumberOfReviews)
+                    total reviews
+                </div>
+            </div>
+        </div>
+        <div class="stats">
+            <div class="stat statdarkborderright">
+                <div class="val">
+                    @(listing.NumberOfLikesByFriends)</div>
+                <div class="desc">
+                    likes by friends</div>
+            </div>
+            <div class="stat statdarkborderright statdarkborderleft">
+                <div class="val">
+                    @(listing.NumberOfReviewsByFriends)</div>
+                <div class="desc">
+                    reviews by friends</div>
+            </div>
+            <div class="stat statdarkborderleft">
+                <div class="val">
+                    @(listing.NumberOfReviewsByFriendsOfFriends)</div>
+                <div class="desc">
+                    reviews by friends of friends</div>
+            </div>
+        </div>
+    </div>
+    }
+    <script src="@Url.Content("~/Scripts/Plugins/jquery.rateit.min.js")" type="text/javascript"></script>
+}
+else
+{
+    <p>
+        No professionals or businesses found per your search.</p>
+}

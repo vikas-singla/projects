@@ -1,0 +1,496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OceanusModelStoreContainer" CdmEntityContainer="OceanusEntitiesLive">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="OceanusModel.Category">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CategoryReviewAttributeMappings">
+      <EntityTypeMapping TypeName="OceanusModel.CategoryReviewAttributeMapping">
+        <MappingFragment StoreEntitySet="CategoryReviewAttributeMapping">
+          <ScalarProperty Name="CategoryAttributeMappingId" ColumnName="CategoryAttributeMappingId" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="ReviewAttributeId" ColumnName="ReviewAttributeId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FacebookFriendLists">
+      <EntityTypeMapping TypeName="OceanusModel.FacebookFriendList">
+        <MappingFragment StoreEntitySet="FacebookFriendList">
+          <ScalarProperty Name="FacebookFriendListId" ColumnName="FacebookFriendListId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FacebookFriendUID" ColumnName="FacebookFriendUID" />
+          <ScalarProperty Name="FacebookFriendName" ColumnName="FacebookFriendName" />
+          <ScalarProperty Name="FacebookFriendSixLooniesUID" ColumnName="FacebookFriendSixLooniesUID" />
+          <ScalarProperty Name="InvitedToSixLoonies" ColumnName="InvitedToSixLoonies" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="OceanusModel.Message">
+        <MappingFragment StoreEntitySet="Message">
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="InitialSendTimestamp" ColumnName="InitialSendTimestamp" />
+          <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+          <ScalarProperty Name="IsSpam" ColumnName="IsSpam" />
+          <ScalarProperty Name="InitiatingUserId" ColumnName="InitiatingUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MessageResponses">
+      <EntityTypeMapping TypeName="OceanusModel.MessageRespons">
+        <MappingFragment StoreEntitySet="MessageResponses">
+          <ScalarProperty Name="MessageResponseId" ColumnName="MessageResponseId" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MessageVisibilities">
+      <EntityTypeMapping TypeName="OceanusModel.MessageVisibility">
+        <MappingFragment StoreEntitySet="MessageVisibility">
+          <ScalarProperty Name="MessageVisibilityId" ColumnName="MessageVisibilityId" />
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="MessageIsUnread" ColumnName="MessageIsUnread" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhysicalVendorLocations">
+      <EntityTypeMapping TypeName="OceanusModel.PhysicalVendorLocation">
+        <MappingFragment StoreEntitySet="PhysicalVendorLocations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="RefLocationStateId" ColumnName="RefLocationStateId" />
+          <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+          <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="MapUrl" ColumnName="MapUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reference_LocationStates">
+      <EntityTypeMapping TypeName="OceanusModel.Reference_LocationStates">
+        <MappingFragment StoreEntitySet="Reference_LocationStates">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReferenceCities">
+      <EntityTypeMapping TypeName="OceanusModel.ReferenceCity">
+        <MappingFragment StoreEntitySet="ReferenceCities">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="AccentCity" ColumnName="AccentCity" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Registrations">
+      <EntityTypeMapping TypeName="OceanusModel.Registration">
+        <MappingFragment StoreEntitySet="Registrations">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reviews">
+      <EntityTypeMapping TypeName="OceanusModel.Review">
+        <MappingFragment StoreEntitySet="Review">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="InsideScoop" ColumnName="InsideScoop" />
+          <ScalarProperty Name="OtherComments" ColumnName="OtherComments" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="IsCloaked" ColumnName="IsCloaked" />
+          <ScalarProperty Name="isInAppropriate" ColumnName="isInAppropriate" />
+          <ScalarProperty Name="IsDuplicate" ColumnName="IsDuplicate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReviewAttributes">
+      <EntityTypeMapping TypeName="OceanusModel.ReviewAttribute">
+        <MappingFragment StoreEntitySet="ReviewAttributes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AttributeName" ColumnName="AttributeName" />
+          <ScalarProperty Name="AttributeDesc" ColumnName="AttributeDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReviewAttributeValues">
+      <EntityTypeMapping TypeName="OceanusModel.ReviewAttributeValue">
+        <MappingFragment StoreEntitySet="ReviewAttributeValues">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+          <ScalarProperty Name="ReviewAttributeId" ColumnName="ReviewAttributeId" />
+          <ScalarProperty Name="AttributeValue" ColumnName="AttributeValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReviewAudios">
+      <EntityTypeMapping TypeName="OceanusModel.ReviewAudio">
+        <MappingFragment StoreEntitySet="ReviewAudio">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+          <ScalarProperty Name="AudioUrl" ColumnName="AudioUrl" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReviewBulletPoints">
+      <EntityTypeMapping TypeName="OceanusModel.ReviewBulletPoint">
+        <MappingFragment StoreEntitySet="ReviewBulletPoints">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+          <ScalarProperty Name="BulletText" ColumnName="BulletText" />
+          <ScalarProperty Name="TypeWhatWasLiked" ColumnName="TypeWhatWasLiked" />
+          <ScalarProperty Name="TypeExpectationExceeded" ColumnName="TypeExpectationExceeded" />
+          <ScalarProperty Name="TypeCanBeBetter" ColumnName="TypeCanBeBetter" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServicePackages">
+      <EntityTypeMapping TypeName="OceanusModel.ServicePackage">
+        <MappingFragment StoreEntitySet="ServicePackages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="OceanusModel.Service">
+        <MappingFragment StoreEntitySet="Services">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SixAnswerQuestions">
+      <EntityTypeMapping TypeName="OceanusModel.SixAnswerQuestion">
+        <MappingFragment StoreEntitySet="SixAnswerQuestion">
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="TitleWikiTextId" ColumnName="TitleWikiTextId" />
+          <ScalarProperty Name="DetailWikiTextId" ColumnName="DetailWikiTextId" />
+          <ScalarProperty Name="AnswerSummaryWikiTextId" ColumnName="AnswerSummaryWikiTextId" />
+          <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="ThumbsUpCount" ColumnName="ThumbsUpCount" />
+          <ScalarProperty Name="IsCloaked" ColumnName="IsCloaked" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SixAnswerQuestionResponses">
+      <EntityTypeMapping TypeName="OceanusModel.SixAnswerQuestionRespons">
+        <MappingFragment StoreEntitySet="SixAnswerQuestionResponses">
+          <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="WikiTextId" ColumnName="WikiTextId" />
+          <ScalarProperty Name="InitialContributingUserId" ColumnName="InitialContributingUserId" />
+          <ScalarProperty Name="NumAnswerUpVotes" ColumnName="NumAnswerUpVotes" />
+          <ScalarProperty Name="NumAnswerDownVotes" ColumnName="NumAnswerDownVotes" />
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SixAnswerQuestionTagMappings">
+      <EntityTypeMapping TypeName="OceanusModel.SixAnswerQuestionTagMapping">
+        <MappingFragment StoreEntitySet="SixAnswerQuestionTagMapping">
+          <ScalarProperty Name="TagMappingId" ColumnName="TagMappingId" />
+          <ScalarProperty Name="SixAnswerQuestionId" ColumnName="SixAnswerQuestionId" />
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SixAnswersQuestionFollowerMappings">
+      <EntityTypeMapping TypeName="OceanusModel.SixAnswersQuestionFollowerMapping">
+        <MappingFragment StoreEntitySet="SixAnswersQuestionFollowerMapping">
+          <ScalarProperty Name="QuestionFollowerId" ColumnName="QuestionFollowerId" />
+          <ScalarProperty Name="SixAnswerQuestionId" ColumnName="SixAnswerQuestionId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SixAnswersRelatedQuestionMappings">
+      <EntityTypeMapping TypeName="OceanusModel.SixAnswersRelatedQuestionMapping">
+        <MappingFragment StoreEntitySet="SixAnswersRelatedQuestionMapping">
+          <ScalarProperty Name="RelatedQuestionMappingId" ColumnName="RelatedQuestionMappingId" />
+          <ScalarProperty Name="OriginQuestionId" ColumnName="OriginQuestionId" />
+          <ScalarProperty Name="RelatedQuestionId" ColumnName="RelatedQuestionId" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SixLooniesFriendConnections">
+      <EntityTypeMapping TypeName="OceanusModel.SixLooniesFriendConnection">
+        <MappingFragment StoreEntitySet="SixLooniesFriendConnections">
+          <ScalarProperty Name="SixLooniesFriendConnectionId" ColumnName="SixLooniesFriendConnectionId" />
+          <ScalarProperty Name="FirstUserId" ColumnName="FirstUserId" />
+          <ScalarProperty Name="SecondUserId" ColumnName="SecondUserId" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SixLooniesPendingFriendRequests">
+      <EntityTypeMapping TypeName="OceanusModel.SixLooniesPendingFriendRequest">
+        <MappingFragment StoreEntitySet="SixLooniesPendingFriendRequests">
+          <ScalarProperty Name="SixLooniesPendingFriendRequestId" ColumnName="SixLooniesPendingFriendRequestId" />
+          <ScalarProperty Name="InitiatingUserId" ColumnName="InitiatingUserId" />
+          <ScalarProperty Name="TargetFacebookUserUID" ColumnName="TargetFacebookUserUID" />
+          <ScalarProperty Name="TargetSixLooniesUserId" ColumnName="TargetSixLooniesUserId" />
+          <ScalarProperty Name="InitiatedOn" ColumnName="InitiatedOn" />
+          <ScalarProperty Name="IsDeclined" ColumnName="IsDeclined" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="OceanusModel.Tag">
+        <MappingFragment StoreEntitySet="Tags">
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="TagName" ColumnName="TagName" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserLevels">
+      <EntityTypeMapping TypeName="OceanusModel.UserLevel">
+        <MappingFragment StoreEntitySet="UserLevel">
+          <ScalarProperty Name="UserLevelId" ColumnName="UserLevelId" />
+          <ScalarProperty Name="LevelName" ColumnName="LevelName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProfiles">
+      <EntityTypeMapping TypeName="OceanusModel.UserProfile">
+        <MappingFragment StoreEntitySet="UserProfile">
+          <ScalarProperty Name="UserProfileId" ColumnName="UserProfileId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="NumThumbsUp" ColumnName="NumThumbsUp" />
+          <ScalarProperty Name="UserLevelId" ColumnName="UserLevelId" />
+          <ScalarProperty Name="FacebookToken" ColumnName="FacebookToken" />
+          <ScalarProperty Name="FacebookUserUID" ColumnName="FacebookUserUID" />
+          <ScalarProperty Name="PromptUserForFBFriends" ColumnName="PromptUserForFBFriends" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserThumbsUpRatings">
+      <EntityTypeMapping TypeName="OceanusModel.UserThumbsUpRating">
+        <MappingFragment StoreEntitySet="UserThumbsUpRatings">
+          <ScalarProperty Name="UserThumbsUpRatingId" ColumnName="UserThumbsUpRatingId" />
+          <ScalarProperty Name="TargetUserId" ColumnName="TargetUserId" />
+          <ScalarProperty Name="Comments" ColumnName="Comments" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="VendorReviewId" ColumnName="VendorReviewId" />
+          <ScalarProperty Name="QuestionResponseId" ColumnName="QuestionResponseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserToUserFollowingMappings">
+      <EntityTypeMapping TypeName="OceanusModel.UserToUserFollowingMapping">
+        <MappingFragment StoreEntitySet="UserToUserFollowingMapping">
+          <ScalarProperty Name="FollowerMappingId" ColumnName="FollowerMappingId" />
+          <ScalarProperty Name="FollowedUserId" ColumnName="FollowedUserId" />
+          <ScalarProperty Name="FollowingUserId" ColumnName="FollowingUserId" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorCategoryMappings">
+      <EntityTypeMapping TypeName="OceanusModel.VendorCategoryMapping">
+        <MappingFragment StoreEntitySet="VendorCategoryMapping">
+          <ScalarProperty Name="CategoryMappingId" ColumnName="CategoryMappingId" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorImages">
+      <EntityTypeMapping TypeName="OceanusModel.VendorImage">
+        <MappingFragment StoreEntitySet="VendorImages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="sourceWebsiteName" ColumnName="sourceWebsiteName" />
+          <ScalarProperty Name="sourceWebsiteURL" ColumnName="sourceWebsiteURL" />
+          <ScalarProperty Name="copyrightAuthor" ColumnName="copyrightAuthor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorRelatedQuestionMappings">
+      <EntityTypeMapping TypeName="OceanusModel.VendorRelatedQuestionMapping">
+        <MappingFragment StoreEntitySet="VendorRelatedQuestionMapping">
+          <ScalarProperty Name="RelatedQuestionMappingId" ColumnName="RelatedQuestionMappingId" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vendors">
+      <EntityTypeMapping TypeName="OceanusModel.Vendor">
+        <MappingFragment StoreEntitySet="Vendors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+          <ScalarProperty Name="WebsiteURL" ColumnName="WebsiteURL" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+          <ScalarProperty Name="IsPendingReview" ColumnName="IsPendingReview" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+          <ScalarProperty Name="ProfileSubmittedToReviewOn" ColumnName="ProfileSubmittedToReviewOn" />
+          <ScalarProperty Name="PublishedOn" ColumnName="PublishedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorTraitsTagMappings">
+      <EntityTypeMapping TypeName="OceanusModel.VendorTraitsTagMapping">
+        <MappingFragment StoreEntitySet="VendorTraitsTagMapping">
+          <ScalarProperty Name="TagMappingId" ColumnName="TagMappingId" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="ContributingUserId" ColumnName="ContributingUserId" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorUserFollowerMappings">
+      <EntityTypeMapping TypeName="OceanusModel.VendorUserFollowerMapping">
+        <MappingFragment StoreEntitySet="VendorUserFollowerMapping">
+          <ScalarProperty Name="VendorFollowerId" ColumnName="VendorFollowerId" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VendorVideos">
+      <EntityTypeMapping TypeName="OceanusModel.VendorVideo">
+        <MappingFragment StoreEntitySet="VendorVideos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VendorId" ColumnName="VendorId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="VideoIdentfier" ColumnName="VideoIdentfier" />
+          <ScalarProperty Name="IsYouTube" ColumnName="IsYouTube" />
+          <ScalarProperty Name="IsVimeo" ColumnName="IsVimeo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VirtualCitiesServeds">
+      <EntityTypeMapping TypeName="OceanusModel.VirtualCitiesServed">
+        <MappingFragment StoreEntitySet="VirtualCitiesServed">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="LocationStatesId" ColumnName="LocationStatesId" />
+          <ScalarProperty Name="ReferenceCityId" ColumnName="ReferenceCityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WikiTexts">
+      <EntityTypeMapping TypeName="OceanusModel.WikiText">
+        <MappingFragment StoreEntitySet="WikiText">
+          <ScalarProperty Name="WikiTextId" ColumnName="WikiTextId" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="IsCloaked" ColumnName="IsCloaked" />
+          <ScalarProperty Name="IsInAppropriate" ColumnName="IsInAppropriate" />
+          <ScalarProperty Name="IsIrrelevantToQuestion" ColumnName="IsIrrelevantToQuestion" />
+          <ScalarProperty Name="IsDuplicate" ColumnName="IsDuplicate" />
+          <ScalarProperty Name="RequiresExplanation" ColumnName="RequiresExplanation" />
+          <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WikiTextPendingRevisions">
+      <EntityTypeMapping TypeName="OceanusModel.WikiTextPendingRevision">
+        <MappingFragment StoreEntitySet="WikiTextPendingRevisions">
+          <ScalarProperty Name="WikiTextPendingRevisionId" ColumnName="WikiTextPendingRevisionId" />
+          <ScalarProperty Name="WikiTextId" ColumnName="WikiTextId" />
+          <ScalarProperty Name="RevisionNum" ColumnName="RevisionNum" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
+          <ScalarProperty Name="IsAccepted" ColumnName="IsAccepted" />
+          <ScalarProperty Name="IsRejected" ColumnName="IsRejected" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WikiTextRevisions">
+      <EntityTypeMapping TypeName="OceanusModel.WikiTextRevision">
+        <MappingFragment StoreEntitySet="WikiTextRevision">
+          <ScalarProperty Name="WikiTextRevisionId" ColumnName="WikiTextRevisionId" />
+          <ScalarProperty Name="WikiTextId" ColumnName="WikiTextId" />
+          <ScalarProperty Name="RevisionNum" ColumnName="RevisionNum" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="IsCloaked" ColumnName="IsCloaked" />
+          <ScalarProperty Name="IsInAppropriate" ColumnName="IsInAppropriate" />
+          <ScalarProperty Name="IsIrrelevantToQuestion" ColumnName="IsIrrelevantToQuestion" />
+          <ScalarProperty Name="IsDuplicate" ColumnName="IsDuplicate" />
+          <ScalarProperty Name="RequiresExplanation" ColumnName="RequiresExplanation" />
+          <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReferenceRegions">
+      <EntityTypeMapping TypeName="OceanusModel.ReferenceRegion">
+        <MappingFragment StoreEntitySet="ReferenceRegions">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+          <ScalarProperty Name="SubdivisionCode" ColumnName="SubdivisionCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

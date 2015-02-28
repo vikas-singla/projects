@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Views/Account
+END
+ChangePassword.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Views/Account/ChangePassword.cshtml
+END
+LogOn.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Views/Account/LogOn.cshtml
+END
+ChangePasswordSuccess.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Views/Account/ChangePasswordSuccess.cshtml
+END
+Register.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/projects/!svn/ver/4/admin/src/Oceanus/Views/Account/Register.cshtml
+END

@@ -1,0 +1,208 @@
+﻿$(document).ready(function () {
+    $("#frmAddService").validationEngine({ promptPosition: "topRight", scroll: false });
+
+    $("#serviceNameInput").autocomplete({
+        minLength: 1,
+        source: function (request, response) {
+            $.ajax({
+                url: "/home/SearchServicesAutoComplete", type: "POST", dataType: "json",
+                data: { searchText: request.term, maxResults: 10 },
+                success: function (data) {
+                    response($.map(data, function (item) {
+                        return { label: item, value: item, id: item }
+                    }))
+                }
+            })
+        },
+        open: function (e, ui) {
+            var acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        }
+    });
+
+    $('#addVendorServiceSubmit').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        if ($('#frmAddService').validationEngine('validate')) {
+            $('#frmAddService').validationEngine('hideAll');
+            $('#frmAddService').submit();
+        }
+
+        return false;
+    });
+
+    $('#addVendorServiceBtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        return false;
+    });
+
+    $('#addVendorServiceBtnLrg').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        return false;
+    });
+
+    $('#closeAddVendorServiceBtn').click(function () {
+        $.fancybox.close();
+        $('#frmAddService').validationEngine('detach');
+        $('#frmAddService').validationEngine('hideAll');
+    });
+
+    $('.veditservice').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        var servid = $(this).attr("data-servid") + "";
+        if (servid != "") {
+            $('#editservformcontent').load("/vendor/GetEditServiceForm?serviceId=" + servid);
+        }
+
+        return false;
+    });
+
+    $('.vdeleteservice').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        var servid = $(this).attr("data-servid") + "";
+        if (servid != "") {
+            $('#deleteservformcontent').load("/vendor/GetDeleteServiceForm?serviceId=" + servid);
+        }
+
+        return false;
+    });
+
+    $("#addVendorServiceBtn").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#addVendorServiceBtnLrg").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $(".veditservice").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $(".vdeleteservice").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+
+    $("#frmAddService").submit(function (e) {
+        e.preventDefault();
+
+        addVendorService();
+    });
+});
+
+function addVendorService() {
+
+    // serialize input fields in form with name attributes where name attribute is key
+    var dataObject = $("#frmAddService").serializeJSON();
+    var vendorId = $("#addVendorServiceSubmit").attr("data-vid") + "";
+
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/AddVendorService",
+        data: dataObject,
+        success: function (result) {
+            showSuccessNotification('Service has been added.');
+            $.fancybox.close();
+            $('#vendorservicessect').load("/vendor/GetVendorServices?vendorId=" + vendorId);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Service could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function editVendorService() {
+
+    // serialize input fields in form with name attributes where name attribute is key
+    var dataObject = $("#frmEditService").serializeJSON();
+    var vendorId = $("#editVendorServiceSubmit").attr("data-vid") + "";
+
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/EditVendorService",
+        data: dataObject,
+        success: function (result) {
+            showSuccessNotification('Service has been updated.');
+            $.fancybox.close();
+            $('#vendorservicessect').load("/vendor/GetVendorServices?vendorId=" + vendorId);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Service could not be updated. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function deleteVendorService(vendorId, servid) {
+
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/DeleteVendorService",
+        data: {
+            vendorId: vendorId,
+            serviceId: servid
+        },
+        success: function (result) {
+            showSuccessNotification('Service has been deleted.');
+            $.fancybox.close();
+            $('#vendorservicessect').load("/vendor/GetVendorServices?vendorId=" + vendorId);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Service could not be deleted. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}

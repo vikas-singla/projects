@@ -1,0 +1,16 @@
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\bin\Debug\JobCrawler.exe.config
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\bin\Debug\JobCrawler.exe
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\bin\Debug\JobCrawler.pdb
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\bin\Debug\AxInterop.SHDocVw.dll
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\bin\Debug\Common.dll
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\bin\Debug\DatabaseHandler.dll
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\bin\Debug\Interop.SHDocVw.dll
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\bin\Debug\Common.pdb
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\bin\Debug\DatabaseHandler.pdb
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\obj\x86\Debug\JobCrawler.MainForm.resources
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\obj\x86\Debug\JobCrawler.Properties.Resources.resources
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\obj\x86\Debug\GenerateResource.write.1.tlog
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\obj\x86\Debug\JobCrawler.exe
+D:\Rainforest\BridgesAndLadders\old\trunk\JobCrawler\obj\x86\Debug\JobCrawler.pdb

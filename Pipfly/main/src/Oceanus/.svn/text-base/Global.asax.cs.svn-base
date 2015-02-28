@@ -1,0 +1,511 @@
+﻿using System;
+using System.Web.Mvc;
+using System.Web.Routing;
+using Oceanus.Data;
+using Oceanus.Logging;
+
+namespace Oceanus
+{
+    // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
+    // visit http://go.microsoft.com/?LinkId=9394801
+
+    public class MvcApplication : System.Web.HttpApplication
+    {
+        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        {
+            filters.Add(new HandleErrorAttribute());
+        }
+
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+
+            routes.MapRoute(
+                "Root", // Route name
+                "", // URL with parameters
+                new {controller = "Home", action = "Index"} // Parameter defaults
+                );
+
+            routes.MapRoute(
+                "VendorDeleteProfile",
+                "Vendor/DeleteProfile",
+                new {controller = "Vendor", Action = "DeleteProfile"}
+                );
+
+            routes.MapRoute(
+                "VendorGetVendorServices",
+                "Vendor/GetVendorServices",
+                new {controller = "Vendor", Action = "GetVendorServices"}
+                );
+
+            routes.MapRoute(
+                "VendorLike",
+                "Vendor/LikeVendor",
+                new { controller = "Vendor", Action = "LikeVendor" }
+                );
+
+            routes.MapRoute(
+                "VendorGetVendorStory",
+                "Vendor/GetVendorStory",
+                new {controller = "Vendor", Action = "GetVendorStory"}
+                );
+
+            routes.MapRoute(
+                "VendorGetVendorStats",
+                "Vendor/GetVendorStats",
+                new {controller = "Vendor", Action = "GetVendorStats"}
+                );
+
+            routes.MapRoute(
+                "VendorSearchCityLocationsAutoComplete",
+                "Vendor/SearchCityLocationsAutoComplete",
+                new {controller = "Vendor", Action = "SearchCityLocationsAutoComplete"}
+                );
+
+            routes.MapRoute(
+                "VendorGetVendorCategories",
+                "Vendor/GetVendorCategories",
+                new {controller = "Vendor", Action = "GetVendorCategories"}
+                );
+
+            routes.MapRoute(
+                "VendorAllReviews",
+                "Vendor/AllReviews",
+                new {controller = "Vendor", Action = "AllReviews"}
+                );
+
+            routes.MapRoute(
+                "VendorGetReviewSummaryAttributes",
+                "Vendor/GetReviewSummaryAttributes",
+                new {controller = "Vendor", Action = "GetReviewSummaryAttributes"}
+                );
+
+            routes.MapRoute(
+                "VendorGetVendorEmail",
+                "Vendor/GetVendorEmail",
+                new {controller = "Vendor", Action = "GetVendorEmail"}
+                );
+
+            routes.MapRoute(
+                "VendorGetVendorWebsite",
+                "Vendor/GetVendorWebsite",
+                new {controller = "Vendor", Action = "GetVendorWebsite"}
+                );
+
+            routes.MapRoute(
+                "VendorPosts",
+                "Vendor/Posts",
+                new {controller = "Vendor", Action = "Posts"}
+                );
+
+            routes.MapRoute(
+                "VendorPortfolio",
+                "Vendor/Portfolio",
+                new {controller = "Vendor", Action = "Portfolio"}
+                );
+
+            routes.MapRoute(
+                "DeleteVendorVideo",
+                "Vendor/DeleteVendorVideo",
+                new {controller = "Vendor", Action = "DeleteVendorVideo"}
+                );
+
+            routes.MapRoute(
+                "UpdateVendorVideo",
+                "Vendor/UpdateVendorVideo",
+                new {controller = "Vendor", Action = "UpdateVendorVideo"}
+                );
+
+            routes.MapRoute(
+                "AcceptVendorProfile",
+                "Vendor/AcceptVendorProfile",
+                new {controller = "Vendor", Action = "AcceptVendorProfile"}
+                );
+
+            routes.MapRoute(
+                "RejectVendorProfile",
+                "Vendor/RejectVendorProfile",
+                new {controller = "Vendor", Action = "RejectVendorProfile"}
+                );
+
+            routes.MapRoute(
+                "VendorGetFriendOfFriendsConnections",
+                "Vendor/GetFriendOfFriendsConnections",
+                new {controller = "Vendor", Action = "GetFriendOfFriendsConnections"}
+                );
+
+            routes.MapRoute(
+                "VendorGetVendorDirectFriendConnections",
+                "Vendor/GetVendorDirectFriendConnections",
+                new {controller = "Vendor", Action = "GetVendorDirectFriendConnections"}
+                );
+
+            routes.MapRoute(
+                "VendorEditVendorServicem",
+                "Vendor/EditVendorService",
+                new {controller = "Vendor", Action = "EditVendorService"}
+                );
+
+            routes.MapRoute(
+                "VendorGetDeleteServiceForm",
+                "Vendor/GetDeleteServiceForm",
+                new {controller = "Vendor", Action = "GetDeleteServiceForm"}
+                );
+
+            routes.MapRoute(
+                "VendorGetEditServiceForm",
+                "Vendor/GetEditServiceForm",
+                new {controller = "Vendor", Action = "GetEditServiceForm"}
+                );
+
+            routes.MapRoute(
+                "VendorAddTextReview",
+                "Vendor/AddTextReview",
+                new {controller = "Vendor", Action = "AddTextReview"}
+                );
+
+            routes.MapRoute(
+                "VendorDeleteService",
+                "Vendor/DeleteVendorService",
+                new {controller = "Vendor", Action = "DeleteVendorService"}
+                );
+
+            routes.MapRoute(
+                "VendorAddService",
+                "Vendor/AddVendorService",
+                new {controller = "Vendor", Action = "AddVendorService"}
+                );
+
+            routes.MapRoute(
+                "VendorAddWebsite",
+                "Vendor/AddWebsite",
+                new {controller = "Vendor", Action = "AddWebsite"}
+                );
+
+            routes.MapRoute(
+                "VendorAddEmail",
+                "Vendor/AddEmail",
+                new {controller = "Vendor", Action = "AddEmail"}
+                );
+
+            routes.MapRoute(
+                "VendorSubmitForReview",
+                "Vendor/SubmitForReview",
+                new {controller = "Vendor", Action = "SubmitForReview"}
+                );
+
+            routes.MapRoute(
+                "VendorGetTellAFriendForm",
+                "Vendor/GetTellAFriendForm",
+                new {controller = "Vendor", Action = "GetTellAFriendForm"}
+                );
+
+            routes.MapRoute(
+                "VendorGetAskToReviewForm",
+                "Vendor/GetAskToReviewForm",
+                new {controller = "Vendor", Action = "GetAskToReviewForm"}
+                );
+
+            routes.MapRoute(
+                "VendorTellAFriend",
+                "Vendor/TellAFriend",
+                new {controller = "Vendor", Action = "TellAFriend"}
+                );
+
+            routes.MapRoute(
+                "VendorAskToReview",
+                "Vendor/AskToReview",
+                new {controller = "Vendor", Action = "AskToReview"}
+                );
+
+            routes.MapRoute(
+                "VendorAddVendorStory",
+                "Vendor/AddVendorStory",
+                new {controller = "Vendor", Action = "AddVendorStory"}
+                );
+
+            routes.MapRoute(
+                "VendorDeleteCategory",
+                "Vendor/DeleteCategory",
+                new {controller = "Vendor", Action = "DeleteCategory"}
+                );
+
+            routes.MapRoute(
+                "VendorGetCategoriesAutoComplete",
+                "Vendor/GetCategoriesAutoComplete",
+                new {controller = "Vendor", Action = "GetCategoriesAutoComplete"}
+                );
+
+            routes.MapRoute(
+                "VendorGetRelatedQuestionsAutoComplete",
+                "Vendor/GetRelatedQuestionsAutoComplete",
+                new {controller = "Vendor", Action = "GetRelatedQuestionsAutoComplete"}
+                );
+
+            routes.MapRoute(
+                "VendorAddRelatedQuestion",
+                "Vendor/AddRelatedQuestion",
+                new {controller = "Vendor", Action = "AddRelatedQuestion"}
+                );
+
+            routes.MapRoute(
+                "VendorAddVendorVideo",
+                "Vendor/AddVendorVideo",
+                new {controller = "Vendor", Action = "AddVendorVideo"}
+                );
+
+            routes.MapRoute(
+                "VendorCreateProfile",
+                "Vendor/CreateVendor",
+                new {controller = "Vendor", Action = "CreateVendor"}
+                );
+
+            routes.MapRoute(
+                "VendorCreateRelatedQuestion",
+                "Vendor/CreateRelatedQuestion",
+                new {controller = "Vendor", Action = "CreateRelatedQuestion"}
+                );
+
+            routes.MapRoute(
+                "VendorGetVendorTraitsAutoComplete",
+                "Vendor/GetVendorTraitsAutoComplete",
+                new {controller = "Vendor", Action = "GetVendorTraitsAutoComplete"}
+                );
+
+            routes.MapRoute(
+                "SendVendorGetQuoteMessage",
+                "Message/SendVendorGetQuoteMessage",
+                new {controller = "Message", Action = "SendVendorGetQuoteMessage"}
+                );
+
+            routes.MapRoute(
+                "SendVendorGetQuoteMessageReply",
+                "Message/SendVendorGetQuoteMessageReply",
+                new {controller = "Message", Action = "SendVendorGetQuoteMessageReply"}
+                );
+
+            routes.MapRoute(
+                "GetMessageUsersAutocomplete",
+                "Message/GetUsersAutoComplete",
+                new {controller = "Message", Action = "GetUsersAutoComplete"}
+                );
+
+            routes.MapRoute(
+                "MessageAddMessage",
+                "Message/AddMessage",
+                new {controller = "Message", Action = "AddMessage"}
+                );
+
+            routes.MapRoute(
+                "ForwardFriendIntroductionMessage",
+                "Message/ForwardFriendIntroductionMessage",
+                new {controller = "Message", Action = "ForwardFriendIntroductionMessage"}
+                );
+
+            routes.MapRoute(
+                "GetAskForIntroductionUI",
+                "Message/GetAskForIntroductionUI",
+                new {controller = "Message", Action = "GetAskForIntroductionUI"}
+                );
+
+            routes.MapRoute(
+                "AcceptFriendIntroductionMessage",
+                "Message/AcceptFriendIntroductionMessage",
+                new {controller = "Message", Action = "AcceptFriendIntroductionMessage"}
+                );
+
+            routes.MapRoute(
+                "SendFriendIntroductionMessage",
+                "Message/SendFriendIntroductionMessage",
+                new {controller = "Message", Action = "SendFriendIntroductionMessage"}
+                );
+
+            routes.MapRoute(
+                "GetFriendIntroductionRequestDetails",
+                "Message/Introduction/{introRequestId}",
+                new {controller = "Message", Action = "GetFriendIntroductionRequestDetails"}
+                );
+
+            routes.MapRoute(
+                "MessageAddMessageReply",
+                "Message/AddMessageReply",
+                new {controller = "Message", Action = "AddMessageReply"}
+                );
+
+            routes.MapRoute(
+                "GetPredefinedWriteMessageUI",
+                "Message/GetPredefinedWriteMessageUI",
+                new {controller = "Message", Action = "GetPredefinedWriteMessageUI"}
+                );
+
+            routes.MapRoute(
+                "GetFriendIntroductionListingsForUser",
+                "Message/GetFriendIntroductionListingsForUser",
+                new {controller = "Message", Action = "GetFriendIntroductionListingsForUser"}
+                );
+
+            routes.MapRoute(
+                "GetMessageListingsForUser",
+                "Message/GetMessageListingsForUser",
+                new {controller = "Message", Action = "GetMessageListingsForUser"}
+                );
+
+            routes.MapRoute(
+                "GetMessageParticipants",
+                "Message/GetMessageParticipants",
+                new {controller = "Message", Action = "GetMessageParticipants"}
+                );
+
+            routes.MapRoute(
+                "GetVendorQuoteMessageDetails",
+                "Message/Quote/{vendorQuoteMessageId}",
+                new {controller = "Message", Action = "GetVendorQuoteMessageDetails"}
+                );
+
+            routes.MapRoute(
+                "GetMessage",
+                "Message/{messageId}",
+                new {controller = "Message", Action = "GetMessageDetails"}
+                );
+
+            routes.MapRoute(
+                "VendorAddCategory",
+                "Vendor/AddCategory",
+                new {controller = "Vendor", Action = "AddCategory"}
+                );
+
+            routes.MapRoute(
+                "VendorFollowUser",
+                "Vendor/FollowUser",
+                new {controller = "Vendor", Action = "FollowUser"}
+                );
+
+            routes.MapRoute(
+                "VendorUnfollowUser",
+                "Vendor/UnfollowUser",
+                new {controller = "Vendor", Action = "UnfollowUser"}
+                );
+
+            routes.MapRoute(
+                "VendorSearchQuestions",
+                "Vendor/SearchQuestionsAutoComplete",
+                new {controller = "Vendor", Action = "SearchQuestionsAutoComplete"}
+                );
+
+
+            routes.MapRoute(
+                "VendorFollow",
+                "Vendor/Follow",
+                new {controller = "Vendor", Action = "Follow"}
+                );
+
+            routes.MapRoute(
+                "VendorUnfollow",
+                "Vendor/Unfollow",
+                new {controller = "Vendor", Action = "Unfollow"}
+                );
+
+            routes.MapRoute(
+                "VendorDeleteTrait",
+                "Vendor/DeleteTrait",
+                new {controller = "Vendor", Action = "DeleteTrait"}
+                );
+
+            routes.MapRoute(
+                "VendorReviewUserThumbsUp",
+                "Vendor/AddReviewUserThumbsUp",
+                new {controller = "Vendor", Action = "AddReviewUserThumbsUp"}
+                );
+
+            routes.MapRoute(
+                "VendorReviewDistribution",
+                "Vendor/GetReviewDistribution",
+                new {controller = "Vendor", Action = "GetReviewDistribution"}
+                );
+
+            routes.MapRoute(
+                "VendorAddTrait",
+                "Vendor/AddTrait",
+                new {controller = "Vendor", Action = "AddTrait"}
+                );
+
+            routes.MapRoute(
+                "VendorAddAudioReview",
+                "Vendor/AddAudioReview",
+                new {controller = "Vendor", Action = "AddAudioReview"}
+                );
+
+            routes.MapRoute(
+                "VendorUnpublishedIndex",
+                "Vendor/{vendorId}/{key}",
+                new {controller = "Vendor", Action = "VendorUnpublishedIndex"}
+                );
+
+            routes.MapRoute(
+                "Vendor",
+                "Vendor/{vendorId}",
+                new {controller = "Vendor", Action = "Index"}
+                );
+
+            routes.MapRoute(
+                "SixAnswerGiveThumbsUp",
+                "Answers/AddQuestionResponseUserThumbsUp",
+                new {controller = "Answers", Action = "AddQuestionResponseUserThumbsUp"}
+                );
+
+            routes.MapRoute(
+                "SixAnswerQuestionDetail",
+                "Answers/Details/{questionId}",
+                new {controller = "Answers", Action = "Details"}
+                );
+
+            routes.MapRoute(
+                "PhysicalVendorLocations", // Route name
+                "AjaxCreate", // URL with parameters
+                new {controller = "PhysicalVendorLocations", Action = "AjaxCreate"} // Parameter defaults
+                );
+
+            routes.MapRoute(
+                "Listings",
+                "Listings/{categoryId}",
+                new {controller = "Listings", action = "Index", categoryId = UrlParameter.Optional}
+                );
+
+            routes.MapRoute(
+                "SignupDelete",
+                "SignUp/Delete/{emailAddress}",
+                new {controller = "SignUp", action = "Delete"}
+                );
+
+            routes.MapRoute(
+                "Default", // Route name
+                "{controller}/{action}/{id}", // URL with parameters
+                new {controller = "Home", action = "Index", id = UrlParameter.Optional} // Parameter defaults
+                //new { controller = "SignUp", action = "Create" }
+                );
+
+            // uncomment to see route mapping
+            //RouteDebug.RouteDebugger.RewriteRoutesForTesting(RouteTable.Routes);
+        }
+
+        protected void Application_Start()
+        {
+            try
+            {
+                Logger.Instance.Info("Site started");
+
+                AreaRegistration.RegisterAllAreas();
+
+                RegisterGlobalFilters(GlobalFilters.Filters);
+                RegisterRoutes(RouteTable.Routes);
+
+                ReferenceData.Instance.Initialize();
+            }
+
+            catch (Exception ex)
+            {
+                Logger.Instance.Error("Error starting application", ex);
+            }
+        }
+    }
+}

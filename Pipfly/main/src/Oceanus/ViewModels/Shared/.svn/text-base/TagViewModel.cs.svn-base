@@ -1,0 +1,32 @@
+﻿using System;
+
+namespace Oceanus.ViewModels.Shared
+{
+    public class TagViewModel : ViewModelBase
+    {
+        /// <summary>
+        /// Tag value
+        /// </summary>
+        public string TagName { get; set; }
+        /// <summary>
+        /// Reference to the user who added the tag
+        /// </summary>
+        public Guid ContributingUserId { get; set; }
+        /// <summary>
+        /// Date Timestamp for when the tag was added
+        /// </summary>
+        public DateTime AddedOn { get; set; }
+
+        public TagViewModel()
+        {
+        }
+
+        public TagViewModel(int? id_, string tagName_, Guid contributingUserId_, DateTime addedOn_)
+        {
+            Id = id_;
+            TagName = tagName_;
+            ContributingUserId = contributingUserId_;
+            AddedOn = addedOn_;
+        }
+    }
+}

@@ -1,0 +1,10 @@
+D:\sixloonies\projects\main\src\facebook\bin\Debug\FacebookAPI.dll
+D:\sixloonies\projects\main\src\facebook\bin\Debug\FacebookAPI.pdb
+D:\sixloonies\projects\main\src\facebook\obj\Debug\ResolveAssemblyReference.cache
+D:\sixloonies\projects\main\src\facebook\obj\Debug\FacebookAPI.dll
+D:\sixloonies\projects\main\src\facebook\obj\Debug\FacebookAPI.pdb
+D:\Startup Work\sixloonies\projects\main\src\facebook\bin\Debug\FacebookAPI.dll
+D:\Startup Work\sixloonies\projects\main\src\facebook\bin\Debug\FacebookAPI.pdb
+D:\Startup Work\sixloonies\projects\main\src\facebook\obj\Debug\ResolveAssemblyReference.cache
+D:\Startup Work\sixloonies\projects\main\src\facebook\obj\Debug\FacebookAPI.dll
+D:\Startup Work\sixloonies\projects\main\src\facebook\obj\Debug\FacebookAPI.pdb

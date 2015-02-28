@@ -1,0 +1,10 @@
+D:\oceanus-mvc\projects\main\src\MvcMaps\obj\Debug\ResolveAssemblyReference.cache
+D:\oceanus-mvc\projects\main\src\MvcMaps\bin\Debug\MvcMaps.dll
+D:\oceanus-mvc\projects\main\src\MvcMaps\bin\Debug\MvcMaps.pdb
+D:\oceanus-mvc\projects\main\src\MvcMaps\obj\Debug\MvcMaps.dll
+D:\oceanus-mvc\projects\main\src\MvcMaps\obj\Debug\MvcMaps.pdb
+D:\sixloonies\projects\main\src\MvcMaps\bin\Debug\MvcMaps.dll
+D:\sixloonies\projects\main\src\MvcMaps\bin\Debug\MvcMaps.pdb
+D:\sixloonies\projects\main\src\MvcMaps\obj\Debug\ResolveAssemblyReference.cache
+D:\sixloonies\projects\main\src\MvcMaps\obj\Debug\MvcMaps.dll
+D:\sixloonies\projects\main\src\MvcMaps\obj\Debug\MvcMaps.pdb

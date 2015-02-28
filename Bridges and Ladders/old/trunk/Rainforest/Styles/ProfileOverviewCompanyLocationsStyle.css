@@ -1,0 +1,46 @@
+﻿.lbl_profileOverviewLocationsHeaderStyle
+{
+    color:#5DAE21;
+    font-weight:bold;
+    font-size:12px;
+}
+
+.tbl_locationsOverviewStyle
+{
+    width:435px;
+}
+
+.locationsOverviewLocationHeaderStyle
+{
+    width:100px;
+    border-bottom: 1px dotted #d9d9d9;
+    padding-bottom:5px;
+}
+
+.locationsOverviewAddressHeaderStyle
+{
+    width:175px;
+    border-bottom: 1px dotted #d9d9d9;
+    padding-bottom:5px;
+}
+
+.locationsOverviewStateHeaderStyle
+{
+    width:110px;
+    border-bottom: 1px dotted #d9d9d9;
+    padding-bottom:5px;
+}
+
+.locationsOverviewMapHeaderStyle
+{
+    width:50px;
+    border-bottom: 1px dotted #d9d9d9;
+    padding-bottom:5px;
+}
+
+.lbl_profileoverviewlocationcontrolfieldstyle
+{    
+    color:#505050;
+    text-align: left;
+    font-size: 12px;
+}

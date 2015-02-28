@@ -1,0 +1,36 @@
+﻿@model Oceanus.Models.LogOnModel
+<div id="signinform">
+    <div class="signinsect">
+        @Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+        @using (Html.BeginForm("SignIn", "Account", new {returnURL = (ViewBag.ReturnUrl == null ? ViewContext.HttpContext.Request.Url.AbsolutePath : ViewBag.ReturnUrl)}))
+        {
+            <div>
+                <div class="sectiontext">login</div><br />
+                <fieldset>
+                    <div class="editor-label bold">
+                        Email
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(m => m.Email)
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                    <div class="editor-label bold">
+                        Password
+                    </div>
+                    <div class="editor-field">
+                        @Html.PasswordFor(m => m.Password)
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                    <div class="editor-label">
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(m => m.RememberMe)
+                    </div>
+                    <br />
+                    <p>
+                        <input type="submit" class="btnbluestyle" value="Log On" />
+                    </p>
+                </fieldset>
+            </div>
+        }
+    </div>
+</div>

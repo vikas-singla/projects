@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Oceanus.ViewModels.GetVendorQuoteMessageVisibilityViewModel>
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="section">
+        <div class="sectiontitle">
+            <div class="titletext">
+                Message Participants
+            </div>
+        </div>
+    </div>
+    foreach (var participant in Model)
+    {
+    <a href="/account/profile?userId=@(participant.User.UserId)" class="participantlink">
+        <div class="participant">
+            <div class="name">
+                @(participant.User.FullName)</div>
+            <div class="photo">
+                <img src="/images/user.jpg" width="30px" height="30px" alt /></div>
+        </div>
+    </a>
+    }
+}

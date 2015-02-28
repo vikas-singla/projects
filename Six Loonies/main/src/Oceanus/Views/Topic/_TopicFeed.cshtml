@@ -1,0 +1,8 @@
+﻿<link href="@Url.Content("~/Content/Activity/sixloonies.activity.feed.css")" rel="stylesheet" type="text/css" />
+<div class="topicfeed">
+    <div class="section" style="margin-top: 0;">
+        <div class="topicfeedcontent">
+            @{Html.RenderAction("GetTopicPosts", "Activity", new { userId = "BFD6A0C2-E84E-4187-B6B1-BAF9D19BBFCD", topicId = 40 });}
+        </div>
+    </div>
+</div>

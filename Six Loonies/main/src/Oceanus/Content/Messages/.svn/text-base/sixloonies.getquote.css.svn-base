@@ -1,0 +1,108 @@
+﻿.vendorquote
+{
+    width:100%;
+    clear:both;
+    color: #444;
+}
+
+.vendorquote .quotetitle
+{
+    width:100%;
+    display:block;
+    font-size:13px;
+    padding-bottom:8px;
+    text-align:left;
+    font-weight:bold;
+    color: #444;
+    clear:both;
+}
+
+.vendorquote .btns
+{
+    width:100%;
+    clear: both;
+    display: block;
+    text-align: right;
+    margin: 2px auto;
+}
+
+.vendorquote #vendorQuoteBudget
+{
+    width:45px;
+    margin:0 0 0 3px;
+    font-weight:normal;
+    font-size:14px;
+}
+
+.vendorquote .additionaldetail, .vendorquote .additionaldetail a, .vendorquote .additionaldetail a:hover, .vendorquote .additionaldetail a:visited
+{
+    width:100%;
+    clear:both;
+    display:block;
+    position:relative;
+}
+
+.vendorquote .additionaldetail a, .vendorquote .additionaldetail a:hover, .vendorquote .additionaldetail a:visited
+{
+    padding-bottom:8px;
+}
+
+.vendorquote .input, .vendorquote .quotebudgetinput
+{
+    width:100%;
+    display:block;
+    text-align:left;
+    clear:both;
+}
+
+.vendorquote .quotebudgetinput
+{
+    color:#106fb8;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.vendorquote .quotebudgetinput .cents
+{
+    color:#444;
+    font-weight:normal;
+    font-size:14px;
+}
+
+.vendorquote .input input, .vendorquote .input textarea
+{
+    resize:none;
+    font-size:12px;
+    width:425px;
+    padding-top:4px;
+    padding-bottom:4px;
+}
+
+.vendorquote .input textarea
+{
+    min-height:80px;
+}
+
+.vendorquote .additionaldetail .showdetails
+{
+    background: url('/images/scrollarrow_down.gif');
+    width: 12px;
+    height: 12px;
+    display: block;
+    float:left;
+    position:relative;
+    top:2px;
+    margin-right: 5px;
+}
+
+.vendorquote .additionaldetail .hidedetails
+{
+    background: url('/images/scrollarrow_up.gif');
+    width:12px;
+    height:12px;
+    display:block;
+    float:left;
+    position:relative;
+    top:2px;
+    margin-right:5px;
+}

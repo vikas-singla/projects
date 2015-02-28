@@ -1,0 +1,112 @@
+﻿.CompanySearchHeader
+{
+    font-style: normal;
+    font-size: 14px;
+    font-weight: bold;
+    color: #505050;
+    border-bottom: 1px solid #d0d0d0;
+}
+.CompanySearchHeaderWithBackgroundColor
+{
+    font-style: normal;
+    font-size: 18px;
+    font-weight: bold;
+    color: #004A7F;
+    background-color: #D9E2FF;
+    vertical-align: middle;
+}
+.SearchCompanyByCategory
+{
+    font-style: normal;
+    font-size: 10px;
+    font-weight: normal;
+    color: #004A7F;
+    background-color: #D9E2FF;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.AlphabeticalListOfCompanies
+{
+    font-style: normal;
+    font-size: 10px;
+    font-weight: normal;
+    color: #004A7F;
+    vertical-align: top;
+    text-align: left;
+    text-indent: 0px;
+    border-bottom: 1px dashed #d0d0d0;
+    border-left: 1px solid #d0d0d0;
+    border-right: 1px solid #d0d0d0;
+    border-top: 1px solid #d0d0d0;
+}
+.CompanyListSeparator
+{
+    border-bottom: 1px dashed #d0d0d0;
+}
+
+.DoubleBorderBottom
+{
+    border-bottom: 1px double #d0d0d0;
+}
+
+.DiscussionTopicHeading
+{
+    font-style: normal;
+    font-size: 14px;
+    font-weight: bold;
+    color: #505050;
+    text-align: left;
+}
+.CompanyTitle
+{
+    color: #106FB8;
+    padding: 0px;
+    border-width: 0px;
+}
+.CompanyShortSearchDescription
+{
+    font-style: normal;
+    font-size: 12px;
+    color: #505050;
+}
+.CompanyCategory
+{
+    font-style: normal;
+    font-size: 12px;
+    color: #505050;
+}
+
+.headerlabelstyle
+{
+    color: #505050;
+    border: none;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: left;
+    vertical-align: middle;
+    padding: 1px;
+}
+.ListSearchExtenderPrompt
+{
+    display: none;
+}
+.ArticleListPageTitleTable
+{
+    width: 100%;
+    padding: 5px 0px 5px 0px;
+    border: none;
+}
+.ArticleListPageHeader
+{
+    font-style: normal;
+    font-size: 16px;
+    font-weight: bold;
+    color: #004A7F;
+    text-align: left;
+    border-bottom: 1px solid #d0d0d0;
+}
+.LogoCompanyLinkStyle, .LogoCompanyLinkStyle img
+{
+    border:none;
+}

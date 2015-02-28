@@ -1,0 +1,39 @@
+﻿@model Oceanus.ViewModels.VirtualCitiesServedViewModel
+@{
+    ViewBag.Title = "Create";
+}
+<div style="border: 1px solid #e0e0e0;">
+    <h3>
+        Add a new Virtual Location</h3>
+    <form name="physicalLocation" action="" id="virtLocForm">
+    <fieldset>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.City)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.City, new { id = "virtLocCity" })
+            <label class="error" for="virtLocCity" id="virtLocCity_error">
+                This field is required.</label>
+        </div>
+        <div class="editor-label">
+            Country
+        </div>
+        <div class="editor-field">
+            <select id="VirtualCountryList" name="Countries">
+            </select>
+        </div>
+        <div class="editor-label">
+            State
+        </div>
+        <div class="editor-field">
+            <select id="VirtualStateList" name="States">
+            </select>
+        </div>
+        <br />
+        <br />
+        <p>
+            <input type="submit" value="Save Virtual Location" id="virtlocsubmit" />
+        </p>
+    </fieldset>
+    </form>
+</div>

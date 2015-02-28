@@ -1,0 +1,36 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <link href="@Url.Content("~/Content/Overlay/sixloonies.expandnetwork.overlay.css")" rel="stylesheet" type="text/css" />
+    Guid currentUserId = (Guid)Membership.GetUser().ProviderUserKey;
+           
+    <div style="display: none;">
+        <div class="expandnetworkoverlay" id="fbexpandnetprompt">
+            <div class="content">
+                <div class="overlaytitle">
+                    Invite Friends to Pipfly
+                </div>
+                <div class="formfields">
+                    <div class="expandnetworkscrollpanel">
+                        <div class="scrollbar">
+                            <div class="track">
+                                <div class="thumb">
+                                    <div class="end">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="viewport">
+                            <div class="overview">
+                                @{Html.RenderAction("UserProfileExpandNetwork", "Account");}
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="btns">
+                        <a href="#" class="btnstyle close" onclick="javascript: $.fancybox.close();">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

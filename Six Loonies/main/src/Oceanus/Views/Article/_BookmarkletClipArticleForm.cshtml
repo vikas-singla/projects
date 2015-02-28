@@ -1,0 +1,93 @@
+﻿@model Oceanus.ViewModels.ArticleViewModel
+@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.JavaScript()
+        .Add("~/Scripts/sixloonies.marklet.clipitem.js")
+        .ForceRelease()
+        .Render("~/cache/sixloonies.marklet.clip.#.js")
+    );
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Get the parent page URL as it was passed in, for browsers that don't support
+        // window.postMessage (this URL could be hard-coded).
+        var parent_url = '@(Model.WebPage.WebDomainUrl)';
+        $(window).load(function () {
+            $.postMessage({ if_height: $('body').outerHeight(true) }, parent_url, parent);
+        });
+        $(window).resize(function () {
+            $.postMessage({ if_height: $('body').outerHeight(true) }, parent_url, parent);
+        });
+    });
+</script>
+<div class="fullsect maincontentsect">
+    <div class="formcontainer">
+        <form id="sl_frmClipStory">
+        <div class="clipstorytitle">
+            Clip Article
+        </div>
+        <div class="formfields" style="clear: both;">
+            <div class="formfield">
+                <div class="lbl">
+                    Type:</div>
+                <div class="field" style="overflow:auto;padding:2px;width:461px;height:25px;">
+                    <label>
+                        <input type="radio" title="News" value="@(Oceanus.Controllers.ClipHelper.ArticleTypes.News)" style="float: left;" id="articletypenews"
+                        name="articletype" checked="checked" /><span>News</span>
+                    </label>
+                    <label>
+                        <input type="radio" title="Fact" value="@(Oceanus.Controllers.ClipHelper.ArticleTypes.Fact)" style="float: left;" id="articletypefact"
+                        name="articletype" /><span>Fact</span>
+                    </label>
+                    <label>
+                        <input type="radio" title="How To" value="@(Oceanus.Controllers.ClipHelper.ArticleTypes.HowTo)" style="float: left;" id="articletypehowto"
+                        name="articletype" /><span>How To</span>
+                    </label>
+                    <label>
+                        <input type="radio" title="Opinion" value="@(Oceanus.Controllers.ClipHelper.ArticleTypes.Opinion)" style="float: left;" id="articletypeopinion"
+                        name="articletype" /><span>Opinion</span>
+                    </label>
+                    <label>
+                        <input type="radio" title="Other" value="@(Oceanus.Controllers.ClipHelper.ArticleTypes.Other)" style="float: left;" name="articletype"
+                        id="articletypeother" /><span>Other</span>
+                    </label>
+                </div>
+            </div>
+            <div class="formfield">
+                <div class="lbl">
+                    Comments <span class="smalltext" style="color: #888; position: relative; top: -1px;">
+                    </span>:
+                </div>
+                <div class="field">
+                    <div class="descfield">
+                        <textarea id="sl_addarticlecomments" name="comments" rows="1" cols="1"></textarea>
+                        <div class="descfieldcaption">
+                            Type <b>#</b> to add tags (e.g., #awesome) in the comments
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="formfield" style="margin-top: 10px; margin-bottom: 10px;">
+                <div class="lbl">
+                    Share With <span class="smalltext" style="color: #888; position: relative; top: -1px;">
+                        (optional)</span>:</div>
+                <div class="field">
+                    <input id="shareArticleRecipientInput" />
+                </div>
+            </div>
+            <div class="btns">
+                <a href="#" class="btnbluestyle" id="sl_addarticleclipbtn" data-article-id="@(Model.ArticleId)">
+                    Clip It</a>
+                <div id="sl_processingcaption" style="display:none;">
+                    <img src="/images/transparent_loader.gif" width="16px" alt /><span style="padding-left: 10px;
+                        position: relative; top: -5px;">Processing Clip...</span>
+                </div>
+            </div>
+        </div>
+        <div class="cliparticlecontent">
+            @Html.Raw(Model.ArticleMarkup)
+        </div>
+        </form>
+    </div>
+</div>

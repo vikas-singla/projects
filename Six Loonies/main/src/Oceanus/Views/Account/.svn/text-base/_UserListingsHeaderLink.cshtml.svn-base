@@ -1,0 +1,5 @@
+﻿@if (ViewBag.LoggedInUserGuid != null)
+{
+    <li><a href="/?contributingUserId=@(ViewBag.LoggedInUserGuid.ToString())" title="View my listing of services">
+        myListings</a></li>
+}

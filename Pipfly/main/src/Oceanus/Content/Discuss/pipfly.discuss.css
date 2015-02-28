@@ -1,0 +1,181 @@
+﻿.discusscontainer
+{
+    margin:0 auto;
+    clear:both;
+    overflow:auto;
+    background:#fff;
+}
+
+.authorpostpanel
+{
+    width:715px;
+    margin:0 auto;
+    clear:both;
+    overflow:auto;
+}
+
+.authorpostpanel .leftpanel
+{    
+    width:160px;
+    float:left;
+}
+
+.authorpostpanel .rightpanel
+{
+    float:left;
+    width:445px;
+    margin:10px 0;
+    padding:10px 20px 20px 20px;
+    margin-left:10px;
+    border: 1px solid #DADADA;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: url('../../images/sitetheme/background.png') bottom left;
+    box-shadow: 0 1px 5px rgba(100,100,100,.1) inset,0 1px 5px rgba(255,255,255,0.5);
+    -moz-box-shadow: 0 1px 5px rgba(100,100,100,.1) inset,0 1px 5px rgba(255,255,255,0.5);
+    -webkit-box-shadow: 0 1px 5px rgba(100,100,100,.1) inset,0 1px 5px rgba(255,255,255,0.5);
+}
+
+.authorpostpanel #posttypemenu
+{
+    float:left;
+    padding:10px 0;
+    width:160px;
+    display:block;
+    overflow:auto;
+}
+
+.authorpostpanel #posttypemenu .posttypemenuitem, .authorpostpanel #posttypemenu .posttypemenuitem:visited
+{
+    margin:10px 0;
+    padding:10px 25px 10px 0;
+    width:135px;
+    text-decoration:none;
+    display:block;
+    font-size:18px;
+    color:#666;
+    text-align:right;
+}
+
+.authorpostpanel #posttypemenu .posttypemenuitem:hover
+{
+    background: url(/images/sitetheme/InviteFriendsNav.png) 0 -36px no-repeat;
+    margin:10px 0;
+    padding:10px 25px 10px 0;
+    width:135px;
+    text-decoration:none;
+    display:block;
+    font-size:18px;
+    color:#666;
+    text-align:right;
+}
+
+.authorpostpanel #posttypemenu .selposttypemenuitem
+{
+    background: url(/images/sitetheme/InviteFriendsNav.png) 0 0 no-repeat;
+    margin:10px 0px;
+    padding:10px 25px 10px 0;
+    width:135px;
+    text-decoration:none;
+    display:block;
+    font-size:18px;
+    color:#666;
+    text-align:right;
+}
+
+.authorpostpanel .addMediaForm .formfield input, .authorpostpanel .addMediaForm .formfield textarea
+{
+    width:410px;
+    padding:5px;
+    font-size:15px;
+}
+
+.authorpostpanel .addMediaForm
+{
+    width:430px;
+    overflow:hidden;
+    clear:both;
+    padding:2px 0px 2px 0px;
+}
+
+.authorpostpanel .addMediaForm .lblHeader
+{
+    color:#555;
+    font-size:14px;
+    font-weight:bold;
+    text-shadow: 2px 2px 5px #DDD;
+    padding-top:15px;
+    padding-bottom:5px;
+}
+
+.authorpostpanel .addMediaForm .formlblfootnote
+{
+    font-size:12px;
+    padding-top:3px;
+}
+
+.authorpostpanel .addMediaForm .upload .uinput
+{
+    width:400px;
+    padding:10px;    
+    border:1px dashed #c9c9c9;
+    margin-top:3px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.authorpostpanel .addMediaForm .upload .uinput ul
+{
+    list-style-type:square;
+    margin-left:20px;
+}
+
+.authorpostpanel .addMediaForm .upload
+{
+    width:100%;
+    clear:both;
+    padding-top:10px;
+}
+
+.authorpostpanel .addMediaForm .embedvid
+{
+    width:100%;
+    clear:both;
+    padding-top:10px;
+}
+
+.authorpostpanel .addMediaForm .embedvid .markupinput
+{
+    background-color:#f5f5f5;
+    width:410px;
+    clear:both;
+    margin-top:3px;
+    font-weight:normal;
+    font-size:12px;
+    display:block;
+    padding:10px;
+    line-height:12px;
+    color:#7e7e7e;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.authorpostpanel .addMediaForm .embedvid textarea
+{
+    width:404px;
+    background-color:#fff;
+    color:#444;
+    resize:none;
+    margin-top:10px;
+}
+
+.authorpostpanel .addMediaForm .formfieldcenter
+{
+    width:100%;
+    overflow:hidden;
+    text-align:center;
+    padding:2px 0px 2px 0px;
+}

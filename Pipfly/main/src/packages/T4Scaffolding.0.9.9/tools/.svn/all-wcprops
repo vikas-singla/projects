@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools
+END
+T4Scaffolding.Format.ps1xml
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/T4Scaffolding.Format.ps1xml
+END
+T4Scaffolding.dll
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/T4Scaffolding.dll
+END
+init.ps1
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/init.ps1
+END
+T4Scaffolding.NuGetServices.dll
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/T4Scaffolding.NuGetServices.dll
+END
+install.ps1
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/install.ps1
+END
+scaffoldingTabExpansion.psm1
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/scaffoldingTabExpansion.psm1
+END
+uninstall.ps1
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/uninstall.ps1
+END

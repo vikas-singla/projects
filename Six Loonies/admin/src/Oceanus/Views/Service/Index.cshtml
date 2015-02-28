@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Oceanus.ViewModels.ServiceViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+<h3>
+    Vendor's Services</h3>
+@if (Model == null || Model.Count() == 0)
+{ 
+    <p>
+        There are currently no services associated with this vendor.</p>
+}
+<table>
+    <tr>
+        <th>
+            Service Name
+        </th>
+        <th>
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+               @item.Name
+            </td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <td>
+                    <a href="#" onclick="javascript: loadServiceEdit('@(item.Id)');">Edit</a>
+                </td>
+                <td>
+                    <input type="image" src="/Images/delete.png" alt="X" onclick="javascript: deleteService('@(item.Id)');return false;" />
+                </td>
+            }
+        </tr>
+    }
+</table>

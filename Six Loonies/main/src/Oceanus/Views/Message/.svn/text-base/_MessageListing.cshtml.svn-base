@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Oceanus.ViewModels.BaseMessageViewModel>
+<div class="section">
+    <div class="sectiontitle">
+        <div class="titletext">
+            Messages (@(Model != null ? Model.Where(m => m.MessageIsUnreadForCurrentUser == true).AsEnumerable().Count() : 0))
+        </div>
+        <div class="alignright">
+            <a href="#writeMessageForm" class="editsect" id="writemessagelink">+ New Message</a>
+        </div>
+    </div>
+    @if (Model != null && Model.Count() > 0)
+    {
+        <div class="messagelisting">
+            @foreach (var message in Model)
+            {          
+                <div class="message @(message.MessageIsUnreadForCurrentUser ? "messageunreadbg" : "")">
+                    <div class="userpic">
+                        <img src="/images/user.jpg" width="50px" height="50px" alt />
+                    </div>
+                    <div class="messagedetails">
+                        @if (message.MessageIsUnreadForCurrentUser)
+                        {
+                            <div class="unreadmarker" title="Unread Message">
+                                &#149;</div>
+                        }
+                        <a class="sendername" href="/account/profile?userid=@(message.InitiatingUserId)">@(message.InitiatingUser.FullName)
+                        </a>
+                        <div class="subject">
+                            <a href="/message/@(message.MessageId)" class="@(message.MessageIsUnreadForCurrentUser ? "bold " : "")">@(message.Subject)</a>
+                        </div>
+                        <div class="datestamp">@(message.LastUpdatedOn.ToString("MMMM d, yyyy"))
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {    
+        <div id="nomsgs">
+            There are currently no messages for you.
+        </div>
+    }
+</div>

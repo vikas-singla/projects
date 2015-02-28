@@ -1,0 +1,7 @@
+D:\Rainforest\BridgesAndLadders\old\trunk\DatabaseService\bin\DatabaseService.dll
+D:\Rainforest\BridgesAndLadders\old\trunk\DatabaseService\bin\DatabaseService.pdb
+D:\Rainforest\BridgesAndLadders\old\trunk\DatabaseService\bin\RainForestAdmin.dll
+D:\Rainforest\BridgesAndLadders\old\trunk\DatabaseService\bin\RainForestAdmin.pdb
+D:\Rainforest\BridgesAndLadders\old\trunk\DatabaseService\obj\Debug\ResolveAssemblyReference.cache
+D:\Rainforest\BridgesAndLadders\old\trunk\DatabaseService\obj\Debug\DatabaseService.dll
+D:\Rainforest\BridgesAndLadders\old\trunk\DatabaseService\obj\Debug\DatabaseService.pdb

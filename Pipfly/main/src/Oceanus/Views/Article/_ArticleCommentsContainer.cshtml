@@ -1,0 +1,34 @@
+﻿<div class="fullsect">
+    <div class="section" style="margin-top: 0px;">
+        <div class="userwall">
+            @if (Request.IsAuthenticated)
+            {
+                <div class="walltitle">
+                    <div class="walltitletext">
+                        Share your thoughts on the article
+                    </div>
+                </div>
+                <div id="newtextpost" class="newwallpost">
+                    <textarea id="newwallpostinput" rows="1" cols="1" data-article-id="@(ViewBag.ArticleId)"></textarea>
+                    <div class="wallposttextareaarrow">
+                    </div>
+                    <div class="postbtns">
+                        <a href="#" id="addnewuserpostbtn" class="btnbluestyle" data-article-id="@(ViewBag.ArticleId)">
+                            Post</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="walltitle">
+                    <div class="walltitletext">
+                        Comments
+                    </div>
+                </div>
+            }
+            <div id="userwallposts">
+                @{Html.RenderAction("GetArticleCommentPosts", new { articleId = ViewBag.ArticleId });}
+            </div>
+        </div>
+    </div>
+</div>

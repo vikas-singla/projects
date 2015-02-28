@@ -1,0 +1,244 @@
+﻿@model Oceanus.ViewModels.Shared.BaseTagViewModel
+@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/topic/pipfly.topic.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.topic.#.css")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/articles/pipfly.articles.css")
+            .Add("~/Content/clips/pipfly.clips.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.collage.#.css")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+            Bundle.JavaScript()
+            .Add("~/Scripts/pipfly.layout.helper.js")
+            .ForceRelease()
+            .Render("~/cache/pipfly.layout.helper_#.js")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+            Bundle.JavaScript()
+            .Add("~/Scripts/pipfly.articles.helper.js")
+            .Add("~/Scripts/pipfly.topics.js")
+            .Render("~/cache/pipfly.topic.scripts_#.js")
+        );
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        @if (ViewBag.ArticleType != Oceanus.Controllers.ArticleController.ArticleTypes.All)
+        {
+            <text>
+                $('.topicsectiontabs .articletab').click();
+            </text>
+        }
+        else
+        {
+            <text>
+                $('#ddmenuallarticles').click(function () {
+                    $('.topicsectiontabs .articletab').click();
+                    return false;
+                });
+            </text>
+        }
+    });
+    var filterByFriendsParam = @ViewBag.FilterByFriends.ToString().ToLower();
+</script>
+<div class="fullsect topic" id="maintopiccontainer" data-topic-id="@(Model.Id)">
+    <div class="theader">
+        <div class="theadertext">
+            Tag - #@(Model.TagName)
+            &nbsp; 
+            @if (!(ViewBag.CurrLoggedInUserIsFollower != null && ((bool)ViewBag.CurrLoggedInUserIsFollower)))
+            {
+                <a href="#" class="btnstyle followtopicbtn" data-topic-id="@(Model.Id)">
+                    <img src="/images/plus.gif" width="16px" height="16px" alt /><span>Follow</span></a>
+            }
+            else
+            {
+                <a href="#" class="btnundo unfollowtopicbtn" data-topic-id="@(Model.Id)">
+                    <img src="/images/tick.png" width="16px" height="16px" alt /><span>Unfollow</span></a>
+            }
+        </div>
+    </div>
+    @{
+        char[] tabSort = new char[3];
+        bool isPhotoFirst = false;
+        bool isVideoFirst = false;
+        bool isArticleFirst = false;
+        if (ViewBag.NumArticles > ViewBag.NumPhotos && ViewBag.NumArticles > ViewBag.NumVideos)
+        {
+            tabSort[0] = 'A';
+            tabSort[1] = 'P';
+            tabSort[2] = 'V';
+            isArticleFirst = true;
+        }
+        else if (ViewBag.NumArticles > ViewBag.NumPhotos && ViewBag.NumArticles < ViewBag.NumVideos)
+        {
+            tabSort[0] = 'V';
+            tabSort[1] = 'A';
+            tabSort[2] = 'P';
+            isVideoFirst = true;
+        }
+        else if (ViewBag.NumArticles < ViewBag.NumPhotos && ViewBag.NumArticles > ViewBag.NumVideos)
+        {
+            tabSort[0] = 'P';
+            tabSort[1] = 'A';
+            tabSort[2] = 'V';
+            isPhotoFirst = true;
+        }
+        else if (ViewBag.NumArticles <= ViewBag.NumPhotos && ViewBag.NumArticles <= ViewBag.NumVideos)
+        {
+            tabSort[0] = 'P';
+            tabSort[1] = 'V';
+            tabSort[2] = 'A';
+            isPhotoFirst = true;
+        }
+    }
+    <div class="tcontent">
+        <div class="optionbar" style="margin:14px 14px 5px 14px;">
+            <ul class="topicsectiontabs" id="topicsectiontabs" style="@(ViewBag.ArticleType == Oceanus.Controllers.ArticleController.ArticleTypes.All ? "" : "width:450px;")">
+                @for (int i = 0; i < tabSort.Count(); ++i)
+                {
+                    switch (tabSort[i])
+                    {
+                        case 'A':
+                    <li class="@(isArticleFirst ? "selected" : "")"><a href="#photos" class="topicsectionlink articletab"
+                        rel="#topicarticlessect">
+                        <img src="/images/sitetheme/story_icon.png" alt /><span class="text">ARTICLES@(ViewBag.ArticleType == Oceanus.Controllers.ArticleController.ArticleTypes.All ? "" : (": " + ViewBag.ArticleType))</span><img
+                            src="/Images/scrollarrow_down.gif" class="topicsectbarimg" alt="" width="12px"
+                            height="12px" /></a>
+                        <div class="ddmenu" style="left: -1px; min-width: 100px;">
+                            <div class="menulink">
+                                <a id="ddmenuallarticles" href="/t/@(Model.LowerTagName)/@(ViewBag.FilterByFriends ? "friends" : "")@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                    All</a>
+                            </div>
+                            <div class="menulink">
+                                <a href="/t/@(Model.LowerTagName)/news/@(ViewBag.FilterByFriends ? "friends" : "")@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                    News</a>
+                            </div>
+                            <div class="menulink">
+                                <a href="/t/@(Model.LowerTagName)/facts/@(ViewBag.FilterByFriends ? "friends" : "")@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                    Facts</a>
+                            </div>
+                            <div class="menulink">
+                                <a href="/t/@(Model.LowerTagName)/opinion/@(ViewBag.FilterByFriends ? "friends" : "")@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                    Opinion</a>
+                            </div>
+                            <div class="menulink">
+                                <a href="/t/@(Model.LowerTagName)/howto/@(ViewBag.FilterByFriends ? "friends" : "")@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                    How To</a>
+                            </div>
+                            <div class="menulink">
+                                <a href="/t/@(Model.LowerTagName)/other/@(ViewBag.FilterByFriends ? "friends" : "")@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                    Other</a>
+                            </div>
+                        </div>
+                    </li>
+                                                                    break;
+                        case 'P':
+                    <li class="@(isPhotoFirst ? "selected" : "")"><a href="#photos" class="topicsectionlink"
+                        rel="#topicphotosect" title="Click here to view photos contributed on the topic">
+                        <img src="/images/sitetheme/photo_icon.png" alt /><span class="text">PHOTOS</span></a></li>
+                           break;
+                        case 'V':
+                    <li class="@(isVideoFirst ? "selected" : "")"><a href="#videos" class="topicsectionlink"
+                        rel="#topicvideosect" title="Click here to view videos contributed on the topic">
+                        <img src="/images/sitetheme/video_icon.png" alt /><span class="text">VIDEOS</span></a></li>
+                           break;
+                        default:
+                           break;
+                    }
+                }
+            </ul>
+            <div class="contentfilterbtns">
+                <ul>
+                    <li class="@(ViewBag.FilterByFriends ? "selected" : "")">Filter By@(ViewBag.FilterByFriends ? ": My Friends" : "")
+                        <img src="/Images/scrollarrow_down.gif" alt="" width="12px" height="12px" />
+                        <div class="ddmenu" style="left: -1px; min-width: 120px;">
+                            <div class="menulink">
+                                <a href="/t/@(Model.LowerTagName)/@(ViewBag.ArticleType == Oceanus.Controllers.ArticleController.ArticleTypes.All ? "" : ViewBag.ArticleType.ToString().ToLower())@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                    Show Everyone</a>
+                            </div>
+                            <div class="menulink">
+                                <a id="topicfilterbyfriendslink" href="/t/@(Model.LowerTagName)@(ViewBag.ArticleType == Oceanus.Controllers.ArticleController.ArticleTypes.All ? "" : ("/" + ViewBag.ArticleType.ToString().ToLower()))/friends@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                    My Friends Only</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="contentfilterbtns" style="left:auto;right:0;">
+                <ul>
+                    <li class="@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? "selected" : "")">Sort By: @(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? "Recently Added" : "Most Popular")
+                        <img src="/Images/scrollarrow_down.gif" alt="" width="12px" height="12px" />
+                        <div class="ddmenu" style="right: -1px; min-width: 120px;">
+                            <div class="menulink">
+                                <a href="/t/@(Model.LowerTagName)/@(ViewBag.ArticleType == Oceanus.Controllers.ArticleController.ArticleTypes.All ? "" : ViewBag.ArticleType.ToString().ToLower())@(ViewBag.FilterByFriends ? "/friends" : "")">
+                                    Most Popular</a>
+                            </div>
+                            <div class="menulink">
+                                <a href="/t/@(Model.LowerTagName)@(ViewBag.ArticleType == Oceanus.Controllers.ArticleController.ArticleTypes.All ? "" : ("/" + ViewBag.ArticleType.ToString().ToLower()))@(ViewBag.FilterByFriends ? "/friends" : "")/?sortby=@((int)Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded)">
+                                    Recently Added</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="topicarticlessect" class="contents" style="@(isArticleFirst ? "" : "display: none;")">
+            @if (isArticleFirst)
+            {
+                <text>
+                @{Html.RenderAction("GetTopicArticles", "Article", new { topic_id = Model.Id, articleType = ViewBag.ArticleType, filterByFriends = ViewBag.FilterByFriends, since_date = ViewBag.since_date, page = 1, sortBy = ViewBag.SortBy });}
+                </text>
+                <a class="paginationlink" href="/article/GetTopicArticles?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")topic_id=@(Html.Encode(Model.Id))&articleType=@(ViewBag.ArticleType)&filterByFriends=@(ViewBag.FilterByFriends)&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="2" style="display:none;">
+                </a>
+            }
+            else
+            {
+                <a class="paginationlink" href="/article/GetTopicArticles?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")topic_id=@(Html.Encode(Model.Id))&articleType=@(ViewBag.ArticleType)&filterByFriends=@(ViewBag.FilterByFriends)&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="1" style="display:none;">
+                </a>
+            }
+        </div>
+        <div id="topicphotosect" class="contents" style="@(isPhotoFirst ? "" : "display: none;")">
+            @if(isPhotoFirst)
+            {
+                <text>
+                @{Html.RenderAction("GetTopicPhotos", "Clip", new { topic_id = Model.Id, filterByFriends = ViewBag.FilterByFriends, since_date = ViewBag.since_date, page = 1, sortBy = ViewBag.SortBy });}
+                </text>
+                <a class="paginationlink" href="/clip/GetTopicPhotos?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")topic_id=@(Html.Encode(Model.Id))&filterByFriends=@(ViewBag.FilterByFriends)&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="2" style="display:none;">
+                </a>
+            }
+            else
+            {
+                <a class="paginationlink" href="/clip/GetTopicPhotos?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")topic_id=@(Html.Encode(Model.Id))&filterByFriends=@(ViewBag.FilterByFriends)&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="1" style="display:none;">
+                </a>
+            }
+        </div>
+        <div id="topicvideosect" class="contents" style="@(isVideoFirst ? "" : "display: none;")">
+            @if(isVideoFirst)
+            {
+                <text>
+                @{Html.RenderAction("TopicVideos", "Clip", new { topic_id = Model.Id, filterByFriends = ViewBag.FilterByFriends, since_date = ViewBag.since_date, page = 1, sortBy = ViewBag.SortBy });}
+                </text>
+                <a class="paginationlink" href="/clip/GetTopicVideos?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")topic_id=@(Html.Encode(Model.Id))&filterByFriends=@(ViewBag.FilterByFriends)&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="2" style="display:none;">
+                </a>
+            }
+            else
+            {
+                <a class="paginationlink" href="/clip/GetTopicVideos?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")topic_id=@(Html.Encode(Model.Id))&filterByFriends=@(ViewBag.FilterByFriends)&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="1" style="display:none;">
+                </a>                
+            }
+        </div>
+    </div>
+</div>

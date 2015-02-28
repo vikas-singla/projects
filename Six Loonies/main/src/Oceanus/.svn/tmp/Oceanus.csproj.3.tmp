@@ -1,0 +1,1114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{54A05D95-AF6C-4F86-AA12-9162D98A0280}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Oceanus</RootNamespace>
+    <AssemblyName>Oceanus</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.4.1.10715.0\lib\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mvc.Mailer">
+      <HintPath>..\packages\MvcMailer.1.1\lib\40\Mvc.Mailer.dll</HintPath>
+    </Reference>
+    <Reference Include="MVCControlsToolkit">
+      <HintPath>..\..\lib\MVC_CT\MVCControlsToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="RouteDebug">
+      <HintPath>..\..\lib\RouteDebugger\RouteDebug.dll</HintPath>
+    </Reference>
+    <Reference Include="SquishIt.Framework">
+      <HintPath>..\..\lib\SquishIt_0.7.0\SquishIt.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages" />
+    <Reference Include="System.Web.Helpers" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attributes\RequiresAuthenticationAttribute.cs" />
+    <Compile Include="Attributes\RequiresRoleAttribute.cs" />
+    <Compile Include="Attributes\TokenizedAuthorizeAttribute.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AnswersController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FAQController.cs" />
+    <Compile Include="Controllers\GlobalSearchController.cs" />
+    <Compile Include="Controllers\GuidelinesController.cs" />
+    <Compile Include="Controllers\Helpers\BrowserCacheAttribute.cs" />
+    <Compile Include="Controllers\Helpers\CookieDefinitions.cs" />
+    <Compile Include="Controllers\Helpers\ImageFolderDefinitions.cs" />
+    <Compile Include="Controllers\Helpers\MapHelper.cs" />
+    <Compile Include="Controllers\Helpers\UserHelper.cs" />
+    <Compile Include="Controllers\Helpers\VendorHelper.cs" />
+    <Compile Include="Controllers\Helpers\VideoHelper.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ListingController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\Helpers\MessageHelper.cs" />
+    <Compile Include="Controllers\PostController.cs" />
+    <Compile Include="Controllers\PrivacyController.cs" />
+    <Compile Include="Controllers\RadarController.cs" />
+    <Compile Include="Controllers\SignUpController.cs" />
+    <Compile Include="Controllers\TermsController.cs" />
+    <Compile Include="Controllers\UploadControllerBase.cs" />
+    <Compile Include="Controllers\VendorController.cs" />
+    <Compile Include="Controllers\VendorImageController.cs" />
+    <Compile Include="Data\Listing\ListingViewModelExtension.cs" />
+    <Compile Include="Data\Locations\LocationsViewModelExtension.cs" />
+    <Compile Include="Data\Messages\MessageViewModelExtension.cs" />
+    <Compile Include="Data\Oceanus.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Oceanus.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Post\PostViewModelExtension.cs" />
+    <Compile Include="Data\ReferenceData.cs" />
+    <Compile Include="Data\Reviews\ReviewViewModelExtension.cs" />
+    <Compile Include="Data\Six Answers\SixAnswersViewModelExtension.cs" />
+    <Compile Include="Data\SocialNetwork\SocialNetworkViewModelExtension.cs" />
+    <Compile Include="Data\User\UserViewModelExtension.cs" />
+    <Compile Include="Data\Vendor\VendorViewModelExtension.cs" />
+    <Compile Include="Filters\ListingNameStartsWithFilter.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Mailers\IUserMailer.cs" />
+    <Compile Include="Mailers\UserMailer.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Data\ViewModelExtensions.cs" />
+    <Compile Include="Models\SixLooniesMembership.cs" />
+    <Compile Include="Utilities\ImageUtilities.cs" />
+    <Compile Include="ViewModels\Admin\AdminStatsViewModel.cs" />
+    <Compile Include="ViewModels\Error\ErrorMessageViewModel.cs" />
+    <Compile Include="ViewModels\GlobalSearch\GlobalSearchViewModel.cs" />
+    <Compile Include="ViewModels\HomePage\HomeViewModel.cs" />
+    <Compile Include="ViewModels\HomePage\VendorImageShowcaseViewModel.cs" />
+    <Compile Include="ViewModels\Locations\BaseLocationsViewModel.cs" />
+    <Compile Include="ViewModels\Message\BaseGetVendorQuoteMessageViewModel.cs" />
+    <Compile Include="ViewModels\Message\GetVendorQuoteMessageResponsesViewModel.cs" />
+    <Compile Include="ViewModels\Message\GetVendorQuoteMessageVisibilityViewModel.cs" />
+    <Compile Include="ViewModels\Message\MessageResponsesViewModel.cs" />
+    <Compile Include="ViewModels\Message\BaseMessageViewModel.cs" />
+    <Compile Include="ViewModels\Message\MessageViewModel.cs" />
+    <Compile Include="ViewModels\Message\MessageVisibilityViewModel.cs" />
+    <Compile Include="ViewModels\Message\GetVendorQuoteMessageViewModel.cs" />
+    <Compile Include="ViewModels\Post\PostsViewModel.cs" />
+    <Compile Include="ViewModels\Radar\RadarReviewViewModel.cs" />
+    <Compile Include="ViewModels\Shared\BaseFilterableViewModel.cs" />
+    <Compile Include="ViewModels\Shared\FilterOrderMapping.cs" />
+    <Compile Include="ViewModels\Six Answers\BaseSixAnswersQuestionViewModel.cs" />
+    <Compile Include="ViewModels\SocialNetwork\BaseFriendIntroRequestViewModel.cs" />
+    <Compile Include="ViewModels\SocialNetwork\FriendIntroRequestViewModel.cs" />
+    <Compile Include="ViewModels\User\AllFriendConnectionsViewModel.cs" />
+    <Compile Include="ViewModels\User\FacebookFriendListViewModel.cs" />
+    <Compile Include="ViewModels\Six Answers\QuestionFollowerMappingViewModel.cs" />
+    <Compile Include="ViewModels\User\BaseUserViewModel.cs" />
+    <Compile Include="ViewModels\User\SixLooniesFriendConnectionViewModel.cs" />
+    <Compile Include="ViewModels\User\SixLooniesPendingFriendRequestViewModel.cs" />
+    <Compile Include="ViewModels\User\UserStatsViewModel.cs" />
+    <Compile Include="ViewModels\User\UserThumbsUpRatingsViewModel.cs" />
+    <Compile Include="ViewModels\User\UserToUserFollowerMappingViewModel.cs" />
+    <Compile Include="ViewModels\Vendor Profile\AverageReviewAttributeValueViewModel.cs" />
+    <Compile Include="ViewModels\Six Answers\BarebonesSixAnswersQuestionViewModel.cs" />
+    <Compile Include="ViewModels\Shared\FilterableViewModel.cs" />
+    <Compile Include="ViewModels\Listing\ListItemViewModel.cs" />
+    <Compile Include="ViewModels\Vendor Profile\BaseVendorViewModel.cs" />
+    <Compile Include="ViewModels\Vendor Profile\VendorLocationViewModel.cs" />
+    <Compile Include="ViewModels\Reviews\ReviewAttributeValueViewModel.cs" />
+    <Compile Include="ViewModels\Reviews\ReviewAttributeViewModel.cs" />
+    <Compile Include="ViewModels\Reviews\ReviewAudioViewModel.cs" />
+    <Compile Include="ViewModels\Reviews\ReviewBulletPointsViewModel.cs" />
+    <Compile Include="ViewModels\Reviews\ReviewDistributionViewModel.cs" />
+    <Compile Include="ViewModels\Reviews\ReviewViewModel.cs" />
+    <Compile Include="ViewModels\Six Answers\SixAnswerQuestionTagMappingViewModel.cs" />
+    <Compile Include="ViewModels\Six Answers\SixAnswersIndexViewModel.cs" />
+    <Compile Include="ViewModels\Six Answers\SixAnswersQuestionViewModel.cs" />
+    <Compile Include="ViewModels\Six Answers\SixAnswersRelatedQuestionMappingViewModel.cs" />
+    <Compile Include="ViewModels\Six Answers\SixAnswersTopicViewModel.cs" />
+    <Compile Include="ViewModels\Six Answers\SixAnswersUserResponseViewModel.cs" />
+    <Compile Include="ViewModels\Shared\TagViewModel.cs" />
+    <Compile Include="ViewModels\User\UserProfileViewModel.cs" />
+    <Compile Include="ViewModels\Vendor Profile\VendorCategoryMappingViewModel.cs" />
+    <Compile Include="ViewModels\Vendor Profile\VendorImageViewModel.cs" />
+    <Compile Include="ViewModels\Vendor Profile\VendorPortfolioViewModel.cs" />
+    <Compile Include="ViewModels\Vendor Profile\VendorRelatedQuestionMappingViewModel.cs" />
+    <Compile Include="ViewModels\Vendor Profile\VendorServicesViewModel.cs" />
+    <Compile Include="ViewModels\Vendor Profile\VendorStatsViewModel.cs" />
+    <Compile Include="ViewModels\Vendor Profile\VendorTraitsTagMappingViewModel.cs" />
+    <Compile Include="ViewModels\Vendor Profile\VendorUserFollowerMappingViewModel.cs" />
+    <Compile Include="ViewModels\Vendor Profile\VendorVideosViewModel.cs" />
+    <Compile Include="ViewModels\Vendor Profile\VendorViewModel.cs" />
+    <Compile Include="ViewModels\Shared\ViewModelBase.cs" />
+    <Compile Include="ViewModels\Shared\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\Listing\ListingViewModel.cs" />
+    <Compile Include="ViewModels\Authentication\SignUpViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Six Answers\WikiTextPendingRevisionViewModel.cs" />
+    <Compile Include="ViewModels\Six Answers\WikiTextRevisionViewModel.cs" />
+    <Compile Include="ViewModels\Six Answers\WikiTextViewModel.cs" />
+    <Compile Include="ViewModels\SocialNetwork\NetworkConnectionPathViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\AboutUs\sixloonies.aboutus.css" />
+    <Content Include="Content\Admin\sixloonies.admin.css" />
+    <Content Include="Content\Contact\sixloonies.contactus.css" />
+    <Content Include="Content\Plugins\validationEngine.jquery.css" />
+    <Content Include="Content\GlobalSearch\sixloonies.globalsearch.css" />
+    <Content Include="Content\FAQ\sixloonies.faq.css" />
+    <Content Include="Content\Guidelines\sixloonies.guidelines.css" />
+    <Content Include="Content\Messages\sixloonies.askforintro.css" />
+    <Content Include="Content\Messages\sixloonies.getquote.css" />
+    <Content Include="Content\Overlay\sixloonies.expandnetwork.overlay.css" />
+    <Content Include="Content\Overlay\sixloonies.vendor.overlay.css" />
+    <Content Include="Content\Plugins\jquery.jscrollpane.css" />
+    <Content Include="Content\Posts\sixloonies.posts.css" />
+    <Content Include="Content\Privacy\sixloonies.privacy.css" />
+    <Content Include="Content\Reviews\sixloonies.reviews.all.css" />
+    <Content Include="Content\Answers\sixloonies.answers.css" />
+    <Content Include="Content\Answers\sixloonies.answers.htmlstyle.css" />
+    <Content Include="Content\sixloonies.aboutus.menu.css" />
+    <Content Include="Content\sixloonies.error.css" />
+    <Content Include="Content\User\sixloonies.user.changepwd.css" />
+    <Content Include="Content\User\sixloonies.user.profile.questions.css" />
+    <Content Include="Content\User\sixloonies.user.profile.reviews.css" />
+    <Content Include="Content\Terms\sixloonies.terms.css" />
+    <Content Include="Content\User\sixloonies.expand.network.friends.css" />
+    <Content Include="Content\Follow\sixloonies.followers.css" />
+    <Content Include="Content\forms.css" />
+    <Content Include="Content\general.css" />
+    <Content Include="Content\HomePage.css" />
+    <Content Include="Content\Plugins\jquery.accordian.css" />
+    <Content Include="Content\Plugins\jquery.autocomplete.css" />
+    <Content Include="Content\Locations\sixloonies.location.edit.css" />
+    <Content Include="Content\Messages\sixloonies.messages.css" />
+    <Content Include="Content\Shared\sixloonies.paging.css" />
+    <Content Include="Content\Plugins\jquery.carousel.css" />
+    <Content Include="Content\Shared\sixloonies.questions.related.css" />
+    <Content Include="Content\Plugins\sixloonies.jplayer.css" />
+    <Content Include="Content\Plugins\jquery.fancybox-1.3.4.css" />
+    <Content Include="Content\Plugins\jquery.jqplot.css" />
+    <Content Include="Content\Plugins\sixloonies.lavalamp.css" />
+    <Content Include="Content\Listings\sixloonies.listings.css" />
+    <Content Include="Content\User\sixloonies.login.css" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\menu.css" />
+    <Content Include="Content\modal.css" />
+    <Content Include="Content\Overlay\sixloonies.general.overlay.css" />
+    <Content Include="Content\Plugins\jquery.rateit.css" />
+    <Content Include="Content\Reviews\sixloonies.review.summary.css" />
+    <Content Include="Content\Overlay\sixloonies.overlay.size.medium.css" />
+    <Content Include="Content\User\sixloonies.user.listings.css" />
+    <Content Include="Content\User\sixloonies.user.networkpath.css" />
+    <Content Include="Content\User\sixloonies.user.signin.css" />
+    <Content Include="Content\User\sixloonies.user.upload.photo.css" />
+    <Content Include="Content\Vendor\sixloonies.vendor.asktoreview.css" />
+    <Content Include="Content\Vendor\sixloonies.vendor.connected.css" />
+    <Content Include="Content\Vendor\sixloonies.vendor.profile.edit.css" />
+    <Content Include="Content\Shared\sixloonies.profile.tabs.css" />
+    <Content Include="Content\Galleria\themes\galleriaclassic\classic-loader.gif" />
+    <Content Include="Content\Galleria\themes\galleriaclassic\classic-map.png" />
+    <Content Include="Content\Galleria\themes\galleriaclassic\galleria.classic.css" />
+    <Content Include="Content\Galleria\themes\galleriaclassic\galleria.classic.min.js" />
+    <Content Include="Content\Galleria\themes\galleriaclassic\nav_arrows.png" />
+    <Content Include="Content\Galleria\themes\galleria\bar.png" />
+    <Content Include="Content\Galleria\themes\galleria\bg-black.png" />
+    <Content Include="Content\Galleria\themes\galleria\bg.png" />
+    <Content Include="Content\Galleria\themes\galleria\fullscreen.png" />
+    <Content Include="Content\Galleria\themes\galleria\galleria.twelve.css" />
+    <Content Include="Content\Galleria\themes\galleria\galleria.twelve.min.js" />
+    <Content Include="Content\Galleria\themes\galleria\loader.gif" />
+    <Content Include="Content\Galleria\themes\galleria\loader_pos.gif" />
+    <Content Include="Content\Galleria\themes\galleria\nav.png" />
+    <Content Include="Content\Galleria\themes\galleria\playpause.png" />
+    <Content Include="Content\Galleria\themes\galleria\popout.png" />
+    <Content Include="Content\Galleria\themes\galleria\separator.png" />
+    <Content Include="Content\Galleria\themes\galleria\thumbs.png" />
+    <Content Include="Content\Vendor\sixloonies.vendor.tellfriend.css" />
+    <Content Include="Content\Vendor\sixloonies.work.portfolio.edit.css" />
+    <Content Include="Content\Plugins\jquery.tiptip.css" />
+    <Content Include="Content\User\sixloonies.user.profile.css" />
+    <Content Include="Content\Vendor\sixloonies.vendor.profile.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\arrow_down.png" />
+    <Content Include="Images\arrow_up.png" />
+    <Content Include="Images\black_arrow_down.png" />
+    <Content Include="Images\BluerBubbles.jpg" />
+    <Content Include="Images\butterflies.jpg" />
+    <Content Include="Images\Camera.png" />
+    <Content Include="Images\cancel.png" />
+    <Content Include="Images\carousel\nav_arrows.png" />
+    <Content Include="Images\chipmunk_looking.jpg" />
+    <Content Include="Images\close-lg.png" />
+    <Content Include="Images\close.gif" />
+    <Content Include="Images\comingsoon.jpg" />
+    <Content Include="Images\curious_dog.jpg" />
+    <Content Include="Images\darkplus.png" />
+    <Content Include="Images\delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\dog_looking.jpg" />
+    <Content Include="Images\down_gray_arrow.png" />
+    <Content Include="Images\edit.png" />
+    <Content Include="Images\Error.png" />
+    <Content Include="Images\facebook.gif" />
+    <Content Include="Images\fancybox\blank.gif" />
+    <Content Include="Images\fancybox\fancybox-x.png" />
+    <Content Include="Images\fancybox\fancybox-y.png" />
+    <Content Include="Images\fancybox\fancybox.png" />
+    <Content Include="Images\fancybox\fancy_close.png" />
+    <Content Include="Images\fancybox\fancy_loading.png" />
+    <Content Include="Images\fancybox\fancy_nav_left.png" />
+    <Content Include="Images\fancybox\fancy_nav_right.png" />
+    <Content Include="Images\fancybox\fancy_title_left.png" />
+    <Content Include="Images\fancybox\fancy_title_main.png" />
+    <Content Include="Images\fancybox\fancy_title_over.png" />
+    <Content Include="Images\fancybox\fancy_title_right.png" />
+    <Content Include="Images\green_arrow_right.png" />
+    <Content Include="Images\jplayer.png" />
+    <Content Include="Images\loader.gif" />
+    <Content Include="Images\mappins\number_0.png" />
+    <Content Include="Images\mappins\number_1.png" />
+    <Content Include="Images\mappins\number_10.png" />
+    <Content Include="Images\mappins\number_100.png" />
+    <Content Include="Images\mappins\number_101.png" />
+    <Content Include="Images\mappins\number_102.png" />
+    <Content Include="Images\mappins\number_103.png" />
+    <Content Include="Images\mappins\number_104.png" />
+    <Content Include="Images\mappins\number_105.png" />
+    <Content Include="Images\mappins\number_106.png" />
+    <Content Include="Images\mappins\number_107.png" />
+    <Content Include="Images\mappins\number_108.png" />
+    <Content Include="Images\mappins\number_109.png" />
+    <Content Include="Images\mappins\number_11.png" />
+    <Content Include="Images\mappins\number_110.png" />
+    <Content Include="Images\mappins\number_111.png" />
+    <Content Include="Images\mappins\number_112.png" />
+    <Content Include="Images\mappins\number_113.png" />
+    <Content Include="Images\mappins\number_114.png" />
+    <Content Include="Images\mappins\number_115.png" />
+    <Content Include="Images\mappins\number_116.png" />
+    <Content Include="Images\mappins\number_117.png" />
+    <Content Include="Images\mappins\number_118.png" />
+    <Content Include="Images\mappins\number_119.png" />
+    <Content Include="Images\mappins\number_12.png" />
+    <Content Include="Images\mappins\number_120.png" />
+    <Content Include="Images\mappins\number_121.png" />
+    <Content Include="Images\mappins\number_122.png" />
+    <Content Include="Images\mappins\number_123.png" />
+    <Content Include="Images\mappins\number_124.png" />
+    <Content Include="Images\mappins\number_125.png" />
+    <Content Include="Images\mappins\number_126.png" />
+    <Content Include="Images\mappins\number_127.png" />
+    <Content Include="Images\mappins\number_128.png" />
+    <Content Include="Images\mappins\number_129.png" />
+    <Content Include="Images\mappins\number_13.png" />
+    <Content Include="Images\mappins\number_130.png" />
+    <Content Include="Images\mappins\number_131.png" />
+    <Content Include="Images\mappins\number_132.png" />
+    <Content Include="Images\mappins\number_133.png" />
+    <Content Include="Images\mappins\number_134.png" />
+    <Content Include="Images\mappins\number_135.png" />
+    <Content Include="Images\mappins\number_136.png" />
+    <Content Include="Images\mappins\number_137.png" />
+    <Content Include="Images\mappins\number_138.png" />
+    <Content Include="Images\mappins\number_139.png" />
+    <Content Include="Images\mappins\number_14.png" />
+    <Content Include="Images\mappins\number_140.png" />
+    <Content Include="Images\mappins\number_141.png" />
+    <Content Include="Images\mappins\number_142.png" />
+    <Content Include="Images\mappins\number_143.png" />
+    <Content Include="Images\mappins\number_144.png" />
+    <Content Include="Images\mappins\number_145.png" />
+    <Content Include="Images\mappins\number_146.png" />
+    <Content Include="Images\mappins\number_147.png" />
+    <Content Include="Images\mappins\number_148.png" />
+    <Content Include="Images\mappins\number_149.png" />
+    <Content Include="Images\mappins\number_150.png" />
+    <Content Include="Images\mappins\number_151.png" />
+    <Content Include="Images\mappins\number_152.png" />
+    <Content Include="Images\mappins\number_153.png" />
+    <Content Include="Images\mappins\number_154.png" />
+    <Content Include="Images\mappins\number_155.png" />
+    <Content Include="Images\mappins\number_156.png" />
+    <Content Include="Images\mappins\number_157.png" />
+    <Content Include="Images\mappins\number_158.png" />
+    <Content Include="Images\mappins\number_159.png" />
+    <Content Include="Images\mappins\number_16.png" />
+    <Content Include="Images\mappins\number_160.png" />
+    <Content Include="Images\mappins\number_161.png" />
+    <Content Include="Images\mappins\number_162.png" />
+    <Content Include="Images\mappins\number_163.png" />
+    <Content Include="Images\mappins\number_164.png" />
+    <Content Include="Images\mappins\number_165.png" />
+    <Content Include="Images\mappins\number_166.png" />
+    <Content Include="Images\mappins\number_167.png" />
+    <Content Include="Images\mappins\number_168.png" />
+    <Content Include="Images\mappins\number_169.png" />
+    <Content Include="Images\mappins\number_17.png" />
+    <Content Include="Images\mappins\number_170.png" />
+    <Content Include="Images\mappins\number_171.png" />
+    <Content Include="Images\mappins\number_172.png" />
+    <Content Include="Images\mappins\number_173.png" />
+    <Content Include="Images\mappins\number_174.png" />
+    <Content Include="Images\mappins\number_175.png" />
+    <Content Include="Images\mappins\number_176.png" />
+    <Content Include="Images\mappins\number_177.png" />
+    <Content Include="Images\mappins\number_178.png" />
+    <Content Include="Images\mappins\number_179.png" />
+    <Content Include="Images\mappins\number_18.png" />
+    <Content Include="Images\mappins\number_180.png" />
+    <Content Include="Images\mappins\number_181.png" />
+    <Content Include="Images\mappins\number_182.png" />
+    <Content Include="Images\mappins\number_183.png" />
+    <Content Include="Images\mappins\number_184.png" />
+    <Content Include="Images\mappins\number_185.png" />
+    <Content Include="Images\mappins\number_186.png" />
+    <Content Include="Images\mappins\number_187.png" />
+    <Content Include="Images\mappins\number_188.png" />
+    <Content Include="Images\mappins\number_189.png" />
+    <Content Include="Images\mappins\number_19.png" />
+    <Content Include="Images\mappins\number_190.png" />
+    <Content Include="Images\mappins\number_191.png" />
+    <Content Include="Images\mappins\number_192.png" />
+    <Content Include="Images\mappins\number_193.png" />
+    <Content Include="Images\mappins\number_194.png" />
+    <Content Include="Images\mappins\number_195.png" />
+    <Content Include="Images\mappins\number_196.png" />
+    <Content Include="Images\mappins\number_197.png" />
+    <Content Include="Images\mappins\number_198.png" />
+    <Content Include="Images\mappins\number_199.png" />
+    <Content Include="Images\mappins\number_2.png" />
+    <Content Include="Images\mappins\number_20.png" />
+    <Content Include="Images\mappins\number_200.png" />
+    <Content Include="Images\mappins\number_201.png" />
+    <Content Include="Images\mappins\number_202.png" />
+    <Content Include="Images\mappins\number_203.png" />
+    <Content Include="Images\mappins\number_204.png" />
+    <Content Include="Images\mappins\number_205.png" />
+    <Content Include="Images\mappins\number_206.png" />
+    <Content Include="Images\mappins\number_207.png" />
+    <Content Include="Images\mappins\number_208.png" />
+    <Content Include="Images\mappins\number_209.png" />
+    <Content Include="Images\mappins\number_21.png" />
+    <Content Include="Images\mappins\number_210.png" />
+    <Content Include="Images\mappins\number_211.png" />
+    <Content Include="Images\mappins\number_212.png" />
+    <Content Include="Images\mappins\number_213.png" />
+    <Content Include="Images\mappins\number_214.png" />
+    <Content Include="Images\mappins\number_215.png" />
+    <Content Include="Images\mappins\number_216.png" />
+    <Content Include="Images\mappins\number_217.png" />
+    <Content Include="Images\mappins\number_218.png" />
+    <Content Include="Images\mappins\number_219.png" />
+    <Content Include="Images\mappins\number_22.png" />
+    <Content Include="Images\mappins\number_220.png" />
+    <Content Include="Images\mappins\number_221.png" />
+    <Content Include="Images\mappins\number_222.png" />
+    <Content Include="Images\mappins\number_223.png" />
+    <Content Include="Images\mappins\number_224.png" />
+    <Content Include="Images\mappins\number_225.png" />
+    <Content Include="Images\mappins\number_226.png" />
+    <Content Include="Images\mappins\number_227.png" />
+    <Content Include="Images\mappins\number_228.png" />
+    <Content Include="Images\mappins\number_229.png" />
+    <Content Include="Images\mappins\number_23.png" />
+    <Content Include="Images\mappins\number_230.png" />
+    <Content Include="Images\mappins\number_231.png" />
+    <Content Include="Images\mappins\number_232.png" />
+    <Content Include="Images\mappins\number_233.png" />
+    <Content Include="Images\mappins\number_234.png" />
+    <Content Include="Images\mappins\number_235.png" />
+    <Content Include="Images\mappins\number_236.png" />
+    <Content Include="Images\mappins\number_237.png" />
+    <Content Include="Images\mappins\number_238.png" />
+    <Content Include="Images\mappins\number_239.png" />
+    <Content Include="Images\mappins\number_24.png" />
+    <Content Include="Images\mappins\number_240.png" />
+    <Content Include="Images\mappins\number_241.png" />
+    <Content Include="Images\mappins\number_242.png" />
+    <Content Include="Images\mappins\number_243.png" />
+    <Content Include="Images\mappins\number_244.png" />
+    <Content Include="Images\mappins\number_245.png" />
+    <Content Include="Images\mappins\number_246.png" />
+    <Content Include="Images\mappins\number_247.png" />
+    <Content Include="Images\mappins\number_248.png" />
+    <Content Include="Images\mappins\number_249.png" />
+    <Content Include="Images\mappins\number_25.png" />
+    <Content Include="Images\mappins\number_250.png" />
+    <Content Include="Images\mappins\number_251.png" />
+    <Content Include="Images\mappins\number_252.png" />
+    <Content Include="Images\mappins\number_253.png" />
+    <Content Include="Images\mappins\number_254.png" />
+    <Content Include="Images\mappins\number_255.png" />
+    <Content Include="Images\mappins\number_256.png" />
+    <Content Include="Images\mappins\number_257.png" />
+    <Content Include="Images\mappins\number_258.png" />
+    <Content Include="Images\mappins\number_259.png" />
+    <Content Include="Images\mappins\number_26.png" />
+    <Content Include="Images\mappins\number_260.png" />
+    <Content Include="Images\mappins\number_261.png" />
+    <Content Include="Images\mappins\number_262.png" />
+    <Content Include="Images\mappins\number_263.png" />
+    <Content Include="Images\mappins\number_264.png" />
+    <Content Include="Images\mappins\number_265.png" />
+    <Content Include="Images\mappins\number_266.png" />
+    <Content Include="Images\mappins\number_267.png" />
+    <Content Include="Images\mappins\number_268.png" />
+    <Content Include="Images\mappins\number_269.png" />
+    <Content Include="Images\mappins\number_27.png" />
+    <Content Include="Images\mappins\number_270.png" />
+    <Content Include="Images\mappins\number_271.png" />
+    <Content Include="Images\mappins\number_272.png" />
+    <Content Include="Images\mappins\number_273.png" />
+    <Content Include="Images\mappins\number_274.png" />
+    <Content Include="Images\mappins\number_275.png" />
+    <Content Include="Images\mappins\number_276.png" />
+    <Content Include="Images\mappins\number_277.png" />
+    <Content Include="Images\mappins\number_278.png" />
+    <Content Include="Images\mappins\number_279.png" />
+    <Content Include="Images\mappins\number_28.png" />
+    <Content Include="Images\mappins\number_280.png" />
+    <Content Include="Images\mappins\number_281.png" />
+    <Content Include="Images\mappins\number_282.png" />
+    <Content Include="Images\mappins\number_283.png" />
+    <Content Include="Images\mappins\number_284.png" />
+    <Content Include="Images\mappins\number_285.png" />
+    <Content Include="Images\mappins\number_286.png" />
+    <Content Include="Images\mappins\number_287.png" />
+    <Content Include="Images\mappins\number_288.png" />
+    <Content Include="Images\mappins\number_289.png" />
+    <Content Include="Images\mappins\number_29.png" />
+    <Content Include="Images\mappins\number_290.png" />
+    <Content Include="Images\mappins\number_291.png" />
+    <Content Include="Images\mappins\number_292.png" />
+    <Content Include="Images\mappins\number_293.png" />
+    <Content Include="Images\mappins\number_294.png" />
+    <Content Include="Images\mappins\number_295.png" />
+    <Content Include="Images\mappins\number_296.png" />
+    <Content Include="Images\mappins\number_297.png" />
+    <Content Include="Images\mappins\number_298.png" />
+    <Content Include="Images\mappins\number_299.png" />
+    <Content Include="Images\mappins\number_3.png" />
+    <Content Include="Images\mappins\number_30.png" />
+    <Content Include="Images\mappins\number_300.png" />
+    <Content Include="Images\mappins\number_31.png" />
+    <Content Include="Images\mappins\number_32.png" />
+    <Content Include="Images\mappins\number_33.png" />
+    <Content Include="Images\mappins\number_34.png" />
+    <Content Include="Images\mappins\number_35.png" />
+    <Content Include="Images\mappins\number_36.png" />
+    <Content Include="Images\mappins\number_37.png" />
+    <Content Include="Images\mappins\number_38.png" />
+    <Content Include="Images\mappins\number_39.png" />
+    <Content Include="Images\mappins\number_4.png" />
+    <Content Include="Images\mappins\number_40.png" />
+    <Content Include="Images\mappins\number_41.png" />
+    <Content Include="Images\mappins\number_42.png" />
+    <Content Include="Images\mappins\number_43.png" />
+    <Content Include="Images\mappins\number_44.png" />
+    <Content Include="Images\mappins\number_45.png" />
+    <Content Include="Images\mappins\number_46.png" />
+    <Content Include="Images\mappins\number_47.png" />
+    <Content Include="Images\mappins\number_48.png" />
+    <Content Include="Images\mappins\number_49.png" />
+    <Content Include="Images\mappins\number_5.png" />
+    <Content Include="Images\mappins\number_50.png" />
+    <Content Include="Images\mappins\number_51.png" />
+    <Content Include="Images\mappins\number_52.png" />
+    <Content Include="Images\mappins\number_53.png" />
+    <Content Include="Images\mappins\number_54.png" />
+    <Content Include="Images\mappins\number_55.png" />
+    <Content Include="Images\mappins\number_56.png" />
+    <Content Include="Images\mappins\number_57.png" />
+    <Content Include="Images\mappins\number_58.png" />
+    <Content Include="Images\mappins\number_59.png" />
+    <Content Include="Images\mappins\number_6.png" />
+    <Content Include="Images\mappins\number_60.png" />
+    <Content Include="Images\mappins\number_61.png" />
+    <Content Include="Images\mappins\number_62.png" />
+    <Content Include="Images\mappins\number_63.png" />
+    <Content Include="Images\mappins\number_64.png" />
+    <Content Include="Images\mappins\number_65.png" />
+    <Content Include="Images\mappins\number_66.png" />
+    <Content Include="Images\mappins\number_67.png" />
+    <Content Include="Images\mappins\number_68.png" />
+    <Content Include="Images\mappins\number_69.png" />
+    <Content Include="Images\mappins\number_7.png" />
+    <Content Include="Images\mappins\number_70.png" />
+    <Content Include="Images\mappins\number_71.png" />
+    <Content Include="Images\mappins\number_72.png" />
+    <Content Include="Images\mappins\number_73.png" />
+    <Content Include="Images\mappins\number_74.png" />
+    <Content Include="Images\mappins\number_75.png" />
+    <Content Include="Images\mappins\number_76.png" />
+    <Content Include="Images\mappins\number_77.png" />
+    <Content Include="Images\mappins\number_78.png" />
+    <Content Include="Images\mappins\number_79.png" />
+    <Content Include="Images\mappins\number_8.png" />
+    <Content Include="Images\mappins\number_80.png" />
+    <Content Include="Images\mappins\number_81.png" />
+    <Content Include="Images\mappins\number_82.png" />
+    <Content Include="Images\mappins\number_83.png" />
+    <Content Include="Images\mappins\number_84.png" />
+    <Content Include="Images\mappins\number_85.png" />
+    <Content Include="Images\mappins\number_86.png" />
+    <Content Include="Images\mappins\number_87.png" />
+    <Content Include="Images\mappins\number_88.png" />
+    <Content Include="Images\mappins\number_89.png" />
+    <Content Include="Images\mappins\number_9.png" />
+    <Content Include="Images\mappins\number_90.png" />
+    <Content Include="Images\mappins\number_91.png" />
+    <Content Include="Images\mappins\number_92.png" />
+    <Content Include="Images\mappins\number_93.png" />
+    <Content Include="Images\mappins\number_94.png" />
+    <Content Include="Images\mappins\number_95.png" />
+    <Content Include="Images\mappins\number_96.png" />
+    <Content Include="Images\mappins\number_97.png" />
+    <Content Include="Images\mappins\number_98.png" />
+    <Content Include="Images\mappins\number_99.png" />
+    <Content Include="Images\mic.png" />
+    <Content Include="Images\physloc.png" />
+    <Content Include="Images\plus.gif" />
+    <Content Include="Images\progressbar.gif" />
+    <Content Include="Images\rabbit_looking.jpg" />
+    <Content Include="Images\scrollarrow_down.gif" />
+    <Content Include="Images\scrollarrow_up.gif" />
+    <Content Include="Images\sitetheme\AboutNav.png" />
+    <Content Include="Images\sitetheme\aboutus\Assess.jpg" />
+    <Content Include="Images\sitetheme\aboutus\attention.jpg" />
+    <Content Include="Images\sitetheme\aboutus\dollar_icon.jpg" />
+    <Content Include="Images\sitetheme\aboutus\Feedback.jpg" />
+    <Content Include="Images\sitetheme\aboutus\Find.jpg" />
+    <Content Include="Images\sitetheme\aboutus\Sell.jpg" />
+    <Content Include="Images\sitetheme\btn_gray_background.png" />
+    <Content Include="Images\sitetheme\btn_green_background.png" />
+    <Content Include="Images\sitetheme\closelabel.gif" />
+    <Content Include="Images\sitetheme\discover.png" />
+    <Content Include="Images\sitetheme\findanswers.png" />
+    <Content Include="Images\sitetheme\homepage\chat.jpg" />
+    <Content Include="Images\sitetheme\homepage\dollar_icon.jpg" />
+    <Content Include="Images\sitetheme\homepage\eye_icon.jpg" />
+    <Content Include="Images\sitetheme\homepage\feedback.jpg" />
+    <Content Include="Images\sitetheme\homepage\find.jpg" />
+    <Content Include="Images\sitetheme\homepage\grow.jpg" />
+    <Content Include="Images\sitetheme\homepage\Interact.jpg" />
+    <Content Include="Images\sitetheme\homepage\portfolio.jpg" />
+    <Content Include="Images\sitetheme\homepage\QA.jpg" />
+    <Content Include="Images\sitetheme\homepage\stayintouch.jpg" />
+    <Content Include="Images\sitetheme\homepage\success.jpg" />
+    <Content Include="Images\sitetheme\homepage\unlock.jpg" />
+    <Content Include="Images\sitetheme\home_icon.png" />
+    <Content Include="Images\sitetheme\LogoText.png" />
+    <Content Include="Images\sitetheme\LogoText_lg.png" />
+    <Content Include="Images\sitetheme\magglass.png" />
+    <Content Include="Images\sitetheme\nav_header.jpg" />
+    <Content Include="Images\sitetheme\redx.png" />
+    <Content Include="Images\sitetheme\scrollbar-thumb-y.png" />
+    <Content Include="Images\sitetheme\scrollbar-track-y.png" />
+    <Content Include="Images\sitetheme\scrollbar-trackend-y.png" />
+    <Content Include="Images\sitetheme\search_btn.png" />
+    <Content Include="Images\sitetheme\section-top.png" />
+    <Content Include="Images\sitetheme\sharetagline.png" />
+    <Content Include="Images\sitetheme\SixLooniesLogo.png" />
+    <Content Include="Images\sitetheme\SixLooniesLogo_lg.png" />
+    <Content Include="Images\sitetheme\thumbsdown.png" />
+    <Content Include="Images\sitetheme\thumbsup-small.jpg" />
+    <Content Include="Images\sitetheme\thumbsup.png" />
+    <Content Include="Images\sitetheme\whitemagglass.png" />
+    <Content Include="Images\slideshow.png" />
+    <Content Include="Images\slideshow\ad_next.png" />
+    <Content Include="Images\slideshow\ad_prev.png" />
+    <Content Include="Images\slideshow\ad_scroll_back.png" />
+    <Content Include="Images\slideshow\ad_scroll_forward.png" />
+    <Content Include="Images\slideshow\opa75.png" />
+    <Content Include="Images\starratings\star-gold32.png" />
+    <Content Include="Images\starratings\star-red32.png" />
+    <Content Include="Images\starratings\star-small.jpg" />
+    <Content Include="Images\starratings\star-white32.png" />
+    <Content Include="Images\starratings\star.gif" />
+    <Content Include="Images\starratings\starcircles.gif" />
+    <Content Include="Images\starratings\starcirclesempty.gif" />
+    <Content Include="Images\starratings\starcirclesfull.gif" />
+    <Content Include="Images\text.png" />
+    <Content Include="Images\tick.png" />
+    <Content Include="Images\scroll_round_light.png" />
+    <Content Include="Images\tri_left.jpg" />
+    <Content Include="Images\tri_right.png" />
+    <Content Include="Images\user.jpg" />
+    <Content Include="Images\user_white.png" />
+    <Content Include="Images\video_camera.png" />
+    <Content Include="Images\video_play.png" />
+    <Content Include="Images\virtloc.png" />
+    <Content Include="Images\wizard\arrow_left.png" />
+    <Content Include="Images\wizard\arrow_right.png" />
+    <Content Include="Images\wizard\cross.png" />
+    <Content Include="Images\wizard\navBtn.gif" />
+    <Content Include="Images\wizard\navCurrentBtn.gif" />
+    <Content Include="Images\wizard\navDoneBtn.gif" />
+    <Content Include="Images\wizard\navLastDoneBtn.gif" />
+    <Content Include="Images\wizard\textfield_key.png" />
+    <Content Include="Images\wizard\tick.png" />
+    <Content Include="Scripts\editor\plugins\autoresize\editor_plugin.js" />
+    <Content Include="Scripts\Plugins\galleria.min.js" />
+    <Content Include="Scripts\graph\excanvas.min.js" />
+    <Content Include="Scripts\graph\jqplot.pieRenderer.min.js" />
+    <Content Include="Scripts\graph\jquery.jqplot.min.js" />
+    <Content Include="Scripts\jplayer\Jplayer.swf" />
+    <Content Include="Scripts\jplayer\jquery.jplayer.min.js" />
+    <Content Include="Scripts\Plugins\jquery.easing.compatibility.js" />
+    <Content Include="Scripts\Plugins\jquery.jscrollpane.min.js" />
+    <Content Include="Scripts\Plugins\jquery.mousewheel.js" />
+    <Content Include="Scripts\Plugins\jquery.scrollto.js" />
+    <Content Include="Scripts\Plugins\jquery.tinyscrollbar.min.js" />
+    <Content Include="Scripts\Plugins\jquery.tipTip.minified.js" />
+    <Content Include="Scripts\Plugins\jquery.ui.custom.min.js" />
+    <Content Include="Scripts\Plugins\jquery.jcarousel.min.js" />
+    <Content Include="Scripts\Plugins\jquery.validationEngine-en.js" />
+    <Content Include="Scripts\Plugins\jquery.validationEngine.js" />
+    <Content Include="Scripts\sixloonies.aboutus.js" />
+    <Content Include="Scripts\sixloonies.facebook.js" />
+    <Content Include="Scripts\sixloonies.globalsearch.js" />
+    <Content Include="Scripts\sixloonies.homepage.js" />
+    <Content Include="Scripts\sixloonies.message.friend.introduction.js" />
+    <Content Include="Scripts\sixloonies.messages.getquote.js" />
+    <Content Include="Scripts\sixloonies.vendor.portfolio.fancybox.js" />
+    <Content Include="Scripts\sixloonies.posts.js" />
+    <Content Include="Scripts\sixloonies.vendor.asktoreview.js" />
+    <Content Include="Scripts\sixloonies.vendor.connections.js" />
+    <Content Include="Scripts\sixloonies.vendor.service.edit.js" />
+    <Content Include="Scripts\sixloonies.vendor.tellfriend.js" />
+    <Content Include="Scripts\sixloonies.vendor.video.js" />
+    <Content Include="Scripts\sixloonies.addreview.js" />
+    <Content Include="Scripts\sixloonies.answer.index.js" />
+    <Content Include="Scripts\sixloonies.flagsddmenu.js" />
+    <Content Include="Scripts\editor\langs\en.js" />
+    <Content Include="Scripts\editor\themes\advanced\about.htm" />
+    <Content Include="Scripts\editor\themes\advanced\anchor.htm" />
+    <Content Include="Scripts\editor\themes\advanced\charmap.htm" />
+    <Content Include="Scripts\editor\themes\advanced\color_picker.htm" />
+    <Content Include="Scripts\editor\themes\advanced\editor_template.js" />
+    <Content Include="Scripts\editor\themes\advanced\editor_template_src.js" />
+    <Content Include="Scripts\editor\themes\advanced\image.htm" />
+    <Content Include="Scripts\editor\themes\advanced\img\colorpicker.jpg" />
+    <Content Include="Scripts\editor\themes\advanced\img\flash.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\icons.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\iframe.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\pagebreak.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\quicktime.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\realmedia.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\shockwave.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\trans.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\video.gif" />
+    <Content Include="Scripts\editor\themes\advanced\img\windowsmedia.gif" />
+    <Content Include="Scripts\editor\themes\advanced\js\about.js" />
+    <Content Include="Scripts\editor\themes\advanced\js\anchor.js" />
+    <Content Include="Scripts\editor\themes\advanced\js\charmap.js" />
+    <Content Include="Scripts\editor\themes\advanced\js\color_picker.js" />
+    <Content Include="Scripts\editor\themes\advanced\js\image.js" />
+    <Content Include="Scripts\editor\themes\advanced\js\link.js" />
+    <Content Include="Scripts\editor\themes\advanced\js\source_editor.js" />
+    <Content Include="Scripts\editor\themes\advanced\langs\en.js" />
+    <Content Include="Scripts\editor\themes\advanced\langs\en_dlg.js" />
+    <Content Include="Scripts\editor\themes\advanced\link.htm" />
+    <Content Include="Scripts\editor\themes\advanced\shortcuts.htm" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\content.css" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\dialog.css" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\img\buttons.png" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\img\items.gif" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\img\menu_arrow.gif" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\img\menu_check.gif" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\img\progress.gif" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\img\tabs.gif" />
+    <Content Include="Scripts\editor\themes\advanced\skins\default\ui.css" />
+    <Content Include="Scripts\editor\themes\advanced\source_editor.htm" />
+    <Content Include="Scripts\editor\tiny_mce.js" />
+    <Content Include="Scripts\editor\tiny_mce_gzip.js" />
+    <Content Include="Scripts\editor\utils\editable_selects.js" />
+    <Content Include="Scripts\editor\utils\form_utils.js" />
+    <Content Include="Scripts\editor\utils\mctabs.js" />
+    <Content Include="Scripts\editor\utils\validate.js" />
+    <Content Include="Scripts\sixloonies.emptytext.js" />
+    <Content Include="Scripts\Plugins\jquery-1.6.1.min.js" />
+    <Content Include="Scripts\Plugins\jquery.easing.min.js" />
+    <Content Include="Scripts\Plugins\jquery.elastic.js" />
+    <Content Include="Scripts\Plugins\jquery.fancybox-1.3.4.pack.js" />
+    <Content Include="Scripts\Plugins\jquery.lavalamp.min.js" />
+    <Content Include="Scripts\Plugins\jquery.rateit.min.js" />
+    <Content Include="Scripts\Plugins\MVCControlToolkit.Controls-0.9.0.min.js" />
+    <Content Include="Scripts\sixloonies.answer.detail.js" />
+    <Content Include="Scripts\sixloonies.flashdetect.js" />
+    <Content Include="Scripts\sixloonies.helper.js" />
+    <Content Include="Scripts\sixloonies.listing.index.js" />
+    <Content Include="Scripts\sixloonies.messages.js" />
+    <Content Include="Scripts\sixloonies.user.profile.js" />
+    <Content Include="Scripts\sixloonies.utils.js" />
+    <Content Include="Scripts\sixloonies.vendor.add.js" />
+    <Content Include="Scripts\sixloonies.vendor.location.add.js" />
+    <Content Include="Scripts\sixloonies.vendor.profile.js" />
+    <Content Include="Scripts\editor\tiny_mce_gzip.ashx" />
+    <Content Include="Scripts\sixloonies.vendor.service.js" />
+    <Content Include="Scripts\sixloonies.vendor.portfolio.js" />
+    <Content Include="Scripts\uploadify\botao_150x30.png" />
+    <Content Include="Scripts\uploadify\botao_150x30_over.png" />
+    <Content Include="Scripts\uploadify\flash_detect.1.0.4.js" />
+    <Content Include="Scripts\uploadify\flash_detect.1.0.4.min.js" />
+    <Content Include="Scripts\uploadify\jquery.uploadify.js" />
+    <Content Include="Scripts\uploadify\jquery.uploadify.min.js" />
+    <Content Include="Scripts\uploadify\uploadify-cancel.png" />
+    <Content Include="Scripts\uploadify\uploadify.css" />
+    <Content Include="Scripts\uploadify\uploadify.swf" />
+    <Content Include="Scripts\uploadify\uploadifyLang_en.js" />
+    <Content Include="Scripts\uploadify\uploadifyLang_hu.js" />
+    <Content Include="Scripts\uploadify\uploadifyLang_pt-br.js" />
+    <Content Include="Scripts\uploadify\_changes.txt" />
+    <Content Include="Scripts\uploadify\_help.txt" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Galleria\themes\base\jquery-ui.css" />
+    <Content Include="Content\Galleria\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\Galleria\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\Galleria\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\Galleria\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\Galleria\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\Galleria\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\Galleria\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\Galleria\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\Galleria\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\Galleria\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\Galleria\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\Galleria\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\Galleria\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Scripts\Plugins\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\Plugins\jquery.validate.min.js" />
+    <Content Include="Scripts\Plugins\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
+    <Content Include="Views\Account\_SignInHeaderForm.cshtml" />
+    <Content Include="Views\Account\_RegisterHeaderForm.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_SignInHeader.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SignUp\Create.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SignUp\Created.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SignUp\Delete.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SignUp\Deleted.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Data\Oceanus.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Oceanus.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Listing\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_Portfolio.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\facebook\FacebookAPI.csproj">
+      <Project>{1F538275-4C0C-4983-8D92-BFF2AA0E5FC1}</Project>
+      <Name>FacebookAPI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Answers\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Answers\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Answers\_UserResponses.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Answers\_QuestionRevision.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Answers\_QuestionTags.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_ReviewSummary.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_AllReviews.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_Followers.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_WriteReview.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_UserTextReview.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_UserAudioReview.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_ReviewSummaryRatings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_ReviewSummaryRatingsDistChart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_VendorTraits.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_JoinNowHeader.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_VendorCategory.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Answers\_RelatedQuestions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_RelatedQuestions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\_SignInForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\_RegisterForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_LoginForm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Listing\_VendorPortfolio.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_ServicesOverview.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_VendorStats.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\_UserProfile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\_UserStats.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\_UserProfileReviews.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\_UserProfileTextReview.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\_UserProfileAudioReview.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\_UserProfileQuestions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Answers\_QuestionFollowers.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_PortfolioImages.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_PortfolioVideos.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Vendor\_AddToWorkPortfolio.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\_UserDashboard.cshtml" />
+    <Content Include="Views\Message\_WriteMessage.cshtml" />
+    <Content Include="Views\Message\_MessageListing.cshtml" />
+    <Content Include="Views\Message\_MessageDetails.cshtml" />
+    <Content Include="Views\Message\_MessageParticipants.cshtml" />
+    <Content Include="Views\Vendor\_AddVendor.cshtml" />
+    <Content Include="Views\Vendor\Edit.cshtml" />
+    <Content Include="Views\Vendor\_VendorWebsite.cshtml" />
+    <Content Include="Views\Vendor\_VendorEmail.cshtml" />
+    <Content Include="Views\Vendor\_VendorStory.cshtml" />
+    <Content Include="Views\Locations\_VendorLocations.cshtml" />
+    <Content Include="Views\Locations\_AddVendorLocations.cshtml" />
+    <Content Include="Views\Account\_UserFriends.cshtml" />
+    <Content Include="Views\Account\_UserExpandNetwork.cshtml" />
+    <Content Include="Views\Account\_UserFriendsOnSixLoonies.cshtml" />
+    <Content Include="Views\Account\_PendingFriendRequests.cshtml" />
+    <Content Include="Views\Shared\_FacebookExpandNetworkPrompt.cshtml" />
+    <Content Include="Views\Vendor\_AskToReview.cshtml" />
+    <Content Include="Views\Vendor\_TellFriendAboutVendor.cshtml" />
+    <Content Include="Views\Vendor\_EditService.cshtml" />
+    <Content Include="Views\Vendor\_ConnectedToVendor.cshtml" />
+    <Content Include="Views\Vendor\_ConnectedToVendorFirstDegree.cshtml" />
+    <Content Include="Views\Vendor\_ConnectedToVendorSecondDegree.cshtml" />
+    <Content Include="Views\Message\_WriteMessagePredefinedRecipient.cshtml" />
+    <Content Include="Views\Message\_AskForIntroduction.cshtml" />
+    <Content Include="Views\Message\_FriendIntroductionRequestListing.cshtml" />
+    <Content Include="Views\Message\_FriendIntroductionRequestDetails.cshtml" />
+    <Content Include="Views\Account\_UserConnectionToLoggedInUser.cshtml" />
+    <Content Include="Views\GlobalSearch\Index.cshtml" />
+    <Content Include="Views\GlobalSearch\_TagResults.cshtml" />
+    <Content Include="Views\Listing\_VendorResults.cshtml" />
+    <Content Include="Views\GlobalSearch\_VendorResults.cshtml" />
+    <Content Include="Views\Home\_VendorImageShowcase.cshtml" />
+    <Content Include="Views\Error\FriendlyError.cshtml" />
+    <Content Include="Views\Shared\_FilterableViewModelPager.cshtml" />
+    <Content Include="Views\GlobalSearch\_AnswerResults.cshtml" />
+    <Content Include="Views\Vendor\_RejectProfileComments.cshtml" />
+    <Content Include="Views\Vendor\_EditPortfolioImages.cshtml" />
+    <Content Include="Views\Vendor\_EditPortfolio.cshtml" />
+    <Content Include="Views\Vendor\_EditPortfolioVideos.cshtml" />
+    <Content Include="Views\Message\_GetVendorQuoteMessage.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\FAQ\Index.cshtml" />
+    <Content Include="Views\Guidelines\Index.cshtml" />
+    <Content Include="Views\Terms\Index.cshtml" />
+    <Content Include="Views\Message\_GetVendorQuoteMessageListings.cshtml" />
+    <Content Include="Views\Message\_GetVendorQuoteMessageDetails.cshtml" />
+    <Content Include="Views\Message\_GetVendorQuoteMessageParticipants.cshtml" />
+    <Content Include="Views\Vendor\_DeleteService.cshtml" />
+    <Content Include="Views\Account\_UserListings.cshtml" />
+    <Content Include="Views\Account\_UserFollowers.cshtml" />
+    <Content Include="Views\Shared\_HomePageLayout.cshtml" />
+    <Content Include="Views\Post\_AddVendorPosts.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Post\_VendorPosts.cshtml" />
+    <Content Include="Views\Account\_UserRadar.cshtml" />
+    <Content Include="Views\Privacy\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\_SummaryPendingReviewProfessionalProfiles.cshtml" />
+    <Content Include="Views\Admin\AllPendingReviewProfessionalProfiles.cshtml" />
+    <Content Include="Views\Admin\_AdminStats.cshtml" />
+    <Content Include="Views\Admin\_SummaryReviewsPendingReview.cshtml" />
+    <Content Include="Views\Admin\_SummaryQuestionsPendingReview.cshtml" />
+    <Content Include="Views\Admin\_SummaryAnswersPendingReview.cshtml" />
+    <Content Include="Views\Account\SignIn.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\uploadify\uploadify-check-exists.php" />
+    <None Include="Scripts\uploadify\uploadify.php" />
+<<<<<<< .mine
+    <Content Include="Views\Account\_AddUserPhoto.cshtml" />
+=======
+    <Content Include="Views\Account\_PendingRegistrationEmail.cshtml" />
+    <Content Include="Views\UserMailer\_Layout.cshtml" />
+    <Content Include="Views\UserMailer\ConfirmRegistration.cshtml" />
+>>>>>>> .r777
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>2011</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://sixloonies.dyndns.org:32000</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>http://sixloonies.dyndns.org:32000</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

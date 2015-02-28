@@ -1,0 +1,23 @@
+﻿using System.Collections.Generic;
+using Oceanus.ViewModels.Shared;
+
+namespace Oceanus.ViewModels
+{
+    public class ListItemViewModel : BaseListItemViewModel
+    {
+        /// <summary>
+        /// List of some of the vendor's most popular services
+        /// </summary>
+        public List<string> PopularServicesOffered { get; set; }
+        
+        /// <summary>
+        /// The primary category of if the item
+        /// </summary>
+        public int PrimaryCategoryId { get; set; }
+
+        /// <summary>
+        /// Reference to categories associated with the vendor
+        /// </summary>
+        public IEnumerable<CategoryViewModel> AssociatedCategories { get; set; }
+    }
+}

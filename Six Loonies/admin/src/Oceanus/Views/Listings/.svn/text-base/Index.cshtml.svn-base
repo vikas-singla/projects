@@ -1,0 +1,65 @@
+﻿@model Oceanus.ViewModels.ListingsViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Model.ListingList == null || Model.ListingList.Count() == 0)
+{ 
+    <p>This category currently has no listings. @Html.ActionLink("Go Back", "Index", "Category")</p>
+}
+else
+{ 
+    <h2>Listings for</h2> <h1>@Model.CategoryView.Name</h1>
+}
+
+<table>
+
+@*@foreach (var item in Model.Listings)
+{
+    <tr>
+        <td>
+            @item.Name
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.Id })
+        </td>
+    </tr>
+}*@
+
+@foreach (var item in Model.ListingList)
+{
+    <tr>
+        <td>
+            @item.Value.Name
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.Value.Id })
+        </td>
+    </tr>
+}
+
+</table>
+
+@using MVCControlsToolkit.Core
+@using MVCControlsToolkit.Controls
+
+@Html.ViewList("ListingFilter", "ListingFilterSelected")
+
+@if (Model.ListingList.Count() > 0)
+{
+    @*@Html.DataFilter(
+        m => m.ListingFilter, 
+        new Oceanus.Filters.ListingNameStartsWithFilter(),
+        "NameStartsWithFilter")*@
+
+    var pager = Html.PagerFor(m => m.CurrentPage, m => m.PreviousPage, m => m.TotalPages);
+    pager.PageButton("<<", PageButtonType.First, PageButtonStyle.Link);
+    pager.PageButton("<", PageButtonType.Previous, PageButtonStyle.Link);
+    pager.PageChoice(5);
+    pager.PageButton(">", PageButtonType.Next, PageButtonStyle.Link);
+    pager.PageButton(">>", PageButtonType.Last, PageButtonStyle.Link);
+}
+
+@*@Html.EnableSortingFor(m => m.ListingList, m => m.ListingOrder, "NormalHeader", "AscendingHeader", "DescendingHeader", page: m => m.CurrPage)*@
+@Html.HiddenFor(m => m.TotalPages)

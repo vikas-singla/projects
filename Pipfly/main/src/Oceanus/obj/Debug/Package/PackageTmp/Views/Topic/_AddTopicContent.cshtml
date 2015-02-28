@@ -1,0 +1,279 @@
+﻿@using SquishIt.Framework
+@if (Request.IsAuthenticated)
+{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/discuss/pipfly.discuss.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.topic.add.#.css")
+        );
+    @MvcHtmlString.Create(
+        Bundle.JavaScript()
+        .Add("~/Scripts/pipfly.topic.add.js")
+        .Render("~/cache/pipfly.topic.add.#.js")
+    );
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/uploadify/jquery.uploadify.js")"></script>
+<script type="text/javascript">
+    @{
+        var token = Request.Cookies[FormsAuthentication.FormsCookieName] == null ? string.Empty : Request.Cookies[FormsAuthentication.FormsCookieName].Value;
+    }
+
+    var uploadedFiles = [];
+    var saveDisabled = false;
+    
+    $(document).ready(function () {
+        $('#file_upload').uploadify({
+            
+            // auth data
+            postData: { AuthToken: '@token', vendorId: 0 },
+            //'uploaderType': 'flash',
+        
+            // plumbing
+            langFile : '@Url.Content("~/Scripts/uploadify/uploadifyLang_en.js")',
+            swf: '@Url.Content("~/Scripts/uploadify/uploadify.swf")',
+            uploader: '@Url.Action("Upload", "VendorImage")',
+            
+            folder: '/uploads',
+            checkExisting: '@Url.Action("CheckExisting", "VendorImage")',
+            cancelImage: '@Url.Content("~/Images/cancel.png")',
+        
+            // restrictions
+            fileTypeDesc: 'Image Files (.jpg, .gif, .png)',
+		    fileTypeExts: '*.jpg;*.gif;*.png',
+            sizeLimit: 10485760,
+        
+            // styling 
+            buttonText: 'Select File',
+            buttonClass: 'btnstyle',
+            queueID: 'file_queue',
+        
+            // options
+            requeueErrors: false,
+            removeCompleted: false,
+            auto: true,
+            multi: true,
+
+            // events        
+            onUploadStart: function () {
+                if (!saveDisabled) {
+                    $('#btnAddImages').hide();
+                }
+            },
+            
+            onUploadSuccess: function(fileMetadata){
+            
+                // add the successful upload to the list of files that will be sent to server for confirmation
+                AddToList(uploadedFiles, fileMetadata.name);
+            
+                // set the hidden field to the file that was uploaded for submission and creation
+                // var targetField = $('input:hidden[name="MasterImageDataViewModel.ImageUrl"]');
+                // targetField.attr("value", fileMetadata.name);
+            },
+            
+            onQueueComplete: function (stats) {
+                $('#btnAddImages').show();
+                saveDisabled = false;
+            }
+        });
+    });
+
+    function CancelImages(){
+
+        for (file in uploadedFiles){
+            $('#file_upload').uploadifyCancel(file);
+        }
+        uploadedFiles = [];
+        $.fancybox.close();
+        show('#addtoworkportfolio');
+        hide('#photoMediaForm');
+        hide('#videoMediaForm');
+    }
+
+    function SaveImages(){
+
+        if ($('#frmAddVendorPhotoMedia').validationEngine('validate')) {
+        
+            $('#frmAddVendorPhotoMedia').validationEngine('hideAll');
+
+            if (uploadedFiles.length == 0){
+                alert("Please upload atleast one file.");
+                return;
+            }
+
+            var dataObject = $("#frmAddVendorPhotoMedia").serializeJSON();
+
+            dataObject["Files"] = uploadedFiles;
+
+            // send form and successful upload data to server
+            $.ajax(
+            {
+                type: "POST",
+                traditional: true,
+                url: '@Url.Action("AjaxCreatePartial", "VendorImage")',
+                data: dataObject,
+                async: true,
+                success: function (result) {
+                    CancelImages();
+                    // refresh gallery
+                    //$('#voverviewportfolio').load("/vendor/Portfolio?vendorId=" + 0));
+                    //$('#vendorpimages').click();
+                },
+                error: function (req, status, error) {
+                    // TODO: make this better
+                    alert(error);
+                }
+            });
+        }
+    }
+</script>
+<style type="text/css">
+    #file_upload_container .uploadifyQueueItem
+    {
+        background-color: #FFFFFF;
+        border: none;
+        border-bottom: 1px solid #E5E5E5;
+        font: 11px Verdana, Geneva, sans-serif;
+        height: 50px;
+        margin-top: 0;
+        padding: 10px;
+        width: 350px;
+    }
+    #file_upload_container .uploadifyError
+    {
+        background-color: #FDE5DD !important;
+        border: none !important;
+        border-bottom: 1px solid #FBCBBC !important;
+    }
+    
+    #file_upload_container .uploadifyQueueItem .cancel
+    {
+        float: right;
+    }
+    
+    #file_upload_container .uploadifyQueue .completed
+    {
+        color: #C5C5C5;
+    }
+    
+    #file_upload_container .uploadifyProgress
+    {
+        background-color: #E5E5E5;
+        margin-top: 10px;
+        width: 100%;
+    }
+    
+    #file_upload_container .uploadifyProgressBar
+    {
+        background-color: #0099FF;
+        height: 3px;
+        width: 1px;
+    }
+    
+    #file_upload_container #file_queue
+    {
+        border: 1px solid #E5E5E5;
+        height: 100px;
+        margin-bottom: 10px;
+        width: 397px;
+        overflow-y: auto;
+    }
+</style>
+<div class="authorpostpanel">
+    <div class="leftpanel">
+        <div id="posttypemenu">
+            <a href="#" rel="#photoMediaForm" class="posttypemenuitem selposttypemenuitem">Add Photo</a>
+            <a href="#" rel="#videoMediaForm" class="posttypemenuitem">Add Video</a>
+        </div>
+    </div>
+    <div class="rightpanel" id="photoMediaForm">
+        <form id="frmAddPhotoMedia">
+        <div class="formfields">
+            <div class="addMediaForm">
+                <input name="vendorId" type="hidden" value="0" />
+                <div class="formfield">
+                    <div class="lblHeader">
+                        Photo Caption:
+                        <div class="formlblfootnote">
+                            (Optional field)
+                        </div>
+                    </div>
+                    <div class="field">
+                        <textarea id="photoDesc" name="description" rows="3" cols="1"></textarea></div>
+                </div>
+                <div class="upload">
+                    <div class="bold">
+                        Upload Image File
+                    </div>
+                    <div class="uinput">
+                        <div id="file_upload_container">
+                            <div id="file_queue">
+                            </div>
+                            <input id="file_upload" type="file" />
+                        </div>
+                        <br />
+                        <ul>
+                            <li><span class="bold">JPG/PNG/GIF</span>s only</li>
+                            <li><span class="bold">10 MB </span>maximum (per file)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+        <br />
+        <div class="btns">
+            <p>
+                <a href="#" id="btnAddImages" class="btnbluestyle" onclick="javascript:SaveImages();">
+                    Add Photo</a>&nbsp; <a href="#" class="btnstyle close" onclick="javascript:CancelImages();">
+                        Cancel</a>
+            </p>
+        </div>
+    </div>
+    <div class="rightpanel" style="display: none;" id="videoMediaForm">
+        <form id="frmAddVideoMedia">
+        <div class="formfields">
+            <input name="vendorId" type="hidden" value="0" />
+            <div class="addMediaForm">
+                <div class="formfield">
+                    <div class="lblHeader">
+                        Video Title:</div>
+                    <div class="field">
+                        <input id="pvideoTitle" name="title" class="validate[required]" /></div>
+                </div>
+                <div class="formfield">
+                    <div class="lblHeader">
+                        Video Description:
+                        <div class="formlblfootnote">
+                            (Optional field)
+                        </div>
+                    </div>
+                    <div class="field">
+                        <textarea id="pvideoDesc" name="description" rows="3" cols="1"></textarea></div>
+                </div>
+                <div class="embedvid">
+                    <div class="bold">
+                        Embed a Video
+                    </div>
+                    <div class="markupinput">
+                        This can be a URL from video sites or raw Embed-tag. Note: Currently only support
+                        YouTube or Vimeo.
+                        <br />
+                        <span class="smalltext italictext">(ie. http://www.youtube.com/watch?v=U0CGsw6h60k OR
+                            <br />
+                            &lt;iframe src=&quot;http://www.youtube.com/embed/U0CGsw6h60k&quot; ...&gt;&lt;/iframe&gt;)</span>
+                        <textarea id="embedVideoMarkup" name="videoURL" class="validate[required]" rows="3"
+                            cols="1"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+        <br />
+        <div class="btns">
+            <a href="#" class="btnbluestyle" id="addPortfolioVideoSubmit" data-vid="0">Add Video</a>&nbsp;
+            <a href="#" class="btnstyle close" onclick="javascript: $.fancybox.close();show('#addtoworkportfolio');hide('#photoMediaForm');hide('#videoMediaForm');return false;">
+                Cancel</a>
+        </div>
+    </div>
+</div>

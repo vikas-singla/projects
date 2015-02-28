@@ -1,0 +1,167 @@
+﻿@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/guidelines/sixloonies.guidelines.css")
+            .Add("~/Content/sixloonies.aboutus.menu.css")
+            .ForceRelease()
+            .Render("~/cache/sixloonies.guidelines.#.css")
+        );
+}
+<div class="breadcomb">
+    <div class="breadcombtext">
+        <a href="/">Home</a>&nbsp;&raquo;&nbsp;<span>Etiquette</span>
+    </div>
+    <div class="alignright">
+        <a href="#addVendorForm" class="btnyellowstyle" id="addvendorbtn" title="Don't see a professional or business that provides a service you know? Create a profile for them and start the buzz.">Add a Professional or Business</a>
+    </div>
+</div>
+<div class="fullsect">
+    <div class="aboutmenu">
+        <a href="/about" class="aboutitem">What is Six Loonies?</a> <a href="/how" class="aboutitem">How it Works</a> <a href="/contact" class="aboutitem">
+            Contact Us</a> <a href="/guidelines" class="selaboutitem">Etiquette</a> <a href="/terms"
+                class="aboutitem">Terms</a> <a href="/privacy" class="aboutitem">Privacy</a>
+    </div>
+    <div class="guidelinesect">
+        <div class="heading">
+            Etiquette</div>
+        <div class="fullsect">
+            <div class="contentguidelinetitle">
+                General
+            </div>
+            <p>
+                Six Loonies allows you to contribute different kinds of content, which includes
+                reviews, photos, questions, answers, private messages, and more. Hence, the quality
+                and relevance of our site depends on you. Please read the guidelines below for specific
+                types of content that you can contribute to the site.</p>
+            <ul>
+                <li><b>Inappropriate content:&nbsp;</b>Threats, harassment, lewdness, hate speech, and
+                    other displays of bigotry.</li>
+                <li><b>Conflicts of interest:&nbsp;</b>Your contributions should be unbiased and objective.
+                    For example, businesses and their employees shouldn't write reviews about themselves
+                    or their competitors.</li>
+                <li><b>Promotional content:&nbsp;</b>Unless you are using adding content to your own
+                    professional profile, we do not encourage promotional content. Our intent is to
+                    keep the content on the site useful for everyone.</li>
+                <li><b>Relevance:&nbsp;</b>Please make sure your contributions are relevant and appropriate
+                    to the forum. For example, your reviews should not be used to air your personal
+                    grievances or your political ideologies, or other matters that are not related to
+                    an end user experience.</li>
+                <li><b>Privacy:&nbsp;</b>Don't publicize other people's private information. While some
+                    businesses may be identified by the people behind them, you should generally avoid
+                    posting other people's full names, personal phone numbers and email addresses —
+                    and avoid uploading close-ups of other people without their permission.</li>
+                <li><b>Intellectual property:&nbsp;</b>Don't swipe content from other sites. You're
+                    a smart cookie, so write your own reviews and take your own photos.</li>
+            </ul>
+        </div>
+        <div class="fullsect">
+            <div class="contentguidelinetitle">
+                Reviews
+            </div>
+            <p>
+                The best reviews present their opinions objectively so that it's relevant. You should
+                target to offer a substantial level of detail, and a helpful tip or two for other
+                people. Here are some additional guidelines.</p>
+            <ul>
+                <li><b>Personal experience:&nbsp;</b>Your review should be based on your own experience,
+                    not what you heard from others. Be as specific as you can, while making sure that
+                    the review will be useful to others.</li>
+                <li><b>Accuracy:&nbsp;</b>Make sure your review is factually correct. It should include
+                    your opinions, but it should not exaggerate. We don't take sides when it comes to
+                    factual disputes, so we expect you to stand behind your review.</li>
+                <li><b>Review updates:&nbsp;</b>Review updates should reflect a new experience or interaction
+                    with the professional or business. If you add a new review for a professional or
+                    business that you had reviewed earlier, your previous review will be overwritten.
+                    We don't promote spam and expect you to not promote spam.</li>
+            </ul>
+        </div>
+        <div class="fullsect">
+            <div class="contentguidelinetitle">
+                Questions
+            </div>
+            <ul>
+                <li><b>Questions should not be individual opinions</b>
+                    <ul>
+                        <li>We recommend that you don’t use the words "you" or "your" in your question; those
+                            words suggest that the question is soliciting the opinion of a single person or
+                            business. Example: "Do you think that Outdoor parties should have a DJ?" should
+                            be written as "Should outdoor parties have a DJ?" because the latter form usually
+                            ends up generating better, more useful, answers.</li>
+                    </ul>
+                </li>
+                <li><b>Good questions are clearly written</b>
+                    <ul>
+                        <li>It should always be clear what your question is asking.</li>
+                        <li>A question should make it clear how an answer can meet its expectations. You can
+                            use <i>Question Details</i> to provide specific instructions for how answers should
+                            be formatted and if they should include any additional information.</li>
+                    </ul>
+                </li>
+                <li><b>Good questions have correct spelling, grammar, and punctuation</b>
+                    <ul>
+                        <li>Our policy is that questions should always have correct spelling, grammar, and punctuation.
+                            Please do not use short form or slang words in your questions.</li>
+                    </ul>
+                </li>
+                <li><b>Good questions provide context and background explanation when appropriate</b>
+                    <ul>
+                        <li>In general, your question should include enough context so that most readers understand
+                            what's being asked.</li>
+                        <li>Question details can be used to provide more explanation and support. This is especially
+                            useful for questions about subjects that may be obscure / unknown by many readers.</li>
+                    </ul>
+                </li>
+                <li><b>Good questions seek out information rather than arguing a point</b>
+                    <ul>
+                        <li>Your question should represent a sincere attempt at eliciting good answers and creating
+                            a page that is a good, reusable resource on the site.</li>
+                        <li>Also, question details should not be used to make an argument, but rather to provide
+                            details and background helpful for placing the question in context.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="fullsect">
+            <div class="contentguidelinetitle">
+                Answers
+            </div>
+            <ul>
+                <li>A good answer should help someone who genuinely wants to know the answer to the
+                    question. So, your answer should be truthful, authentic, and correct whenever possible.</li>
+                <li>An answer that’s wrong is not a good answer. Answers that are funny, joyful, passionate,
+                    will be liked by others. But if the answer is incorrect -- or likely incorrect --
+                    then it’s not really helpful.</li>
+                <li>A good answer should directly respond to the question. It’s not helpful when you
+                    provide an answer that’s a comment or general opinion about the topic, but what
+                    you say is not actually an answer.</li>
+                <li>A good answer is usually supported with an argument – so that readers can understand
+                    why the answer is the answer. Great answers are usually as much about “why?” as
+                    they are about “what’s the right answer?” </li>
+            </ul>
+        </div>
+        <div class="fullsect">
+            <div class="contentguidelinetitle">
+                Profiles of Professionals and Businesses
+            </div>
+            <p>
+                Don't be shy — use your professional profile to let people know who you are and
+                what makes you tick. Remember that people want to know your story, the kind of services
+                you provide, and the specifics of those services. The more meaningful your professional
+                profile, the easier it will be for others to find you!</p>
+        </div>
+        <div class="fullsect">
+            <div class="contentguidelinetitle">
+                Media Guidelines for Professionals and Businesses
+            </div>
+            <p>
+                You can upload photos and videos to your professional profile. Photos, and videos
+                that best reflect the types of services you provide along with an appropriate description
+                will help you build a profile that is engaging and interesting with its readers.<br />
+                <br />
+                However, please note that Six Loonies strictly prohibits any adult content. If your
+                professional profile is found to contain explicit content of adult nature, it will
+                be de-listed without your consent.</p>
+        </div>
+    </div>
+</div>

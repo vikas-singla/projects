@@ -1,0 +1,60 @@
+﻿@model Oceanus.ViewModels.UserProfileViewModel
+<link href="@Url.Content("~/Content/User/sixloonies.user.networkpath.css")" rel="stylesheet" type="text/css" />
+@{MembershipUser currUserMembership = Membership.GetUser(User.Identity.Name);}
+@if (currUserMembership != null && Model != null && Model.UserConnectionNetworkPath != null && Model.UserConnectionNetworkPath.Count() > 0)
+{
+    Oceanus.ViewModels.UserProfileViewModel loggedInUserProfile = ((Guid)currUserMembership.ProviderUserKey == Model.UserConnectionNetworkPath.ElementAt(0).FromUID) ? Model.UserConnectionNetworkPath.ElementAt(0).FromUserProfile : Model.UserConnectionNetworkPath.ElementAt(0).TargetUserProfile;
+    Oceanus.ViewModels.UserProfileViewModel targetUserProfile = ((Guid)currUserMembership.ProviderUserKey == Model.UserConnectionNetworkPath.ElementAt(0).FromUID) ? Model.UserConnectionNetworkPath.ElementAt(0).TargetUserProfile : Model.UserConnectionNetworkPath.ElementAt(0).FromUserProfile;         
+     
+    <div class="section">
+        <div class="sectiontitle">
+            <div class="titletext">
+                How You're Connected
+            </div>
+        </div>
+        <div class="networkpath">
+            <div class="fromuser">
+                <span class="normaltext bold">You</span>
+            </div>
+            <div class="connectionarrow">
+                <img src="/images/down_gray_arrow.png" width="16px" height="16px" alt />
+            </div>
+            @if (Model.UserConnectionNetworkPath.ElementAt(0).Distance > 1)
+            {
+                foreach (var networkPath in Model.UserConnectionNetworkPath)
+                {
+                <div class="connectingusers">
+                    <a href="/account/profile?userid=@(networkPath.ConnectingFriendUserProfile.UserId)">@(networkPath.ConnectingFriendName)</a>
+                </div>
+                }
+                <div class="connectionarrow">
+                    <img src="/images/down_gray_arrow.png" width="16px" height="16px" alt />
+                </div>
+            }
+            <div class="targetuser">
+                @if (Model.UserConnectionNetworkPath.ElementAt(0).Distance > 1)
+                {
+                    <span class="degree"><b>2</b>nd</span>
+                }
+                else if (Model.UserConnectionNetworkPath.ElementAt(0).Distance == 1)
+                {
+                    <span class="degree"><b>1</b>st</span>
+                }
+                <span class="bold">@(targetUserProfile.FullName)</span>
+            </div>
+        </div>
+    </div>
+}
+else if (currUserMembership != null)
+{
+    <div class="section">
+        <div class="sectiontitle">
+            <div class="titletext">
+                How You're Connected
+            </div>
+        </div>
+        <div class="fullsect" style="text-align: center">
+            You are not connected to @(Model.FullName).
+        </div>
+    </div>
+}

@@ -1,0 +1,18 @@
+﻿@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+    Bundle.Css()
+        .Add("~/Content/tag/pipfly.tag.trending.css")
+        .Add("~/Content/tag/pipfly.tag.collage.css")
+        .ForceRelease()
+        .Render("~/cache/pipfly.tag.trending.#.css")
+    );
+}
+<div class="trendingheader">
+    <div class="trendingheadertext">
+        Popular tags
+    </div>
+</div>
+<div class="tagcollagecontainer">
+    @{Html.RenderAction("TrendingCollage", "Topic", new { page = 1, perpage = 25 });}
+</div>

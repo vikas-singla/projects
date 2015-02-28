@@ -1,0 +1,86 @@
+﻿.topicsection #edittopics .addtopic, .topicsection #edittopics .addfirsttopic
+{
+    clear:both;
+    width:290px;
+    margin-top:5px;
+    position:relative;
+}
+
+.topicsection #edittopics #addtopicinput
+{
+    position:relative;
+    top:3px;
+    width:175px;
+    height:17px;
+    padding:3px;
+}
+
+.topicsection #edittopics .addtopic ul.token-input-list li input {
+    border: 0;
+    width: 145px;
+    padding: 3px 8px;
+    background-color: transparent;
+    -webkit-appearance: caret;
+}
+
+.topicsection #edittopics .addtopic ul.token-input-list 
+{
+    width: 175px;
+    margin-right:10px;
+    float:left;
+}
+
+.topicsection #edittopics .addtopic div.token-input-dropdown 
+{
+    width: 168px;
+}
+
+.topicsection #edittopics .addfirsttopic ul.token-input-list li input {
+    border: 0;
+    width: 205px;
+    padding: 3px 8px;
+    background-color: transparent;
+    -webkit-appearance: caret;
+}
+
+.topicsection #edittopics .addfirsttopic ul.token-input-list 
+{
+    width: 235px;
+    margin-right:10px;
+    float:left;
+}
+
+.topicsection #edittopics .addfirsttopic div.token-input-dropdown 
+{
+    width: 228px;
+}
+
+.topiceditbtn, .topiceditbtn:visited
+{
+    position: absolute;
+    right: 5px;
+    top: 7px;
+    display: block;
+    width: 7px;
+    height: 7px;
+    font-size: 1px;
+    background: url('/images/close.gif');
+}
+
+.topiceditbtn:hover
+{
+    background-position: 7px;
+}
+
+.topicedit
+{
+    padding: 2px 17px 2px 5px;
+    margin: 2px 0px 2px 2px;
+    position: relative;
+    font-weight: normal;
+    display: inline-block;
+    background-color: #DFEAF4;
+    color: #19558D;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}

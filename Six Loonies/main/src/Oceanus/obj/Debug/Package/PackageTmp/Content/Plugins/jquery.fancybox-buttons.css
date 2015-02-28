@@ -1,0 +1,46 @@
+#fancybox-buttons {
+	height: 20px;
+	overflow:hidden;
+}
+
+#fancybox-buttons ul {
+	display: block;
+	width: 85px;
+	height: 20px;
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+    border-radius: 3px;
+}
+
+#fancybox-buttons ul li {
+	float: left;
+    margin:0 8px;
+	padding: 0;
+}
+
+#fancybox-buttons a {
+	display: block;
+	width: 24px;
+	height: 20px;
+	text-indent: -9999px;
+	background-repeat: no-repeat;
+	outline: none;
+}
+
+#fancybox-buttons a.btnPrev {
+    background: url('/images/back.png');
+    width:20px;
+    height:20px;
+}
+
+#fancybox-buttons a.btnNext {
+    background: url('/images/next.png');
+    width:20px;
+    height:20px;
+}
+
+#fancybox-buttons a.btnDisabled {
+	opacity : 0.5;
+	cursor: default;
+}

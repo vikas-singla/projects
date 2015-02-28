@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/EFDbContext
+END
+DbContext.cs.t4
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/EFDbContext/DbContext.cs.t4
+END
+DbContext.vb.t4
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/EFDbContext/DbContext.vb.t4
+END
+DbContextEntityMember.cs.t4
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/EFDbContext/DbContextEntityMember.cs.t4
+END
+DbContextEntityMember.vb.t4
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/EFDbContext/DbContextEntityMember.vb.t4
+END
+T4Scaffolding.EFDbContext.ps1
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/projects/!svn/ver/776/main/src/packages/T4Scaffolding.0.9.9/tools/EFDbContext/T4Scaffolding.EFDbContext.ps1
+END

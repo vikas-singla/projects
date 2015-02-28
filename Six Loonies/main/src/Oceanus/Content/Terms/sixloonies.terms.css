@@ -1,0 +1,74 @@
+﻿.termsect
+{
+    width:680px;
+    float:left;
+    font-size:14px;
+    display:block;
+    margin:0 20px 30px 40px;
+    text-align:left;
+}
+
+.termsect a, .termsect a:hover, .termsect a:visited, .termsect a:active
+{
+    font-size:14px;
+}
+
+.termsect .heading
+{
+    font-size:23px;
+    color:#666;
+    font-weight:bold;
+    padding:15px 0 15px 0;
+    text-align:left;
+}
+
+.termsect .useragreement
+{
+    text-align: left;
+    font-size:14px;
+}
+
+
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+{
+}
+h1
+{
+    padding:15px 0px;
+    font-size: 14.0pt;
+    font-weight: bold;
+}
+h2
+{
+    padding:15px 0px;
+    font-size: 12.0pt;
+    font-weight: bold;
+}
+h3
+{
+    padding:15px 0px;
+    font-size: 10pt;
+    font-weight: bold;
+}
+p.MsoCommentText, li.MsoCommentText, div.MsoCommentText
+{
+    margin: 0in;
+    margin-bottom: .0001pt;
+    font-size: 10.0pt;
+}
+p
+{
+    margin-right: 0in;
+    margin-left: 0in;
+    line-height:22px;
+}
+p.MsoCommentSubject, li.MsoCommentSubject, div.MsoCommentSubject
+{
+    font-size: 10.0pt;
+    font-weight: bold;
+}
+p.MsoAcetate, li.MsoAcetate, div.MsoAcetate
+{
+    font-size: 8.0pt;
+}

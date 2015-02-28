@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/projects/!svn/ver/778/main/src/Oceanus.Utilities
+END
+Oceanus.Designer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/projects/!svn/ver/472/main/src/Oceanus.Utilities/Oceanus.Designer.cs
+END
+ImageThumbnailer.cs
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/projects/!svn/ver/778/main/src/Oceanus.Utilities/ImageThumbnailer.cs
+END
+CityStateLinker.cs
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/projects/!svn/ver/472/main/src/Oceanus.Utilities/CityStateLinker.cs
+END
+CityStateUpdater.cs
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/projects/!svn/ver/472/main/src/Oceanus.Utilities/CityStateUpdater.cs
+END
+App.config
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/projects/!svn/ver/621/main/src/Oceanus.Utilities/App.config
+END
+Oceanus.Utilities.csproj
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/projects/!svn/ver/623/main/src/Oceanus.Utilities/Oceanus.Utilities.csproj
+END
+Oceanus.edmx
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/projects/!svn/ver/472/main/src/Oceanus.Utilities/Oceanus.edmx
+END
+Program.cs
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/projects/!svn/ver/623/main/src/Oceanus.Utilities/Program.cs
+END

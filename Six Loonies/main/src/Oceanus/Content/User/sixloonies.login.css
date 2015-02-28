@@ -1,0 +1,371 @@
+﻿#promptlogin
+{
+    padding:5px 0px;
+}
+
+#promptlogin input[type="text"], #promptlogin input[type="password"], #promptlogin textarea
+{
+    padding:3px;
+    font-size:14px;
+}
+
+#promptlogin .title
+{
+    padding:10px;
+    font-size:14px;
+    font-weight:bold;
+    color:#666;
+    border-bottom:3px double #e0e0e0;
+    margin-bottom:10px;
+}
+
+#promptlogin .smalltext
+{
+    color:#FF3030;
+    text-align:left;
+}
+
+#promptlogin .sectiontext
+{
+    text-transform:uppercase;
+    font-variant:small-caps;
+    font-size:14px;
+    color:#333;
+    font-weight:bold;
+    text-align:left;
+}
+
+#promptlogin .registerleft
+{
+    margin-top:10px;
+    float:left;
+    width:283px;
+    padding-left:20px;
+    padding-right:20px;
+    border-right:2px solid #d9d9d9;
+}
+
+#promptlogin .signinright
+{
+    margin-top:10px;
+    float:left;
+    width:283px;
+    padding:right:20px;
+    padding-left:20px;    
+}
+
+#promptlogin .editor-label
+{
+    font-size:11px;
+    color:#707070;
+    text-align:left;
+}
+
+.inviteheader
+{
+    width: 100px;
+    line-height:100%;
+    padding:0 10px 0 10px;
+    display:block;
+    float: right;
+    height: 100%;
+}
+
+.inviteheader .invitefriends
+{
+    margin:15px 0;
+}
+
+.session
+{
+    height: 100%;
+    position: relative;
+    display:block;
+    float: right;
+    z-index:999;
+}
+
+#userlogged, #userlogged:hover
+{
+    max-width:230px;
+    height:33px;
+    line-height:33px;
+    padding:10px 5px;
+    border:1px solid transparent;
+    display:block;
+    vertical-align:top;
+    float:right;
+    color:#555;
+    font-weight:bold;
+    text-align:center;
+    position:relative;
+}
+
+#userlogged .profileimg
+{
+    margin-right:6px;
+    margin-top:8px;
+    height:20px;
+    vertical-align:top;
+    display:inline-block;
+}
+
+#userlogged .screenname
+{
+    clear:both;
+    line-height:20px;
+    height:20px;
+    font-weight:bold;
+    display:inline-block;
+}
+
+#userlogged img
+{
+    margin-left:4px;
+}
+
+.loginclose
+{
+    clear:both;
+    padding-top:10px;
+    width:100%;
+    text-align:center;
+}
+
+#signindisplay, #joinowdisplay, #signindisplay:hover, #joinowdisplay:hover
+{
+    text-align: center;
+    color: #555;
+    vertical-align: top;
+    font-weight:bold;
+    padding: 10px 5px;
+    border:1px solid transparent;
+    margin:0;
+    width: 80px;
+    line-height:35px;
+    height: 35px;
+    display:block;
+    float:right;
+}
+
+#signindropdown input[type="text"], #signindropdown input[type="password"], #signindropdown textarea
+{
+    padding:3px;
+    font-size:14px;
+}
+
+#registerdropdown input[type="text"], #registerdropdown input[type="password"], #registerdropdown textarea
+{
+    padding:3px;
+    font-size:14px;
+}
+
+#signindropdown .btnbluestyle, #registerdropdown .btnbluestyle
+{
+    box-shadow: 0 1px 2px #909090;
+    -webkit-box-shadow: 0 1px 2px #909090;
+}
+
+#signindropdown, #registerdropdown, #usersessiondropdown
+{
+    clear: both;
+    position: absolute;
+    top: 56px;
+    right: 0;
+    z-index: 999;
+    display:block;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background: #fff;
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    zoom: 1;
+    padding:10px;
+    min-width: 160px;
+    min-height:20px;
+    max-height: 400px;
+    overflow:hidden;
+    color:#333;
+}
+
+#usersessiondropdown
+{
+    padding:0px;
+}
+
+#usersessiondropdown .menulink
+{
+    width:100%;
+    text-decoration:none;
+    font-weight:normal;
+    padding:7px 7px;
+}
+
+#usersessiondropdown .menuseperator
+{
+    height:1px;
+    background:#aaa;
+    display:block;
+    margin:2px 5px;
+}
+
+#usersessiondropdown .menulink:hover
+{    
+    background: #f0f0f0;
+    font-weight:normal;
+}
+
+#usersessiondropdown .menulink a, #usersessiondropdown .menulink a:active, #usersessiondropdown .menulink a:hover, #usersessiondropdown .menulink a:visited
+{
+    color:#333;
+    font-weight:normal;
+    font-size:12px;
+    text-decoration:none;
+    padding:3px;
+}
+
+#signindisplay img
+{
+    position: relative;
+    top: 2px;
+}
+
+#signindisplay:hover, #joinowdisplay:hover, #userlogged:hover, .sessionsel
+{
+    text-decoration: none;
+    font-weight:bold;
+    color:#106fb8;
+    background:#fff;
+    border:1px solid #c9c9c9;
+    box-shadow: 0px 0px 5px #e0e0e0;
+    -moz-box-shadow: 0px 0px 5px #e0e0e0;
+    -webkit-box-shadow: 0px 0px 5px #e0e0e0;
+}
+
+#signindisplay a:link, #joinowdisplay a:link
+{
+    color: white;
+}
+
+#signindisplay a:visited, #joinowdisplay a:visited
+{
+    color: white;
+}
+
+#signindisplay a:hover
+{
+    color: white;
+    text-decoration: underline;
+}
+
+.loginsect
+{
+    width: 950px;
+    padding: 5px;
+    display: block;
+    overflow: auto;
+    margin: 25px 0px 25px 0px;
+    text-align: left;
+}
+
+.loginsect .registersect
+{
+    width: 245px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: 1px solid #d9d9d9;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    padding: 15px;
+    float: left;
+    background:transparent;
+}
+
+.loginsect .signinsect
+{
+    width: 245px;
+    padding: 15px;
+    margin-right: 10px;
+    float: left;
+}
+
+#facebooksigninbtn, #facebooksigninbtn2
+{
+    position:relative;
+    height:16px;
+    max-height:16px;
+    overflow:hidden;
+}
+
+#facebooksigninbtn img, #facebooksigninbtn2 img
+{
+    float:left;
+    position:relative;
+    padding:0px;
+    margin:0px;
+    padding-right:5px;
+}
+
+.signinsect .horizrule, .registersect .horizrule
+{
+    margin-top:20px;
+    margin-bottom:5px;
+    border-top:1px solid #777;
+    text-align:center;
+    position:relative;
+}
+
+.signinsect .horizrule span, .registersect .horizrule span
+{
+    position:relative;
+    padding:0px 5px;
+    top:-9px;
+    background:#fff;
+}
+
+.loginsect .socialsect
+{
+    width: 245px;
+    padding: 15px;
+    margin-right: 10px;
+    float: left;
+}
+
+.loginsect .titleplain
+{
+    width: 100%;
+    font-variant: small-caps;
+    font-size: 18px;
+    color: #333;
+    text-align: left;
+    padding: 5px 0px;
+    border-bottom: 2px solid #e0e0e0;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.loginsect .title
+{
+    width: 100%;
+    font-variant: small-caps;
+    font-size: 18px;
+    border-bottom: 2px solid #FF3030;
+    color: #333;
+    text-align: left;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.loginsect .title .text
+{
+    padding: 5px 2px 5px 2px;
+    text-align: left;
+}

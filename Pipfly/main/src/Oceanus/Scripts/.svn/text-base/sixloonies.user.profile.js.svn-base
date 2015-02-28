@@ -1,0 +1,245 @@
+﻿
+$(document).ready(function () {
+
+    $('#uprofiletabs li a').click(function () {
+        $('#uprofiletabs li a').each(function () {
+            $(this).parent().attr("class", "");
+            var relToHide = $(this).attr("rel") + "";
+            hide(relToHide);
+        });
+
+        var rel = $(this).attr("rel") + "";
+        $(this).parent().attr("class", "selected");
+        show(rel);
+
+        return false;
+    });
+
+    $('#dashboardfriendslink').click(function () {
+        $('#friendstablink').click();
+    });
+
+    $('.btnundo').click(function () {
+        var sid = $(this).attr("data-sid") + "";
+
+        if (sid == "unfollowUser") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+
+            var uid = $(this).attr("data-uid") + "";
+            if (uid != null) {
+                unfollowUser(uid);
+            }
+
+            return false;
+        }
+    });
+
+    $('.btnbluestyle').click(function () {
+        var sid = $(this).attr("data-sid") + "";
+
+        if (sid == "followUser") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+
+            var uid = $(this).attr("data-uid") + "";
+            if (uid != null) {
+                followUser(uid);
+            }
+
+            return false;
+        }
+        else if (sid == "addfbslfriend") {
+            var uid = $(this).attr("data-uid") + "";
+            if (uid != null) {
+                sendFriendRequest(uid);
+            }
+
+            return false;
+        }
+    });
+
+    $('#uploadprofilephotobtn').click(function () {
+        var userProfileId = $(this).attr("data-upid") + "";
+
+        $('#userprofilephotouploadcontent').load("/account/GetUserProfilePhotoUploadForm?userProfileId=" + htmlEncode(userProfileId));
+
+        return false;
+    });
+
+    $('#sendMsgToUserBtn').click(function () {
+        var recipientId = $(this).attr("data-uid") + "";
+
+        $('#userprofilesendmsgformcontent').load("/message/GetPredefinedWriteMessageUI?recipientUID=" + htmlEncode(recipientId));
+
+        return false;
+    });
+
+    $('#addfriendbtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        var uid = $(this).attr("data-uid") + "";
+        if (uid != null) {
+            sendFriendRequest(uid);
+        }
+
+        return false;
+    });
+
+    $('#acceptfriendrequestbtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        var uid = $(this).attr("data-uid") + "";
+        if (uid != null) {
+            acceptFriendRequest(uid);
+        }
+
+        return false;
+    });
+
+    $('#rejectfriendrequestbtn').click(function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        var uid = $(this).attr("data-uid") + "";
+        if (uid != null) {
+            rejectFriendRequest(uid);
+        }
+
+        return false;
+    });
+
+    $("#uploadprofilephotobtn").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#sendMsgToUserBtn").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#writemessagelink").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+
+    $("#dashboardaddvendorbtn").fancybox({
+        'autoscale': 'true',
+        'modal': true,
+        'padding': 0,
+        'transitionIn': 'fade',
+        'transitionOut': 'fade',
+        'scrolling': 'no'
+    });
+});
+
+function rejectFriendRequest(friendUserId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Account/RejectFriendRequest",
+        data: {
+            friendId: friendUserId
+        },
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Friend request could not be rejected. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function acceptFriendRequest(friendUserId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Account/AcceptFriendRequest",
+        data: {
+            friendId: friendUserId
+        },
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Friend request could not be accepted. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function sendFriendRequest(indicatedFriendId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Account/SendSixLooniesFriendRequest",
+        data: {
+            indicatedFriend: indicatedFriendId
+        },
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: You could not be added as a follower. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function followUser(userToFollowId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Account/FollowUser",
+        data: "userToFollowId=" + htmlEncode(userToFollowId),
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: You could not be added as a follower. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function unfollowUser(userToFollowId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Account/UnfollowUser",
+        data: "followedUserId=" + htmlEncode(userToFollowId),
+        async: false,
+        success: function (result) {
+            window.location.reload(true);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: You could not be removed as a follower. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}

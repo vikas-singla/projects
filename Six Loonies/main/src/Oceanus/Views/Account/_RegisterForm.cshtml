@@ -1,0 +1,47 @@
+﻿@model Oceanus.Models.RegisterModel
+<div id="registerform">
+    <div class="registersect">
+        @using (Html.BeginForm("Register", "Account", new { returnURL = ViewContext.HttpContext.Request.Url.AbsolutePath }))
+        {
+            @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
+            <div>
+                <div class="sectiontext">New to Pipfly? Sign Up</div>
+                <div class="smalltext">It's free and it's easy</div>
+                <fieldset>
+                    <div class="editor-label bold">
+                        First Name
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(m => m.FirstName)
+                        @Html.ValidationMessageFor(m => m.FirstName)
+                    </div>
+                    <div class="editor-label bold">
+                        Last Name
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(m => m.LastName)
+                        @Html.ValidationMessageFor(m => m.LastName)
+                    </div>
+                    <div class="editor-label bold">
+                        Email
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(m => m.Email)
+                        @Html.ValidationMessageFor(m => m.Email)
+                    </div>
+                    <div class="editor-label bold">
+                        Password
+                    </div>
+                    <div class="editor-field">
+                        @Html.PasswordFor(m => m.Password)
+                        @Html.ValidationMessageFor(m => m.Password)
+                    </div>
+                    <br />
+                    <p>
+                        <input type="submit" class="btnyellowstyle" value="Sign Up" />
+                    </p>
+                </fieldset>
+            </div>
+        }
+    </div>
+</div>

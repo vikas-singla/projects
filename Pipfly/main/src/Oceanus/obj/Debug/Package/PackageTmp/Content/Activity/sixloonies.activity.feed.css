@@ -1,0 +1,303 @@
+﻿.userwall
+{
+    padding-bottom:10px;
+    clear:both;
+    overflow:hidden;
+}
+
+.userwall .walltitle
+{
+    display:block;
+    overflow:auto;
+    clear:both;
+    padding-bottom:10px;
+    position:relative;
+}
+
+.userwall .walltitle .walltitletext
+{
+    font-size:16px;
+    font-weight:bold;
+    color:#606060;
+    text-shadow: 2px 2px 5px #ddd;
+    text-align:left;
+    display:block;
+    height:20px;
+    overflow:auto;
+}
+
+.userwall .wallbtns
+{
+    display:block;
+    clear:both;
+    overflow:auto;
+    padding-bottom:10px;
+}
+
+.userwall .wallbtns .btn img, .profile .wallbtns .btnselected img
+{
+    padding-right:5px;
+}
+
+.userwall .wallbtns .btn .text, .profile .wallbtns .btnselected .text
+{
+    position:relative;
+    top:-5px;
+}
+
+.userwall .wallbtns .btn:hover
+{
+    border: 2px solid #009EDF;
+    padding:2px 7px;
+}
+
+.userwall .wallbtns .btn, .userwall .wallbtns .btn:visited, .userwall .wallbtns .btn:active
+{
+    text-decoration:none;
+    padding:3px 8px;
+    margin:0 10px;
+    color:#106fb8;
+    float:left;
+    text-align:center;
+    font-weight:bold;
+    cursor:pointer;
+    border: 1px solid #009EDF;
+    box-shadow: 0px 0px 5px #e0e0e0;
+    -moz-box-shadow: 0px 0px 5px #e0e0e0;
+    -webkit-box-shadow: 0px 0px 5px #e0e0e0;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.userwall .wallbtns .btnselected, .userwall .wallbtns .btnselected:hover, .userwall .wallbtns .btnselected:active, .userwall .wallbtns .btnselected:visited
+{
+    text-decoration:none;
+    padding:2px 7px 2px 0;
+    border: 2px solid transparent;
+    font-weight:bold;
+    cursor:pointer;
+    color:#777;
+    font-size:14px;    
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    float:left;
+    text-align:center;
+    cursor:text;
+}
+
+.userwall .wallpost
+{
+    border-bottom:1px solid #e0e0e0;
+    text-align:left;
+    padding:10px 0;
+    overflow:auto;
+}
+
+.userwall .wallpost .postuserimg
+{
+    float:left;
+    width:40px;
+    overflow:hidden;
+    margin-right:10px;
+    margin-bottom:10px;
+}
+
+.userwall .wallpost .postcontent
+{
+    float:left;
+    width:490px;
+    padding-right:30px;
+}
+
+.userwall .wallpost .postfooter
+{
+    font-size:11px;
+    color:#888;
+    font-weight:normal;
+    padding-top:7px;
+    font-size:11px;
+}
+
+.userwall .wallpost .postfooter a, .userwall .wallpost .postfooter a:hover, .userwall .wallpost .postfooter a:active, .userwall .wallpost .postfooter a:visited
+{
+    font-size:11px;
+}
+
+.userwall .emptywall
+{
+    padding-top:5px;
+}
+
+.userwall .newwallpost
+{
+    margin-bottom:15px;
+    border: 1px solid silver;
+    position:relative;
+    overflow:visible;
+}
+
+.userwall .newwallpost #newwallpostinput
+{
+    width:560px;
+    padding:5px 4px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border:none;
+    outline:none;
+    line-height:normal;
+    min-height:20px;
+    height:20px;
+    resize:none;
+}
+
+.userwall .wallposttextareaarrow
+{
+    position:absolute;
+    top:-7px;
+    left:20px;
+    display:block;
+    height:7px;
+    width:8px;
+    z-index:99;
+    background: url('/images/sitetheme/textarea_arrow.png') no-repeat center top;
+}
+
+.userwall .newwallpost .postbtns
+{
+    display:block;
+    clear:both;
+    border-top:1px dashed #d9d9d9;
+    background-color:#fff;
+    text-align:right;
+    padding:4px 5px;
+}
+
+.userwall .postcommentblock
+{
+    margin-top:5px;
+    border:2px solid #d9d9d9;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.userwall .wallpostcomment
+{
+    background-color:#fff;
+    border-top:1px solid #fff;
+    border-bottom:1px solid #d9d9d9;
+    text-align:left;
+    padding:5px 0;
+    overflow:auto;
+}
+
+.userwall .wallpostcomment .postcommentuserimg
+{
+    float:left;
+    width:30px;
+    overflow:hidden;
+    margin-left:5px;
+    margin-right:10px;
+    margin-bottom:10px;
+}
+
+.userwall .wallpostcomment .postcommentcontent
+{
+    float:left;
+    width:430px;
+    margin-right:5px;
+}
+
+.userwall .wallpostcomment .postcommentfooter
+{
+    font-size:11px;
+    color:#888;
+    font-weight:normal;
+    padding-top:7px;
+    font-size:11px;
+}
+
+.userwall .wallpostcomment .postcommentfooter a, .userwall .wallpostcomment .postcommentfooter a:hover, .userwall .wallpostcomment .postcommentfooter a:active, .userwall .wallpostcomment .postcommentfooter a:visited
+{
+    font-size:11px;
+}
+
+.userwall .newpostcomment .newpostcommentinput
+{
+    width:425px;
+    padding:5px 4px;
+    background:#fff;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    outline:none;
+    line-height:normal;
+    min-height:16px;
+    height:16px;
+    resize:none;
+}
+
+.userwall .newpostcomment .newpostcommentinput:focus
+{
+    min-height:16px;
+    height:16px;
+    resize:none;
+}
+
+.userwall .newpostcomment .postcommentinputboxfooter
+{
+    font-size:10px;
+    color:#666;
+}
+
+.userwall .postcontent .sourceWebPageSect
+{
+    display:block;
+    overflow:auto;
+    margin:10px 0 0 0;
+}
+
+.userwall .postcontent .sourceWebPageSect .webicon
+{
+    float:left;
+    width:50px;
+    height:50px;
+    padding:4px 0;
+    display:block;
+}
+
+.userwall .postcontent .sourceWebPageSect .webpagedetails
+{
+    float:left;
+    display:block;
+}
+
+.userwall .postcontent .sourceWebPageSect .webpagedetails .webpagetitle a,
+.userwall .postcontent .sourceWebPageSect .webpagedetails .webpagetitle a:hover,
+.userwall .postcontent .sourceWebPageSect .webpagedetails .webpagetitle a:visited
+{
+    clear:both;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.userwall .postcontent .sourceWebPageSect .webpagedetails .webpageurl
+{
+    clear:both;
+    color:#808080;
+    font-size:11px;
+}
+
+.userwall .postcontent .sourceWebPageSect .webpagedetails .webpagedescriptor
+{
+    clear:both;
+    color:#666;
+    font-size:11px;
+    width:170px;
+    border-bottom:1px solid #d9d9d9;
+    padding-bottom:2px;
+    font-weight:bold;
+}

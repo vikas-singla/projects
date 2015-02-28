@@ -1,0 +1,45 @@
+﻿<div class="home">
+    <div class="top">
+        <div class="logo">
+            <img src="/images/sitetheme/Pipfly_logo_lg.png" width="165px" alt /></div>
+        <div id="searchdisplay">
+            <span class="searchbtnstyle" id="searchsitebtn">
+                <img src="/Images/sitetheme/search_btn.png" alt class="adjimg" />
+            </span>
+            <input id="searchsiteinput" class="searchinputstyle" style="color: #555; border: none;" />
+        </div>
+    </div>
+    <div class="whatsect">
+        <div class="leftpanel">
+            <div class="header">
+                Share & discover content on topics</div>
+            <div class="subtext">
+                Curate or share content with friends using the Pipfly <a href="/button" class="btnredstyle">
+                    bookmarklet</a> on celebrities, sports, news, travel destinations, or whatever
+                else you're passionate about<br />
+                <br />
+                <a href="#bookmarklethowto" id="video_howto_link">Click here to see it in action&nbsp;&nbsp;<img src="/images/open_new_window_sm.png" alt /></a>
+                <div style="display:none;">
+                    @{Html.RenderPartial("_ViewBookmarkletHowTo");}
+                </div>
+            </div>
+        </div>
+        <div class="rightpanel">
+            <div class="fblogin" style="margin-top: 25px;">
+                <div class="title" style="border: none; margin-bottom: 5px; margin-top: -5px;">
+                    Log-in with Facebook
+                </div>
+                <div style="float: none; text-align: center; border: 1px solid #d9d9d9; padding: 15px 10px 10px 10px;
+                    -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px;">
+                    <a href="#" id="facebooksigninbtn">
+                        <img alt src="/images/facebook_login_button.png" style="float: none;" /></a>
+                    <div class="terms">
+                        By logging in with Facebook, you agree to Pipfly <a href="/terms">terms and conditions.</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toptopics">
+        @{Html.RenderAction("HomePageTop", "Topic", new { numTopics = 30 });}
+    </div>
+</div>

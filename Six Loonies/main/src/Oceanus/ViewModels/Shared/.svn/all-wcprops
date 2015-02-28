@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/projects/!svn/ver/840/main/src/Oceanus/ViewModels/Shared
+END
+FilterOrderMapping.cs
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/projects/!svn/ver/493/main/src/Oceanus/ViewModels/Shared/FilterOrderMapping.cs
+END
+BaseFilterableViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/projects/!svn/ver/562/main/src/Oceanus/ViewModels/Shared/BaseFilterableViewModel.cs
+END
+FilterableViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/projects/!svn/ver/562/main/src/Oceanus/ViewModels/Shared/FilterableViewModel.cs
+END
+ViewModelBase.cs
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/projects/!svn/ver/516/main/src/Oceanus/ViewModels/Shared/ViewModelBase.cs
+END
+TagViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/projects/!svn/ver/516/main/src/Oceanus/ViewModels/Shared/TagViewModel.cs
+END
+CategoryViewModel.cs
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/projects/!svn/ver/840/main/src/Oceanus/ViewModels/Shared/CategoryViewModel.cs
+END

@@ -1,0 +1,162 @@
+﻿@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/topic/pipfly.topic.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.topic.#.css")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/spotlight/pipfly.spotlight.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.spotlight.#.css")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/articles/pipfly.articles.css")
+            .Add("~/Content/clips/pipfly.clips.css")
+            .ForceRelease()
+            .Render("~/cache/pipfly.collage.#.css")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+            Bundle.JavaScript()
+            .Add("~/Scripts/pipfly.layout.helper.js")
+            .ForceRelease()
+            .Render("~/cache/pipfly.layout.helper_#.js")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+            Bundle.JavaScript()
+            .Add("~/Scripts/pipfly.articles.helper.js")
+            .Add("~/Scripts/pipfly.spotlight.js")
+            .Render("~/cache/pipfly.spotlight.scripts_#.js")
+        );
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#searchsiteinput').val('@(ViewBag.SearchTerm)');
+
+        @if (ViewBag.ArticleType != Oceanus.Controllers.ArticleController.ArticleTypes.All)
+        {
+            <text>
+                $('.topicsectiontabs .articletab').click();
+            </text>
+        }
+        else
+        {
+            <text>
+                $('#ddmenuallarticles').click(function () {
+                    $('.topicsectiontabs .articletab').click();
+                    return false;
+                });
+            </text>
+        }
+    });
+</script>
+<div class="fullsect topic" id="spotlightcontainer" data-follow-count="@(ViewBag.FollowCount)">
+    <div class="theader">
+        <div class="theadertext">
+            Spotlight 
+        </div>
+    </div>
+    <div class="tcontent">
+        <div class="optionbar" style="margin:14px 14px 5px 14px;@((ViewBag.DisplaySpotlightPrompt != null && ViewBag.DisplaySpotlightPrompt) ? "display:none;": "")">
+            <ul class="topicsectiontabs" id="topicsectiontabs" style="@(ViewBag.ArticleType == Oceanus.Controllers.ArticleController.ArticleTypes.All ? "width:525px;" : "width:650px;")">
+                <li class="@((ViewBag.DisplaySpotlightPrompt != null && ViewBag.DisplaySpotlightPrompt) ? "": "selected")"><a href="#photos" class="topicsectionlink" rel="#topicphotosect" title="Click here to only view photos contributed on the topic">
+                    <img src="/images/sitetheme/photo_icon.png" alt /><span class="text">PHOTOS</span></a></li>
+                <li><a href="#videos" class="topicsectionlink" rel="#topicvideosect" title="Click here to only view videos contributed on the topic">
+                    <img src="/images/sitetheme/video_icon.png" alt /><span class="text">VIDEOS</span></a></li>
+                <li><a href="#photos" class="topicsectionlink articletab" rel="#topicarticlessect">
+                    <img src="/images/sitetheme/story_icon.png" alt /><span class="text">ARTICLES@(ViewBag.ArticleType == Oceanus.Controllers.ArticleController.ArticleTypes.All ? "" : (": " + ViewBag.ArticleType))</span><img
+                        src="/Images/scrollarrow_down.gif" class="topicsectbarimg" alt="" width="12px"
+                        height="12px" /></a>
+                    <div class="ddmenu" style="left: -1px; min-width: 100px;">
+                        <div class="menulink">
+                            <a id="ddmenuallarticles" href="/spotlight/@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                All</a>
+                        </div>
+                        <div class="menulink">
+                            <a href="/spotlight/news/@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                News</a>
+                        </div>
+                        <div class="menulink">
+                            <a href="/spotlight/facts/@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                Facts</a>
+                        </div>
+                        <div class="menulink">
+                            <a href="/spotlight/opinion/@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                Opinion</a>
+                        </div>
+                        <div class="menulink">
+                            <a href="/spotlight/howto/@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                How To</a>
+                        </div>
+                        <div class="menulink">
+                            <a href="/spotlight/other/@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("?sortBy=" + (int)ViewBag.SortBy) : "")">
+                                Other</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="@((ViewBag.DisplaySpotlightPrompt != null && ViewBag.DisplaySpotlightPrompt) ? "selected": "")"><a class="topicsectionlink" href="#tags" rel="#tagsect">
+                    <img src="/images/sitetheme/tab_tag_icon.png" alt /><span class="text">TAGS</span></a></li>
+            </ul>
+            <div class="contentfilterbtns" style="left: auto; right: 0;">
+                <ul>
+                    <li class="@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? "selected" : "")">
+                        Sort By: @(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? "Recent" : "Popular")
+                        <img src="/Images/scrollarrow_down.gif" alt="" width="12px" height="12px" />
+                        <div class="ddmenu" style="right: -1px; min-width: 120px;">
+                            <div class="menulink">
+                                <a href="/spotlight/@(ViewBag.ArticleType == Oceanus.Controllers.ArticleController.ArticleTypes.All ? "" : ViewBag.ArticleType.ToString().ToLower())">
+                                    Most Popular</a>
+                            </div>
+                            <div class="menulink">
+                                <a href="/spotlight@(ViewBag.ArticleType == Oceanus.Controllers.ArticleController.ArticleTypes.All ? "" : ("/" + ViewBag.ArticleType.ToString().ToLower()))/?sortBy=@((int)Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded)">
+                                    Recently Added</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="spotlightoverview" style="@((ViewBag.DisplaySpotlightPrompt != null && ViewBag.DisplaySpotlightPrompt) ? "" : "display:none;")">
+            <div class="title">
+                You're currently not following any tags or people. 
+            </div>
+            <div class="description">
+                Spotlight is your dashboard where you can view photos, videos or articles from tags
+                and people you follow on Pipfly. <b>Follow</b> one of the tags below to populate Spotlight.</div>
+        </div>
+        <div id="tagsect" class="contents" style="@((ViewBag.DisplaySpotlightPrompt != null && ViewBag.DisplaySpotlightPrompt) ? "" : "display:none;")">
+            @{Html.RenderAction("TrendingCollage", "Topic", new { page = 1, perpage = 25 });}
+        </div>
+        <div id="topicarticlessect" class="contents" style="display: none;">
+            <a class="paginationlink" href="/article/Spotlight?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")articleType=@(ViewBag.ArticleType)&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="1" style="display:none;">
+            </a>
+        </div>
+        <div id="topicphotosect" class="contents" style="@((ViewBag.DisplaySpotlightPrompt != null && ViewBag.DisplaySpotlightPrompt) ? "display:none;" : "")">
+            @if(ViewBag.DisplaySpotlightPrompt != null && !ViewBag.DisplaySpotlightPrompt) {
+                Html.RenderAction("Spotlight", "Clip", new { since_date = ViewBag.since_date, page = 1, sortBy = ViewBag.SortBy, type = Oceanus.Controllers.ClipController.ClipType.Photo });
+                <a class="paginationlink" href="/clip/Spotlight?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")type=@((int)Oceanus.Controllers.ClipController.ClipType.Photo)&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="2" style="display:none;">
+                </a>
+            }
+            else
+            {
+                <a class="paginationlink" href="/clip/Spotlight?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")type=@((int)Oceanus.Controllers.ClipController.ClipType.Photo)&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="1" style="display:none;">
+                </a>
+            }
+        </div>
+        <div id="topicvideosect" class="contents" style="display: none;">
+            <a class="paginationlink" href="/clip/Spotlight?@(ViewBag.SortBy != null && ViewBag.SortBy == Oceanus.Controllers.ControllerBase.SortContentCriteria.RecentlyAdded ? ("sortBy=" + (int)ViewBag.SortBy + "&") : "")type=@((int)Oceanus.Controllers.ClipController.ClipType.Video)&since_date=@(Html.Encode(ViewBag.since_date))" data-page-id="1" style="display:none;">
+            </a>
+        </div>
+    </div>
+</div>

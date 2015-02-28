@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/old/trunk/JobCrawler/HTML%20Parser/HTML%20Content%20Filters/Filters
+END
+FormattingFilter.cs
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/old/trunk/JobCrawler/HTML%20Parser/HTML%20Content%20Filters/Filters/FormattingFilter.cs
+END
+LinkFilter.cs
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/old/trunk/JobCrawler/HTML%20Parser/HTML%20Content%20Filters/Filters/LinkFilter.cs
+END
+ImageFilter.cs
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/old/trunk/JobCrawler/HTML%20Parser/HTML%20Content%20Filters/Filters/ImageFilter.cs
+END
+AbstractFilter.cs
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/old/trunk/JobCrawler/HTML%20Parser/HTML%20Content%20Filters/Filters/AbstractFilter.cs
+END
+EmbedObjectFilter.cs
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/old/trunk/JobCrawler/HTML%20Parser/HTML%20Content%20Filters/Filters/EmbedObjectFilter.cs
+END
+ScriptFilter.cs
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/rainforest/!svn/ver/210/BridgesAndLadders/old/trunk/JobCrawler/HTML%20Parser/HTML%20Content%20Filters/Filters/ScriptFilter.cs
+END

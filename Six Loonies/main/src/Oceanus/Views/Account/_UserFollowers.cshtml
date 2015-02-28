@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Oceanus.ViewModels.UserProfileViewModel>   
+<link href="@Url.Content("~/Content/follow/sixloonies.followers.css")" rel="stylesheet" type="text/css" />
+<div class="fullsect" id="voverview">
+    <div class="section">
+        <div class="sectiontitle">
+            <div class="titletext">
+                Followers
+            </div>
+        </div>
+        <div class="fullsect">
+            @if (Model != null && Model.Count() > 0)
+            {
+                foreach (var followingUser in Model)
+                {
+                <div class="follower">
+                    <div class="details">
+                        <div class="leftalign">
+                            <div class="photo">
+                                <a href="/u/@(followingUser.Id)">
+                                    <img src="/images/user.jpg" width="50px" height="50px" alt /></a></div>                            
+                                @{
+                                
+                                    MembershipUser currUserMembership = Membership.GetUser(User.Identity.Name);
+                                    if (currUserMembership != null)
+                                    {
+                                        <div class="btns">
+                                        @if (followingUser.CurrentUserIsFollowing)
+                                        {
+                                            <a href="#" class="btnundo" data-sid="unfollowUser" data-uid="@(followingUser.UserId)">
+                                                Unfollow</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" class="btnstyle" data-sid="followUser" data-uid="@(followingUser.UserId)">
+                                                Follow</a>
+                                        }
+                                        </div>
+                                    }
+                                        
+                                }
+                                
+                        </div>
+                        <div class="name">
+                            <a href="/u/@(followingUser.Id)">@(followingUser.FirstName + " " + followingUser.LastName)</a></div>
+                        <div class="smalltext">@(followingUser.UserLevel)
+                            &nbsp;&#149;&nbsp;&nbsp;@(followingUser.NumThumbsUp)
+                            thumbs up</div>
+                        <div class="reviewcount smallgraytext">
+                            <img src="/images/starratings/star-small.jpg" alt />&nbsp;<span class="bold">@(followingUser.NumReviews)</span>
+                            reviews</div>
+                    </div>
+                </div>
+                }
+            }
+            else
+            {
+                Guid guidOfUserProfile = ViewBag.UserId;
+                MembershipUser currUserMembership = Membership.GetUser(User.Identity.Name);
+                if (currUserMembership != null)
+                {
+                    Guid currUserGuid = (Guid)currUserMembership.ProviderUserKey;
+                    if (currUserGuid == guidOfUserProfile)
+                    {
+                        <p>You currently do not have any followers.</p>
+                    }
+                    else
+                    {
+                        <p>There are currently no followers for @(ViewBag.UserFirstName).</p>
+                    }
+                }
+                else
+                {
+                    <p>There are currently no followers for @(ViewBag.UserFirstName).</p>
+                }
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿.faqsect
+{
+    width:920px;
+    margin:0 20px 10px 20px;    
+}
+
+.faqsect .heading
+{
+    font-size:16px;
+    color:#666;
+    font-weight:bold;
+    padding:30px 0 15px 0;
+    text-align:left;
+}
+
+.faqsect .leftsect
+{
+    width:430px;
+    padding:5px 20px 5px 0px;
+    float:left;
+}
+
+.faqsect .rightsect
+{
+    width:430px;
+    margin-left:20px;
+    padding:5px 0px 5px 20px;
+    float:left;
+}

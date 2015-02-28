@@ -1,0 +1,197 @@
+﻿var tellFriendRecipientList = new Array();
+
+$(function () {
+    $("#tellFriendRecipientInput").emptyText("Enter your friend's name here or select from below", "emptytextstyle");
+});
+
+function tellFriendRecipientInputChange(evt) {
+    evt = (evt) ? evt : event;
+    var target = (evt.target) ? evt.target : evt.srcElement;
+    var form = target.form;
+    var charCode = (evt.charCode) ? evt.charCode :
+        ((evt.which) ? evt.which : evt.keyCode);
+    if (charCode == 13) {
+        var inputVal = $('#tellFriendRecipientInput').val();
+
+        user = new Object();
+        user.FullName = inputVal;
+        user.UserId = inputVal;
+
+        tellFriendRecipientList.push(user);
+        refreshMessageToUI();
+
+        $("#tellFriendRecipientInput").val("");
+    }
+    return true;
+}
+
+function escape_regexp(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
+
+$.expr[':'].textEquals = function (a, i, m) {
+    return $(a).text().match("^" + escape_regexp(m[3]) + "$");
+};
+
+$(document).ready(function () {
+
+    $("#tellFriendRecipientInput").autocomplete({
+        minLength: 0,
+        source: function (request, response) {
+            var term = request.term;
+            var results = new Array();
+            for (i = 0; i < tellFriendList.length; ++i) {
+                if (tellFriendList[i].FullName.toLowerCase().indexOf(term) != -1) {
+                    results.push(tellFriendList[i]);
+                }
+            }
+            response($.map(results, function (item) {
+                return { label: item.FullName, value: item.FullName, id: item.UserId }
+            }))
+        },
+        select: function (event, ui) {
+            user = new Object();
+            user.FullName = ui.item.value;
+            user.UserId = ui.item.id;
+
+            tellFriendRecipientList.push(user);
+            refreshTellFriendRecipientUI();
+
+            $("#tellFriendRecipientInput").val("");
+
+            return false;
+        },
+        open: function (e, ui) {
+            var 
+            acData = $(this).data('autocomplete');
+
+            acData
+            .menu
+            .element
+            .find('a')
+            .each(function () {
+                var me = $(this);
+                var regex = new RegExp(acData.term, "gi");
+                me.html(me.text().replace(regex, function (matched) {
+                    var termTemplate = '<span class="bold underline">%s</span>';
+                    return termTemplate.replace('%s', matched);
+                }));
+            });
+        },
+        change: function (event, ui) {
+            if (!ui.item) {
+                if ($(".ui-autocomplete li:textEquals('" + $(this).val() + "')").size() == 0 && $(this).val() != $(this).attr("emptytext")) {
+                    // remove invalid value, as it didn't match anything
+                    relQuestId = -1;
+                    $(this).val("");
+                    $(this).data("autocomplete").term = "";
+                    $(this).blur();
+                    return false;
+                }
+            }
+        }
+    });
+
+    $('#tellFriendBtnSubmit').live('click', function () {
+        var vendorId = $(this).attr("data-vid") + "";
+
+        postTellAFriendMsg(vendorId);
+
+        return false;
+    });
+
+    $('.tellfriendrecipientsect').live('click', function () {
+        $('#tellFriendRecipientInput').focus();
+        return false;
+    });
+
+    $('#tellFriendFormContent .btns .close').live('click', function () {
+        tellFriendRecipientList = new Array();
+    });
+
+    $('.tageditbtn').live('click', function () {
+        var func = $(this).attr("func") + "";
+
+        if (func != null && $.trim(func) != "") {
+            func = $.trim(func);
+            if (func == "remtellfriendrecipient") {
+                var tid = $(this).attr("data-tid") + "";
+
+                tellFriendRecipientList.splice(tid, 1);
+                refreshTellFriendRecipientUI();
+                return false;
+            }
+        }
+    });
+
+    $('#tellFriendFormContent .friend').live('click', function () {
+        var name = $(this).attr("data-fn") + "";
+        var uid = $(this).attr("data-uid") + "";
+
+        var user = new Object();
+        user.FullName = name;
+        user.UserId = uid;
+
+        //check if already a recipient
+        var addRecipient = true;
+        for (i = 0; i < tellFriendRecipientList.length; ++i) {
+            if (tellFriendRecipientList[i].UserId == uid) {
+                addRecipient = false;
+                break;
+            }
+        }
+
+        if (addRecipient) {
+            tellFriendRecipientList.push(user);
+            refreshTellFriendRecipientUI();
+        }
+
+        return false;
+    });
+});
+
+function refreshTellFriendRecipientUI() {
+    $('#tellfriendrecipientArgs').html("");
+    if (tellFriendRecipientList != null) {
+        for (i = 0; i < tellFriendRecipientList.length; ++i) {
+            var htmlstr = "<span class='tageditgray'>" +
+                tellFriendRecipientList[i].FullName + "<a href='#' class='tageditbtn' func='remtellfriendrecipient' tid='" + i + "'></a></span>";
+            $('#tellfriendrecipientArgs').append(htmlstr);
+        }
+    }
+}
+
+function postTellAFriendMsg(vendorId) {
+    var messageBody = $.trim($("#tellfriendmsginput").val());
+
+    $.ajax(
+    {
+        type: "POST",
+        dataType: 'json',
+        traditional: true,
+        url: "/Vendor/TellAFriend",
+        data: {
+            recipients: JSON.stringify(retrieveTellAFriendUIDs(tellFriendRecipientList)),
+            message: messageBody,
+            vendorId: vendorId
+        },
+        async: false,
+        success: function (result) {
+            showSuccessNotification('Your message to tell your friends has been sent');
+            $.fancybox.close();
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Your message could not be sent. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function retrieveTellAFriendUIDs() {
+    var userIdList = new Array();
+
+    for (i = 0; i < tellFriendRecipientList.length; ++i) {
+        userIdList.push(tellFriendRecipientList[i].UserId);
+    }
+
+    return userIdList;
+}

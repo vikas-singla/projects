@@ -1,0 +1,282 @@
+﻿$(document).ready(function () {
+    $("#frmAddVendorPhotoMedia").validationEngine({ promptPosition: "topRight", scroll: false });
+    $("#frmAddVendorVideoMedia").validationEngine({ promptPosition: "topRight", scroll: false });
+
+    $('#photoMedia').live('click', function () {
+        hide('#addtoworkportfolio');
+        show('#photoMediaForm');
+        hide('#videoMediaForm');
+        $.fancybox.resize();
+
+        return false;
+    });
+    $('#videoMedia').live('click', function () {
+        hide('#addtoworkportfolio');
+        hide('#photoMediaForm');
+        show('#videoMediaForm');
+        $.fancybox.resize();
+
+        return false;
+    });
+    $('.close').live('click', function () {
+        show('#addtoworkportfolio');
+        hide('#photoMediaForm');
+        hide('#videoMediaForm');
+
+        return false;
+    });
+
+    $('#addPortfolioVideoSubmit').live('click', function () {
+
+        if ($('#frmAddVendorVideoMedia').validationEngine('validate')) {
+            $('#frmAddVendorVideoMedia').validationEngine('hideAll');
+
+            var vid = $(this).attr('data-vid') + "";
+
+            addVendorVideo(vid);
+        }
+
+        return false;
+    });
+
+    $('.editPortfolioPhotoSubmit').live('click', function () {
+        var photoId = $(this).attr("data-photo-id") + "";
+
+        if ($('#frmEditVendorPhotoMedia' + photoId).validationEngine('validate')) {
+            $('#frmEditVendorPhotoMedia' + photoId).validationEngine('hideAll');
+
+            var vendorId = $(this).attr("data-vid") + "";
+
+            UpdateVendorImage(vendorId, photoId);
+        }
+
+        return false;
+    });
+
+    $('.editPortfolioVideoSubmit').live('click', function () {
+        var videoId = $(this).attr("data-video-id") + "";
+
+        if ($('#frmEditVendorVideoMedia' + videoId).validationEngine('validate')) {
+            $('#frmEditVendorVideoMedia' + videoId).validationEngine('hideAll');
+
+            var vendorId = $(this).attr("data-vid") + "";
+
+            UpdateVendorVideo(vendorId, videoId);
+        }
+
+        return false;
+    });
+
+    $('#vendorpvideos').live('click', function () {
+        hide('#pimages');
+        show('#pvideos');
+        $('#vendorpimages').attr("class", "");
+        $('#vendorpvideos').attr("class", "selbtn");
+
+        $('#vidcarousel').resize();
+
+        return false;
+    });
+
+    $('#vendorpimages').live('click', function () {
+        show('#pimages');
+        hide('#pvideos');
+        $('#vendorpimages').attr("class", "selbtn");
+        $('#vendorpvideos').attr("class", "");
+
+        return false;
+    });
+
+    $('#addphotobtn').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+    });
+
+    $('#editphotobtn').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+    });
+
+    $('#addToPortfolioBtn').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+    });
+
+    $('.editvendorportfolioimg').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        return false;
+    });
+
+    $('.deletevendorportfolioimg').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        return false;
+    });
+
+    $('.editvendorportfoliovid').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        return false;
+    });
+
+    $('.deletevendorportfoliovid').live('click', function () {
+        if (!loggedin) {
+            $('#loginbtn').click();
+            return false;
+        }
+
+        return false;
+    });
+
+    $('.btnbluestyle').live('click', function () {
+        var sid = $(this).attr("data-sid") + "";
+
+        if (sid == "deleteportfolioviddetails") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+
+            var vendorId = $(this).attr("data-vid") + "";
+            var videoId = $(this).attr("data-vidid") + "";
+            DeleteVendorVideo(vendorId, videoId);
+            return false;
+        }
+        else if (sid == "deleteportfolioimgdetails") {
+            if (!loggedin) {
+                $('#loginbtn').click();
+                return false;
+            }
+
+            var vendorId = $(this).attr("data-vid") + "";
+            var photoId = $(this).attr("data-pid") + "";
+            DeleteVendorImage(vendorId, photoId);
+            return false;
+        }
+
+        if ($(this).attr('type') == "submit") {
+            return true;
+        }
+    });
+});
+
+function addVendorVideo(vid) {
+
+    // serialize input fields in form with name attributes where name attribute is key
+    var dataObject = $("#frmAddVendorVideoMedia").serializeJSON();
+    
+    $.ajax(
+    {
+        type: "POST",
+        traditional: true,
+        url: "/Vendor/AddVendorVideo",
+        data: dataObject,
+        async: false,
+        success: function (result) {
+            showSuccessNotification('Video has been added.');
+            $.fancybox.close();
+            $('#voverviewportfolio').load("/vendor/Portfolio?vendorId=" + vid);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Video could not be added. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function UpdateVendorVideo(vid, videoId) {
+    // serialize input fields in form with name attributes where name attribute is key
+    var dataObject = $("#frmEditVendorVideoMedia" + videoId).serializeJSON();
+    
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/UpdateVendorVideo",
+        data: dataObject,
+        success: function (result) {
+            $.fancybox.close();
+            showSuccessNotification('Video has been updated.');
+            $('#voverviewportfolio').load("/vendor/Portfolio?vendorId=" + vid);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Video could not be updated. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function DeleteVendorVideo(vid, videoId) {
+    $.ajax(
+    {
+        type: "POST",
+        url: "/Vendor/DeleteVendorVideo",
+        data: {
+            vid: vid,
+            videoId: videoId
+        },
+        success: function (result) {
+            $.fancybox.close();
+            showSuccessNotification('Video has been deleted.');
+            $('#voverviewportfolio').load("/vendor/Portfolio?vendorId=" + vid);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Video could not be deleted. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function UpdateVendorImage(vid, photoId) {
+
+    // serialize input fields in form with name attributes where name attribute is key
+    var dataObject = $("#frmEditVendorPhotoMedia" + photoId).serializeJSON();
+
+    $.ajax(
+    {
+        type: "POST",
+        url: "/VendorImage/AjaxImageUpdate",
+        data: dataObject,
+        success: function (result) {
+            $.fancybox.close();
+            showSuccessNotification('Image has been updated.');
+            $('#voverviewportfolio').load("/vendor/Portfolio?vendorId=" + vid);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Image could not be updated. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}
+
+function DeleteVendorImage(vid, photoId) {
+
+    $.ajax(
+    {
+        type: "POST",
+        url: "/VendorImage/AjaxImageDelete",
+        data: {
+            VendorId: vid,
+            photoId: photoId
+        },
+        success: function (result) {
+            $.fancybox.close();
+            showSuccessNotification('Image has been deleted.');
+            $('#voverviewportfolio').load("/vendor/Portfolio?vendorId=" + vid);
+        },
+        error: function (req, status, error) {
+            showErrorNotification('Error: Image could not be deleted. We have recorded the error for analysis and apologize for inconvenience. Please try again later.');
+        }
+    });
+}

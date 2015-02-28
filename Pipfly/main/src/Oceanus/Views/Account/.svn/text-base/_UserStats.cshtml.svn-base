@@ -1,0 +1,52 @@
+﻿@model Oceanus.ViewModels.UserStatsViewModel
+<div class="stats">
+    @if (Model != null)
+    {
+        <div class="stat lightrightborder lightbtmborder">
+            <div class="num">
+                <span>
+                    @(Model.NumThumbsUp)</span></div>
+            <div class="lbl">
+                thumbs up<br />
+                <br />
+            </div>
+        </div>
+        <div class="stat lightrightborder lightbtmborder">
+            <div class="num">
+                <span>
+                    @(Model.NumVendorsFollowed)</span></div>
+            <div class="lbl">
+                professionals or businesses followed<br />
+                <br />
+            </div>
+        </div>
+        <div class="stat lightbtmborder">
+            <div class="num">
+                <span>
+                    @(Model.NumFriendsOnSixLoonies)</span></div>
+            <div class="lbl">
+                friends on Six Loonies</div>
+        </div>
+        <div class="stat lightrightborder">
+            <div class="num">
+                <span>
+                    @(Model.NumFollowers)</span></div>
+            <div class="lbl">
+                followers</div>
+        </div>
+        <div class="stat lightrightborder">
+            <div class="num">
+                <span>
+                    @(Model.NumFollowed)</span></div>
+            <div class="lbl">
+                following</div>
+        </div>
+        <div class="stat">
+            <div class="num">
+                <span>
+                    @(Model.NumReviews)</span></div>
+            <div class="lbl">
+                reviews</div>
+        </div>
+    }
+</div>

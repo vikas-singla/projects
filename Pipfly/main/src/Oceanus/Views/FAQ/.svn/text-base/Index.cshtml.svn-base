@@ -1,0 +1,28 @@
+﻿<link href="@Url.Content("~/Content/faq/sixloonies.faq.css")" rel="stylesheet" type="text/css" />
+<div class="fullsect">
+    <div class="faqsect">
+        <div class="heading">
+            FAQ
+        </div>
+        <div class="fullsect">
+            <div class="leftsect">
+                <div class="section">
+                    <div class="sectiontitle">
+                        <div class="titletext">
+                            About Six Loonies
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="rightsect">
+                <div class="section">
+                    <div class="sectiontitle">
+                        <div class="titletext">
+                            How do I ...?
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

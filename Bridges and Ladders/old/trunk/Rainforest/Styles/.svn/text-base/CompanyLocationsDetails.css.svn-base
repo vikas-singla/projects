@@ -1,0 +1,63 @@
+﻿.CPD_HeaderTable
+{
+    width: 100%;
+    vertical-align: top;
+    background-color: #fff;
+    padding-top: 5px;
+}
+.CPD_NavColumnStyle
+{
+    text-align: left;
+}
+.lbl_cpdnamenav
+{
+    color: #505050;
+    text-align: right;
+    font-size: 12px;
+    font-weight: bold;
+}
+.link_cpdhierarchyNav, .link_cpdhierarchyNav:visited
+{
+    color: #106fb8;
+    padding: 0px;
+    border-width: 0px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.locationsOverviewLocationHeaderStyle
+{
+    width:350px;
+    border-bottom: 1px dotted #d9d9d9;
+    padding-bottom:5px;
+}
+.tbl_locationsOverviewStyle
+{
+    width:930px;
+}
+.locationsOverviewAddressHeaderStyle
+{
+    width:375px;
+    border-bottom: 1px dotted #d9d9d9;
+    padding-bottom:5px;
+}
+
+.locationsOverviewStateHeaderStyle
+{
+    width:200px;
+    border-bottom: 1px dotted #d9d9d9;
+    padding-bottom:5px;
+}
+
+.locationsOverviewMapHeaderStyle
+{
+    width:50px;
+    border-bottom: 1px dotted #d9d9d9;
+    padding-bottom:5px;
+}
+
+.lbl_profileoverviewlocationcontrolfieldstyle
+{    
+    color:#505050;
+    text-align: left;
+    font-size: 12px;
+}

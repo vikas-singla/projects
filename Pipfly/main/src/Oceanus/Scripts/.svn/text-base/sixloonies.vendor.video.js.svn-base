@@ -1,0 +1,17 @@
+﻿
+$(document).ready(function () {
+    $('#vidcarousel').jcarousel({
+        visible: 8
+    });
+
+    $('.carouselimg').click(function () {
+
+        var ref = $(this).attr("ref") + "";
+        if (ref) {
+            hide(".vidplayer");
+            show(ref);
+        }
+
+        return false;
+    });
+});

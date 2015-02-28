@@ -1,0 +1,175 @@
+﻿.userlistings
+{
+    float: left;
+    width: 680px;
+    display:block;
+    overflow:auto;
+    padding: 0px 0px 10px 0px;
+    border-left: none;
+    border-bottom: 2px solid #fff;
+    border-bottom-left-radius:10px;
+    -moz-border-radius-bottomleft:10px;
+    -webkit-border-bottom-left-radius: 10px;
+    margin: 0px;
+    background:#fff;
+}
+
+.userlistings .resultsheader
+{
+    width:100%;
+    display:block;
+    position:relative;
+    border-top:2px solid #d9d9d9;
+    padding:3px 0px;
+    overflow:auto;
+    margin-bottom:10px;
+}
+
+.userlistings .resultsheader .resultscount
+{
+    color:#a0a0a0;
+    font-weight:bold;
+    float:left;
+}
+
+.userlistings .resultsheader .resultsperpage
+{
+    float:right;
+}
+
+.userlistings .vendor
+{
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.userlistings .vendor .vendordetails
+{
+    display:block;
+    width:465px;
+    float:left;
+}
+
+.userlistings .vendor .header
+{
+    width: 100%;
+    clear:both;
+    text-align: left;
+    display:block;
+    margin-bottom: 8px;
+    position: relative;
+}
+
+.userlistings .vendor .header .stars
+{
+    position:absolute;
+    top:1px;
+    right:3px;
+}
+
+.userlistings .vendor .portfolioimagesect
+{
+    display:block;
+    float:left;
+    width: 200px;
+    height: 135px;
+    margin-right:15px;
+    overflow:hidden;
+    position:relative;
+}
+
+.userlistings .vendor .vendorTitle
+{
+    margin-right: 90px;
+    font-size: 20px;
+    display:block;
+    text-align: left;
+    margin-bottom: 3px;
+    color: #007BD3;
+}
+
+.userlistings .vendor .sdesc
+{
+    text-align: left;
+    width: 100%;
+}
+
+.userlistings .vendor .samples
+{
+    height: 20px;
+    margin-bottom: 3px;
+}
+
+.userlistings .vendor .details
+{
+    margin-top: 10px;
+    width: 100%;
+}
+
+.userlistings .vendor .details .services
+{
+    width: 100%;
+    text-align: left;
+    display: block;
+}
+
+.userlistings .vendor .details .services .title
+{
+    color: #FF3030;
+    font-weight: bold;
+    font-size:13px;
+    text-align: left;
+    display: inline;
+}
+
+.userlistings .vendor .samples a
+{
+    position: relative;
+    top: -3px;
+    padding-left: 3px;
+}
+
+.userlistings .vendor .vstats
+{
+    clear: both;
+    width: 676px;
+    height: 25px;
+    overflow: hidden;
+    display: block;
+    padding: 10px 2px 0px 2px;
+}
+
+.userlistings .vendor .vstats .vstat
+{
+    width: 210px;
+    height: 35px;
+    display: block;
+    height: 100%;
+    padding-left: 2px;
+    padding-right: 2px;
+    float: left;
+}
+
+.userlistings .vendor .vstats .vstat .val
+{
+    height: 25px;
+    line-height: 25px;
+    color: #5DAE21;
+    padding: 0px 10px 0px 5px;
+    display: block;
+    float: left;
+    font-size: 20px;
+}
+
+.userlistings .vendor .vstats .vstat .desc
+{
+    text-align: left;
+    float: left;
+    padding: 0px 5px 0px 0px;
+    height: 25px;
+    line-height: 25px;
+    position: relative;
+    color:#999999;
+}

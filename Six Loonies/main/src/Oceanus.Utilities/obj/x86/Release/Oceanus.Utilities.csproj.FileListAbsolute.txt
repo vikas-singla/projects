@@ -1,0 +1,29 @@
+D:\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\Images\delete.png
+D:\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\Oceanus.Utilities.exe.config
+D:\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\Oceanus.Utilities.exe
+D:\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\Oceanus.Utilities.pdb
+D:\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\Oceanus.dll
+D:\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\MVCControlsToolkit.dll
+D:\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\FacebookAPI.dll
+D:\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\Oceanus.pdb
+D:\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\MVCControlsToolkit.pdb
+D:\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\FacebookAPI.pdb
+D:\sixloonies\projects\main\src\Oceanus.Utilities\obj\x86\Release\ResolveAssemblyReference.cache
+D:\sixloonies\projects\main\src\Oceanus.Utilities\obj\x86\Release\Oceanus.Utilities.exe
+D:\sixloonies\projects\main\src\Oceanus.Utilities\obj\x86\Release\Oceanus.Utilities.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\Images\delete.png
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\Oceanus.Utilities.exe.config
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\Oceanus.Utilities.exe
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\Oceanus.Utilities.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\Oceanus.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\FacebookAPI.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\Oceanus.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\FacebookAPI.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\obj\x86\Release\ResolveAssemblyReference.cache
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\obj\x86\Release\Oceanus.Utilities.exe
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\obj\x86\Release\Oceanus.Utilities.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\log4net.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\log4net.xml
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\HtmlAgilityPack.dll
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\HtmlAgilityPack.pdb
+D:\Startup Work\sixloonies\projects\main\src\Oceanus.Utilities\bin\Release\HtmlAgilityPack.xml

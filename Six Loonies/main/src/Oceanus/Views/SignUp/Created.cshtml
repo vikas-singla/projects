@@ -1,0 +1,32 @@
+﻿@model Oceanus.ViewModels.SignUpViewModel
+
+@*@{
+    ViewBag.Title = "SignUpComplete";
+}
+*@
+
+<h2>Signup Complete!</h2>
+
+<fieldset>
+    @*<legend>SignUpModel</legend>*@
+
+    <div>
+        @TempData["FirstName"] @TempData["LastName"],<br /><br />
+
+        Thank you for signing up. You will receive a confirmation email shortly. At any time, you may unsubscribe
+        by clicking the link at the bottom of the email.
+    </div>
+    
+   @* <div class="display-label">FirstName</div>
+    <div class="display-field">@Model.FirstName</div>
+
+    <div class="display-label">LastName</div>
+    <div class="display-field">@Model.LastName</div>
+
+    <div class="display-label">EmailAddress</div>
+    <div class="display-field">@Model.EmailAddress</div>*@
+</fieldset>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |*@
+    @Html.ActionLink("Return to sign up", "Create")
+</p>

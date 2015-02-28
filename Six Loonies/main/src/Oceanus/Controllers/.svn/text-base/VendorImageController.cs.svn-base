@@ -1,0 +1,214 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Web;
+using System.Web.Mvc;
+using Oceanus.Attributes;
+using Oceanus.Logging;
+using Oceanus.Utilities;
+
+namespace Oceanus.Controllers
+{
+    [BrowserCache(PreventBrowserCaching = true)]
+    public class VendorImageController : UploadControllerBase
+    {
+
+        #region constants
+
+        private const string ConfirmedImageSuffix = ".final";
+
+        #endregion
+
+
+        #region class variables
+
+        private static readonly Dictionary<string, int> ThumbSizes = new Dictionary<string, int>()
+        {
+            {"profile", 80},
+            {"listing", 280}
+        };
+
+        #endregion
+
+
+        #region ajax manipulation
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AjaxImageDelete(int VendorId, int photoId)
+        {
+            string dbMessage = string.Empty;
+            bool success = false;
+
+            var oldImage = Database.VendorImages.Where(i => i.vendorId == VendorId && i.Id == photoId).FirstOrDefault();
+            if (oldImage != null)
+            {
+                Database.VendorImages.DeleteObject(oldImage);
+                Database.SaveChanges();
+
+                dbMessage = "Vendor Image Deleted";
+                success = true;
+            }
+            else
+            {
+                var message =
+                    string.Format("{0}: {1}: Tried to delete non-existant VendorImage id {2} for vendor id {3}",
+                                  "VendorImageController", "AjaxImageDelete", VendorId, photoId);
+                
+                Logger.Instance.Warn(message);
+                dbMessage = message;
+            }
+
+            return Json(
+                new
+                {
+                    result = success.ToString(),
+                    message = dbMessage
+                }
+            );
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AjaxImageUpdate(int VendorId, int photoId, string title, string description)
+        {
+            string dbMessage = string.Empty;
+            bool success = false;
+
+            var oldImage = Database.VendorImages.Where(i => i.vendorId == VendorId && i.Id == photoId).FirstOrDefault();
+            if (oldImage != null)
+            {
+                oldImage.Title = title;
+                oldImage.Description = description;
+
+                Database.SaveChanges();
+
+                dbMessage = "Vendor Image Saved";
+                success = true;
+            }
+            else
+            {
+                var message =
+                    string.Format("{0}: {1}: Tried to update non-existant VendorImage id {2} for vendor id {3}",
+                                  "VendorImageController", "AjaxImageUpdate", VendorId, photoId);
+
+                Logger.Instance.Warn(message);
+                dbMessage = message;
+            }
+
+            return Json(
+                new
+                {
+                    result = success.ToString(),
+                    message = dbMessage
+                }
+            );
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AjaxCreatePartial(int VendorId, string Title, string Description, List<string> Files)
+        {
+            string dbMessage = string.Empty;
+            int successCount = 0;
+            bool success = true;
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var file in Files)
+            {
+                var oldImage = Database.VendorImages.Where(i => i.vendorId == VendorId && i.ImageUrl.Contains(file)).FirstOrDefault();
+                if (oldImage != null)
+                {
+                    Database.VendorImages.DeleteObject(oldImage);
+                    Database.SaveChanges();
+                }
+
+                try
+                {
+                    string tempName = Guid.NewGuid().ToString();
+
+                    var fileModel = new Data.VendorImage()
+                    {
+                        ImageUrl = tempName,
+                        vendorId = VendorId,
+                        Title = Title,
+                        Description = Description
+                    };
+
+                    Database.VendorImages.AddObject(fileModel);
+                    Database.SaveChanges();
+
+                    var currentName = Path.GetFileNameWithoutExtension(file);
+                    var newName = Confirm(ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS, VendorId, file, string.Format("{0}.{1}", fileModel.Id, currentName), ConfirmedImageSuffix);
+                    newName = EnsureOriginalFileIsJpeg(VendorId, ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS, newName);
+                    GenerateThumbnails(newName, ThumbSizes);
+
+                    string imageFileName = Path.GetFileNameWithoutExtension(newName);
+                    fileModel.ImageUrl = imageFileName;
+
+                    Database.SaveChanges();
+                    successCount++;
+                }
+                catch (Exception ex)
+                {
+                    string message = string.Format("Could not process uploaded image {0}", file);
+                    sb.AppendLine(message);
+
+                    message = string.Format("{0}: {1}: {2}: {3}", "VendorImageController", "AjaxCreatePartial", message, ex.Message);
+                    Logger.Instance.Error(message);
+                }
+            }
+
+            if (successCount != Files.Count)
+            {
+                success = false;
+                dbMessage = sb.ToString();
+            }
+
+            Sweep(ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS, VendorId, ConfirmedImageSuffix);
+
+            return Json(
+                new
+                {
+                    result = success.ToString(),
+                    message = dbMessage
+                }
+            );
+        }
+
+        #endregion
+
+
+        #region overrides
+
+        [TokenizedAuthorize]
+        [RequiresAuthentication]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ContentResult CheckExisting(int vendorId, string filename)
+        {
+            return base.CheckExisting(vendorId, filename, ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS);
+        }
+
+        public ContentResult Upload(int vendorId, HttpPostedFileBase fileData)
+        {
+            if (!ImageUtilities.IsAspectRatioValid(fileData.InputStream))
+            {
+                string message = string.Format("{0}: {1}: Aspect ratio for file being uploaded ({2}, for vendor {3}) is out of range", 
+                    "VendorImageController", "Upload", fileData.FileName, vendorId);
+                
+                Logger.Instance.Warn(message);
+                
+                return new ContentResult() {Content = "0"};
+            }
+
+            return base.Upload(vendorId, fileData, ImageFolderDefinitions.FOLDER_VENDOR_UPLOADS);
+        }
+
+        #endregion
+
+    }
+}

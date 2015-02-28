@@ -1,0 +1,301 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web.Mvc;
+using System.Web.Security;
+using MVCControlsToolkit.Linq;
+using Oceanus.Data;
+using Oceanus.ViewModels;
+using Oceanus.ViewModels.Shared;
+using System.Web;
+
+namespace Oceanus.Controllers
+{
+    [BrowserCache(PreventBrowserCaching = true)]
+    public class HomeController : ControllerBase
+    {
+        private static readonly FilterOrderMapping<Data.Vendor> OrderByMapping =
+            new FilterOrderMapping<Data.Vendor>()
+                {
+                };
+
+        #region GET actions
+
+        public ActionResult GetListingPagePortfolio(int vendorId)
+        {
+            var vendorImagePorfolio = Database.VendorImages.Where(vi => vi.vendorId == vendorId).AsEnumerable();
+            IEnumerable<VendorImageViewModel> portfolioViewModel = null;
+
+            SetViewBagData(vendorId);
+
+            if (vendorImagePorfolio.Count() > 0)
+            {
+                portfolioViewModel = vendorImagePorfolio.Select(vi => vi.ToVendorImageViewModel());
+            }
+
+            return PartialView("_VendorPortfolio", portfolioViewModel);
+        }
+
+        public ActionResult Index(
+
+            // filter / form params
+            string SelectedCategories,
+            string SelectedServices,
+            string showListingsByFriends,
+            // search params
+            string VendorName,
+            string CityId,
+            string contributingUserId,
+            // paging params
+            string OrderBy, string Order, int Page = 1, int ResultsPerPage = 50)
+        {
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+            Guid? loggedInUserGuid = (user != null) ? ((Guid)user.ProviderUserKey) : ((Guid?)null);
+
+            ViewBag.FilterByFriends = showListingsByFriends;
+
+            if (string.IsNullOrEmpty(OrderBy)) OrderBy = "VendorName";
+            if (string.IsNullOrEmpty(Order)) Order = "Ascending";
+
+            if ((SelectedCategories != null && !SelectedCategories.Trim().Equals(string.Empty)) || (VendorName != null && !VendorName.Trim().Equals(string.Empty)) ||
+                (SelectedServices != null && !SelectedServices.Trim().Equals(string.Empty)))
+            {
+                if (VendorName != null && !VendorName.Trim().Equals(string.Empty))
+                {
+                    ViewBag.ShowSearchResultsCount = true;
+                    ViewBag.VendorNameSearchText = VendorName;
+                }
+
+                if (SelectedServices != null && !SelectedServices.Trim().Equals(string.Empty))
+                {
+                    ViewBag.ShowSearchResultsCount = true;
+                    ViewBag.ServiceNameSearchText = SelectedServices;
+                }
+
+                if (SelectedCategories != null && !SelectedCategories.Trim().Equals(string.Empty))
+                {
+                    int catId = -1;
+                    if (int.TryParse(SelectedCategories, out catId))
+                    {
+                        if (catId != -1)
+                        {
+                            var categoryModel = Database.Categories.Where(cat => cat.Id == catId).FirstOrDefault();
+
+                            if (categoryModel != null)
+                            {
+                                ViewBag.ShowSearchResultsCount = true;
+                                ViewBag.FilterCategoryName = categoryModel.Name;
+                                ViewBag.FilterCategoryId = SelectedCategories;
+                            }
+                        }
+                    }
+                }
+            }
+
+            var listingViewModel = new ListingViewModel();
+
+            listingViewModel.AvailableCities = ReferenceData.Instance.AvailableCities;
+
+            string[] selectedCats = null;
+            // get all categories and select those that were selected
+            if (SelectedCategories != null)
+            {
+                selectedCats = SelectedCategories.Split(',');
+            }
+
+            // set final result transform
+
+            IEnumerable<Guid> userFriendIDs = null;
+            IEnumerable<Guid?> userFriendOfFriendIDs = null;
+            if (loggedInUserGuid != null)
+            {
+                userFriendIDs = Database.SixLooniesFriendConnections.Where(con => con.FirstUserId == loggedInUserGuid || con.SecondUserId == loggedInUserGuid).Select(con => (con.FirstUserId == loggedInUserGuid ? con.SecondUserId : con.FirstUserId)).AsEnumerable();
+                userFriendOfFriendIDs = Database.GetFriendsOfFriendIDs((Guid)loggedInUserGuid).AsEnumerable();
+            }
+            listingViewModel.Transform = v => v.ToListingViewModel(Database, loggedInUserGuid, userFriendIDs, userFriendOfFriendIDs);
+
+            // add ordering
+            // TODO: implement ascending / descending
+            if (OrderByMapping.Count > 0)
+            {
+                listingViewModel.OrderByExpressions.Add(new KeyValuePair<LambdaExpression, OrderType>(OrderByMapping[OrderBy], OrderType.Ascending));
+            }
+
+            // set filter delegate to be called by paging code
+            listingViewModel.FilterAction =
+                delegate
+                {
+                    // get queryable version
+                    IQueryable<Vendor> results = null;
+                    if (showListingsByFriends != null && showListingsByFriends.Trim().ToLower().Equals("on"))
+                    {
+                        ViewBag.FilteredByFriends = true;
+
+                        if (loggedInUserGuid != null)
+                        {
+                            userFriendIDs = Database.SixLooniesFriendConnections.Where(con => con.FirstUserId == loggedInUserGuid || con.SecondUserId == loggedInUserGuid).Select(con => (con.FirstUserId == loggedInUserGuid ? con.SecondUserId : con.FirstUserId)).AsEnumerable();
+                            results = Database.Vendors.Where(v => v.Reviews.Where(r => userFriendIDs.Contains(r.ContributingUserId)).Count() > 0).AsQueryable();
+                        }
+                        else
+                        {
+                            results = (new List<Vendor>()).AsQueryable();
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.FilteredByFriends = false;
+
+                        results = Database.Vendors.AsQueryable();
+
+                    }
+
+                    //only show published profiles that are not pending review
+                    results = results.Where(v => v.IsPublished && !v.IsPendingReview);
+
+                    //filter our vendors that are soft deleted
+                    results = results.Where(v => !v.IsFlaggedAsDeleted);
+
+                    //randomize
+                    if (Page > 1 && OrderByMapping.Count <= 0)
+                    {
+                        if (System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_COLLAGE_SORT_KEY] != null)
+                        {
+                            Guid sortGuid = Guid.Empty;
+                            HttpCookie cookie = System.Web.HttpContext.Current.Request.Cookies[CookieDefinitions.COOKIE_COLLAGE_SORT_KEY];
+                            cookie.Expires = DateTime.Now.AddDays(0.01);
+                            System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
+
+                            if (Guid.TryParse(cookie.Value, out sortGuid))
+                            {
+                                results = results.OrderBy(x => sortGuid);
+                            }
+                        }
+                        else
+                        {
+                            Page = 1;
+                        }
+                    }
+
+                    if(Page <= 1 && OrderByMapping.Count <= 0)
+                    {
+                        Guid sortGuid = Guid.NewGuid();
+                        HttpCookie cookie = new HttpCookie(CookieDefinitions.COOKIE_COLLAGE_SORT_KEY);
+                        cookie.Value = sortGuid.ToString();
+                        cookie.Expires = DateTime.Now.AddDays(0.01);
+                        System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
+
+                        results = results.OrderBy(x => sortGuid);
+                    }
+
+                    //filter by conributing user
+                    if (contributingUserId != null)
+                    {
+                        Guid filterUserGuid = Guid.Empty;
+
+                        if (Guid.TryParse(contributingUserId, out filterUserGuid))
+                        {
+                            results = results.Where(v => v.ContributingUserId == filterUserGuid);
+                        }
+                    }
+
+                    // match vendor name
+                    if (VendorName != null)
+                    {
+                        results = results.Where(
+                            v => v.Name.ToLower().Contains(VendorName.Trim().ToLower()));
+                    }
+
+                    // match city name
+                    int cityIdNumber;
+                    if (CityId != null && Int32.TryParse(CityId, out cityIdNumber) && cityIdNumber > 0)
+                    {
+                        results =
+                            results.Where(
+                                v => v.VendorLocations.Any(
+                                    c => c.ReferenceCitiesId == cityIdNumber));
+                    }
+
+                    if (SelectedCategories != null)
+                    {
+                        // get selected categories
+                        var selectedCatIds = new List<int>();
+                        foreach (string s in selectedCats)
+                        {
+                            int id;
+                            if (int.TryParse(s, out id))
+                            {
+                                selectedCatIds.Add((id));
+                            }
+                        }
+
+                        // match selected categories
+                        results =
+                            results.Where(
+                                v =>
+                                v.VendorCategoryMappings
+                                    .Select(map => map.Category.Id)
+                                    .Intersect(selectedCatIds)
+                                    .Count() > 0);
+                    }
+
+                    // determine selected services for filtering
+                    if (SelectedServices != null)
+                    {
+                        var selectedServices = SelectedServices.Split(',');
+
+                        foreach (string servicefilter in selectedServices)
+                        {
+                            results = results.Where(v => v.Services.Where(s => s.Name.Contains(servicefilter)).Count() > 0);
+                        }
+
+                        listingViewModel.SelectedServices = selectedServices.ToList();
+                    }
+
+                    return results;
+                };
+
+            // set up available categories and cross reference selection with selected categories
+            listingViewModel.AvailableCategories = Database.Categories.Where(c => c.IsVisibleOnListingPg)
+                .AsEnumerable()
+                .Select(c => new SelectListItem()
+                    {
+                        Text = c.Name,
+                        Value = c.Id.ToString(),
+                        Selected = selectedCats != null && selectedCats.Contains(c.Id.ToString())
+                    })
+                .ToList();
+
+            // perform filtering and paging
+            listingViewModel.Filter(ResultsPerPage, Page);
+
+            return View("Index", "_ListLayout", listingViewModel);
+        }
+
+        public ActionResult SearchServicesAutoComplete(string searchText, int maxResults)
+        {
+            IEnumerable<string> services = Database.Services.Where(s => s.Vendor.IsPublished && !s.Vendor.IsPendingReview && s.Name.StartsWith(searchText)).Select(s => s.Name).Distinct().Take(maxResults);
+            return Json(services, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult SearchVendorNameAutoComplete(string searchText, int maxResults)
+        {
+            IEnumerable<Vendor> vendors = Database.Vendors.Where(v => !v.IsFlaggedAsDeleted && v.IsPublished && !v.IsPendingReview && v.Name.Contains(searchText)).Take(maxResults);
+            IEnumerable<BaseVendorViewModel> baseVendorsViewModel = vendors.Select(v => v.ToBaseVendorViewModel());
+            return Json(baseVendorsViewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
+
+        #region SetViewBag methods
+
+        private void SetViewBagData(int vendorId)
+        {
+            ViewBag.VendorId = vendorId;
+        }
+
+        #endregion
+
+    }
+}

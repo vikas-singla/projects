@@ -1,0 +1,1058 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Web.Mvc;
+using System.Web.Security;
+using MVCControlsToolkit.Linq;
+using Oceanus.Data;
+using Oceanus.ViewModels;
+using Oceanus.ViewModels.Shared;
+
+namespace Oceanus.Controllers
+{
+    [BrowserCache(PreventBrowserCaching = true)]
+    public class AnswersController : ControllerBase
+    {
+        private static readonly Dictionary<string, Expression<Func<SixAnswerQuestion, string>>> OrderByMapping =
+            new Dictionary<string, Expression<Func<SixAnswerQuestion, string>>>()
+                {
+                    { "Title", m => m.WikiText1.Text },
+                };
+
+        // GET: /Answers/
+
+        public ActionResult Index(
+            string Term = "",
+
+            // paging params
+            int Page = 1, int ResultsPerPage = 15, string OrderBy = "QuestionTitleText", string Order = "Ascending"
+        )
+        {
+            var viewModel = new SixAnswersIndexViewModel();
+            viewModel.Transform = v => v.ToQuestionViewModel();
+
+            // add order
+            viewModel.OrderByExpressions.Add(new KeyValuePair<LambdaExpression, OrderType>(OrderByMapping["Title"], OrderType.Ascending));
+
+            if (!string.IsNullOrEmpty(Term))
+            {
+                // set filter delegate to be called by paging code
+                viewModel.FilterAction =
+                    delegate
+                    {
+                        return Database.SixAnswerQuestions.Where(a => a.WikiText1.Text.ToLower().Contains(Term.ToLower()));
+                    };
+            }
+            else
+            {
+                // set filter delegate to be called by paging code
+                viewModel.FilterAction =
+                    delegate
+                    {
+                        return Database.SixAnswerQuestions;
+                    };
+            }
+            
+            // apply page and filter to view model
+            viewModel.Filter(ResultsPerPage, Page);
+
+            ViewBag.Term = Term;
+
+            return View(viewModel);
+        }
+
+        [Authorize]
+        [ValidateInput(false)]
+        public ActionResult AddQuestionResponseUserThumbsUp(Guid targetUser, string comments, int questionId, int responseId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                var question = Database.SixAnswerQuestions.Where(q => q.QuestionId == questionId).FirstOrDefault();
+                if (question != null)
+                {
+                    var questionResponse = Database.SixAnswerQuestionResponses.Where(r => r.AnswerId == responseId).FirstOrDefault();
+
+                    if (questionResponse != null)
+                    {
+                        var questionResponseContribUserProfile = Database.UserProfiles.Where(u => u.UserId == questionResponse.InitialContributingUserId).FirstOrDefault();
+
+                        if (questionResponseContribUserProfile != null)
+                        {
+                            questionResponseContribUserProfile.NumThumbsUp = questionResponseContribUserProfile.NumThumbsUp + 1;
+
+                            UserThumbsUpRatingsViewModel ratingViewModel = new UserThumbsUpRatingsViewModel(null, targetUser, comments, userGuid, DateTime.Now, null, responseId);
+                            UserThumbsUpRating ratingModel = ratingViewModel.ToUserThumbsUpModel();
+                            Database.UserThumbsUpRatings.AddObject(ratingModel);
+
+                            question.ThumbsUpCount = question.ThumbsUpCount + 1;
+                            Database.SaveChanges();
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetRelatedQuestions(int questionId)
+        {
+            IEnumerable<SixAnswersRelatedQuestionMappingViewModel> model = new List<SixAnswersRelatedQuestionMappingViewModel>();
+            var mappings = Database.SixAnswersRelatedQuestionMappings.Where(mapping => mapping.OriginQuestionId == questionId);
+
+            if (mappings != null && mappings.Count() > 0)
+            {
+                model = mappings.AsEnumerable().Select(m => m.ToRelatedQuestionViewModel());
+            }
+
+            ViewBag.QuestionId = questionId;
+
+            return PartialView("_RelatedQuestions", model);
+        }
+
+        public ActionResult GetQuestionFollowers(int questionId)
+        {
+            var questionFollowersModel = Database.SixAnswersQuestionFollowerMappings.Where(f => f.SixAnswerQuestionId == questionId).AsEnumerable();
+            IEnumerable<QuestionFollowerMappingViewModel> questionFollowersViewModel = questionFollowersModel.Select(f => f.ToQuestionFollowerMappingViewModel());
+
+            return PartialView("_QuestionFollowers", questionFollowersViewModel);
+        }
+
+        public ActionResult GetQuestionTagsAutoComplete(string searchText, int maxResults)
+        {
+            IEnumerable<Tag> tags = Database.Tags.Where(t => t.SixAnswerQuestionTagMappings.Count > 0 && t.TagName.Contains(searchText)).Take(maxResults);
+            IEnumerable<TagViewModel> tagsViewModel = tags.Select(t => t.ToTagViewModel());
+            return Json(tagsViewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetQuestionTags(int questionId)
+        {
+            IEnumerable<TagViewModel> model = new List<TagViewModel>();
+            var mappings = Database.SixAnswerQuestionTagMappings.Where(mapping => mapping.SixAnswerQuestionId == questionId);
+
+            if (mappings != null && mappings.Count() > 0)
+            {
+                model = mappings.AsEnumerable().Select(m => m.Tag.ToTagViewModel());
+            }
+
+            ViewBag.QuestionId = questionId;
+
+            return PartialView("_QuestionTags", model);
+        }
+
+        [Authorize]
+        public ActionResult AddRelatedQuestion(int questionId, int relatedQuestionId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                if (questionId == relatedQuestionId)
+                {
+                    throw new Exception("Cannot link question to self");
+                }
+
+                var questionModel = Database.SixAnswerQuestions.Where(q => q.QuestionId == questionId).FirstOrDefault();
+                var relQuestionModel = Database.SixAnswerQuestions.Where(q => q.QuestionId == relatedQuestionId).FirstOrDefault();
+
+                if (questionModel == null || relQuestionModel == null)
+                {
+                    throw new Exception("Question not found");
+                }
+
+                //check if questions are already marked as related
+                var mapping = Database.SixAnswersRelatedQuestionMappings.Where(map => map.OriginQuestionId == questionId && map.RelatedQuestionId == relatedQuestionId).FirstOrDefault();
+
+                if (mapping == null)
+                {
+                    SixAnswersRelatedQuestionMappingViewModel newMapping = new SixAnswersRelatedQuestionMappingViewModel(null, questionId, relatedQuestionId, userGuid, DateTime.Now);
+                    SixAnswersRelatedQuestionMapping newMappingModel = newMapping.ToRelatedQuestionModel();
+
+                    Database.SixAnswersRelatedQuestionMappings.AddObject(newMappingModel);
+                    Database.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult DeleteRelatedQuestion(int mappingId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                //check if questions are already marked as related
+                var mapping = Database.SixAnswersRelatedQuestionMappings.Where(map => map.RelatedQuestionMappingId == mappingId).FirstOrDefault();
+
+                if (mapping == null)
+                {
+                    Database.SixAnswersRelatedQuestionMappings.DeleteObject(mapping);
+                    Database.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        public ActionResult SearchQuestionsAutoComplete(string searchText, int maxResults)
+        {
+            IEnumerable<SixAnswerQuestion> questions = Database.SixAnswerQuestions.Where(quest => quest.WikiText1.Text.Contains(searchText)).Take(maxResults);
+            IEnumerable<BarebonesSixAnswersQuestionViewModel> questionsViewModel = questions.Select(quest => quest.ToBarebonesQuestionViewModel());
+            return Json(questionsViewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetRelatedQuestionsAutoComplete(string searchText, int maxResults)
+        {
+            IEnumerable<SixAnswerQuestion> questions = Database.SixAnswerQuestions.Where(quest => quest.WikiText1.Text.Contains(searchText)).Take(maxResults);
+            IEnumerable<BarebonesSixAnswersQuestionViewModel> questionsViewModel = questions.Select(quest => quest.ToBarebonesQuestionViewModel());
+            return Json(questionsViewModel, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        public ActionResult Follow(int questionId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //check if the user is already following the question
+                var questionFollowerMapping = Database.SixAnswersQuestionFollowerMappings.Where(mapping => (mapping.SixAnswerQuestionId == questionId && mapping.UserId == userGuid)).FirstOrDefault();
+
+                if (questionFollowerMapping == null)
+                {
+                    QuestionFollowerMappingViewModel viewModel = new QuestionFollowerMappingViewModel(null, questionId, userGuid, DateTime.Now);
+                    SixAnswersQuestionFollowerMapping followerModel = viewModel.ToQuestionFollowerMapping();
+
+                    Database.SixAnswersQuestionFollowerMappings.AddObject(followerModel);
+                    Database.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult Unfollow(int questionId)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //check if the user is already following the vendor
+                var questionFollowerMapping = Database.SixAnswersQuestionFollowerMappings.Where(mapping => (mapping.SixAnswerQuestionId == questionId && mapping.UserId == userGuid)).FirstOrDefault();
+
+                if (questionFollowerMapping != null)
+                {
+                    Database.SixAnswersQuestionFollowerMappings.DeleteObject(questionFollowerMapping);
+                    Database.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        public ActionResult Details(int questionId)
+        {
+            var model = Database.SixAnswerQuestions.Where(q => q.QuestionId == questionId).FirstOrDefault();
+
+            if (model == null)
+            {
+                throw new Exception("Question not found");
+            }
+
+            //Check if the currently logged in user has already responded to the question
+            var questionViewModel = model.ToQuestionViewModel();
+            questionViewModel.UserHasResponded = false;
+
+            MembershipUser user = Membership.GetUser(User.Identity.Name);
+
+            if (user != null)
+            {
+                Guid userGuid = (Guid)user.ProviderUserKey;
+                var questionFollowerMappingFound = Database.SixAnswersQuestionFollowerMappings.Where(f => f.UserId == userGuid && f.SixAnswerQuestionId == questionId);
+
+                if (questionFollowerMappingFound != null && questionFollowerMappingFound.Count() > 0)
+                {
+                    questionViewModel.CurrentUserIsFollower = true;
+                }
+                else
+                {
+                    questionViewModel.CurrentUserIsFollower = false;
+                }
+
+                if (questionViewModel.ContributingUserId == userGuid)
+                {
+                    PopulateQuestionDetailPendingRevisions(questionViewModel);
+                    PopulateQuestionTitlePendingRevisions(questionViewModel);
+                }
+
+                SixAnswersUserResponseViewModel currentUserResponse = GetCurrentUserResponseIfAny(userGuid, questionViewModel.UserResponses);
+
+                if (currentUserResponse != null)
+                {
+                    currentUserResponse.IsCurrentlyLoggedInUserResponse = true;
+                    questionViewModel.UserHasResponded = true;
+
+                    PopulateUserResponseWithPendingRevisions(currentUserResponse);
+                }
+            }
+
+            return View(questionViewModel);
+        }
+
+        private void PopulateQuestionTitlePendingRevisions(SixAnswersQuestionViewModel questionViewModel)
+        {
+            var pendingRevisions = Database.WikiTextPendingRevisions.Where(rev => (rev.WikiTextId == questionViewModel.TitleTextWikiId && !rev.IsRejected && !rev.IsAccepted));
+
+            if (pendingRevisions != null)
+            {
+                questionViewModel.PendingTitleRevisions = pendingRevisions.AsEnumerable().Select(pr => pr.ToWikiTextPendingRevisionViewModel());
+            }
+        }
+
+        private void PopulateQuestionDetailPendingRevisions(SixAnswersQuestionViewModel questionViewModel)
+        {
+            var pendingRevisions = Database.WikiTextPendingRevisions.Where(rev => (rev.WikiTextId == questionViewModel.DetailTextWikiId && !rev.IsRejected && !rev.IsAccepted));
+
+            if (pendingRevisions != null)
+            {
+                questionViewModel.PendingQDetailRevisions = pendingRevisions.AsEnumerable().Select(pr => pr.ToWikiTextPendingRevisionViewModel());
+            }
+        }
+
+        private void PopulateUserResponseWithPendingRevisions(SixAnswersUserResponseViewModel userResponse)
+        {
+            int responseWikiTextId = userResponse.ResponseWikiTextId;
+
+            var pendingRevisions = Database.WikiTextPendingRevisions.Where(rev => (rev.WikiTextId == responseWikiTextId && !rev.IsRejected && !rev.IsAccepted));
+
+            if (pendingRevisions != null)
+            {
+                userResponse.PendingResponseRevisions = pendingRevisions.AsEnumerable().Select(pr => pr.ToWikiTextPendingRevisionViewModel());
+            }
+        }
+
+        private SixAnswersUserResponseViewModel GetCurrentUserResponseIfAny(Guid userId, IEnumerable<SixAnswersUserResponseViewModel> userResponses)
+        {
+            SixAnswersUserResponseViewModel result = null;
+
+            foreach (SixAnswersUserResponseViewModel response in userResponses)
+            {
+                if (response.InitialContributingUserId == userId)
+                {
+                    result = response;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+        [Authorize]
+        public ActionResult DeleteTag(int qid, int tid)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                var tag = Database.SixAnswerQuestionTagMappings.Where(t => (t.TagId == tid && t.SixAnswerQuestionId == qid)).FirstOrDefault();
+
+                if (tag != null)
+                {
+                    Database.SixAnswerQuestionTagMappings.DeleteObject(tag);
+                    Database.SaveChanges();
+
+                    dbMessage = "Tag Deleted";
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult AddTag(int qid, string tag)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+            tag = tag.Trim();
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                var question = Database.SixAnswerQuestions.Where(q => q.QuestionId == qid).FirstOrDefault();
+
+                if (question != null)
+                {
+                    var existingTag = Database.Tags.Where(t => t.TagName.ToLower().Equals(tag.ToLower())).FirstOrDefault();
+
+                    //does the tag already exist?
+                    if (existingTag != null)
+                    {
+                        //check if the tag is already associated to the question
+                        var tagMappings = Database.SixAnswerQuestionTagMappings.Where(mapping => (mapping.SixAnswerQuestionId == qid && mapping.TagMappingId == existingTag.TagId)).FirstOrDefault();
+
+                        if (tagMappings == null)
+                        {
+                            SixAnswerQuestionTagMappingViewModel tagMappingViewModel = new ViewModels.SixAnswerQuestionTagMappingViewModel(null, qid, existingTag.TagId, userGuid, DateTime.Now);
+                            SixAnswerQuestionTagMapping tagMapping = tagMappingViewModel.ToTagMapping();
+
+                            Database.SixAnswerQuestionTagMappings.AddObject(tagMapping);
+                            Database.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        TagViewModel tagViewModel = new TagViewModel(null, tag, userGuid, DateTime.Now);
+                        Tag newTag = tagViewModel.ToTag();
+
+                        Database.Tags.AddObject(newTag);
+                        Database.SaveChanges();
+
+                        SixAnswerQuestionTagMappingViewModel tagMappingViewModel = new ViewModels.SixAnswerQuestionTagMappingViewModel(null, qid, newTag.TagId, userGuid, DateTime.Now);
+                        SixAnswerQuestionTagMapping tagMapping = tagMappingViewModel.ToTagMapping();
+
+                        Database.SixAnswerQuestionTagMappings.AddObject(tagMapping);
+                        Database.SaveChanges();
+                    }
+                }
+                else
+                {
+                    dbMessage = "Failed. Question does not exist";
+                    successful = false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        [ValidateInput(false)]
+        public ActionResult AddQuestionRevision(int wtid, string text)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                int revisionNum = Database.WikiTextPendingRevisions.Count(wt => wt.WikiTextId == wtid) + 1;
+
+                WikiTextPendingRevisionViewModel pendingRevisionViewModel = new WikiTextPendingRevisionViewModel(null, wtid, revisionNum, text, userGuid, DateTime.Now);
+                WikiTextPendingRevision pendingRevision = pendingRevisionViewModel.ToWikiTextPendingRevision();
+
+                Database.WikiTextPendingRevisions.AddObject(pendingRevision);
+                Database.SaveChanges();
+
+                successful = true;
+                dbMessage = "Answer Revision Saved";
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult AcceptQuestionRevision(int qid, int wtrid)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                var question = Database.SixAnswerQuestions.Where(q => q.QuestionId == qid).FirstOrDefault();
+
+                if (question != null)
+                {
+                    var pendingRevision = Database.WikiTextPendingRevisions.Where(pr => pr.WikiTextPendingRevisionId == wtrid).FirstOrDefault();
+
+                    if (pendingRevision != null)
+                    {
+                        MembershipUser user = Membership.GetUser(User.Identity.Name);
+                        Guid userGuid = (Guid)user.ProviderUserKey;
+
+                        if (question.TitleWikiTextId == pendingRevision.WikiTextId && question.ContributingUserId == userGuid)
+                        {
+                            UpdateQuestionTitleOrDetails(qid, pendingRevision.WikiTextId, wtrid);
+                        }
+                        else if (question.DetailWikiTextId == pendingRevision.WikiTextId && question.ContributingUserId == userGuid)
+                        {
+                            UpdateQuestionTitleOrDetails(qid, pendingRevision.WikiTextId, wtrid);
+                        }
+                        else
+                        {
+                            //must be one of the question responses
+                            UpdateQuestionResponse(qid, pendingRevision.WikiTextId, wtrid);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult RejectQuestionRevision(int qid, int wtrid)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                var question = Database.SixAnswerQuestions.Where(q => q.QuestionId == qid).FirstOrDefault();
+
+                if (question != null)
+                {
+                    var pendingRevision = Database.WikiTextPendingRevisions.Where(pr => pr.WikiTextPendingRevisionId == wtrid).FirstOrDefault();
+
+                    if (pendingRevision != null)
+                    {
+                        MembershipUser user = Membership.GetUser(User.Identity.Name);
+                        Guid userGuid = (Guid)user.ProviderUserKey;
+
+                        if (question.TitleWikiTextId == pendingRevision.WikiTextId && question.ContributingUserId == userGuid)
+                        {
+                            RejectQuestionTitleOrDetailsRevision(qid, pendingRevision.WikiTextId, wtrid);
+                        }
+                        else if (question.DetailWikiTextId == pendingRevision.WikiTextId && question.ContributingUserId == userGuid)
+                        {
+                            RejectQuestionTitleOrDetailsRevision(qid, pendingRevision.WikiTextId, wtrid);
+                        }
+                        else
+                        {
+                            //must be one of the question responses
+                            RejectQuestionResponseRevision(qid, pendingRevision.WikiTextId, wtrid);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        private ActionResult UpdateQuestionResponse(int qid, int wtid, int wtrid)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                var questionResponse = Database.SixAnswerQuestionResponses.Where(resp => (resp.QuestionId == qid && resp.WikiTextId == wtid)).FirstOrDefault();
+
+                if (questionResponse != null && questionResponse.InitialContributingUserId == userGuid)
+                {
+                    var wikiTextPendingRevision = Database.WikiTextPendingRevisions.Where(pr => pr.WikiTextPendingRevisionId == wtrid).FirstOrDefault();
+
+                    if (wikiTextPendingRevision != null && !wikiTextPendingRevision.IsAccepted && !wikiTextPendingRevision.IsRejected)
+                    {
+                        //obtain prior instance of wikitext
+                        var wikiText = Database.WikiTexts.Where(wt => wt.WikiTextId == wtid).FirstOrDefault();
+
+                        if (wikiText != null)
+                        {
+                            //mark prior wikitext as revision
+                            bool result = MoveWikiTextToRevision(wtid);
+
+                            if (result)
+                            {
+                                wikiText.Text = wikiTextPendingRevision.Text;
+                                wikiText.UserId = wikiTextPendingRevision.UserId;
+                                wikiText.LastUpdatedOn = wikiTextPendingRevision.RevisionDate;
+
+                                wikiTextPendingRevision.IsAccepted = true;
+                                wikiTextPendingRevision.IsRejected = false;
+
+                                Database.SaveChanges();
+
+                                successful = true;
+                                dbMessage = "Question Response Updated";
+                            }
+                            else
+                            {
+                                result = false;
+                                dbMessage = "Failed to accept revision for question response";
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        private ActionResult RejectQuestionResponseRevision(int qid, int wtid, int wtrid)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                var questionResponse = Database.SixAnswerQuestionResponses.Where(resp => (resp.QuestionId == qid && resp.WikiTextId == wtid)).FirstOrDefault();
+
+                if (questionResponse != null && questionResponse.InitialContributingUserId == userGuid)
+                {
+                    var wikiTextPendingRevision = Database.WikiTextPendingRevisions.Where(pr => pr.WikiTextPendingRevisionId == wtrid).FirstOrDefault();
+
+                    if (wikiTextPendingRevision != null && !wikiTextPendingRevision.IsAccepted && !wikiTextPendingRevision.IsRejected)
+                    {
+                        wikiTextPendingRevision.IsAccepted = false;
+                        wikiTextPendingRevision.IsRejected = true;
+
+                        Database.SaveChanges();
+
+                        successful = true;
+                        dbMessage = "Question Revision Saved";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        private ActionResult UpdateQuestionTitleOrDetails(int qid, int wtid, int wtrid)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                var question = Database.SixAnswerQuestions.Where(ques => ques.QuestionId == qid).FirstOrDefault();
+
+                if (question != null && question.ContributingUserId == userGuid)
+                {
+                    var wikiTextPendingRevision = Database.WikiTextPendingRevisions.Where(pr => pr.WikiTextPendingRevisionId == wtrid).FirstOrDefault();
+
+                    if (wikiTextPendingRevision != null && !wikiTextPendingRevision.IsAccepted && !wikiTextPendingRevision.IsRejected)
+                    {
+                        //obtain prior instance of wikitext
+                        var wikiText = Database.WikiTexts.Where(wt => wt.WikiTextId == wtid).FirstOrDefault();
+
+                        if (wikiText != null)
+                        {
+                            //mark prior wikitext as revision
+                            bool result = MoveWikiTextToRevision(wtid);
+
+                            if (result)
+                            {
+                                wikiText.Text = wikiTextPendingRevision.Text;
+                                wikiText.UserId = wikiTextPendingRevision.UserId;
+                                wikiText.LastUpdatedOn = wikiTextPendingRevision.RevisionDate;
+
+                                wikiTextPendingRevision.IsRejected = false;
+                                wikiTextPendingRevision.IsAccepted = true;
+
+                                Database.SaveChanges();
+
+                                successful = true;
+                                dbMessage = "Revision Saved";
+                            }
+                            else
+                            {
+                                result = false;
+                                dbMessage = "Failed to accept revision for question";
+                            }
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        private ActionResult RejectQuestionTitleOrDetailsRevision(int qid, int wtid, int wtrid)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                var question = Database.SixAnswerQuestions.Where(ques => ques.QuestionId == qid).FirstOrDefault();
+
+                if (question != null && question.ContributingUserId == userGuid)
+                {
+                    var wikiTextPendingRevision = Database.WikiTextPendingRevisions.Where(pr => pr.WikiTextPendingRevisionId == wtrid).FirstOrDefault();
+
+                    if (wikiTextPendingRevision != null && !wikiTextPendingRevision.IsAccepted && !wikiTextPendingRevision.IsRejected)
+                    {
+                        wikiTextPendingRevision.IsRejected = true;
+                        wikiTextPendingRevision.IsAccepted = false;
+
+                        Database.SaveChanges();
+
+                        successful = true;
+                        dbMessage = "Revision Saved";
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        [ValidateInput(false)]
+        public ActionResult AddQuestionDetails(int qid, string qDetail)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //obtain prior instance of question
+                var question = Database.SixAnswerQuestions.Where(q => q.QuestionId == qid).FirstOrDefault();
+
+                if (question != null)
+                {
+                    //create new instace of wikiText
+                    WikiTextViewModel wikiTextViewModel = new WikiTextViewModel(null, qDetail, userGuid, false, false, false, false, false, DateTime.Now);
+
+                    WikiText wikiText = wikiTextViewModel.ToWikiTextModel();
+
+                    //save the wikitext
+                    Database.WikiTexts.AddObject(wikiText);
+                    Database.SaveChanges();
+
+                    //update the question
+                    question.DetailWikiTextId = wikiText.WikiTextId;
+                    question.LastUpdatedOn = DateTime.Now;
+                    Database.SaveChanges();
+                }
+
+                successful = true;
+                dbMessage = "Question Detail Saved";
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        public ActionResult CreateQuestion(string qTitle, string qDetail)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+            int questionId = -1; //Question Id
+
+            try
+            {
+
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //save WikiTexts first
+                WikiTextViewModel titleWikiTextViewModel = new WikiTextViewModel(null, qTitle, userGuid, false, false, false, false, false, DateTime.Now);
+                WikiText titleWikiText = titleWikiTextViewModel.ToWikiTextModel();
+                WikiTextViewModel detailWikiTextViewModel = null;
+                WikiText detailWikiText = null;
+
+                if (qDetail != null && !qDetail.Trim().Equals(string.Empty))
+                {
+                    detailWikiTextViewModel = new WikiTextViewModel(null, qDetail, userGuid, false, false, false, false, false, DateTime.Now);
+                    detailWikiText = detailWikiTextViewModel.ToWikiTextModel();
+                    Database.WikiTexts.AddObject(detailWikiText);
+                }
+
+
+                Database.WikiTexts.AddObject(titleWikiText);
+                //save changes
+                Database.SaveChanges();
+
+                //create a question now
+                SixAnswersQuestionViewModel questionViewModel = null;
+                if (detailWikiText != null)
+                {
+                    questionViewModel = new SixAnswersQuestionViewModel(titleWikiText.WikiTextId, detailWikiText.WikiTextId, null,
+                        userGuid, 0, DateTime.Now, 0, false, false, DateTime.Now);
+                }
+                else
+                {
+                    questionViewModel = new SixAnswersQuestionViewModel(titleWikiText.WikiTextId, null, null,
+                        userGuid, 0, DateTime.Now, 0, false, false, DateTime.Now);
+                }
+
+                SixAnswerQuestion question = questionViewModel.ToQuestionModel();
+
+                Database.SixAnswerQuestions.AddObject(question);
+                Database.SaveChanges();
+
+                questionId = question.QuestionId;
+                successful = true;
+                dbMessage = "Question Saved";
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage, qid = questionId });
+        }
+
+        [Authorize]
+        [ValidateInput(false)]
+        public ActionResult AddQuestionSummary(int qid, string qSummary)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //obtain prior instance of question
+                var question = Database.SixAnswerQuestions.Where(q => q.QuestionId == qid).FirstOrDefault();
+
+                if (question != null)
+                {
+                    //create new instace of wikiText
+                    WikiTextViewModel wikiTextViewModel = new WikiTextViewModel(null, qSummary, userGuid, false, false, false, false, false, DateTime.Now);
+
+                    WikiText wikiText = wikiTextViewModel.ToWikiTextModel();
+
+                    //save the wikitext
+                    Database.WikiTexts.AddObject(wikiText);
+                    Database.SaveChanges();
+
+                    //update the question
+                    question.AnswerSummaryWikiTextId = wikiText.WikiTextId;
+                    question.LastUpdatedOn = DateTime.Now;
+                    Database.SaveChanges();
+                }
+
+                successful = true;
+                dbMessage = "Question Summary Saved";
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        [ValidateInput(false)]
+        public ActionResult AddQuestionResponse(int qid, string text)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //obtain prior instance of question
+                var question = Database.SixAnswerQuestions.Where(q => q.QuestionId == qid).FirstOrDefault();
+
+                if (question != null)
+                {
+                    //create new instace of wikiText
+                    WikiTextViewModel wikiTextViewModel = new WikiTextViewModel(null, text, userGuid, false, false, false, false, false, DateTime.Now);
+                    WikiText wikiText = wikiTextViewModel.ToWikiTextModel();
+
+                    //save the wikitext
+                    Database.WikiTexts.AddObject(wikiText);
+                    Database.SaveChanges();
+
+                    //create a new instace of Question Response
+                    SixAnswersUserResponseViewModel userResponseViewModel = new SixAnswersUserResponseViewModel(null, question.QuestionId, wikiText.WikiTextId, userGuid,
+                        0, 0, false, DateTime.Now);
+                    SixAnswerQuestionResponses userResponse = userResponseViewModel.ToQuestionResponseModel();
+
+                    Database.SixAnswerQuestionResponses.AddObject(userResponse);
+                    Database.SaveChanges();
+                }
+
+                successful = true;
+                dbMessage = "Question Answer Saved";
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        [Authorize]
+        [ValidateInput(false)]
+        public ActionResult UpdateQuestionSummary(int wtid, string qSummary)
+        {
+            string dbMessage = string.Empty;
+            bool successful = false;
+
+            try
+            {
+                MembershipUser user = Membership.GetUser(User.Identity.Name);
+                Guid userGuid = (Guid)user.ProviderUserKey;
+
+                //obtain prior instance of wikitext
+                var wikiText = Database.WikiTexts.Where(wt => wt.WikiTextId == wtid).FirstOrDefault();
+
+                if (wikiText != null)
+                {
+                    //mark prior wikitext as revision
+                    bool result = MoveWikiTextToRevision(wtid);
+
+                    if (result)
+                    {
+                        wikiText.Text = qSummary;
+                        wikiText.UserId = userGuid;
+                        wikiText.LastUpdatedOn = DateTime.Now;
+
+                        Database.SaveChanges();
+
+                        successful = true;
+                        dbMessage = "Question Summary Saved";
+                    }
+                    else
+                    {
+                        result = false;
+                        dbMessage = "Failed to replicate wikitext";
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return Json(new { result = successful.ToString(), message = dbMessage });
+        }
+
+        private bool MoveWikiTextToRevision(int wikiTextId)
+        {
+            bool result = false; //true if function succeeds, false otherwise
+
+            try
+            {
+                var origWikiText = Database.WikiTexts.Where(wt => wt.WikiTextId == wikiTextId).FirstOrDefault();
+                int revisionNum = Database.WikiTextRevisions.Count(wt => wt.WikiTextId == wikiTextId) + 1;
+
+                if (origWikiText != null)
+                {
+                    WikiTextRevisionViewModel revisionViewModel = new WikiTextRevisionViewModel(null, wikiTextId, origWikiText.Text, origWikiText.UserId,
+                        revisionNum, origWikiText.IsCloaked, origWikiText.IsInAppropriate, origWikiText.IsIrrelevantToQuestion, origWikiText.IsDuplicate, origWikiText.RequiresExplanation, DateTime.Now);
+
+                    WikiTextRevision revision = revisionViewModel.ToWikiTextRevisionModel();
+
+                    Database.WikiTextRevisions.AddObject(revision);
+                    Database.SaveChanges();
+
+                    // mark result as successful
+                    result = true;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return result;
+        }
+    }
+}

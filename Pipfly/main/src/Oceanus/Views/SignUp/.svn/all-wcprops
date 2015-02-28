@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/projects/!svn/ver/4/main/src/Oceanus/Views/SignUp
+END
+Deleted.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/projects/!svn/ver/4/main/src/Oceanus/Views/SignUp/Deleted.cshtml
+END
+Created.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/projects/!svn/ver/4/main/src/Oceanus/Views/SignUp/Created.cshtml
+END
+Delete.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/projects/!svn/ver/4/main/src/Oceanus/Views/SignUp/Delete.cshtml
+END
+Create.cshtml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/projects/!svn/ver/4/main/src/Oceanus/Views/SignUp/Create.cshtml
+END

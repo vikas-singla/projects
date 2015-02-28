@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Oceanus.ViewModels.PhysicalVendorLocationsViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+<h3>
+    Physical Locations</h3>
+@if (Model == null || Model.Count() == 0)
+{ 
+    <p>
+        There are currently no physical locations associated with vendor.</p>
+}
+<table>
+    <tr>
+        <th>
+            AddressLine1
+        </th>
+        <th>
+            AddressLine2
+        </th>
+        <th>
+            City
+        </th>
+        <th>
+            PostalCode
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Fax
+        </th>
+        <th>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.AddressLine1
+            </td>
+            <td>
+                @item.AddressLine2
+            </td>
+            <td>
+                @item.City
+            </td>
+            <td>
+                @item.PostalCode
+            </td>
+            <td>
+                @item.Phone
+            </td>
+            <td>
+                @item.Fax
+            </td>
+            <td>
+                <input type="image" src="/Images/delete.png" alt="X" onclick="javascript: deletePhysicalLocation('@(item.Id)');" />
+            </td>
+        </tr>
+    }
+</table>

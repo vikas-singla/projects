@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Oceanus.ViewModels.Shared;
+
+namespace Oceanus.ViewModels
+{
+    public class UserToUserFollowerMappingViewModel : ViewModelBase
+    {
+        /// <summary>
+        /// Reference to the user being followed
+        /// </summary>
+        public Guid FollowedUserId { get; set; }
+        /// <summary>
+        /// Reference to the user who is following
+        /// </summary>
+        public Guid FollowingUserId { get; set; }
+        /// <summary>
+        /// Timestamp for when the following user started following
+        /// </summary>
+        public DateTime AddedOn { get; set; }
+
+        public UserToUserFollowerMappingViewModel()
+        {
+        }
+
+        public UserToUserFollowerMappingViewModel(int? id_, Guid followedUserId_, Guid followingUserId_, DateTime addedOn_)
+        {
+            Id = id_;
+            FollowedUserId = followedUserId_;
+            FollowingUserId = followingUserId_;
+            AddedOn = addedOn_;
+        }
+    }
+}

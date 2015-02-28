@@ -1,0 +1,18 @@
+﻿@model Oceanus.ViewModels.WebPageViewModel
+<div class="stats">
+    <div class="stat statborderight">
+        <div class="num">@(Model == null ? 0 : Model.NumPosts)</div>
+        <div class="lbl">
+            posts</div>
+    </div>
+    <div class="stat statpaddingleft statborderight">
+        <div class="num">@(Model == null ? 0 : Model.NumLikes)</div>
+        <div class="lbl">
+            likes</div>
+    </div>
+    <div class="stat statpaddingleft statborderight">
+        <div class="num">@(Model == null ? 0 : Model.NumRecommendations)</div>
+        <div class="lbl">
+            shared</div>
+    </div>
+</div>

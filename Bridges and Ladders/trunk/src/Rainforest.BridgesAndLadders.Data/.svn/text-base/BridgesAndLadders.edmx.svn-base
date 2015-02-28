@@ -1,0 +1,1357 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BridgesAndLaddersModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="BridgesAndLaddersModelStoreContainer">
+          <EntitySet Name="CareerPath" EntityType="BridgesAndLaddersModel.Store.CareerPath" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CareerPosition" EntityType="BridgesAndLaddersModel.Store.CareerPosition" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CareerTrack" EntityType="BridgesAndLaddersModel.Store.CareerTrack" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Classification" EntityType="BridgesAndLaddersModel.Store.Classification" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Company" EntityType="BridgesAndLaddersModel.Store.Company" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CompanyClassification" EntityType="BridgesAndLaddersModel.Store.CompanyClassification" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CompanyIndustry" EntityType="BridgesAndLaddersModel.Store.CompanyIndustry" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CompanyLocation" EntityType="BridgesAndLaddersModel.Store.CompanyLocation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CompanyMedia" EntityType="BridgesAndLaddersModel.Store.CompanyMedia" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CompanyScoopData" EntityType="BridgesAndLaddersModel.Store.CompanyScoopData" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CompanyScoops" EntityType="BridgesAndLaddersModel.Store.CompanyScoops" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CompanyServiceArea" EntityType="BridgesAndLaddersModel.Store.CompanyServiceArea" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CompanyTrends" EntityType="BridgesAndLaddersModel.Store.CompanyTrends" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CompanyType" EntityType="BridgesAndLaddersModel.Store.CompanyType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CompanyTypes" EntityType="BridgesAndLaddersModel.Store.CompanyTypes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Country" EntityType="BridgesAndLaddersModel.Store.Country" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Industry" EntityType="BridgesAndLaddersModel.Store.Industry" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Location" EntityType="BridgesAndLaddersModel.Store.Location" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Media" EntityType="BridgesAndLaddersModel.Store.Media" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ServiceArea" EntityType="BridgesAndLaddersModel.Store.ServiceArea" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CareerPath_Company" Association="BridgesAndLaddersModel.Store.FK_CareerPath_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CareerPath" EntitySet="CareerPath" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CareerTrack_CareerPath" Association="BridgesAndLaddersModel.Store.FK_CareerTrack_CareerPath">
+            <End Role="CareerPath" EntitySet="CareerPath" />
+            <End Role="CareerTrack" EntitySet="CareerTrack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CareerTrack_CareerPosition" Association="BridgesAndLaddersModel.Store.FK_CareerTrack_CareerPosition">
+            <End Role="CareerPosition" EntitySet="CareerPosition" />
+            <End Role="CareerTrack" EntitySet="CareerTrack" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyClassification_Classification" Association="BridgesAndLaddersModel.Store.FK_CompanyClassification_Classification">
+            <End Role="Classification" EntitySet="Classification" />
+            <End Role="CompanyClassification" EntitySet="CompanyClassification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyClassification_Company" Association="BridgesAndLaddersModel.Store.FK_CompanyClassification_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyClassification" EntitySet="CompanyClassification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyIndustry_CompanyIndustry" Association="BridgesAndLaddersModel.Store.FK_CompanyIndustry_CompanyIndustry">
+            <End Role="CompanyIndustry" EntitySet="CompanyIndustry" />
+            <End Role="CompanyIndustry1" EntitySet="CompanyIndustry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyIndustry_Industry" Association="BridgesAndLaddersModel.Store.FK_CompanyIndustry_Industry">
+            <End Role="Industry" EntitySet="Industry" />
+            <End Role="CompanyIndustry" EntitySet="CompanyIndustry" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyLocation_Company" Association="BridgesAndLaddersModel.Store.FK_CompanyLocation_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyLocation" EntitySet="CompanyLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyLocation_Location" Association="BridgesAndLaddersModel.Store.FK_CompanyLocation_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="CompanyLocation" EntitySet="CompanyLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyMedia_Company" Association="BridgesAndLaddersModel.Store.FK_CompanyMedia_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyMedia" EntitySet="CompanyMedia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyMedia_Media" Association="BridgesAndLaddersModel.Store.FK_CompanyMedia_Media">
+            <End Role="Media" EntitySet="Media" />
+            <End Role="CompanyMedia" EntitySet="CompanyMedia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyScoopData_Company" Association="BridgesAndLaddersModel.Store.FK_CompanyScoopData_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyScoopData" EntitySet="CompanyScoopData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyScoops_Company" Association="BridgesAndLaddersModel.Store.FK_CompanyScoops_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyScoops" EntitySet="CompanyScoops" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyServiceArea_Company" Association="BridgesAndLaddersModel.Store.FK_CompanyServiceArea_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyServiceArea" EntitySet="CompanyServiceArea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyServiceArea_ServiceArea" Association="BridgesAndLaddersModel.Store.FK_CompanyServiceArea_ServiceArea">
+            <End Role="ServiceArea" EntitySet="ServiceArea" />
+            <End Role="CompanyServiceArea" EntitySet="CompanyServiceArea" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyTrends_Company" Association="BridgesAndLaddersModel.Store.FK_CompanyTrends_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyTrends" EntitySet="CompanyTrends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyType_Company" Association="BridgesAndLaddersModel.Store.FK_CompanyType_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="CompanyType" EntitySet="CompanyType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyType_CompanyTypes" Association="BridgesAndLaddersModel.Store.FK_CompanyType_CompanyTypes">
+            <End Role="CompanyTypes" EntitySet="CompanyTypes" />
+            <End Role="CompanyType" EntitySet="CompanyType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_Country" Association="BridgesAndLaddersModel.Store.FK_Location_Country">
+            <End Role="Country" EntitySet="Country" />
+            <End Role="Location" EntitySet="Location" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CareerPath">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="256" />
+          <Property Name="companyId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CareerPosition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="summary" Type="varchar" MaxLength="256" />
+          <Property Name="salaryLow" Type="money" Nullable="false" />
+          <Property Name="salaryHigh" Type="money" Nullable="false" />
+          <Property Name="responsibilities" Type="varchar" Nullable="false" MaxLength="1024" />
+          <Property Name="competencies" Type="varchar" Nullable="false" MaxLength="1024" />
+          <Property Name="qualifications" Type="varchar" Nullable="false" MaxLength="1024" />
+          <Property Name="companyId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CareerTrack">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="sequence" Type="int" Nullable="false" />
+          <Property Name="positionId" Type="bigint" Nullable="false" />
+          <Property Name="pathId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Classification">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="siteUrl" Type="varchar" MaxLength="256" />
+          <Property Name="logoUrl" Type="varchar" MaxLength="256" />
+          <Property Name="headquartersLocationId" Type="bigint" Nullable="false" />
+          <Property Name="foundingLocationid" Type="bigint" Nullable="false" />
+          <Property Name="foundingDate" Type="date" />
+          <Property Name="summary" Type="varchar" MaxLength="256" />
+          <Property Name="description" Type="varchar" MaxLength="2048" />
+          <Property Name="metadataId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyClassification">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="companyId" Type="bigint" Nullable="false" />
+          <Property Name="classificationId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyIndustry">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="industryId" Type="bigint" Nullable="false" />
+          <Property Name="companyId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyLocation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="companyId" Type="bigint" Nullable="false" />
+          <Property Name="locationId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyMedia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="companyId" Type="bigint" Nullable="false" />
+          <Property Name="mediaId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="CompanyScoopData">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="data" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="isUpper" Type="bit" Nullable="false" />
+          <Property Name="companyScoopId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyScoops">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="companyId" Type="bigint" Nullable="false" />
+          <Property Name="summary" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="description" Type="varchar" Nullable="false" MaxLength="1024" />
+        </EntityType>
+        <EntityType Name="CompanyServiceArea">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="serviceAreaId" Type="bigint" Nullable="false" />
+          <Property Name="companyId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyTrends">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="companyId" Type="bigint" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="numEmployees" Type="bigint" Nullable="false" />
+          <Property Name="revenue" Type="money" Nullable="false" />
+          <Property Name="reputationIndex" Type="int" />
+          <Property Name="salaryIndex" Type="int" />
+        </EntityType>
+        <EntityType Name="CompanyType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="companyId" Type="bigint" Nullable="false" />
+          <Property Name="typeId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Industry">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6005: The data type 'geography' is not supported; the column 'latitude' in table 'C:\DEV\BRIDGESANDLADDERS\TRUNK\SRC\RAINFOREST.BRIDGESANDLADDERS.DATA\BRIDGESANDLADDERS.MDF.dbo.Location' was excluded.
+      warning 6005: The data type 'geography' is not supported; the column 'longitude' in table 'C:\DEV\BRIDGESANDLADDERS\TRUNK\SRC\RAINFOREST.BRIDGESANDLADDERS.DATA\BRIDGESANDLADDERS.MDF.dbo.Location' was excluded.
+      -->
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="address1" Type="varbinary" Nullable="false" MaxLength="50" />
+          <Property Name="address2" Type="varchar" MaxLength="50" />
+          <Property Name="address3" Type="varchar" MaxLength="50" />
+          <Property Name="city" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
+          <Property Name="subdivision" Type="varchar" MaxLength="50" />
+          <Property Name="countryId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Media">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="name" Type="varbinary" Nullable="false" MaxLength="50" />
+          <Property Name="url" Type="varchar" MaxLength="256" />
+          <Property Name="embedHtml" Type="varchar" MaxLength="1024" />
+          <Property Name="description" Type="varbinary" MaxLength="512" />
+        </EntityType>
+        <EntityType Name="ServiceArea">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_CareerPath_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Store.Company" Multiplicity="1" />
+          <End Role="CareerPath" Type="BridgesAndLaddersModel.Store.CareerPath" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CareerPath">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CareerTrack_CareerPath">
+          <End Role="CareerPath" Type="BridgesAndLaddersModel.Store.CareerPath" Multiplicity="1" />
+          <End Role="CareerTrack" Type="BridgesAndLaddersModel.Store.CareerTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CareerPath">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CareerTrack">
+              <PropertyRef Name="pathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CareerTrack_CareerPosition">
+          <End Role="CareerPosition" Type="BridgesAndLaddersModel.Store.CareerPosition" Multiplicity="1" />
+          <End Role="CareerTrack" Type="BridgesAndLaddersModel.Store.CareerTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CareerPosition">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CareerTrack">
+              <PropertyRef Name="positionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyClassification_Classification">
+          <End Role="Classification" Type="BridgesAndLaddersModel.Store.Classification" Multiplicity="1" />
+          <End Role="CompanyClassification" Type="BridgesAndLaddersModel.Store.CompanyClassification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classification">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyClassification">
+              <PropertyRef Name="classificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyClassification_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Store.Company" Multiplicity="1" />
+          <End Role="CompanyClassification" Type="BridgesAndLaddersModel.Store.CompanyClassification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyClassification">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyIndustry_CompanyIndustry">
+          <End Role="CompanyIndustry" Type="BridgesAndLaddersModel.Store.CompanyIndustry" Multiplicity="1" />
+          <End Role="CompanyIndustry1" Type="BridgesAndLaddersModel.Store.CompanyIndustry" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyIndustry">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyIndustry1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyIndustry_Industry">
+          <End Role="Industry" Type="BridgesAndLaddersModel.Store.Industry" Multiplicity="1" />
+          <End Role="CompanyIndustry" Type="BridgesAndLaddersModel.Store.CompanyIndustry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyIndustry">
+              <PropertyRef Name="industryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyLocation_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Store.Company" Multiplicity="1" />
+          <End Role="CompanyLocation" Type="BridgesAndLaddersModel.Store.CompanyLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyLocation">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyLocation_Location">
+          <End Role="Location" Type="BridgesAndLaddersModel.Store.Location" Multiplicity="1" />
+          <End Role="CompanyLocation" Type="BridgesAndLaddersModel.Store.CompanyLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyLocation">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyMedia_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Store.Company" Multiplicity="1" />
+          <End Role="CompanyMedia" Type="BridgesAndLaddersModel.Store.CompanyMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyMedia">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyMedia_Media">
+          <End Role="Media" Type="BridgesAndLaddersModel.Store.Media" Multiplicity="1" />
+          <End Role="CompanyMedia" Type="BridgesAndLaddersModel.Store.CompanyMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Media">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyMedia">
+              <PropertyRef Name="mediaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyScoopData_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Store.Company" Multiplicity="1" />
+          <End Role="CompanyScoopData" Type="BridgesAndLaddersModel.Store.CompanyScoopData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyScoopData">
+              <PropertyRef Name="companyScoopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyScoops_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Store.Company" Multiplicity="1" />
+          <End Role="CompanyScoops" Type="BridgesAndLaddersModel.Store.CompanyScoops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyScoops">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyServiceArea_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Store.Company" Multiplicity="1" />
+          <End Role="CompanyServiceArea" Type="BridgesAndLaddersModel.Store.CompanyServiceArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyServiceArea">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyServiceArea_ServiceArea">
+          <End Role="ServiceArea" Type="BridgesAndLaddersModel.Store.ServiceArea" Multiplicity="1" />
+          <End Role="CompanyServiceArea" Type="BridgesAndLaddersModel.Store.CompanyServiceArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceArea">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyServiceArea">
+              <PropertyRef Name="serviceAreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyTrends_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Store.Company" Multiplicity="1" />
+          <End Role="CompanyTrends" Type="BridgesAndLaddersModel.Store.CompanyTrends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyTrends">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyType_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Store.Company" Multiplicity="1" />
+          <End Role="CompanyType" Type="BridgesAndLaddersModel.Store.CompanyType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyType">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyType_CompanyTypes">
+          <End Role="CompanyTypes" Type="BridgesAndLaddersModel.Store.CompanyTypes" Multiplicity="1" />
+          <End Role="CompanyType" Type="BridgesAndLaddersModel.Store.CompanyType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyTypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyType">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_Country">
+          <End Role="Country" Type="BridgesAndLaddersModel.Store.Country" Multiplicity="1" />
+          <End Role="Location" Type="BridgesAndLaddersModel.Store.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="countryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BridgesAndLaddersModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="BridgesAndLaddersEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CareerPaths" EntityType="BridgesAndLaddersModel.CareerPath" />
+          <EntitySet Name="CareerPositions" EntityType="BridgesAndLaddersModel.CareerPosition" />
+          <EntitySet Name="CareerTracks" EntityType="BridgesAndLaddersModel.CareerTrack" />
+          <EntitySet Name="Classifications" EntityType="BridgesAndLaddersModel.Classification" />
+          <EntitySet Name="Companies" EntityType="BridgesAndLaddersModel.Company" />
+          <EntitySet Name="CompanyClassifications" EntityType="BridgesAndLaddersModel.CompanyClassification" />
+          <EntitySet Name="CompanyIndustries" EntityType="BridgesAndLaddersModel.CompanyIndustry" />
+          <EntitySet Name="CompanyLocations" EntityType="BridgesAndLaddersModel.CompanyLocation" />
+          <EntitySet Name="CompanyMedias" EntityType="BridgesAndLaddersModel.CompanyMedia" />
+          <EntitySet Name="CompanyScoopDatas" EntityType="BridgesAndLaddersModel.CompanyScoopData" />
+          <EntitySet Name="CompanyScoops" EntityType="BridgesAndLaddersModel.CompanyScoop" />
+          <EntitySet Name="CompanyServiceAreas" EntityType="BridgesAndLaddersModel.CompanyServiceArea" />
+          <EntitySet Name="CompanyTrends" EntityType="BridgesAndLaddersModel.CompanyTrend" />
+          <EntitySet Name="CompanyTypes" EntityType="BridgesAndLaddersModel.CompanyType" />
+          <EntitySet Name="CompanyTypes1" EntityType="BridgesAndLaddersModel.CompanyType1" />
+          <EntitySet Name="Countries" EntityType="BridgesAndLaddersModel.Country" />
+          <EntitySet Name="Industries" EntityType="BridgesAndLaddersModel.Industry" />
+          <EntitySet Name="Locations" EntityType="BridgesAndLaddersModel.Location" />
+          <EntitySet Name="Media" EntityType="BridgesAndLaddersModel.Medium" />
+          <EntitySet Name="ServiceAreas" EntityType="BridgesAndLaddersModel.ServiceArea" />
+          <AssociationSet Name="FK_CareerPath_Company" Association="BridgesAndLaddersModel.FK_CareerPath_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CareerPath" EntitySet="CareerPaths" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CareerTrack_CareerPath" Association="BridgesAndLaddersModel.FK_CareerTrack_CareerPath">
+            <End Role="CareerPath" EntitySet="CareerPaths" />
+            <End Role="CareerTrack" EntitySet="CareerTracks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CareerTrack_CareerPosition" Association="BridgesAndLaddersModel.FK_CareerTrack_CareerPosition">
+            <End Role="CareerPosition" EntitySet="CareerPositions" />
+            <End Role="CareerTrack" EntitySet="CareerTracks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyClassification_Classification" Association="BridgesAndLaddersModel.FK_CompanyClassification_Classification">
+            <End Role="Classification" EntitySet="Classifications" />
+            <End Role="CompanyClassification" EntitySet="CompanyClassifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyClassification_Company" Association="BridgesAndLaddersModel.FK_CompanyClassification_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyClassification" EntitySet="CompanyClassifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyLocation_Company" Association="BridgesAndLaddersModel.FK_CompanyLocation_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyLocation" EntitySet="CompanyLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyMedia_Company" Association="BridgesAndLaddersModel.FK_CompanyMedia_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyMedia" EntitySet="CompanyMedias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyScoopData_Company" Association="BridgesAndLaddersModel.FK_CompanyScoopData_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyScoopData" EntitySet="CompanyScoopDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyScoops_Company" Association="BridgesAndLaddersModel.FK_CompanyScoops_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyScoops" EntitySet="CompanyScoops" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyServiceArea_Company" Association="BridgesAndLaddersModel.FK_CompanyServiceArea_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyServiceArea" EntitySet="CompanyServiceAreas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyTrends_Company" Association="BridgesAndLaddersModel.FK_CompanyTrends_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyTrends" EntitySet="CompanyTrends" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyType_Company" Association="BridgesAndLaddersModel.FK_CompanyType_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="CompanyType" EntitySet="CompanyTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyIndustry_CompanyIndustry" Association="BridgesAndLaddersModel.FK_CompanyIndustry_CompanyIndustry">
+            <End Role="CompanyIndustry" EntitySet="CompanyIndustries" />
+            <End Role="CompanyIndustry1" EntitySet="CompanyIndustries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyIndustry_Industry" Association="BridgesAndLaddersModel.FK_CompanyIndustry_Industry">
+            <End Role="Industry" EntitySet="Industries" />
+            <End Role="CompanyIndustry" EntitySet="CompanyIndustries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyLocation_Location" Association="BridgesAndLaddersModel.FK_CompanyLocation_Location">
+            <End Role="Location" EntitySet="Locations" />
+            <End Role="CompanyLocation" EntitySet="CompanyLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyMedia_Media" Association="BridgesAndLaddersModel.FK_CompanyMedia_Media">
+            <End Role="Media" EntitySet="Media" />
+            <End Role="CompanyMedia" EntitySet="CompanyMedias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyServiceArea_ServiceArea" Association="BridgesAndLaddersModel.FK_CompanyServiceArea_ServiceArea">
+            <End Role="ServiceArea" EntitySet="ServiceAreas" />
+            <End Role="CompanyServiceArea" EntitySet="CompanyServiceAreas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyType_CompanyTypes" Association="BridgesAndLaddersModel.FK_CompanyType_CompanyTypes">
+            <End Role="CompanyTypes" EntitySet="CompanyTypes1" />
+            <End Role="CompanyType" EntitySet="CompanyTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_Country" Association="BridgesAndLaddersModel.FK_Location_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Location" EntitySet="Locations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CareerPath">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="description" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Name="companyId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="BridgesAndLaddersModel.FK_CareerPath_Company" FromRole="CareerPath" ToRole="Company" />
+          <NavigationProperty Name="CareerTracks" Relationship="BridgesAndLaddersModel.FK_CareerTrack_CareerPath" FromRole="CareerPath" ToRole="CareerTrack" />
+        </EntityType>
+        <EntityType Name="CareerPosition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="summary" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Name="salaryLow" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="salaryHigh" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="responsibilities" Type="String" Nullable="false" MaxLength="1024" Unicode="false" FixedLength="false" />
+          <Property Name="competencies" Type="String" Nullable="false" MaxLength="1024" Unicode="false" FixedLength="false" />
+          <Property Name="qualifications" Type="String" Nullable="false" MaxLength="1024" Unicode="false" FixedLength="false" />
+          <Property Name="companyId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CareerTracks" Relationship="BridgesAndLaddersModel.FK_CareerTrack_CareerPosition" FromRole="CareerPosition" ToRole="CareerTrack" />
+        </EntityType>
+        <EntityType Name="CareerTrack">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="sequence" Type="Int32" Nullable="false" />
+          <Property Name="positionId" Type="Int64" Nullable="false" />
+          <Property Name="pathId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CareerPath" Relationship="BridgesAndLaddersModel.FK_CareerTrack_CareerPath" FromRole="CareerTrack" ToRole="CareerPath" />
+          <NavigationProperty Name="CareerPosition" Relationship="BridgesAndLaddersModel.FK_CareerTrack_CareerPosition" FromRole="CareerTrack" ToRole="CareerPosition" />
+        </EntityType>
+        <EntityType Name="Classification">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="CompanyClassifications" Relationship="BridgesAndLaddersModel.FK_CompanyClassification_Classification" FromRole="Classification" ToRole="CompanyClassification" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="siteUrl" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Name="logoUrl" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Name="headquartersLocationId" Type="Int64" Nullable="false" />
+          <Property Name="foundingLocationid" Type="Int64" Nullable="false" />
+          <Property Name="foundingDate" Type="DateTime" />
+          <Property Name="summary" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Name="description" Type="String" MaxLength="2048" Unicode="false" FixedLength="false" />
+          <Property Name="metadataId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CareerPaths" Relationship="BridgesAndLaddersModel.FK_CareerPath_Company" FromRole="Company" ToRole="CareerPath" />
+          <NavigationProperty Name="CompanyClassifications" Relationship="BridgesAndLaddersModel.FK_CompanyClassification_Company" FromRole="Company" ToRole="CompanyClassification" />
+          <NavigationProperty Name="CompanyLocations" Relationship="BridgesAndLaddersModel.FK_CompanyLocation_Company" FromRole="Company" ToRole="CompanyLocation" />
+          <NavigationProperty Name="CompanyMedias" Relationship="BridgesAndLaddersModel.FK_CompanyMedia_Company" FromRole="Company" ToRole="CompanyMedia" />
+          <NavigationProperty Name="CompanyScoopDatas" Relationship="BridgesAndLaddersModel.FK_CompanyScoopData_Company" FromRole="Company" ToRole="CompanyScoopData" />
+          <NavigationProperty Name="CompanyScoops" Relationship="BridgesAndLaddersModel.FK_CompanyScoops_Company" FromRole="Company" ToRole="CompanyScoops" />
+          <NavigationProperty Name="CompanyServiceAreas" Relationship="BridgesAndLaddersModel.FK_CompanyServiceArea_Company" FromRole="Company" ToRole="CompanyServiceArea" />
+          <NavigationProperty Name="CompanyTrends" Relationship="BridgesAndLaddersModel.FK_CompanyTrends_Company" FromRole="Company" ToRole="CompanyTrends" />
+          <NavigationProperty Name="CompanyTypes" Relationship="BridgesAndLaddersModel.FK_CompanyType_Company" FromRole="Company" ToRole="CompanyType" />
+        </EntityType>
+        <EntityType Name="CompanyClassification">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyId" Type="Int64" Nullable="false" />
+          <Property Name="classificationId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Classification" Relationship="BridgesAndLaddersModel.FK_CompanyClassification_Classification" FromRole="CompanyClassification" ToRole="Classification" />
+          <NavigationProperty Name="Company" Relationship="BridgesAndLaddersModel.FK_CompanyClassification_Company" FromRole="CompanyClassification" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="CompanyIndustry">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="industryId" Type="Int64" Nullable="false" />
+          <Property Name="companyId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CompanyIndustry1" Relationship="BridgesAndLaddersModel.FK_CompanyIndustry_CompanyIndustry" FromRole="CompanyIndustry" ToRole="CompanyIndustry1" />
+          <NavigationProperty Name="CompanyIndustry2" Relationship="BridgesAndLaddersModel.FK_CompanyIndustry_CompanyIndustry" FromRole="CompanyIndustry1" ToRole="CompanyIndustry" />
+          <NavigationProperty Name="Industry" Relationship="BridgesAndLaddersModel.FK_CompanyIndustry_Industry" FromRole="CompanyIndustry" ToRole="Industry" />
+        </EntityType>
+        <EntityType Name="CompanyLocation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyId" Type="Int64" Nullable="false" />
+          <Property Name="locationId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="BridgesAndLaddersModel.FK_CompanyLocation_Company" FromRole="CompanyLocation" ToRole="Company" />
+          <NavigationProperty Name="Location" Relationship="BridgesAndLaddersModel.FK_CompanyLocation_Location" FromRole="CompanyLocation" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="CompanyMedia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="companyId" Type="Int64" Nullable="false" />
+          <Property Name="mediaId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Company" Relationship="BridgesAndLaddersModel.FK_CompanyMedia_Company" FromRole="CompanyMedia" ToRole="Company" />
+          <NavigationProperty Name="Medium" Relationship="BridgesAndLaddersModel.FK_CompanyMedia_Media" FromRole="CompanyMedia" ToRole="Media" />
+        </EntityType>
+        <EntityType Name="CompanyScoopData">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="data" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Name="isUpper" Type="Boolean" Nullable="false" />
+          <Property Name="companyScoopId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="BridgesAndLaddersModel.FK_CompanyScoopData_Company" FromRole="CompanyScoopData" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="CompanyScoop">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyId" Type="Int64" Nullable="false" />
+          <Property Name="summary" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Name="description" Type="String" Nullable="false" MaxLength="1024" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Company" Relationship="BridgesAndLaddersModel.FK_CompanyScoops_Company" FromRole="CompanyScoops" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="CompanyServiceArea">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="serviceAreaId" Type="Int64" Nullable="false" />
+          <Property Name="companyId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="BridgesAndLaddersModel.FK_CompanyServiceArea_Company" FromRole="CompanyServiceArea" ToRole="Company" />
+          <NavigationProperty Name="ServiceArea" Relationship="BridgesAndLaddersModel.FK_CompanyServiceArea_ServiceArea" FromRole="CompanyServiceArea" ToRole="ServiceArea" />
+        </EntityType>
+        <EntityType Name="CompanyTrend">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyId" Type="Int64" Nullable="false" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="numEmployees" Type="Int64" Nullable="false" />
+          <Property Name="revenue" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="reputationIndex" Type="Int32" />
+          <Property Name="salaryIndex" Type="Int32" />
+          <NavigationProperty Name="Company" Relationship="BridgesAndLaddersModel.FK_CompanyTrends_Company" FromRole="CompanyTrends" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="CompanyType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="companyId" Type="Int64" Nullable="false" />
+          <Property Name="typeId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="BridgesAndLaddersModel.FK_CompanyType_Company" FromRole="CompanyType" ToRole="Company" />
+          <NavigationProperty Name="CompanyType1" Relationship="BridgesAndLaddersModel.FK_CompanyType_CompanyTypes" FromRole="CompanyType" ToRole="CompanyTypes" />
+        </EntityType>
+        <EntityType Name="CompanyType1">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="CompanyTypes" Relationship="BridgesAndLaddersModel.FK_CompanyType_CompanyTypes" FromRole="CompanyTypes" ToRole="CompanyType" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Locations" Relationship="BridgesAndLaddersModel.FK_Location_Country" FromRole="Country" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="Industry">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="CompanyIndustries" Relationship="BridgesAndLaddersModel.FK_CompanyIndustry_Industry" FromRole="Industry" ToRole="CompanyIndustry" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="address1" Type="Binary" Nullable="false" MaxLength="50" FixedLength="false" />
+          <Property Name="address2" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="address3" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="city" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="state" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="subdivision" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="countryId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CompanyLocations" Relationship="BridgesAndLaddersModel.FK_CompanyLocation_Location" FromRole="Location" ToRole="CompanyLocation" />
+          <NavigationProperty Name="Country" Relationship="BridgesAndLaddersModel.FK_Location_Country" FromRole="Location" ToRole="Country" />
+        </EntityType>
+        <EntityType Name="Medium">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="name" Type="Binary" Nullable="false" MaxLength="50" FixedLength="false" />
+          <Property Name="url" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Name="embedHtml" Type="String" MaxLength="1024" Unicode="false" FixedLength="false" />
+          <Property Name="description" Type="Binary" MaxLength="512" FixedLength="false" />
+          <NavigationProperty Name="CompanyMedias" Relationship="BridgesAndLaddersModel.FK_CompanyMedia_Media" FromRole="Media" ToRole="CompanyMedia" />
+        </EntityType>
+        <EntityType Name="ServiceArea">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="CompanyServiceAreas" Relationship="BridgesAndLaddersModel.FK_CompanyServiceArea_ServiceArea" FromRole="ServiceArea" ToRole="CompanyServiceArea" />
+        </EntityType>
+        <Association Name="FK_CareerPath_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Company" Multiplicity="1" />
+          <End Role="CareerPath" Type="BridgesAndLaddersModel.CareerPath" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CareerPath">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CareerTrack_CareerPath">
+          <End Role="CareerPath" Type="BridgesAndLaddersModel.CareerPath" Multiplicity="1" />
+          <End Role="CareerTrack" Type="BridgesAndLaddersModel.CareerTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CareerPath">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CareerTrack">
+              <PropertyRef Name="pathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CareerTrack_CareerPosition">
+          <End Role="CareerPosition" Type="BridgesAndLaddersModel.CareerPosition" Multiplicity="1" />
+          <End Role="CareerTrack" Type="BridgesAndLaddersModel.CareerTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CareerPosition">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CareerTrack">
+              <PropertyRef Name="positionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyClassification_Classification">
+          <End Role="Classification" Type="BridgesAndLaddersModel.Classification" Multiplicity="1" />
+          <End Role="CompanyClassification" Type="BridgesAndLaddersModel.CompanyClassification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classification">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyClassification">
+              <PropertyRef Name="classificationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyClassification_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Company" Multiplicity="1" />
+          <End Role="CompanyClassification" Type="BridgesAndLaddersModel.CompanyClassification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyClassification">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyLocation_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Company" Multiplicity="1" />
+          <End Role="CompanyLocation" Type="BridgesAndLaddersModel.CompanyLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyLocation">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyMedia_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Company" Multiplicity="1" />
+          <End Role="CompanyMedia" Type="BridgesAndLaddersModel.CompanyMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyMedia">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyScoopData_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Company" Multiplicity="1" />
+          <End Role="CompanyScoopData" Type="BridgesAndLaddersModel.CompanyScoopData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyScoopData">
+              <PropertyRef Name="companyScoopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyScoops_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Company" Multiplicity="1" />
+          <End Role="CompanyScoops" Type="BridgesAndLaddersModel.CompanyScoop" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyScoops">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyServiceArea_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Company" Multiplicity="1" />
+          <End Role="CompanyServiceArea" Type="BridgesAndLaddersModel.CompanyServiceArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyServiceArea">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyTrends_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Company" Multiplicity="1" />
+          <End Role="CompanyTrends" Type="BridgesAndLaddersModel.CompanyTrend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyTrends">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyType_Company">
+          <End Role="Company" Type="BridgesAndLaddersModel.Company" Multiplicity="1" />
+          <End Role="CompanyType" Type="BridgesAndLaddersModel.CompanyType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyType">
+              <PropertyRef Name="companyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyIndustry_CompanyIndustry">
+          <End Role="CompanyIndustry" Type="BridgesAndLaddersModel.CompanyIndustry" Multiplicity="1" />
+          <End Role="CompanyIndustry1" Type="BridgesAndLaddersModel.CompanyIndustry" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyIndustry">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyIndustry1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyIndustry_Industry">
+          <End Role="Industry" Type="BridgesAndLaddersModel.Industry" Multiplicity="1" />
+          <End Role="CompanyIndustry" Type="BridgesAndLaddersModel.CompanyIndustry" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Industry">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyIndustry">
+              <PropertyRef Name="industryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyLocation_Location">
+          <End Role="Location" Type="BridgesAndLaddersModel.Location" Multiplicity="1" />
+          <End Role="CompanyLocation" Type="BridgesAndLaddersModel.CompanyLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyLocation">
+              <PropertyRef Name="locationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyMedia_Media">
+          <End Role="Media" Type="BridgesAndLaddersModel.Medium" Multiplicity="1" />
+          <End Role="CompanyMedia" Type="BridgesAndLaddersModel.CompanyMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Media">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyMedia">
+              <PropertyRef Name="mediaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyServiceArea_ServiceArea">
+          <End Role="ServiceArea" Type="BridgesAndLaddersModel.ServiceArea" Multiplicity="1" />
+          <End Role="CompanyServiceArea" Type="BridgesAndLaddersModel.CompanyServiceArea" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceArea">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyServiceArea">
+              <PropertyRef Name="serviceAreaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyType_CompanyTypes">
+          <End Role="CompanyTypes" Type="BridgesAndLaddersModel.CompanyType1" Multiplicity="1" />
+          <End Role="CompanyType" Type="BridgesAndLaddersModel.CompanyType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyTypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyType">
+              <PropertyRef Name="typeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_Country">
+          <End Role="Country" Type="BridgesAndLaddersModel.Country" Multiplicity="1" />
+          <End Role="Location" Type="BridgesAndLaddersModel.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="countryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BridgesAndLaddersModelStoreContainer" CdmEntityContainer="BridgesAndLaddersEntities">
+          <EntitySetMapping Name="CareerPaths"><EntityTypeMapping TypeName="BridgesAndLaddersModel.CareerPath"><MappingFragment StoreEntitySet="CareerPath">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+            <ScalarProperty Name="description" ColumnName="description" />
+            <ScalarProperty Name="companyId" ColumnName="companyId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CareerPositions"><EntityTypeMapping TypeName="BridgesAndLaddersModel.CareerPosition"><MappingFragment StoreEntitySet="CareerPosition">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+            <ScalarProperty Name="summary" ColumnName="summary" />
+            <ScalarProperty Name="salaryLow" ColumnName="salaryLow" />
+            <ScalarProperty Name="salaryHigh" ColumnName="salaryHigh" />
+            <ScalarProperty Name="responsibilities" ColumnName="responsibilities" />
+            <ScalarProperty Name="competencies" ColumnName="competencies" />
+            <ScalarProperty Name="qualifications" ColumnName="qualifications" />
+            <ScalarProperty Name="companyId" ColumnName="companyId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CareerTracks"><EntityTypeMapping TypeName="BridgesAndLaddersModel.CareerTrack"><MappingFragment StoreEntitySet="CareerTrack">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="sequence" ColumnName="sequence" />
+            <ScalarProperty Name="positionId" ColumnName="positionId" />
+            <ScalarProperty Name="pathId" ColumnName="pathId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Classifications"><EntityTypeMapping TypeName="BridgesAndLaddersModel.Classification"><MappingFragment StoreEntitySet="Classification">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Companies"><EntityTypeMapping TypeName="BridgesAndLaddersModel.Company"><MappingFragment StoreEntitySet="Company">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+            <ScalarProperty Name="siteUrl" ColumnName="siteUrl" />
+            <ScalarProperty Name="logoUrl" ColumnName="logoUrl" />
+            <ScalarProperty Name="headquartersLocationId" ColumnName="headquartersLocationId" />
+            <ScalarProperty Name="foundingLocationid" ColumnName="foundingLocationid" />
+            <ScalarProperty Name="foundingDate" ColumnName="foundingDate" />
+            <ScalarProperty Name="summary" ColumnName="summary" />
+            <ScalarProperty Name="description" ColumnName="description" />
+            <ScalarProperty Name="metadataId" ColumnName="metadataId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CompanyClassifications"><EntityTypeMapping TypeName="BridgesAndLaddersModel.CompanyClassification"><MappingFragment StoreEntitySet="CompanyClassification">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="companyId" ColumnName="companyId" />
+            <ScalarProperty Name="classificationId" ColumnName="classificationId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CompanyIndustries"><EntityTypeMapping TypeName="BridgesAndLaddersModel.CompanyIndustry"><MappingFragment StoreEntitySet="CompanyIndustry">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="industryId" ColumnName="industryId" />
+            <ScalarProperty Name="companyId" ColumnName="companyId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CompanyLocations"><EntityTypeMapping TypeName="BridgesAndLaddersModel.CompanyLocation"><MappingFragment StoreEntitySet="CompanyLocation">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="companyId" ColumnName="companyId" />
+            <ScalarProperty Name="locationId" ColumnName="locationId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CompanyMedias"><EntityTypeMapping TypeName="BridgesAndLaddersModel.CompanyMedia"><MappingFragment StoreEntitySet="CompanyMedia">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="companyId" ColumnName="companyId" />
+            <ScalarProperty Name="mediaId" ColumnName="mediaId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CompanyScoopDatas"><EntityTypeMapping TypeName="BridgesAndLaddersModel.CompanyScoopData"><MappingFragment StoreEntitySet="CompanyScoopData">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="data" ColumnName="data" />
+            <ScalarProperty Name="isUpper" ColumnName="isUpper" />
+            <ScalarProperty Name="companyScoopId" ColumnName="companyScoopId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CompanyScoops"><EntityTypeMapping TypeName="BridgesAndLaddersModel.CompanyScoop"><MappingFragment StoreEntitySet="CompanyScoops">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="companyId" ColumnName="companyId" />
+            <ScalarProperty Name="summary" ColumnName="summary" />
+            <ScalarProperty Name="description" ColumnName="description" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CompanyServiceAreas"><EntityTypeMapping TypeName="BridgesAndLaddersModel.CompanyServiceArea"><MappingFragment StoreEntitySet="CompanyServiceArea">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="serviceAreaId" ColumnName="serviceAreaId" />
+            <ScalarProperty Name="companyId" ColumnName="companyId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CompanyTrends"><EntityTypeMapping TypeName="BridgesAndLaddersModel.CompanyTrend"><MappingFragment StoreEntitySet="CompanyTrends">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="companyId" ColumnName="companyId" />
+            <ScalarProperty Name="year" ColumnName="year" />
+            <ScalarProperty Name="numEmployees" ColumnName="numEmployees" />
+            <ScalarProperty Name="revenue" ColumnName="revenue" />
+            <ScalarProperty Name="reputationIndex" ColumnName="reputationIndex" />
+            <ScalarProperty Name="salaryIndex" ColumnName="salaryIndex" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CompanyTypes"><EntityTypeMapping TypeName="BridgesAndLaddersModel.CompanyType"><MappingFragment StoreEntitySet="CompanyType">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="companyId" ColumnName="companyId" />
+            <ScalarProperty Name="typeId" ColumnName="typeId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="CompanyTypes1"><EntityTypeMapping TypeName="BridgesAndLaddersModel.CompanyType1"><MappingFragment StoreEntitySet="CompanyTypes">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Countries"><EntityTypeMapping TypeName="BridgesAndLaddersModel.Country"><MappingFragment StoreEntitySet="Country">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Industries"><EntityTypeMapping TypeName="BridgesAndLaddersModel.Industry"><MappingFragment StoreEntitySet="Industry">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Locations"><EntityTypeMapping TypeName="BridgesAndLaddersModel.Location"><MappingFragment StoreEntitySet="Location">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="address1" ColumnName="address1" />
+            <ScalarProperty Name="address2" ColumnName="address2" />
+            <ScalarProperty Name="address3" ColumnName="address3" />
+            <ScalarProperty Name="city" ColumnName="city" />
+            <ScalarProperty Name="state" ColumnName="state" />
+            <ScalarProperty Name="subdivision" ColumnName="subdivision" />
+            <ScalarProperty Name="countryId" ColumnName="countryId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Media"><EntityTypeMapping TypeName="BridgesAndLaddersModel.Medium"><MappingFragment StoreEntitySet="Media">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+            <ScalarProperty Name="url" ColumnName="url" />
+            <ScalarProperty Name="embedHtml" ColumnName="embedHtml" />
+            <ScalarProperty Name="description" ColumnName="description" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ServiceAreas"><EntityTypeMapping TypeName="BridgesAndLaddersModel.ServiceArea"><MappingFragment StoreEntitySet="ServiceArea">
+            <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="name" ColumnName="name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="BridgesAndLadders">
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.CareerPath" Width="1.5" PointX="3" PointY="8" Height="1.843455765843391" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.CareerPosition" Width="1.5" PointX="3" PointY="4.75" Height="2.4663805506626773" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.CareerTrack" Width="1.5" PointX="5.25" PointY="8" Height="1.843455765843391" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.Classification" Width="1.5" PointX="0.75" PointY="8.125" Height="1.3762621772289272" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.Company" Width="1.5" PointX="0.75" PointY="10.875" Height="3.8679613165060651" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.CompanyClassification" Width="1.5" PointX="3" PointY="12" Height="1.6877245696385685" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.CompanyIndustry" Width="1.5" PointX="8" PointY="0.875" Height="1.843455765843391" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.CompanyLocation" Width="1.5" PointX="3" PointY="15" Height="1.6877245696385703" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.CompanyMedia" Width="1.5" PointX="6" PointY="12" Height="1.6877245696385685" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.CompanyScoopData" Width="1.5" PointX="3" PointY="17.875" Height="1.6877245696385685" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.CompanyScoop" Width="1.5" PointX="3" PointY="20.375" Height="1.6877245696385756" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.CompanyServiceArea" Width="1.5" PointX="6" PointY="15" Height="1.6877245696385703" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.CompanyTrend" Width="1.5" PointX="3" PointY="25.25" Height="2.1549181582530395" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.CompanyType" Width="1.5" PointX="8" PointY="9" Height="1.6877245696385756" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.CompanyType1" Width="1.5" PointX="5.75" PointY="5.125" Height="1.3762621772289307" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.Country" Width="1.5" PointX="1.5" PointY="29.125" Height="1.3762621772289307" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.Industry" Width="1.5" PointX="5.75" PointY="1.125" Height="1.3762621772289307" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.Location" Width="1.5" PointX="0.75" PointY="15.625" Height="2.4663805506626773" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.Medium" Width="1.5" PointX="3.75" PointY="1.875" Height="1.8434557658433945" IsExpanded="true" />
+        <EntityTypeShape EntityType="BridgesAndLaddersModel.ServiceArea" Width="1.5" PointX="3.75" PointY="29.125" Height="1.3762621772289307" IsExpanded="true" />
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CareerPath_Company" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="10.876152846153847" />
+          <ConnectorPoint PointX="2.625" PointY="10.501152846153847" />
+          <ConnectorPoint PointX="2.625" PointY="8.9217278829216955" />
+          <ConnectorPoint PointX="3" PointY="8.9217278829216955" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CareerTrack_CareerPath" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="8.9217278829216955" />
+          <ConnectorPoint PointX="5.25" PointY="8.9217278829216955" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CareerTrack_CareerPosition" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="6.890071363945804" />
+          <ConnectorPoint PointX="5.46875" PointY="6.890071363945804" />
+          <ConnectorPoint PointX="5.46875" PointY="8" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CompanyClassification_Classification" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="9.438800047647" />
+          <ConnectorPoint PointX="2.5660744349011213" PointY="9.75487448254812" />
+          <ConnectorPoint PointX="2.6839255650988791" PointY="9.872725612745878" />
+          <ConnectorPoint PointX="2.8125" PointY="10.001300047647" />
+          <ConnectorPoint PointX="2.8125" PointY="12.843862284819284" />
+          <ConnectorPoint PointX="3" PointY="12.843862284819284" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CompanyClassification_Company" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="12.359431142409642" />
+          <ConnectorPoint PointX="2.7291666666666665" PointY="12.359431142409642" />
+          <ConnectorPoint PointX="2.8958333333333335" PointY="12.359431142409642" />
+          <ConnectorPoint PointX="3" PointY="12.359431142409642" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CompanyLocation_Company" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="14.719883393429143" />
+          <ConnectorPoint PointX="2.40625" PointY="14.876133393429143" />
+          <ConnectorPoint PointX="2.40625" PointY="14.405097153846153" />
+          <ConnectorPoint PointX="3.0011528461538459" PointY="15" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CompanyMedia_Company" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="14.184090943072317" />
+          <ConnectorPoint PointX="6.75" PointY="14.184090943072317" />
+          <ConnectorPoint PointX="6.75" PointY="13.687724569638569" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CompanyScoopData_Company" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.224615384615384" PointY="14.742961316506065" />
+          <ConnectorPoint PointX="2.78125" PointY="15.29959593189068" />
+          <ConnectorPoint PointX="2.78125" PointY="18.718862284819284" />
+          <ConnectorPoint PointX="3" PointY="18.718862284819284" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CompanyScoops_Company" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.2488461538461539" PointY="14.742961316506065" />
+          <ConnectorPoint PointX="2.71875" PointY="15.212865162659911" />
+          <ConnectorPoint PointX="2.71875" PointY="21.218862284819288" />
+          <ConnectorPoint PointX="3" PointY="21.218862284819288" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CompanyServiceArea_Company" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="14.695652624198374" />
+          <ConnectorPoint PointX="2.5625" PointY="15.008152624198374" />
+          <ConnectorPoint PointX="2.5625" PointY="14.625" />
+          <ConnectorPoint PointX="5.6261528461538468" PointY="14.625" />
+          <ConnectorPoint PointX="6.0011528461538459" PointY="15" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CompanyTrends_Company" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.2003846153846149" PointY="14.742961316506065" />
+          <ConnectorPoint PointX="2.625" PointY="15.167576701121451" />
+          <ConnectorPoint PointX="2.625" PointY="26.32745907912652" />
+          <ConnectorPoint PointX="3" PointY="26.32745907912652" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CompanyType_Company" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="11.438078923076924" />
+          <ConnectorPoint PointX="2.7291666666666665" PointY="11.438078923076924" />
+          <ConnectorPoint PointX="2.8958333333333335" PointY="11.438078923076924" />
+          <ConnectorPoint PointX="7.322916666666667" PointY="11.438078923076924" />
+          <ConnectorPoint PointX="7.489583333333333" PointY="11.438078923076924" />
+          <ConnectorPoint PointX="8.75" PointY="11.438078923076924" />
+          <ConnectorPoint PointX="8.75" PointY="10.687724569638576" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CompanyIndustry_CompanyIndustry" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.5319230769230767" PointY="2.718455765843391" />
+          <ConnectorPoint PointX="8.5319230769230767" PointY="2.968455765843391" />
+          <ConnectorPoint PointX="8.9784615384615378" PointY="2.968455765843391" />
+          <ConnectorPoint PointX="8.9784615384615378" PointY="2.718455765843391" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CompanyIndustry_Industry" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.25" PointY="1.8131310886144654" />
+          <ConnectorPoint PointX="8" PointY="1.8131310886144654" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CompanyLocation_Location" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="16.156362284819284" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="16.156362284819284" />
+          <ConnectorPoint PointX="2.8645833333333335" PointY="16.156362284819284" />
+          <ConnectorPoint PointX="3" PointY="16.156362284819284" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CompanyMedia_Media" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.25" PointY="3.1411089715361626" />
+          <ConnectorPoint PointX="7.40625" PointY="3.1411089715361626" />
+          <ConnectorPoint PointX="7.40625" PointY="12" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CompanyServiceArea_ServiceArea" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.25" PointY="29.813131088614465" />
+          <ConnectorPoint PointX="6.75" PointY="29.813131088614465" />
+          <ConnectorPoint PointX="6.75" PointY="16.687724569638569" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_CompanyType_CompanyTypes" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.03125" PointY="6.5012621772289307" />
+          <ConnectorPoint PointX="7.03125" PointY="10.296840167740983" />
+          <ConnectorPoint PointX="7.322916666666667" PointY="10.296840167740983" />
+          <ConnectorPoint PointX="7.489583333333333" PointY="10.296840167740983" />
+          <ConnectorPoint PointX="8" PointY="10.296840167740983" />
+        </AssociationConnector>
+        <AssociationConnector Association="BridgesAndLaddersModel.FK_Location_Country" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.875" PointY="29.125" />
+          <ConnectorPoint PointX="1.875" PointY="18.091380550662677" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,97 @@
+﻿@using SquishIt.Framework
+@{
+    @MvcHtmlString.Create(
+        Bundle.Css()
+            .Add("~/Content/contact/sixloonies.contactus.css")
+            .Add("~/Content/sixloonies.aboutus.menu.css")
+            .ForceRelease()
+            .Render("~/cache/sixloonies.contactus.#.css")
+        );
+}
+@{
+    @MvcHtmlString.Create(
+        Bundle.JavaScript()
+        .Add("~/scripts/sixloonies.aboutus.js")
+        .Render("~/cache/sixloonies.aboutus.#.js")
+    );
+}
+<div class="breadcomb">
+    <div class="breadcombtext">
+        <a href="/">Home</a>&nbsp;&raquo;&nbsp;<span>Contact Us</span>
+    </div>
+    <div class="alignright">
+        <a href="#addVendorForm" class="btnyellowstyle" id="addvendorbtn" title="Don't see a professional or business that provides a service you know? Create a profile for them and start the buzz.">Add a Professional or Business</a>
+    </div>
+</div>
+<div class="fullsect">
+    <div class="aboutmenu">
+        <a href="/about" class="aboutitem">What is Six Loonies?</a> <a href="/how" class="aboutitem">How it Works</a><a href="/contact" class="selaboutitem">
+            Contact Us</a> <a href="/guidelines" class="aboutitem">Etiquette</a> <a href="/terms"
+                class="aboutitem">Terms</a> <a href="/privacy" class="aboutitem">Privacy</a>
+    </div>
+    <div class="contactus">
+        <div class="fullsect">
+            <div class="leftsect">
+                <div class="heading">
+                    Contact Us
+                </div>
+                <div class="text">
+                    The idea for Six Loonies was born out of our desire to make it really simple and
+                    easy for people to find the best source of services. What you see now before you
+                    is our modest attempt towards that problem.
+                    <br />
+                    <br />
+                    So if you see an opportunity for us to improve, drop us a note... We'd love to hear
+                    from you.
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                </div>
+                <form id="contactusform">
+                <div class="formfields">
+                    <div class="formfield">
+                        <div class="label">
+                            Your Name
+                        </div>
+                        <div class="input">
+                            <input id="contactusname" class="validate[required]" />
+                        </div>
+                    </div>
+                    <div class="formfield">
+                        <div class="label">
+                            Your Email
+                        </div>
+                        <div class="input">
+                            <input id="contactusemail" class="validate[required] validate[custom[email]]" />
+                        </div>
+                    </div>
+                    <div class="formfield">
+                        <div class="label">
+                            Subject
+                        </div>
+                        <div class="input">
+                            <input id="contactussubject" class="validate[required]" />
+                        </div>
+                    </div>
+                    <div class="formfield">
+                        <div class="label">
+                            Message
+                        </div>
+                        <div class="input">
+                            <textarea id="contactusmsg" rows="1" cols="1" class="validate[required]"></textarea>
+                        </div>
+                    </div>
+                    <div class="btns">
+                        <a href="#" class="btnbluestyle" id="contactusformbtn">Submit</a>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="rightsect">
+                <div class="textpanel">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
